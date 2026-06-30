@@ -47,7 +47,6 @@
             overflow-x: hidden;
             padding-bottom: 60px;
             scroll-behavior: smooth;
-            will-change: scroll-position;
         }
 
         /* ========== PARTICLES ========== */
@@ -137,10 +136,7 @@
             line-height: 1.1;
             margin-bottom: 0.5rem;
             color: #ffffff;
-            text-shadow: 
-                0 0 20px rgba(0, 255, 200, 0.6),
-                0 0 40px rgba(0, 255, 200, 0.3),
-                0 0 80px rgba(0, 255, 200, 0.1);
+            text-shadow: 0 0 20px rgba(0, 255, 200, 0.6), 0 0 40px rgba(0, 255, 200, 0.3), 0 0 80px rgba(0, 255, 200, 0.1);
             letter-spacing: -1px;
         }
         @media (max-width: 420px) {
@@ -169,7 +165,7 @@
             font-size: 0.9rem;
         }
 
-        /* ========== HERO SUB TEXT (Premium Red Design) ========== */
+        /* ========== HERO SUB TEXT ========== */
         .hero-sub-text {
             margin-top: 0.5rem;
         }
@@ -329,6 +325,8 @@
             font-size: 0.6rem; font-weight: 700; padding: 0.1rem 0.8rem;
             border-radius: 40px; margin-bottom: 0.5rem;
         }
+        
+        /* ========== DOWNLOAD BUTTON (Clicked triggers popup) ========== */
         .btn-download {
             display: inline-flex;
             align-items: center;
@@ -341,6 +339,8 @@
             font-size: 0.8rem;
             transition: 0.3s;
             text-decoration: none;
+            cursor: pointer;
+            border: none;
         }
         .btn-download i { font-size: 0.9rem; }
         .btn-download:hover {
@@ -348,36 +348,128 @@
             box-shadow: 0 0 20px rgba(0, 255, 200, 0.3);
         }
 
-        /* ========== FOOTER (UPDATED) ========== */
+        /* ========== COUNTDOWN POPUP ========== */
+        .countdown-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .countdown-overlay.show {
+            display: flex;
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .countdown-box {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 255, 200, 0.2);
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0, 255, 200, 0.1);
+        }
+        .countdown-box .icon {
+            font-size: 3rem;
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .countdown-box h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+        }
+        .countdown-box p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        .countdown-timer {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: var(--teal);
+            text-shadow: 0 0 30px rgba(0, 255, 200, 0.3);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .countdown-box .sub-text {
+            font-size: 0.7rem;
+            color: #4a7a6e;
+            letter-spacing: 1px;
+        }
+        .countdown-box .close-btn {
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 0.4rem 1.5rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: 0.3s;
+        }
+        .countdown-box .close-btn:hover {
+            background: rgba(255, 0, 80, 0.1);
+            border-color: var(--red);
+            color: #fff;
+        }
+
+        /* ========== NEW FOOTER ========== */
         .footer {
             max-width: 800px;
             width: 100%;
-            padding: 1.5rem 1.2rem;
+            padding: 1.5rem 1.2rem 1rem;
             margin-top: 2rem;
             border-top: 1px solid rgba(0, 255, 200, 0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.4rem;
-            text-align: center;
+            gap: 0.6rem;
         }
-        .footer-links {
-            color: #4a7a6e;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        .footer-copyright {
-            color: #4a7a6e;
-            font-size: 0.8rem;
+        .footer-badge-row {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 6px;
+            align-items: center;
+            gap: 1.2rem 2rem;
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #8cd4c5;
         }
-        .footer-copyright i {
+        .footer-badge-row i {
             color: var(--teal);
-            font-size: 0.9rem;
+            margin-right: 6px;
+            font-size: 0.85rem;
+        }
+        .footer-dot-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            color: #4a7a6e;
+            text-transform: lowercase;
+            letter-spacing: 1.2px;
+            font-weight: 400;
+        }
+        .footer-dot-row i {
+            color: var(--teal);
+            font-size: 0.35rem;
         }
 
         /* ========== FLOATING SUPPORT ========== */
@@ -426,7 +518,6 @@
             </div>
 
             <div class="hero-sub-text">
-                <!-- Premium Title (Red & Small) with Crown Icon -->
                 <h2 class="premium-title">
                     <i class="fas fa-crown"></i> Premium Minecraft Download
                 </h2>
@@ -461,32 +552,42 @@
             <p class="section-sub">Always up-to-date with the latest releases.</p>
 
             <div class="card-grid-3">
+                <!-- Minecraft 26.32 -->
                 <div class="card-item" data-btn="MINECRAFT 26.32">
                     <div class="content">
                         <div class="icon-wrap"><img src="https://res.cloudinary.com/p35rwudq/image/upload/20260630_183545_sxcb8o.png" alt="Minecraft"></div>
                         <span class="badge">Latest</span>
                         <h3>Minecraft 26.32</h3>
                         <p>Latest version, updated instantly with new biomes & fixes.</p>
-                        <a href="https://www.mediafire.com/folder/pgg106erjfq49/Minecraft+26.32" target="_blank" class="btn-download"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                        <!-- Clicking this will trigger 10s countdown -->
+                        <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Minecraft.1.26.32.apk" data-name="Minecraft 26.32">
+                            <i class="fas fa-cloud-download-alt"></i> Download
+                        </button>
                     </div>
                 </div>
 
+                <!-- Mojo Launcher -->
                 <div class="card-item" data-btn="MOJO LAUNCHER">
                     <div class="content">
                         <div class="icon-wrap"><img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192515_sxwegq.png" alt="Mojo"></div>
                         <span class="badge" style="background:#00ffcc; color:#000;">Smooth FPS</span>
                         <h3>Mojo Launcher</h3>
                         <p>Boost FPS & smooth gameplay. Updated alongside new versions.</p>
-                        <a href="https://www.mediafire.com/folder/etq4dz2cmikn8/Mojo+Launcher" target="_blank" class="btn-download"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                        <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Mojo.Launcher.xapk" data-name="Mojo Launcher">
+                            <i class="fas fa-cloud-download-alt"></i> Download
+                        </button>
                     </div>
                 </div>
 
+                <!-- MJ Launcher -->
                 <div class="card-item" data-btn="MJ LAUNCHER">
                     <div class="content">
                         <div class="icon-wrap"><img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192621_hl8cbi.png" alt="MJ"></div>
                         <h3>MJ Launcher</h3>
                         <p>Lightweight, fast, and regularly updated for low-end devices.</p>
-                        <a href="https://www.mediafire.com/folder/m9h3gqxc2533v/MJ+launcher" target="_blank" class="btn-download"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                        <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/MJ-Launcher.apk" data-name="MJ Launcher">
+                            <i class="fas fa-cloud-download-alt"></i> Download
+                        </button>
                     </div>
                 </div>
             </div>
@@ -509,22 +610,42 @@
                         <span class="badge" style="background:#ffaa00; color:#000;">Resource Pack</span>
                         <h3>Action & Stuff</h3>
                         <p>Vibrant textures & 3D models. Up-to-date for Bedrock.</p>
-                        <a href="https://www.mediafire.com/folder/9d09oszm1eghh/Actions+&+Stuff" target="_blank" class="btn-download"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                        <!-- You can add your direct download link for Action & Stuff here -->
+                        <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/ACTION_STUFF.mcpack" data-name="Action & Stuff">
+                            <i class="fas fa-cloud-download-alt"></i> Download
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ====== FOOTER (UPDATED AS REQUESTED) ====== -->
+        <!-- ====== FOOTER ====== -->
         <footer class="footer">
-            <div class="footer-links">
-                Privacy Policy &nbsp;|&nbsp; Terms of Service
+            <div class="footer-badge-row">
+                <span><i class="fas fa-leaf"></i> 100% original · no copyright</span>
+                <span><i class="fas fa-check-circle"></i> FlatFusion · by Semx</span>
+                <span><i class="fas fa-shield-alt"></i> 100% Safe</span>
             </div>
-            <div class="footer-copyright">
-                <i class="fas fa-leaf"></i> Flat Fusion · by Semx | 2026
+            <div class="footer-dot-row">
+                <i class="fas fa-circle"></i>
+                <i class="fas fa-circle"></i>
+                <i class="fas fa-circle"></i>
+                premium minecraft
             </div>
         </footer>
 
+    </div>
+
+    <!-- ====== COUNTDOWN POPUP ====== -->
+    <div class="countdown-overlay" id="countdownOverlay">
+        <div class="countdown-box">
+            <div class="icon"><i class="fas fa-cloud-download-alt"></i></div>
+            <h3 id="cdTitle">Preparing Download</h3>
+            <p id="cdSub">Your download will start automatically in...</p>
+            <div class="countdown-timer" id="cdTimer">10</div>
+            <div class="sub-text">Please wait while we prepare your file</div>
+            <button class="close-btn" id="cdClose">Cancel</button>
+        </div>
     </div>
 
     <!-- ====== FLOATING SUPPORT ====== -->
@@ -596,17 +717,107 @@
             }
             checkAndNotifyVisit();
 
-            // Click Tracking
-            const clicked = [];
-            document.querySelectorAll('[data-btn]').forEach(el => {
-                el.addEventListener('click', function(e) {
-                    const name = this.getAttribute('data-btn') || this.innerText.trim();
-                    if (!clicked.includes(name)) clicked.push(name);
+            // ========== COUNTDOWN LOGIC ==========
+            const overlay = document.getElementById('countdownOverlay');
+            const cdTitle = document.getElementById('cdTitle');
+            const cdSub = document.getElementById('cdSub');
+            const cdTimer = document.getElementById('cdTimer');
+            const cdClose = document.getElementById('cdClose');
+            let countdownInterval = null;
+            let downloadUrl = '';
+            let downloadName = '';
+            let isCountingDown = false;
+
+            // Function to start countdown
+            function startCountdown(url, name) {
+                if (isCountingDown) return; // Prevent multiple popups
+                isCountingDown = true;
+                downloadUrl = url;
+                downloadName = name;
+                
+                cdTitle.textContent = `Preparing ${name}`;
+                cdSub.textContent = 'Your download will start automatically in...';
+                cdTimer.textContent = '10';
+                overlay.classList.add('show');
+                
+                let count = 10;
+                countdownInterval = setInterval(() => {
+                    count--;
+                    cdTimer.textContent = count;
+                    if (count <= 0) {
+                        clearInterval(countdownInterval);
+                        countdownInterval = null;
+                        isCountingDown = false;
+                        overlay.classList.remove('show');
+                        // Trigger download
+                        if (downloadUrl) {
+                            const a = document.createElement('a');
+                            a.href = downloadUrl;
+                            a.target = '_blank';
+                            a.rel = 'noopener noreferrer';
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                        }
+                    }
+                }, 1000);
+            }
+
+            // Cancel countdown
+            function cancelCountdown() {
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
+                isCountingDown = false;
+                overlay.classList.remove('show');
+            }
+
+            cdClose.addEventListener('click', cancelCountdown);
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) cancelCountdown();
+            });
+
+            // Attach to all Download buttons
+            document.querySelectorAll('.btn-download').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const url = this.getAttribute('data-url');
+                    const name = this.getAttribute('data-name') || 'File';
+                    
+                    // Track click
+                    const btnName = this.closest('.card-item')?.getAttribute('data-btn') || name;
+                    const clicked = JSON.parse(localStorage.getItem('flatfusion_clicked_buttons') || '[]');
+                    if (!clicked.includes(btnName)) {
+                        clicked.push(btnName);
+                        localStorage.setItem('flatfusion_clicked_buttons', JSON.stringify(clicked));
+                    }
                     const total = getStoredCount();
                     const bd = getBangladeshTime();
-                    sendToDiscord(`🖱️ **Click Detected**\n🌊 **${PAGE_NAME}**\n⏰ ${bd}\n👁️ Total: **${total}**\n🔘 Clicked: ${clicked.join(', ')}\n\n${ROLE_PING}`);
+                    const clickedStr = clicked.join(', ');
+                    sendToDiscord(`🖱️ **Download Clicked**\n🌊 **${PAGE_NAME}**\n⏰ ${bd}\n👁️ Total: **${total}**\n🔘 Clicked: ${clickedStr}\n\n${ROLE_PING}`);
+                    
+                    // Start countdown
+                    startCountdown(url, name);
                 });
             });
+
+            // Track other buttons (Community, etc.)
+            document.querySelectorAll('[data-btn]:not(.btn-download)').forEach(el => {
+                el.addEventListener('click', function() {
+                    const name = this.getAttribute('data-btn') || this.innerText.trim();
+                    const clicked = JSON.parse(localStorage.getItem('flatfusion_clicked_buttons') || '[]');
+                    if (!clicked.includes(name)) {
+                        clicked.push(name);
+                        localStorage.setItem('flatfusion_clicked_buttons', JSON.stringify(clicked));
+                    }
+                    const total = getStoredCount();
+                    const bd = getBangladeshTime();
+                    const clickedStr = clicked.join(', ');
+                    sendToDiscord(`🖱️ **Click Detected**\n🌊 **${PAGE_NAME}**\n⏰ ${bd}\n👁️ Total: **${total}**\n🔘 Clicked: ${clickedStr}\n\n${ROLE_PING}`);
+                });
+            });
+
         })();
     </script>
 </body>
