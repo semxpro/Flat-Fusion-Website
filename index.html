@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNWJEQ7C29"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-MNWJEQ7C29');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Flat Fusion · by Semx</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Cloudflare Turnstile Script (শুধু স্ক্রিপ্ট, কোনো ওভারলে নয়) -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <style>
+        :root {
+            --teal: #00ffcc;
+            --teal-glow: #00bb99;
+            --bg-deep: #030807;
+            --card-bg: rgba(6, 18, 16, 0.55);
+            --red: #ff0050;
+            --red-glow: #ff6b8a;
+            --gold: #ffaa00;
+            --discord: #5865F2;
+            --text-primary: #e6fff7;
+            --text-secondary: #b3dfd6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #0b1a17, #030807);
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            padding: 0.8rem;
+            margin: 0;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Particles Background */
+        .particles {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 3px; height: 3px;
+            background: rgba(0, 255, 200, 0.25);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* Popup Overlay */
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 1rem;
+        }
+        .popup-overlay.show {
+            display: flex;
+            animation: overlayReveal 0.45s ease-out;
+        }
+        @keyframes overlayReveal { from { opacity: 0; } to { opacity: 1; } }
+        .popup-overlay.hidden { display: none !important; }
+
+        .popup-card {
+            max-width: 350px; width: 100%;
+            background: linear-gradient(155deg, rgba(10, 25, 22, 0.97), rgba(2, 14, 10, 0.99));
+            border-radius: 2.2rem;
+            padding: 2rem 1.5rem 1.5rem;
+            text-align: center;
+            border: 1.5px solid transparent;
+            box-shadow: 0 0 50px rgba(255, 0, 80, 0.15), 0 20px 50px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            animation: cardEnter 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, cardFloat 4s ease-in-out 0.8s infinite;
+        }
+        @keyframes cardEnter {
+            0% { transform: translateY(40px) scale(0.8); opacity: 0; filter: blur(8px); }
+            60% { transform: translateY(-5px) scale(1.03); opacity: 1; filter: blur(0); }
+            100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
+        }
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .popup-card::before {
+            content: '';
+            position: absolute; inset: -2px; border-radius: 2.25rem; padding: 2px;
+            background: conic-gradient(from 0deg, transparent 40deg, rgba(255,0,80,0.35) 80deg, transparent 120deg, rgba(255,0,80,0.35) 200deg, transparent 240deg, rgba(255,0,80,0.35) 320deg, transparent 360deg);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            animation: borderRotate 6s linear infinite;
+            z-index: -1; pointer-events: none; opacity: 0.8;
+        }
+        @keyframes borderRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .popup-card::after {
+            content: '';
+            position: absolute; top: -80%; left: -80%; width: 260%; height: 260%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255,0,80,0.05), transparent 60%);
+            animation: innerGlow 5s ease-in-out infinite alternate;
+            pointer-events: none; z-index: 0; border-radius: 50%;
+        }
+        @keyframes innerGlow {
+            0% { transform: translate(-4%, -4%) rotate(0deg); opacity: 0.4; }
+            100% { transform: translate(4%, 4%) rotate(6deg); opacity: 0.9; }
+        }
+        .glow-ring {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 135%; height: 135%; border-radius: 50%;
+            border: 1.5px solid rgba(255,0,80,0.05);
+            animation: ringBreathe 4s ease-in-out infinite;
+            pointer-events: none; z-index: 0;
+        }
+        @keyframes ringBreathe {
+            0%, 100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.4; border-color: rgba(255,0,80,0.04); }
+            50% { transform: translate(-50%, -50%) scale(1.08); opacity: 0.9; border-color: rgba(255,0,80,0.14); }
+        }
+
+        .popup-icon {
+            font-size: 3.6rem; color: #ff0050;
+            filter: drop-shadow(0 0 30px rgba(255,0,80,0.3));
+            margin-bottom: 0.3rem; position: relative; z-index: 3;
+            animation: iconGentleBounce 2.5s ease-in-out infinite;
+        }
+        @keyframes iconGentleBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            25% { transform: translateY(-8px) scale(1.04); }
+            50% { transform: translateY(0) scale(1); }
+            75% { transform: translateY(-4px) scale(1.02); }
+        }
+        .popup-badge {
+            font-size: 0.55rem; color: #ffaa00; background: rgba(255,170,0,0.08);
+            padding: 0.2rem 1.1rem; border-radius: 40px; border: 1px solid rgba(255,170,0,0.16);
+            display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.7px;
+            text-transform: uppercase; font-weight: 700; position: relative; z-index: 3;
+        }
+        .popup-badge i { color: #ffaa00; font-size: 0.45rem; margin-right: 4px; }
+        .popup-title {
+            font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 0.1rem; position: relative; z-index: 3;
+        }
+        .popup-title span {
+            background: linear-gradient(135deg, #ff0050, #ff6b8a); background-size: 200% auto;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            animation: titleShine 3s ease-in-out infinite;
+        }
+        @keyframes titleShine {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 200% center; }
+        }
+        .popup-sub {
+            font-size: 0.82rem; color: #b3dfd6; margin-bottom: 0.5rem; position: relative; z-index: 3; letter-spacing: 0.4px;
+        }
+        .popup-sub strong { color: #ff6b8a; }
+        .popup-divider {
+            width: 45px; height: 2px; margin: 0.55rem auto;
+            background: linear-gradient(90deg, transparent, #ff0050, transparent);
+            border-radius: 10px; position: relative; z-index: 3;
+            animation: dividerBreathe 3s ease-in-out infinite;
+        }
+        @keyframes dividerBreathe {
+            0%, 100% { width: 45px; opacity: 0.5; }
+            50% { width: 75px; opacity: 1; }
+        }
+        .popup-text {
+            font-size: 0.75rem; color: #b3dfd6; margin-bottom: 1.3rem; line-height: 1.7;
+            position: relative; z-index: 3; padding: 0 0.2rem;
+        }
+        .popup-text i { color: #ff0050; margin: 0 3px; }
+        .popup-text .premium-next {
+            background: linear-gradient(135deg, #ffd700, #ff6b8a, #ffaa00);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;
+        }
+        .popup-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background: linear-gradient(135deg, #ff0050, #e00045);
+            color: #fff; font-size: 0.92rem; font-weight: 700; padding: 0.7rem 2rem;
+            border-radius: 60px; border: none; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 30px rgba(255,0,80,0.15);
+            text-decoration: none; letter-spacing: 0.5px; width: 100%;
+            position: relative; z-index: 10; -webkit-tap-highlight-color: transparent;
+            user-select: none; overflow: hidden;
+        }
+        .popup-btn::after {
+            content: ''; position: absolute; top: -40%; left: -100%; width: 50%; height: 180%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            transform: skewX(-20deg); animation: btnShine 3.5s ease-in-out infinite;
+        }
+        @keyframes btnShine {
+            0% { left: -100%; } 35% { left: 150%; } 100% { left: 150%; }
+        }
+        .popup-btn:hover { transform: scale(1.04) translateY(-3px); box-shadow: 0 0 45px rgba(255,0,80,0.35); }
+        .popup-btn:active { transform: scale(0.94); transition: all 0.1s ease; }
+        .popup-btn i { font-size: 1.15rem; position: relative; z-index: 2; }
+        .popup-btn span { position: relative; z-index: 2; }
+        .popup-skip {
+            display: inline-block; margin-top: 0.75rem; color: #4a7a6e; font-size: 0.7rem;
+            cursor: pointer; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.05);
+            padding: 0.3rem 1.5rem; border-radius: 40px; font-family: inherit; font-weight: 400;
+            letter-spacing: 0.5px; transition: all 0.25s ease; user-select: none;
+            -webkit-tap-highlight-color: transparent; position: relative; z-index: 10;
+        }
+        .popup-skip:hover { color: #b3dfd6; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+        .popup-skip:active { transform: scale(0.94); }
+        .popup-footer { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; margin-top: 0.3rem; position: relative; z-index: 3; }
+
+        /* Main Card */
+        .card {
+            max-width: 420px; width: 100%;
+            background: rgba(6, 18, 16, 0.55);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border-radius: 2.2rem 2.2rem 1.8rem 1.8rem;
+            padding: 1.4rem 1.2rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.9), 0 0 0 1.5px rgba(0, 255, 200, 0.12);
+            border: 1px solid rgba(0, 255, 200, 0.12);
+            text-align: center; margin: 0 auto; position: relative; z-index: 1;
+            animation: mainCardReveal 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+        @keyframes mainCardReveal {
+            0% { opacity: 0; transform: scale(0.92) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Brand */
+        .brand-wrapper {
+            display: flex; align-items: center; justify-content: center; flex-wrap: nowrap;
+            margin-bottom: 0.2rem; position: relative; min-height: 55px;
+        }
+        .brand-left {
+            display: flex; flex-direction: column; align-items: center; text-align: center; z-index: 1;
+        }
+        .brand {
+            font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; color: #e6fff7;
+            text-shadow: 0 0 15px #00ffcc, 0 0 35px #00bb99;
+            animation: pulseGlow 3s infinite alternate ease-in-out; line-height: 1.1;
+        }
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 8px #00ffcc, 0 0 25px #00bb99; }
+            100% { text-shadow: 0 0 20px #66ffdd, 0 0 45px #00ffcc, 0 0 70px #00aa88; }
+        }
+        .sub {
+            font-size: 0.7rem; font-weight: 400; color: #b8e3d8; letter-spacing: 2.5px; text-transform: uppercase;
+            background: rgba(0, 255, 200, 0.04); display: inline-block; padding: 0.15rem 1.2rem; border-radius: 60px;
+            border: 1px solid rgba(0, 255, 200, 0.1); backdrop-filter: blur(4px); margin-top: -0.1rem;
+        }
+        .sub i { color: #00ffcc; margin: 0 3px; font-size: 0.65rem; }
+
+        /* Handle */
+        .handle-wrapper {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            margin-top: 0.2rem; margin-bottom: 0.6rem;
+            animation: fadeInUp 0.7s ease-out 0.2s both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); }
+        }
+        .handle {
+            font-size: 0.8rem; background: linear-gradient(135deg, rgba(255, 0, 80, 0.12), rgba(0, 255, 200, 0.06));
+            padding: 0.25rem 1.2rem; border-radius: 60px; display: inline-flex; align-items: center; gap: 8px;
+            color: #fff; border: 1.5px solid rgba(255, 0, 80, 0.2); backdrop-filter: blur(4px);
+            box-shadow: 0 0 20px rgba(255, 0, 80, 0.06); transition: all 0.3s ease; text-decoration: none;
+            animation: handleShine 3s ease-in-out infinite;
+        }
+        @keyframes handleShine {
+            0%, 100% { box-shadow: 0 0 18px rgba(255, 0, 80, 0.05); }
+            50% { box-shadow: 0 0 28px rgba(255, 0, 80, 0.15); }
+        }
+        .handle:hover { transform: scale(1.03); border-color: #ff0050; box-shadow: 0 0 30px rgba(255, 0, 80, 0.15); animation: none; }
+        .handle i { color: #ff0050; font-size: 1rem; filter: drop-shadow(0 0 8px rgba(255, 0, 80, 0.2)); }
+        .handle .handle-text {
+            font-weight: 600; background: linear-gradient(135deg, #ff0050, #ff6b8a);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .promo-badge {
+            font-size: 0.5rem; color: #ff6b8a; background: rgba(255, 0, 80, 0.06); padding: 0.1rem 0.8rem;
+            border-radius: 40px; border: 1px solid rgba(255, 0, 80, 0.1); letter-spacing: 0.6px;
+            backdrop-filter: blur(2px); margin-top: 0.25rem;
+            animation: fadeInUp 0.7s ease-out 0.3s both;
+        }
+        .promo-badge i { color: #ff0050; font-size: 0.4rem; margin-right: 3px; }
+        .welcome {
+            color: #daf2ea; font-size: 0.8rem; font-weight: 300; letter-spacing: 0.3px;
+            background: rgba(0, 255, 200, 0.02); padding: 0.2rem 1rem; border-radius: 60px;
+            display: inline-block; border: 1px solid rgba(0, 255, 200, 0.04); margin-bottom: 0.8rem;
+            animation: fadeInUp 0.7s ease-out 0.35s both;
+        }
+        .welcome strong { font-weight: 600; color: #9effe6; }
+        .divider {
+            width: 80px; height: 2px; margin: 0.3rem auto 0.8rem auto;
+            background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+            border-radius: 10px; opacity: 0.5; animation: dividerWidth 3s ease-in-out infinite;
+        }
+        @keyframes dividerWidth {
+            0%, 100% { width: 80px; opacity: 0.5; } 50% { width: 120px; opacity: 1; }
+        }
+        .section-title {
+            font-size: 1.1rem; font-weight: 700; color: #e6fff5; letter-spacing: 0.5px;
+            text-shadow: 0 0 15px rgba(0, 255, 200, 0.15); margin-bottom: 0.8rem;
+            position: relative; display: inline-block;
+            animation: fadeInUp 0.7s ease-out 0.45s both;
+        }
+        .section-title i { color: #00ffcc; margin-right: 8px; font-size: 1rem; text-shadow: 0 0 20px #00ffcc; animation: iconSpin 4s ease-in-out infinite; }
+        @keyframes iconSpin {
+            0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(10deg); } 75% { transform: rotate(-10deg); }
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
+            width: 40%; height: 2px; background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+            border-radius: 10px; opacity: 0.4;
+        }
+        .section-title-sm {
+            font-size: 0.9rem; font-weight: 600; color: #d4f2ea; letter-spacing: 0.3px;
+            text-shadow: 0 0 12px rgba(0, 255, 200, 0.1); margin-bottom: 0.6rem; margin-top: 0.3rem;
+            position: relative; display: inline-block;
+            animation: fadeInUp 0.7s ease-out 0.55s both;
+        }
+        .section-title-sm i { color: #00ffcc; margin-right: 6px; font-size: 0.85rem; text-shadow: 0 0 15px #00ffcc; }
+        .section-title-sm::after {
+            content: ''; position: absolute; bottom: -3px; left: 50%; transform: translateX(-50%);
+            width: 30%; height: 1.5px; background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+            border-radius: 10px; opacity: 0.3;
+        }
+        .grid { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.7rem 0 1.2rem 0; }
+        .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+            background: rgba(0, 30, 25, 0.5); backdrop-filter: blur(6px);
+            border: 1px solid rgba(0, 255, 200, 0.15); padding: 0.55rem 1.2rem; border-radius: 60px;
+            font-size: 0.7rem; font-weight: 600; color: #e6fff5; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); flex: 1 1 auto; min-width: 110px;
+            letter-spacing: 0.2px; position: relative; overflow: hidden;
+            animation: btnPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            line-height: 1.3;
+        }
+        @keyframes btnPopIn {
+            from { opacity: 0; transform: scale(0.85) translateY(12px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .btn:nth-child(1) { animation-delay: 0.55s; }
+        .btn:nth-child(2) { animation-delay: 0.62s; }
+        .btn::before {
+            content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 60px;
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.06), transparent, rgba(0, 255, 200, 0.03));
+            opacity: 0; transition: opacity 0.3s ease; z-index: -1;
+        }
+        .btn:hover::before { opacity: 1; }
+        .btn::after {
+            content: ''; position: absolute; top: -50%; left: -120%; width: 40%; height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transform: skewX(-25deg); transition: left 0.6s ease; z-index: 1; pointer-events: none;
+        }
+        .btn:hover::after { left: 130%; }
+        .btn i { font-size: 0.9rem; color: #00ffcc; transition: 0.3s; margin-bottom: 1px; position: relative; z-index: 2; }
+        .btn:hover { background: rgba(0, 255, 200, 0.06); border-color: #00ffcc; transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 25px rgba(0, 255, 200, 0.12); }
+        .btn:hover i { color: #b3fff0; text-shadow: 0 0 15px rgba(0, 255, 200, 0.3); }
+        .btn:active { transform: scale(0.94); transition: all 0.1s ease; }
+        .btn .btn-icon {
+            width: 28px; height: 28px; object-fit: contain; display: block; margin-bottom: 2px;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 200, 0.1)); transition: all 0.3s ease; position: relative; z-index: 2;
+        }
+        .btn:hover .btn-icon { transform: scale(1.1); filter: drop-shadow(0 0 18px rgba(0, 255, 200, 0.25)); }
+
+        .btn-minecraft { border-color: rgba(255, 170, 0, 0.25); background: rgba(255, 170, 0, 0.04); }
+        .btn-minecraft .btn-title { font-weight: 700; font-size: 0.75rem; color: #ffcc44; text-shadow: 0 0 20px rgba(255, 170, 0, 0.15); position: relative; z-index: 2; }
+        .btn-minecraft .btn-badge {
+            font-size: 0.5rem; font-weight: 400; color: #b3ffe6; background: rgba(0, 255, 200, 0.08);
+            padding: 0.05rem 0.8rem; border-radius: 40px; border: 1px solid rgba(0, 255, 200, 0.08);
+            letter-spacing: 0.5px; animation: badgePulse 2s ease-in-out infinite;
+            display: inline-flex; align-items: center; gap: 4px; margin-top: 1px; position: relative; z-index: 2;
+        }
+        .btn-badge .fire-emoji { display: inline-block; animation: fireDance 0.6s ease-in-out infinite alternate; font-size: 0.65rem; }
+        @keyframes fireDance { 0% { transform: scale(1) rotate(-3deg); } 100% { transform: scale(1.15) rotate(3deg); } }
+        @keyframes badgePulse { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.02); } }
+        .btn-minecraft i { color: #ffaa00; text-shadow: 0 0 15px #ffaa00, 0 0 30px #ff8800; }
+        .btn-minecraft:hover i { color: #ffcc44; text-shadow: 0 0 25px #ffaa00, 0 0 45px #ff8800; }
+        .btn-minecraft:hover { background: rgba(255, 170, 0, 0.08); border-color: #ffaa00; box-shadow: 0 8px 28px rgba(255, 170, 0, 0.15); }
+        .btn-minecraft:hover .btn-icon { filter: drop-shadow(0 0 18px rgba(255, 170, 0, 0.3)); }
+
+        .btn-action { border-color: rgba(255, 170, 0, 0.2); background: rgba(255, 170, 0, 0.04); animation-delay: 0.75s; }
+        .btn-action i { color: #ffaa00; text-shadow: 0 0 15px rgba(255, 170, 0, 0.2); }
+        .btn-action:hover { background: rgba(255, 170, 0, 0.08); border-color: #ffaa00; box-shadow: 0 8px 28px rgba(255, 170, 0, 0.15); }
+        .btn-action:hover .btn-icon { filter: drop-shadow(0 0 18px rgba(255, 170, 0, 0.3)); }
+
+        .support-section {
+            margin: 0.8rem 0 0.5rem 0; padding: 0.5rem 0 0.4rem 0;
+            border-top: 1px solid rgba(0, 255, 200, 0.05); border-bottom: 1px solid rgba(0, 255, 200, 0.05);
+            animation: fadeInUp 0.7s ease-out 0.7s both;
+        }
+        .support-title { font-size: 0.65rem; font-weight: 500; color: #8ab3a8; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.4rem; }
+        .support-title i { color: #00ffcc; margin-right: 4px; font-size: 0.6rem; }
+        .btn-support {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.12), rgba(88, 101, 242, 0.04));
+            backdrop-filter: blur(4px); border: 1.5px solid rgba(88, 101, 242, 0.25);
+            padding: 0.5rem 1.8rem; border-radius: 60px; font-size: 0.75rem; font-weight: 600;
+            color: #e6fff5; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); letter-spacing: 0.3px;
+            position: relative; overflow: hidden;
+            animation: btnPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.78s both;
+        }
+        .btn-support::after {
+            content: ''; position: absolute; top: -50%; left: -120%; width: 40%; height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transform: skewX(-25deg); transition: left 0.6s ease; z-index: 1; pointer-events: none;
+        }
+        .btn-support:hover::after { left: 130%; }
+        .btn-support i { font-size: 1rem; color: #5865F2; transition: 0.3s; filter: drop-shadow(0 0 6px rgba(88, 101, 242, 0.15)); position: relative; z-index: 2; }
+        .btn-support:hover { background: rgba(88, 101, 242, 0.18); border-color: #5865F2; transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 30px rgba(88, 101, 242, 0.18); }
+        .btn-support:hover i { color: #7a85f5; filter: drop-shadow(0 0 15px rgba(88, 101, 242, 0.3)); }
+        .btn-support:active { transform: scale(0.94); transition: all 0.1s ease; }
+
+        .social-wrap { margin: 0.8rem 0 0.4rem 0; padding-top: 0.8rem; border-top: 1px solid rgba(0, 255, 200, 0.04); animation: fadeInUp 0.7s ease-out 0.85s both; }
+        .social-icons { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem 1rem; margin: 0.3rem 0 0.2rem 0; }
+        .social-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #e6fff5; text-decoration: none; font-size: 0.75rem; font-weight: 600;
+            background: rgba(0, 30, 25, 0.4); padding: 0.35rem 1rem 0.35rem 0.8rem; border-radius: 60px;
+            border: 1.5px solid rgba(0, 255, 200, 0.12); backdrop-filter: blur(4px);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;
+            animation: socialPopIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+        @keyframes socialPopIn {
+            from { opacity: 0; transform: scale(0.7) translateY(8px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .social-link:nth-child(1) { animation-delay: 0.9s; }
+        .social-link:nth-child(2) { animation-delay: 0.98s; }
+        .social-link:nth-child(3) { animation-delay: 1.06s; }
+        .social-link::after {
+            content: ''; position: absolute; top: -50%; left: -120%; width: 40%; height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+            transform: skewX(-25deg); transition: left 0.6s ease; z-index: 1; pointer-events: none;
+        }
+        .social-link:hover::after { left: 130%; }
+        .social-link i { font-size: 1.2rem; color: #00ffcc; transition: 0.3s; filter: drop-shadow(0 0 5px rgba(0, 255, 200, 0.1)); position: relative; z-index: 2; }
+        .social-link:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 8px 25px rgba(0, 255, 200, 0.1); }
+        .social-link:hover i { color: #ccfff5; filter: drop-shadow(0 0 15px rgba(0, 255, 200, 0.3)); }
+        .social-link:active { transform: scale(0.94); transition: all 0.1s ease; }
+
+        .social-link.tiktok { border-color: rgba(255, 0, 80, 0.25); background: rgba(255, 0, 80, 0.04); }
+        .social-link.tiktok:hover { background: rgba(255, 0, 80, 0.1); border-color: #ff0050; box-shadow: 0 8px 28px rgba(255, 0, 80, 0.15); }
+        .social-link.tiktok i { color: #ff0050; filter: drop-shadow(0 0 6px rgba(255, 0, 80, 0.2)); }
+        .social-link.tiktok:hover i { color: #ff3366; filter: drop-shadow(0 0 15px rgba(255, 0, 80, 0.3)); }
+
+        .social-link.youtube { border-color: rgba(255, 0, 0, 0.25); background: rgba(255, 0, 0, 0.04); }
+        .social-link.youtube:hover { background: rgba(255, 0, 0, 0.1); border-color: #ff0000; box-shadow: 0 8px 28px rgba(255, 0, 0, 0.15); }
+        .social-link.youtube i { color: #ff0000; filter: drop-shadow(0 0 6px rgba(255, 0, 0, 0.2)); }
+        .social-link.youtube:hover i { color: #ff3333; filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.3)); }
+
+        .social-link.discord { border-color: rgba(88, 101, 242, 0.25); background: rgba(88, 101, 242, 0.04); }
+        .social-link.discord:hover { background: rgba(88, 101, 242, 0.1); border-color: #5865F2; box-shadow: 0 8px 28px rgba(88, 101, 242, 0.15); }
+        .social-link.discord i { color: #5865F2; filter: drop-shadow(0 0 6px rgba(88, 101, 242, 0.2)); }
+        .social-link.discord:hover i { color: #7a85f5; filter: drop-shadow(0 0 15px rgba(88, 101, 242, 0.3)); }
+
+        /* Selected state */
+        .btn.selected,
+        .btn-minecraft.selected,
+        .btn-action.selected,
+        .btn-support.selected,
+        .social-link.selected {
+            border-color: #00FFD5 !important;
+            border-width: 2px !important;
+            background: rgba(0, 255, 213, 0.12) !important;
+        }
+        .btn.selected i,
+        .btn-minecraft.selected i,
+        .btn-action.selected i,
+        .btn-support.selected i,
+        .social-link.selected i {
+            color: #ffffff !important;
+            text-shadow: 0 0 15px rgba(0, 255, 213, 0.5);
+        }
+        .btn.selected .btn-title,
+        .btn-minecraft.selected .btn-title,
+        .btn-action.selected .btn-title {
+            color: #ffffff !important;
+            text-shadow: 0 0 12px rgba(0, 255, 213, 0.4);
+        }
+        .btn.selected:hover,
+        .btn-minecraft.selected:hover,
+        .btn-action.selected:hover,
+        .btn-support.selected:hover,
+        .social-link.selected:hover {
+            background: rgba(0, 255, 213, 0.18) !important;
+            border-color: #00FFD5 !important;
+            box-shadow: 0 0 30px rgba(0, 255, 213, 0.2);
+        }
+
+        .foot {
+            margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid rgba(0, 255, 200, 0.04);
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.5rem;
+            font-size: 0.55rem; color: #3a7568; letter-spacing: 0.5px;
+            animation: fadeInUp 0.7s ease-out 1.2s both;
+        }
+        .foot span i { color: #00ffcc; margin-right: 3px; opacity: 0.7; font-size: 0.5rem; }
+        .foot .gold { color: #79cfbe; font-weight: 400; }
+        .badge {
+            margin-top: 0.3rem; font-size: 0.45rem; color: #1f4d42; letter-spacing: 1.5px; opacity: 0.5;
+            animation: fadeInUp 0.7s ease-out 1.3s both;
+        }
+        .badge i { color: #00ffcc; font-size: 0.35rem; margin: 0 2px; }
+        .media-label {
+            color: #c0e8de; font-weight: 300; letter-spacing: 1px;
+            background: rgba(0, 255, 200, 0.02); padding: 0.1rem 1rem; border-radius: 40px;
+            border: 1px solid rgba(0, 255, 200, 0.03); font-size: 0.6rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 420px) {
+            .card { padding: 1rem 0.8rem; border-radius: 1.8rem; }
+            .brand { font-size: 1.8rem; }
+            .sub { font-size: 0.6rem; padding: 0.1rem 0.8rem; letter-spacing: 2px; }
+            .handle-wrapper { margin-top: 0.1rem; margin-bottom: 0.4rem; }
+            .handle { font-size: 0.7rem; padding: 0.2rem 0.9rem; gap: 5px; }
+            .handle i { font-size: 0.85rem; }
+            .welcome { font-size: 0.7rem; padding: 0.15rem 0.8rem; }
+            .section-title { font-size: 0.95rem; }
+            .section-title i { font-size: 0.85rem; margin-right: 5px; }
+            .section-title-sm { font-size: 0.78rem; }
+            .section-title-sm i { font-size: 0.7rem; }
+            .btn { font-size: 0.6rem; padding: 0.4rem 0.8rem; min-width: 90px; gap: 5px; }
+            .btn i { font-size: 0.75rem; }
+            .btn .btn-icon { width: 22px; height: 22px; }
+            .btn-minecraft .btn-title { font-size: 0.65rem; }
+            .btn-minecraft .btn-badge { font-size: 0.45rem; padding: 0.03rem 0.5rem; }
+            .btn-minecraft .btn-badge .fire-emoji { font-size: 0.55rem; }
+            .btn-support { font-size: 0.65rem; padding: 0.4rem 1.2rem; }
+            .btn-support i { font-size: 0.85rem; }
+            .social-link { font-size: 0.65rem; padding: 0.25rem 0.8rem 0.25rem 0.6rem; gap: 4px; }
+            .social-link i { font-size: 1rem; }
+            .social-icons { gap: 0.4rem 0.7rem; }
+            .foot { font-size: 0.45rem; gap: 0.3rem 1rem; }
+            .divider { width: 60px; }
+            .media-label { font-size: 0.5rem; padding: 0.08rem 0.7rem; }
+            .promo-badge { font-size: 0.4rem; padding: 0.08rem 0.6rem; }
+            .popup-card { padding: 1.5rem 1rem 1.2rem; border-radius: 1.8rem; }
+            .popup-title { font-size: 1.1rem; }
+            .popup-icon { font-size: 2.8rem; }
+            .popup-btn { font-size: 0.8rem; padding: 0.5rem 1.5rem; }
+            .popup-text { font-size: 0.65rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== PARTICLES BACKGROUND ====== -->
+    <div class="particles" id="particlesContainer"></div>
+
+    <!-- ====== POPUP OVERLAY ====== -->
+    <div class="popup-overlay hidden" id="tiktokPopup">
+        <div class="popup-card">
+            <div class="glow-ring"></div>
+            <div class="popup-badge"><i class="fas fa-star"></i> Minecraft Best Content</div>
+            <div class="popup-icon"><i class="fab fa-tiktok"></i></div>
+            <div class="popup-title">Follow on <span>TikTok</span></div>
+            <div class="popup-sub">🔥 <strong>@semxpro</strong> 🔥</div>
+            <div class="popup-divider"></div>
+            <div class="popup-text">
+                <i class="fas fa-cube" style="color:#ffaa00;"></i>
+                <span class="premium-next">Minecraft Best Content</span>
+                <i class="fas fa-heart" style="color:#ff0050;"></i>
+                <br>And <span class="premium-next">Flat Fusion Server Updates!</span>
+            </div>
+            <a href="https://www.tiktok.com/@semxpro?_r=1&_t=ZS-97XtjmAg1CK" target="_blank" class="popup-btn" id="followBtn">
+                <i class="fab fa-tiktok"></i> <span>Follow @semxpro</span>
+            </a>
+            <div class="popup-footer">
+                <button class="popup-skip" id="skipPopup" type="button">Maybe later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== MAIN SITE (সরাসরি লোড হবে) ====== -->
+    <div class="card" id="mainCard">
+
+        <div class="brand-wrapper">
+            <div class="brand-left">
+                <div class="brand">Flat Fusion</div>
+                <div class="sub"><i class="fas fa-crown"></i> by Semx <i class="fas fa-code"></i></div>
+            </div>
+        </div>
+
+        <div class="handle-wrapper">
+            <a href="https://www.tiktok.com/@semxpro?_r=1&_t=ZS-97XtjmAg1CK" target="_blank" class="handle">
+                <i class="fab fa-tiktok"></i>
+                <span class="handle-text">@semxpro</span>
+            </a>
+            <span class="promo-badge"><i class="fas fa-fire"></i> Follow for more content</span>
+        </div>
+
+        <div class="welcome">
+            <i class="fas fa-arrow-right" style="color:#00ffcc; margin-right:4px;"></i>
+            Welcome to <strong>FlatFusion</strong> · All Files
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-title"><i class="fas fa-download"></i> DOWNLOAD FREE MINECRAFT</div>
+
+        <div class="grid">
+            <div class="row">
+                <a href="https://www.mediafire.com/folder/pgg106erjfq49/Minecraft+26.32" target="_blank" class="btn btn-minecraft" data-btn="MINECRAFT 26.32">
+                    <img src="https://res.cloudinary.com/p35rwudq/image/upload/20260630_183545_sxcb8o.png" alt="Minecraft" class="btn-icon">
+                    <span class="btn-title">MINECRAFT 26.32</span>
+                    <span class="btn-badge">latest <span class="fire-emoji">🔥</span></span>
+                </a>
+
+                <!-- এখানে পরিবর্তন করা হয়েছে (MOJO LAUNCHER) -->
+                <a href="https://www.mediafire.com/folder/etq4dz2cmikn8/Mojo+Launcher" target="_blank" class="btn btn-minecraft" data-btn="MOJO LAUNCHER">
+                    <img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192515_sxwegq.png" class="btn-icon">
+                    <span class="btn-title">MOJO LAUNCHER</span>
+                    <span class="btn-badge">Smooth FPS <i class="fas fa-bolt" style="color:#ffaa00;"></i></span>
+                </a>
+            </div>
+            <div class="row">
+                <a href="https://www.mediafire.com/folder/m9h3gqxc2533v/MJ+launcher" target="_blank" class="btn" data-btn="MJ LAUNCHER">
+                    <img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192621_hl8cbi.png" alt="MJ LAUNCHER" class="btn-icon">
+                    MJ LAUNCHER
+                </a>
+            </div>
+
+            <div style="margin-top: 0.3rem;">
+                <div class="section-title-sm"><i class="fas fa-star"></i> Minecraft Bedrock Resource Pack</div>
+                <div class="row">
+                    <a href="https://www.mediafire.com/folder/9d09oszm1eghh/Actions+&+Stuff" target="_blank" class="btn btn-action" data-btn="Action & Stuff">
+                        <img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192238_mflbn5.png" alt="Action & Stuff" class="btn-icon">
+                        Action & Stuff
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="support-section">
+            <div class="support-title"><i class="fas fa-headset"></i> WEBSITES SUPPORT</div>
+            <a href="https://discord.com/channels/1433382145858207858/1520230104436051988" target="_blank" class="btn-support" data-btn="SUPPORT">
+                <i class="fas fa-headset"></i> SUPPORT
+            </a>
+        </div>
+
+        <div class="social-wrap">
+            <div style="display:flex; justify-content:center; align-items:center; gap:4px; flex-wrap:wrap; margin-bottom:0.3rem;">
+                <span class="media-label"><i class="fas fa-share-alt" style="color:#00ffcc; margin-right:4px;"></i> MEDIA CHANNEL</span>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.tiktok.com/@semxpro?_r=1&_t=ZS-97XtjmAg1CK" target="_blank" class="social-link tiktok" data-btn="TikTok">
+                    <i class="fab fa-tiktok"></i> TikTok
+                </a>
+                <a href="https://youtube.com/@flatfusion?si=BVG4mQMlb33TvRT2" target="_blank" class="social-link youtube" data-btn="YouTube">
+                    <i class="fab fa-youtube"></i> YouTube
+                </a>
+                <a href="https://discord.gg/ZGHKKUx44w" target="_blank" class="social-link discord" data-btn="Discord">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+            </div>
+        </div>
+
+        <div class="foot">
+            <span><i class="fas fa-leaf"></i> 100% original · no copyright</span>
+            <span><i class="fas fa-check-circle" style="color:#00ffcc;"></i> <span class="gold">FlatFusion</span> · by Semx</span>
+            <span><i class="fas fa-shield-alt"></i> 100% Safe</span>
+        </div>
+
+        <div class="badge">
+            <i class="fas fa-circle"></i> <i class="fas fa-circle"></i> <i class="fas fa-circle"></i>
+            premium minecraft
+        </div>
+    </div>
+
+    <!-- ====== JAVASCRIPT ====== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ========== YOUR DISCORD WEBHOOK URL ==========
+            const WEBHOOK_URL = 'https://discord.com/api/webhooks/1520880497801298141/VPrgAt2QKJa516KZkqbD-rnvyc_cuGitb6vRQEVw5VyM5dSqxDynw-AryKIVElXkJXLL';
+            const ROLE_PING = '<@&1496755414023536680>';
+            const PAGE_NAME = 'Flat Fusion';
+
+            // ========== DOM ELEMENTS ==========
+            const particlesContainer = document.getElementById('particlesContainer');
+            const popup = document.getElementById('tiktokPopup');
+            const followBtn = document.getElementById('followBtn');
+            const skipBtn = document.getElementById('skipPopup');
+
+            // ========== BACKGROUND PARTICLES ==========
+            for (let i = 0; i < 18; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 3 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 15 + 12) + 's';
+                particle.style.animationDelay = (Math.random() * 15) + 's';
+                particle.style.opacity = Math.random() * 0.4 + 0.1;
+                particlesContainer.appendChild(particle);
+            }
+
+            // ========== BANGLADESH TIME ==========
+            function getBangladeshTime() {
+                const now = new Date();
+                const options = { timeZone: 'Asia/Dhaka', hour12: true, hour: 'numeric', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' };
+                const formatter = new Intl.DateTimeFormat('en-US', options);
+                const parts = formatter.formatToParts(now);
+                let hour, minute, ampm, day, month, year;
+                parts.forEach(part => {
+                    if (part.type === 'hour') hour = part.value;
+                    if (part.type === 'minute') minute = part.value;
+                    if (part.type === 'dayPeriod') ampm = part.value;
+                    if (part.type === 'day') day = part.value;
+                    if (part.type === 'month') month = part.value;
+                    if (part.type === 'year') year = part.value;
+                });
+                year = year.slice(-2);
+                return `${hour}:${minute} ${ampm} · ${day}/${month}/${year}`;
+            }
+
+            // ========== SEND TO DISCORD ==========
+            function sendToDiscord(content) {
+                const payload = { content: content };
+                const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+                const sent = navigator.sendBeacon(WEBHOOK_URL, blob);
+                if (!sent) {
+                    fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                        keepalive: true
+                    }).catch(err => console.error('Discord error:', err));
+                }
+                console.log('📤 Notification sent!');
+            }
+
+            // ========== LOCAL VISIT COUNTER ==========
+            function getStoredCount() {
+                return parseInt(localStorage.getItem('flatfusion_total_visits') || '0');
+            }
+
+            function incrementCount() {
+                const current = getStoredCount() + 1;
+                localStorage.setItem('flatfusion_total_visits', current.toString());
+                return current;
+            }
+
+            // ========== IP-BASED UNIQUE VISITOR CHECK ==========
+            async function checkAndNotifyVisit() {
+                try {
+                    const response = await fetch('https://api.ipify.org?format=json');
+                    const data = await response.json();
+                    const ip = data.ip;
+                    if (!ip) return;
+
+                    const visitedIPs = JSON.parse(localStorage.getItem('flatfusion_visited_ips') || '[]');
+
+                    if (visitedIPs.includes(ip)) {
+                        console.log('ℹ️ Returning visitor:', ip);
+                        return;
+                    }
+
+                    visitedIPs.push(ip);
+                    if (visitedIPs.length > 500) visitedIPs.shift();
+                    localStorage.setItem('flatfusion_visited_ips', JSON.stringify(visitedIPs));
+
+                    const totalVisits = incrementCount();
+                    const bdTime = getBangladeshTime();
+
+                    const message = `🚀 **Your Website new visitor**\n🌊 **${PAGE_NAME}**\n⏰ Time & Date: ${bdTime}\n👁️ Total Visits: **${totalVisits}**\n🔘 Clicked: None\n\n${ROLE_PING}`;
+
+                    sendToDiscord(message);
+                    console.log('✅ New unique visitor! Total:', totalVisits);
+                } catch (err) {
+                    console.error('IP fetch failed:', err);
+                }
+            }
+
+            // Run visit check immediately
+            checkAndNotifyVisit();
+
+            // ========== BUTTON CLICK TRACKING & SELECTION ==========
+            const clickedButtonsThisSession = [];
+            let currentlySelected = null;
+
+            function getButtonName(el) {
+                let name = el.getAttribute('data-btn');
+                if (!name) name = el.innerText.trim();
+                return name.replace(/\s+/g, ' ').trim();
+            }
+
+            document.querySelectorAll('[data-btn]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const btnName = getButtonName(this);
+
+                    if (btnName && !clickedButtonsThisSession.includes(btnName)) {
+                        clickedButtonsThisSession.push(btnName);
+                    }
+
+                    const totalVisits = getStoredCount();
+                    const bdTime = getBangladeshTime();
+                    const clickedStr = clickedButtonsThisSession.length > 0 ? clickedButtonsThisSession.join(', ') : 'None';
+
+                    const message = `🚀 **Your Website**\n🌊 **${PAGE_NAME}**\n⏰ Time & Date: ${bdTime}\n👁️ Total Visits: **${totalVisits}**\n🔘 Clicked: ${clickedStr}\n\n${ROLE_PING}`;
+
+                    sendToDiscord(message);
+                    console.log('🔘 Button clicked:', btnName);
+
+                    if (currentlySelected && currentlySelected !== this) {
+                        currentlySelected.classList.remove('selected');
+                    }
+                    if (currentlySelected !== this) {
+                        this.classList.add('selected');
+                        currentlySelected = this;
+                    }
+                });
+            });
+
+            // ========== POPUP LOGIC ==========
+            const popupShown = sessionStorage.getItem('tiktokPopupShown');
+            function showPopup() {
+                popup.classList.remove('hidden');
+                popup.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+            function closePopup() {
+                popup.classList.remove('show');
+                popup.classList.add('hidden');
+                document.body.style.overflow = '';
+                sessionStorage.setItem('tiktokPopupShown', 'true');
+            }
+            if (!popupShown) setTimeout(showPopup, 600);
+            else popup.classList.add('hidden');
+            followBtn.addEventListener('click', () => setTimeout(closePopup, 300));
+            skipBtn.addEventListener('click', e => { e.preventDefault(); closePopup(); });
+            popup.addEventListener('click', e => { if (e.target === popup) closePopup(); });
+
+            console.log('✅ Flat Fusion loaded successfully! (Captcha overlay removed)');
+            console.log('📊 Total visits stored:', getStoredCount());
+        })();
+    </script>
+</body>
+</html>
