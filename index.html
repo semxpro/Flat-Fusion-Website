@@ -245,20 +245,6 @@
             box-shadow: 0 0 40px rgba(255,0,80,0.4);
         }
 
-        /* ========== AD BANNER ========== */
-        .ad-banner {
-            width: 100%;
-            max-width: 728px;
-            margin: 1.5rem auto;
-            min-height: 90px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
         /* ========== SECTION TITLES ========== */
         .section-title {
             font-size: 1.6rem;
@@ -305,6 +291,18 @@
             border-color: var(--teal);
             box-shadow: 0 12px 40px rgba(0, 255, 200, 0.15);
         }
+        
+        /* ========== ENHANCED MOJO LAUNCHER CARD ========== */
+        .card-highlight {
+            border: 1px solid rgba(0, 255, 200, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 255, 200, 0.05);
+        }
+        .card-highlight:hover {
+            transform: translateY(-6px);
+            border-color: var(--teal);
+            box-shadow: 0 12px 40px rgba(0, 255, 200, 0.25);
+        }
+
         .card-item .content { position: relative; z-index: 1; width: 100%; }
         .card-item .icon-wrap {
             width: 50px; height: 50px;
@@ -314,15 +312,26 @@
             margin-bottom: 0.8rem;
             border: 1px solid rgba(0, 255, 200, 0.1);
         }
+        .card-highlight .icon-wrap {
+            border: 1px solid rgba(0, 255, 200, 0.3);
+        }
         .card-item .icon-wrap img { width: 30px; height: 30px; object-fit: contain; }
         .card-item h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem; }
         .card-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.8rem; }
-        .card-item .badge {
-            display: inline-block; background: var(--gold); color: #000;
-            font-size: 0.6rem; font-weight: 700; padding: 0.1rem 0.8rem;
-            border-radius: 40px; margin-bottom: 0.5rem;
-        }
         
+        /* ========== LATEST BADGE STYLING (PILL SHAPE) ========== */
+        .card-item .badge {
+            display: inline-block; 
+            background: var(--gold); 
+            color: #000;
+            font-size: 0.6rem; 
+            font-weight: 700; 
+            padding: 4px 12px;
+            border-radius: 20px; 
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
         /* ========== DOWNLOAD BUTTON ========== */
         .btn-download {
             display: inline-flex;
@@ -490,6 +499,78 @@
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         ::-webkit-scrollbar { width: 6px; background: #030807; }
         ::-webkit-scrollbar-thumb { background: var(--teal-glow); border-radius: 10px; }
+
+        /* ========== BANNER STYLE (UPDATED BG & BORDER-RADIUS) ========== */
+        .banner-game-card {
+            width: 100%;
+            border-radius: 1.5rem; /* Mojo Launcher এর মত বর্ডার-রেডিয়াস */
+            overflow: hidden;
+            background: var(--card-bg); /* Mojo Launcher এর মত ব্যাকগ্রাউন্ড */
+            margin: 0 auto 1.5rem;
+        }
+        .banner-img {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .banner-badge-fixed {
+            display: inline-block; 
+            background: var(--gold); 
+            color: #000;
+            font-size: 0.6rem; 
+            font-weight: 700; 
+            padding: 4px 12px;
+            border-radius: 20px; /* হুবহু Mojo Launcher এর পিল শেপ (Pill Shape) */
+            letter-spacing: 0.5px;
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 2;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        .banner-icon {
+            position: absolute;
+            bottom: -25px;
+            left: 15px;
+            width: 50px;
+            height: 50px;
+            background: #030807;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        }
+        .banner-icon img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+        .banner-content {
+            padding: 1.8rem 1.5rem 1.5rem 1.5rem;
+            background: #030807; /* এটা আগের মত থাকবে, নিচের ডাউনলোড সেকশন কালার ডার্ক থাকে */
+        }
+        .banner-content h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 15px rgba(0, 255, 200, 0.25);
+        }
+        @media (max-width: 450px) {
+            .banner-content h3 { font-size: 1.6rem; }
+        }
+        .banner-content p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+        }
+        /* =========================================================== */
     </style>
 </head>
 <body>
@@ -538,41 +619,36 @@
             </a>
         </section>
 
-        <!-- ====== AD 1 (উপরের অ্যাড - highperformanceformat) ====== -->
-        <div class="ad-banner">
-            <script>
-                atOptions = {
-                    'key' : 'd10a137e507b00cc2153fe99fbf56ccc',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/d10a137e507b00cc2153fe99fbf56ccc/invoke.js"></script>
-        </div>
-
         <!-- ====== DOWNLOADS ====== -->
         <section id="downloads" class="fade-in">
             <h2 class="section-title"><i class="fas fa-download"></i> Download Free Minecraft Bedrock And Java</h2>
-            <p class="section-sub">Always up-to-date with the latest releases.</p>
-
-            <div class="card-grid-3">
-                <!-- Minecraft 26.32 -->
-                <div class="card-item" data-btn="MINECRAFT 26.32">
-                    <div class="content">
-                        <div class="icon-wrap"><img src="https://res.cloudinary.com/p35rwudq/image/upload/20260630_183545_sxcb8o.png" alt="Minecraft"></div>
-                        <span class="badge">Latest</span>
-                        <h3>Minecraft 26.32</h3>
-                        <p>Latest version, updated instantly with new biomes & fixes.</p>
-                        <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Minecraft.1.26.32.apk" data-name="Minecraft 26.32">
+            <!-- নির্দেশিত 24px গ্যাপ যুক্ত করা হয়েছে -->
+            <div style="height: 24px;"></div> 
+            
+            <!-- ====== CUSTOM MINECRAFT 24.32 BANNER (MATCHING MOJO STYLE) ====== -->
+            <div style="width: 100%; max-width: 728px; margin: 0 auto 1.5rem auto;">
+                <div class="banner-game-card card-highlight">
+                    <div class="banner-img" style="background-image: url('https://res.cloudinary.com/p35rwudq/image/upload/v1782915854/Picsart_26-07-01_20-22-27-117_pbmnht.jpg');">
+                        <!-- পিল শেপে (Pill shape) রূপান্তরিত Latest ব্যাজ -->
+                        <span class="banner-badge-fixed">Latest</span>
+                        <div class="banner-icon">
+                            <img src="https://res.cloudinary.com/p35rwudq/image/upload/20260630_183545_sxcb8o.png" alt="icon">
+                        </div>
+                    </div>
+                    <div class="banner-content">
+                        <h3>Minecraft 24.32</h3>
+                        <p>Minecraft 24.32 and later versions, updated with new biomes & fixes.</p>
+                        <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Minecraft.1.26.32.apk" data-name="Minecraft 24.32 Banner">
                             <i class="fas fa-cloud-download-alt"></i> Download
                         </button>
                     </div>
                 </div>
+            </div>
+            <!-- =================================================== -->
 
-                <!-- Mojo Launcher -->
-                <div class="card-item" data-btn="MOJO LAUNCHER">
+            <div class="card-grid-3">
+                <!-- Mojo Launcher (Stylish Highlighted Card) -->
+                <div class="card-item card-highlight">
                     <div class="content">
                         <div class="icon-wrap"><img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192515_sxwegq.png" alt="Mojo"></div>
                         <span class="badge" style="background:#00ffcc; color:#000;">Smooth FPS</span>
@@ -585,7 +661,7 @@
                 </div>
 
                 <!-- MJ Launcher -->
-                <div class="card-item" data-btn="MJ LAUNCHER">
+                <div class="card-item">
                     <div class="content">
                         <div class="icon-wrap"><img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192621_hl8cbi.png" alt="MJ"></div>
                         <h3>MJ Launcher</h3>
@@ -598,19 +674,13 @@
             </div>
         </section>
 
-        <!-- ====== AD 2 (নিচের অ্যাড - effectivecpmnetwork) ====== -->
-        <div class="ad-banner">
-            <script async="async" data-cfasync="false" src="https://pl30147956.effectivecpmnetwork.com/25e60ebbd9824ed2fa9bcf2e762e8abf/invoke.js"></script>
-            <div id="container-25e60ebbd9824ed2fa9bcf2e762e8abf"></div>
-        </div>
-
         <!-- ====== BEDROCK RESEARCH PACK ====== -->
         <section id="resource-pack" class="fade-in">
             <h2 class="section-title"><i class="fas fa-puzzle-piece"></i> Bedrock Research Pack</h2>
             <p class="section-sub">Enhance your game with stunning visuals.</p>
 
             <div style="display: flex; justify-content: center; width: 100%;">
-                <div class="card-item" data-btn="Action & Stuff" style="max-width: 380px; width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="card-item" style="max-width: 380px; width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;">
                     <div class="content" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                         <div class="icon-wrap"><img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192238_mflbn5.png" alt="Action"></div>
                         <span class="badge" style="background:#ffaa00; color:#000;">Resource Pack</span>
@@ -780,13 +850,14 @@
                 if (e.target === this) cancelCountdown();
             });
 
+            // শুধুমাত্র Download বাটনে ক্লিক করলেই কাজ করবে (পুরো কার্ডে ক্লিক করলে কিছু হবে না)
             document.querySelectorAll('.btn-download').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const url = this.getAttribute('data-url');
                     const name = this.getAttribute('data-name') || 'File';
                     
-                    const btnName = this.closest('.card-item')?.getAttribute('data-btn') || name;
+                    const btnName = name;
                     const clicked = JSON.parse(localStorage.getItem('flatfusion_clicked_buttons') || '[]');
                     if (!clicked.includes(btnName)) {
                         clicked.push(btnName);
@@ -801,8 +872,12 @@
                 });
             });
 
+            // শুধুমাত্র কমিউনিটি (TikTok, YouTube, Discord) লিংকের জন্য ট্র্যাকিং রাখা হয়েছে
             document.querySelectorAll('[data-btn]:not(.btn-download)').forEach(el => {
-                el.addEventListener('click', function() {
+                el.addEventListener('click', function(e) {
+                    // গার্ড কন্ডিশন: বাটনের ক্লিক যেন এখানে ডুপ্লিকেট না হয়
+                    if (e.target.closest('.btn-download')) return;
+
                     const name = this.getAttribute('data-btn') || this.innerText.trim();
                     const clicked = JSON.parse(localStorage.getItem('flatfusion_clicked_buttons') || '[]');
                     if (!clicked.includes(name)) {
