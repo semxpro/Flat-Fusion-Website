@@ -245,22 +245,19 @@
             box-shadow: 0 0 40px rgba(255,0,80,0.4);
         }
 
-        /* ========== AD PLACEHOLDER ========== */
+        /* ========== AD BANNER ========== */
         .ad-banner {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed rgba(0, 255, 200, 0.15);
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            color: #4a7a6e;
-            font-size: 0.8rem;
-            margin: 1.5rem 0;
-            min-height: 80px;
+            width: 100%;
+            max-width: 728px;
+            margin: 1.5rem auto;
+            min-height: 90px;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            overflow: hidden;
         }
-        .ad-banner span { opacity: 0.6; }
 
         /* ========== SECTION TITLES ========== */
         .section-title {
@@ -326,7 +323,7 @@
             border-radius: 40px; margin-bottom: 0.5rem;
         }
         
-        /* ========== DOWNLOAD BUTTON (Clicked triggers popup) ========== */
+        /* ========== DOWNLOAD BUTTON ========== */
         .btn-download {
             display: inline-flex;
             align-items: center;
@@ -429,7 +426,7 @@
             color: #fff;
         }
 
-        /* ========== NEW FOOTER ========== */
+        /* ========== FOOTER ========== */
         .footer {
             max-width: 800px;
             width: 100%;
@@ -541,9 +538,18 @@
             </a>
         </section>
 
-        <!-- ====== AD PLACEHOLDER ====== -->
+        <!-- ====== AD 1 (উপরের অ্যাড - highperformanceformat) ====== -->
         <div class="ad-banner">
-            <span><i class="fas fa-ad"></i> AdSense Placeholder (Banner 728x90)</span>
+            <script>
+                atOptions = {
+                    'key' : 'd10a137e507b00cc2153fe99fbf56ccc',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/d10a137e507b00cc2153fe99fbf56ccc/invoke.js"></script>
         </div>
 
         <!-- ====== DOWNLOADS ====== -->
@@ -559,7 +565,6 @@
                         <span class="badge">Latest</span>
                         <h3>Minecraft 26.32</h3>
                         <p>Latest version, updated instantly with new biomes & fixes.</p>
-                        <!-- Clicking this will trigger 10s countdown -->
                         <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Minecraft.1.26.32.apk" data-name="Minecraft 26.32">
                             <i class="fas fa-cloud-download-alt"></i> Download
                         </button>
@@ -593,9 +598,10 @@
             </div>
         </section>
 
-        <!-- ====== AD PLACEHOLDER ====== -->
-        <div class="ad-banner" style="min-height:60px;">
-            <span><i class="fas fa-ad"></i> AdSense In-Feed Ad Placeholder</span>
+        <!-- ====== AD 2 (নিচের অ্যাড - effectivecpmnetwork) ====== -->
+        <div class="ad-banner">
+            <script async="async" data-cfasync="false" src="https://pl30147956.effectivecpmnetwork.com/25e60ebbd9824ed2fa9bcf2e762e8abf/invoke.js"></script>
+            <div id="container-25e60ebbd9824ed2fa9bcf2e762e8abf"></div>
         </div>
 
         <!-- ====== BEDROCK RESEARCH PACK ====== -->
@@ -610,7 +616,6 @@
                         <span class="badge" style="background:#ffaa00; color:#000;">Resource Pack</span>
                         <h3>Action & Stuff</h3>
                         <p>Vibrant textures & 3D models. Up-to-date for Bedrock.</p>
-                        <!-- You can add your direct download link for Action & Stuff here -->
                         <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/ACTION_STUFF.mcpack" data-name="Action & Stuff">
                             <i class="fas fa-cloud-download-alt"></i> Download
                         </button>
@@ -728,9 +733,8 @@
             let downloadName = '';
             let isCountingDown = false;
 
-            // Function to start countdown
             function startCountdown(url, name) {
-                if (isCountingDown) return; // Prevent multiple popups
+                if (isCountingDown) return;
                 isCountingDown = true;
                 downloadUrl = url;
                 downloadName = name;
@@ -749,7 +753,6 @@
                         countdownInterval = null;
                         isCountingDown = false;
                         overlay.classList.remove('show');
-                        // Trigger download
                         if (downloadUrl) {
                             const a = document.createElement('a');
                             a.href = downloadUrl;
@@ -763,7 +766,6 @@
                 }, 1000);
             }
 
-            // Cancel countdown
             function cancelCountdown() {
                 if (countdownInterval) {
                     clearInterval(countdownInterval);
@@ -778,14 +780,12 @@
                 if (e.target === this) cancelCountdown();
             });
 
-            // Attach to all Download buttons
             document.querySelectorAll('.btn-download').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const url = this.getAttribute('data-url');
                     const name = this.getAttribute('data-name') || 'File';
                     
-                    // Track click
                     const btnName = this.closest('.card-item')?.getAttribute('data-btn') || name;
                     const clicked = JSON.parse(localStorage.getItem('flatfusion_clicked_buttons') || '[]');
                     if (!clicked.includes(btnName)) {
@@ -797,12 +797,10 @@
                     const clickedStr = clicked.join(', ');
                     sendToDiscord(`🖱️ **Download Clicked**\n🌊 **${PAGE_NAME}**\n⏰ ${bd}\n👁️ Total: **${total}**\n🔘 Clicked: ${clickedStr}\n\n${ROLE_PING}`);
                     
-                    // Start countdown
                     startCountdown(url, name);
                 });
             });
 
-            // Track other buttons (Community, etc.)
             document.querySelectorAll('[data-btn]:not(.btn-download)').forEach(el => {
                 el.addEventListener('click', function() {
                     const name = this.getAttribute('data-btn') || this.innerText.trim();
