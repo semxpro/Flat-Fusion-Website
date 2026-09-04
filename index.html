@@ -25,28 +25,26 @@
                    ROOT — COMPLETE NEW DESIGN SYSTEM
                    ============================================================ */
         :root {
-            /* ——— Colors ——— */
             --bg-primary: #0A0A0F;
             --bg-secondary: #10101A;
             --bg-surface: #14141E;
             --bg-card: #181824;
             --bg-card-hover: #1E1E2E;
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --border-hover: rgba(139, 92, 246, 0.25);
+            --border-subtle: rgba(255,255,255,0.06);
+            --border-hover: rgba(139,92,246,0.25);
 
             --violet: #8B5CF6;
             --violet-dark: #6D3BD9;
-            --violet-glow: rgba(139, 92, 246, 0.15);
+            --violet-glow: rgba(139,92,246,0.15);
             --gold: #F59E0B;
-            --gold-glow: rgba(245, 158, 11, 0.12);
+            --gold-glow: rgba(245,158,11,0.12);
             --rose: #F43F5E;
-            --rose-glow: rgba(244, 63, 94, 0.12);
+            --rose-glow: rgba(244,63,94,0.12);
             --orange: #F97316;
             --teal: #14B8A6;
             --blue: #3B82F6;
             --amber: #FBBF24;
             --emerald: #34D399;
-            --pink: #EC4899;
             --cyan: #22D3EE;
 
             --text-primary: #F8FAFC;
@@ -54,38 +52,21 @@
             --text-muted: #64748B;
             --text-inverse: #0A0A0F;
 
-            /* ——— Typography ——— */
             --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             --radius: 12px;
             --radius-lg: 20px;
             --radius-full: 9999px;
 
-            /* ——— Shadows ——— */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
-            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.6);
-            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.7);
-            --shadow-glow: 0 0 60px rgba(139, 92, 246, 0.08);
+            --shadow-md: 0 8px 32px rgba(0,0,0,0.6);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,0.7);
+            --shadow-glow: 0 0 60px rgba(139,92,246,0.08);
 
-            /* ——— Transitions ——— */
             --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
             --duration: 0.3s;
         }
 
-        /* ============================================================
-                   RESET & BASE
-                   ============================================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
         body {
             font-family: var(--font);
             background: var(--bg-primary);
@@ -95,884 +76,517 @@
             line-height: 1.6;
             padding-bottom: 110px;
         }
+        ::-webkit-scrollbar { width:5px; background:var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background:var(--violet); border-radius:var(--radius-full); }
+        ::-webkit-scrollbar-track { background:var(--bg-secondary); }
+        a { text-decoration:none; color:inherit; }
+        button { font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+        img { display:block; max-width:100%; }
+        .container { max-width:1200px; margin:0 auto; padding:0 20px; }
 
-        ::-webkit-scrollbar {
-            width: 5px;
-            background: var(--bg-primary);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--violet);
-            border-radius: var(--radius-full);
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        button {
-            font-family: inherit;
-            cursor: pointer;
-            border: none;
-            background: none;
-            color: inherit;
-        }
-        img {
-            display: block;
-            max-width: 100%;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* ============================================================
-                   HEADER
-                   ============================================================ */
+        /* ===== HEADER ===== */
         .header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 0 20px;
-            height: 64px;
-            display: flex;
-            align-items: center;
+            position:sticky; top:0; z-index:1000;
+            background:rgba(10,10,15,0.85); backdrop-filter:blur(16px);
+            -webkit-backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border-subtle);
+            padding:0 20px; height:64px; display:flex; align-items:center;
         }
-
         .header-inner {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
+            max-width:1200px; width:100%; margin:0 auto;
+            display:flex; align-items:center; justify-content:space-between; gap:16px;
         }
-
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: -0.5px;
-            flex-shrink: 0;
-            color: var(--text-primary);
+            display:flex; align-items:center; gap:10px;
+            font-weight:800; font-size:1.25rem; letter-spacing:-0.5px;
+            flex-shrink:0; color:var(--text-primary);
         }
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--violet), var(--violet-dark));
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            color: #fff;
+            width:32px; height:32px;
+            background:linear-gradient(135deg, var(--violet), var(--violet-dark));
+            border-radius:var(--radius);
+            display:flex; align-items:center; justify-content:center; font-size:1rem; color:#fff;
         }
-        .logo span {
-            background: linear-gradient(135deg, var(--violet), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .logo span { background:linear-gradient(135deg, var(--violet), var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 
-        .nav-categories {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            flex-wrap: wrap;
-            flex: 1;
-            justify-content: center;
-        }
-
+        .nav-categories { display:flex; align-items:center; gap:4px; flex-wrap:wrap; flex:1; justify-content:center; }
         .nav-categories .cat-btn {
-            padding: 6px 16px;
-            border-radius: var(--radius-full);
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: all var(--duration) var(--ease);
-            background: transparent;
-            border: 1px solid transparent;
-            white-space: nowrap;
+            padding:6px 16px; border-radius:var(--radius-full); font-size:0.8rem; font-weight:600;
+            color:var(--text-secondary); transition:all var(--duration) var(--ease);
+            background:transparent; border:1px solid transparent; white-space:nowrap;
         }
-        .nav-categories .cat-btn:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.04);
-        }
+        .nav-categories .cat-btn:hover { color:var(--text-primary); background:rgba(255,255,255,0.04); }
         .nav-categories .cat-btn.active {
-            color: #fff;
-            background: var(--violet);
-            border-color: var(--violet);
-            box-shadow: 0 0 20px var(--violet-glow);
+            color:#fff; background:var(--violet); border-color:var(--violet);
+            box-shadow:0 0 20px var(--violet-glow);
         }
-        .nav-categories .cat-btn i {
-            margin-right: 6px;
-            font-size: 0.75rem;
-        }
+        .nav-categories .cat-btn i { margin-right:6px; font-size:0.75rem; }
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-
+        .header-actions { display:flex; align-items:center; gap:8px; flex-shrink:0; }
         .header-search-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            transition: all var(--duration) var(--ease);
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-subtle);
+            width:38px; height:38px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            color:var(--text-secondary); font-size:1rem;
+            transition:all var(--duration) var(--ease);
+            background:rgba(255,255,255,0.04); border:1px solid var(--border-subtle);
         }
-        .header-search-btn:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--border-hover);
-        }
-
+        .header-search-btn:hover { color:var(--text-primary); background:rgba(255,255,255,0.08); border-color:var(--border-hover); }
         .header-account-btn {
-            padding: 6px 18px;
-            border-radius: var(--radius-full);
-            font-size: 0.8rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--violet), var(--violet-dark));
-            color: #fff;
-            transition: all var(--duration) var(--ease);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border: none;
-            box-shadow: 0 0 20px var(--violet-glow);
+            padding:6px 18px; border-radius:var(--radius-full); font-size:0.8rem; font-weight:600;
+            background:linear-gradient(135deg, var(--violet), var(--violet-dark)); color:#fff;
+            transition:all var(--duration) var(--ease);
+            display:flex; align-items:center; gap:6px; border:none;
+            box-shadow:0 0 20px var(--violet-glow);
         }
-        .header-account-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 0 30px var(--violet-glow);
-        }
-        .header-account-btn i {
-            font-size: 0.8rem;
-        }
-
+        .header-account-btn:hover { transform:translateY(-1px); box-shadow:0 0 30px var(--violet-glow); }
+        .header-account-btn i { font-size:0.8rem; }
         .hamburger {
-            display: none;
-            width: 38px;
-            height: 38px;
-            border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-subtle);
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--text-secondary);
+            display:none; width:38px; height:38px; border-radius:var(--radius);
+            background:rgba(255,255,255,0.04); border:1px solid var(--border-subtle);
+            align-items:center; justify-content:center; font-size:1.2rem; color:var(--text-secondary);
         }
 
-        /* ============================================================
-                   MOBILE NAV OVERLAY
-                   ============================================================ */
+        /* ===== MOBILE NAV ===== */
         .mobile-nav-overlay {
-            display: none;
-            position: fixed;
-            top: 64px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(10, 10, 15, 0.96);
-            backdrop-filter: blur(12px);
-            z-index: 999;
-            padding: 24px 20px;
-            overflow-y: auto;
-            flex-direction: column;
-            gap: 8px;
+            display:none; position:fixed; top:64px; left:0; right:0; bottom:0;
+            background:rgba(10,10,15,0.96); backdrop-filter:blur(12px);
+            z-index:999; padding:24px 20px; overflow-y:auto;
+            flex-direction:column; gap:8px;
         }
-        .mobile-nav-overlay.open {
-            display: flex;
-        }
+        .mobile-nav-overlay.open { display:flex; }
         .mobile-nav-overlay .cat-btn {
-            padding: 14px 18px;
-            border-radius: var(--radius);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-subtle);
-            width: 100%;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            padding:14px 18px; border-radius:var(--radius); font-size:1rem; font-weight:600;
+            color:var(--text-secondary); background:rgba(255,255,255,0.03);
+            border:1px solid var(--border-subtle); width:100%; text-align:left;
+            display:flex; align-items:center; gap:12px;
         }
-        .mobile-nav-overlay .cat-btn.active {
-            color: #fff;
-            background: var(--violet);
-            border-color: var(--violet);
-        }
-        .mobile-nav-overlay .cat-btn i {
-            width: 24px;
-            text-align: center;
-        }
+        .mobile-nav-overlay .cat-btn.active { color:#fff; background:var(--violet); border-color:var(--violet); }
+        .mobile-nav-overlay .cat-btn i { width:24px; text-align:center; }
 
-        /* ============================================================
-                   HERO
-                   ============================================================ */
-        .hero {
-            padding: 48px 0 32px;
-            text-align: center;
-            position: relative;
-        }
-
+        /* ===== HERO ===== */
+        .hero { padding:48px 0 32px; text-align:center; position:relative; }
         .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(139, 92, 246, 0.08);
-            border: 1px solid rgba(139, 92, 246, 0.15);
-            padding: 4px 18px;
-            border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--violet);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
+            display:inline-flex; align-items:center; gap:8px;
+            background:rgba(139,92,246,0.08); border:1px solid rgba(139,92,246,0.15);
+            padding:4px 18px; border-radius:var(--radius-full);
+            font-size:0.7rem; font-weight:600; color:var(--violet);
+            letter-spacing:0.5px; text-transform:uppercase; margin-bottom:16px;
         }
-        .hero-badge i {
-            font-size: 0.6rem;
-        }
-
+        .hero-badge i { font-size:0.6rem; }
         .hero h1 {
-            font-size: clamp(2.4rem, 6vw, 4.2rem);
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: -1.5px;
-            margin-bottom: 12px;
+            font-size:clamp(2.4rem, 6vw, 4.2rem); font-weight:900;
+            line-height:1.05; letter-spacing:-1.5px; margin-bottom:12px;
         }
-        .hero h1 .highlight {
-            background: linear-gradient(135deg, var(--violet), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            max-width: 560px;
-            margin: 0 auto 24px;
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            flex-wrap: wrap;
-            margin-top: 8px;
-        }
+        .hero h1 .highlight { background:linear-gradient(135deg, var(--violet), var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .hero p { max-width:560px; margin:0 auto 24px; color:var(--text-secondary); font-size:1.05rem; line-height:1.7; }
+        .hero-stats { display:flex; justify-content:center; gap:32px; flex-wrap:wrap; margin-top:8px; }
         .hero-stats .stat {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-weight: 500;
+            display:flex; align-items:center; gap:8px; color:var(--text-muted);
+            font-size:0.85rem; font-weight:500;
         }
-        .hero-stats .stat i {
-            color: var(--violet);
-            font-size: 1rem;
-        }
-        .hero-stats .stat strong {
-            color: var(--text-primary);
-            font-weight: 700;
-        }
+        .hero-stats .stat i { color:var(--violet); font-size:1rem; }
+        .hero-stats .stat strong { color:var(--text-primary); font-weight:700; }
 
-        /* ============================================================
-                   CATEGORY INDICATOR
-                   ============================================================ */
+        /* ===== CATEGORY INDICATOR ===== */
         .category-indicator {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 20px 0 8px;
-            border-bottom: 1px solid var(--border-subtle);
-            margin-bottom: 28px;
-            flex-wrap: wrap;
+            display:flex; align-items:center; gap:12px;
+            padding:20px 0 8px; border-bottom:1px solid var(--border-subtle);
+            margin-bottom:28px; flex-wrap:wrap;
         }
-        .category-indicator .label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-        }
-        .category-indicator .name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-        .category-indicator .desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-left: 4px;
-            font-weight: 400;
-        }
+        .category-indicator .label { font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); }
+        .category-indicator .name { font-size:1.2rem; font-weight:700; color:var(--text-primary); }
+        .category-indicator .desc { font-size:0.85rem; color:var(--text-secondary); margin-left:4px; font-weight:400; }
         .category-indicator .count {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2px 12px;
-            border-radius: var(--radius-full);
-            margin-left: auto;
+            font-size:0.8rem; color:var(--text-muted);
+            background:rgba(255,255,255,0.05); padding:2px 12px;
+            border-radius:var(--radius-full); margin-left:auto;
         }
 
-        /* ============================================================
-                   DOWNLOAD GRID
-                   ============================================================ */
+        /* ===== GRID & CARDS ===== */
         .download-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            padding-bottom: 40px;
+            display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+            gap:20px; padding-bottom:40px;
         }
-
-        /* ============================================================
-                   CARD
-                   ============================================================ */
         .download-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            transition: all var(--duration) var(--ease);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(4px);
+            background:var(--bg-card); border:1px solid var(--border-subtle);
+            border-radius:var(--radius-lg); padding:20px;
+            transition:all var(--duration) var(--ease);
+            display:flex; flex-direction:column; position:relative;
+            overflow:hidden; backdrop-filter:blur(4px);
         }
         .download-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-hover);
-            background: var(--bg-card-hover);
-            box-shadow: var(--shadow-md), var(--shadow-glow);
+            transform:translateY(-4px); border-color:var(--border-hover);
+            background:var(--bg-card-hover); box-shadow:var(--shadow-md), var(--shadow-glow);
         }
-
         .download-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--violet), var(--teal));
-            opacity: 0;
-            transition: opacity var(--duration) var(--ease);
+            content:''; position:absolute; top:0; left:0; right:0; height:2px;
+            background:linear-gradient(90deg, var(--violet), var(--teal));
+            opacity:0; transition:opacity var(--duration) var(--ease);
         }
-        .download-card:hover::before {
-            opacity: 1;
-        }
+        .download-card:hover::before { opacity:1; }
 
-        .download-card .card-top {
-            display: flex;
-            gap: 14px;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
+        .download-card .card-top { display:flex; gap:14px; align-items:flex-start; margin-bottom:12px; }
         .download-card .card-thumb {
-            width: 56px;
-            height: 56px;
-            border-radius: var(--radius);
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            flex-shrink: 0;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            width:56px; height:56px; border-radius:var(--radius);
+            background:var(--bg-secondary); border:1px solid var(--border-subtle);
+            flex-shrink:0; overflow:hidden;
+            display:flex; align-items:center; justify-content:center; position:relative;
         }
-        .download-card .card-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: var(--bg-secondary);
-        }
-        .download-card .card-thumb .fallback-icon {
-            font-size: 1.8rem;
-            color: var(--text-muted);
-        }
+        .download-card .card-thumb img { width:100%; height:100%; object-fit:contain; background:var(--bg-secondary); }
         .download-card .card-thumb .image-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-secondary);
-            color: var(--text-muted);
-            font-size: 1.5rem;
+            width:100%; height:100%;
+            display:flex; align-items:center; justify-content:center;
+            background:var(--bg-secondary); color:var(--text-muted); font-size:1.5rem;
         }
 
-        .download-card .card-info {
-            flex: 1;
-            min-width: 0;
-        }
+        .download-card .card-info { flex:1; min-width:0; }
         .download-card .card-info .title-row {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 2px;
+            display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:2px;
         }
-        .download-card .card-info .title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.3;
+        .download-card .card-info .title { 
+            font-size:1.05rem; font-weight:700; color:var(--text-primary); line-height:1.3;
+            transition:all var(--duration);
         }
         .download-card .card-info .version {
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--violet);
-            background: rgba(139, 92, 246, 0.12);
-            padding: 2px 10px;
-            border-radius: var(--radius-full);
-            border: 1px solid rgba(139, 92, 246, 0.1);
-            letter-spacing: 0.3px;
-            display: inline-block;
+            font-size:0.65rem; font-weight:700; color:var(--violet);
+            background:rgba(139,92,246,0.12); padding:2px 10px;
+            border-radius:var(--radius-full); border:1px solid rgba(139,92,246,0.1);
+            letter-spacing:0.3px; display:inline-block;
+            transition:all var(--duration);
         }
-
         .download-card .card-info .badge-pill {
-            font-size: 0.6rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 2px 10px;
-            border-radius: var(--radius-full);
-            background: var(--amber);
-            color: #0A0A0F;
-            box-shadow: 0 0 12px rgba(251, 191, 36, 0.2);
-            display: inline-block;
-            line-height: 1.4;
+            font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;
+            padding:2px 10px; border-radius:var(--radius-full);
+            background:var(--amber); color:#0A0A0F;
+            box-shadow:0 0 12px rgba(251,191,36,0.2);
+            display:inline-block; line-height:1.4;
+            transition:all var(--duration);
         }
-        .download-card .card-info .badge-pill.bedrock { background: var(--emerald); color: #0A0A0F; box-shadow: 0 0 12px rgba(52, 211, 153, 0.25); }
-        .download-card .card-info .badge-pill.java { background: var(--blue); color: #fff; box-shadow: 0 0 12px rgba(59, 130, 246, 0.25); }
-        .download-card .card-info .badge-pill.smooth { background: var(--teal); color: #0A0A0F; box-shadow: 0 0 12px rgba(20, 184, 166, 0.25); }
-        .download-card .card-info .badge-pill.premium { background: var(--violet); color: #fff; box-shadow: 0 0 12px rgba(139, 92, 246, 0.25); }
-        .download-card .card-info .badge-pill.fps { background: var(--rose); color: #fff; box-shadow: 0 0 12px rgba(244, 63, 94, 0.25); }
-        .download-card .card-info .badge-pill.models { background: var(--orange); color: #0A0A0F; box-shadow: 0 0 12px rgba(249, 115, 22, 0.25); }
-        .download-card .card-info .badge-pill.latest { background: var(--cyan); color: #0A0A0F; box-shadow: 0 0 12px rgba(34, 211, 238, 0.25); }
+        .download-card .card-info .badge-pill.bedrock { background:var(--emerald); color:#0A0A0F; box-shadow:0 0 12px rgba(52,211,153,0.25); }
+        .download-card .card-info .badge-pill.java { background:var(--blue); color:#fff; box-shadow:0 0 12px rgba(59,130,246,0.25); }
+        .download-card .card-info .badge-pill.smooth { background:var(--teal); color:#0A0A0F; box-shadow:0 0 12px rgba(20,184,166,0.25); }
+        .download-card .card-info .badge-pill.premium { background:var(--violet); color:#fff; box-shadow:0 0 12px rgba(139,92,246,0.25); }
+        .download-card .card-info .badge-pill.fps { background:var(--rose); color:#fff; box-shadow:0 0 12px rgba(244,63,94,0.25); }
+        .download-card .card-info .badge-pill.models { background:var(--orange); color:#0A0A0F; box-shadow:0 0 12px rgba(249,115,22,0.25); }
+        .download-card .card-info .badge-pill.latest { background:var(--cyan); color:#0A0A0F; box-shadow:0 0 12px rgba(34,211,238,0.25); }
+
+        .download-card .card-info .edition-badge {
+            font-size:0.55rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;
+            padding:2px 10px; border-radius:var(--radius-full);
+            background:var(--blue); color:#fff;
+            box-shadow:0 0 12px rgba(59,130,246,0.25);
+            transition:all var(--duration);
+        }
 
         .download-card .card-info .category-tag {
-            font-size: 0.6rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.04);
-            padding: 2px 10px;
-            border-radius: var(--radius-full);
-            border: 1px solid var(--border-subtle);
+            font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;
+            color:var(--text-muted); background:rgba(255,255,255,0.04);
+            padding:2px 10px; border-radius:var(--radius-full); border:1px solid var(--border-subtle);
         }
         .download-card .card-info .desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-top: 6px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            font-size:0.85rem; color:var(--text-secondary); line-height:1.6;
+            margin-top:6px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+            transition:all var(--duration);
         }
 
         .download-card .feature-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px 10px;
-            margin: 10px 0 14px;
-            padding: 0;
-            list-style: none;
+            display:flex; flex-wrap:wrap; gap:6px 10px;
+            margin:10px 0 14px; padding:0; list-style:none;
+            transition:all var(--duration);
         }
         .download-card .feature-list li {
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            font-size:0.7rem; font-weight:500; color:var(--text-secondary);
+            display:flex; align-items:center; gap:4px;
         }
-        .download-card .feature-list li i {
-            color: var(--violet);
-            font-size: 0.5rem;
+        .download-card .feature-list li i { color:var(--violet); font-size:0.5rem; }
+
+        /* ---- Card Footer: Dropdown + Button ---- */
+        .download-card .card-footer {
+            display:flex; align-items:center; justify-content:space-between; gap:12px;
+            margin-top:auto; padding-top:14px; border-top:1px solid var(--border-subtle);
+            flex-wrap:wrap;
         }
 
-        .download-card .card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: auto;
-            padding-top: 14px;
-            border-top: 1px solid var(--border-subtle);
+        .version-select-wrapper {
+            display:flex; align-items:center; gap:10px;
+            flex:1; min-width:140px;
         }
+
+        .version-select-wrapper .version-label {
+            font-size:0.65rem; font-weight:500; color:var(--text-muted);
+            letter-spacing:0.3px; white-space:nowrap;
+        }
+
+        .version-select {
+            background:var(--bg-secondary);
+            border:1px solid var(--border-subtle);
+            border-radius:var(--radius-full);
+            padding:5px 28px 5px 14px;
+            font-size:0.75rem;
+            font-weight:500;
+            color:var(--text-primary);
+            font-family:var(--font);
+            cursor:pointer;
+            appearance:none;
+            -webkit-appearance:none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2394A3B8'/%3E%3C/svg%3E");
+            background-repeat:no-repeat;
+            background-position:right 10px center;
+            background-size:10px 6px;
+            min-width:80px;
+            transition:all var(--duration) var(--ease);
+            outline:none;
+        }
+        .version-select:hover { border-color:var(--border-hover); }
+        .version-select:focus { border-color:var(--violet); box-shadow:0 0 0 2px var(--violet-glow); }
+        .version-select option {
+            background:var(--bg-secondary);
+            color:var(--text-primary);
+            padding:4px 8px;
+        }
+
+        .version-badge-display {
+            font-size:0.55rem; font-weight:600; text-transform:uppercase; letter-spacing:0.3px;
+            padding:2px 10px; border-radius:var(--radius-full);
+            background:var(--amber); color:#0A0A0F;
+            display:inline-block; white-space:nowrap;
+            transition:all var(--duration);
+        }
+        .version-badge-display.bedrock { background:var(--emerald); color:#0A0A0F; }
+        .version-badge-display.java { background:var(--blue); color:#fff; }
+        .version-badge-display.smooth { background:var(--teal); color:#0A0A0F; }
+        .version-badge-display.premium { background:var(--violet); color:#fff; }
+        .version-badge-display.fps { background:var(--rose); color:#fff; }
+        .version-badge-display.models { background:var(--orange); color:#0A0A0F; }
+        .version-badge-display.latest { background:var(--cyan); color:#0A0A0F; }
 
         .btn-download {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 18px;
-            border-radius: var(--radius-full);
-            font-size: 0.8rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--violet), var(--violet-dark));
-            color: #fff;
-            border: none;
-            transition: all var(--duration) var(--ease);
-            box-shadow: 0 0 20px var(--violet-glow);
-            flex-shrink: 0;
-            cursor: pointer;
+            display:inline-flex; align-items:center; gap:6px;
+            padding:6px 18px; border-radius:var(--radius-full);
+            font-size:0.8rem; font-weight:600;
+            background:linear-gradient(135deg, var(--violet), var(--violet-dark));
+            color:#fff;
+            border:none; transition:all var(--duration) var(--ease);
+            box-shadow:0 0 20px var(--violet-glow);
+            flex-shrink:0; cursor:pointer;
         }
-        .btn-download:hover { transform: scale(1.04); box-shadow: 0 0 30px var(--violet-glow); }
-        .btn-download i { font-size: 0.75rem; }
+        .btn-download:hover { transform:scale(1.04); box-shadow:0 0 30px var(--violet-glow); }
+        .btn-download i { font-size:0.75rem; }
         .btn-download:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
+            opacity:0.45;
+            cursor:not-allowed;
+            transform:none !important;
+            box-shadow:none !important;
+            background:var(--bg-secondary);
+            color:var(--text-muted);
+            pointer-events:none;
         }
 
-        /* ============================================================
-                   EMPTY STATE
-                   ============================================================ */
+        /* ===== EMPTY STATE ===== */
         .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            grid-column: 1 / -1;
+            text-align:center; padding:60px 20px;
+            background:var(--bg-card); border:1px solid var(--border-subtle);
+            border-radius:var(--radius-lg); grid-column:1/-1;
         }
-        .empty-state .icon { font-size: 3rem; color: var(--text-muted); margin-bottom: 16px; opacity: 0.5; }
-        .empty-state h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
-        .empty-state p { color: var(--text-secondary); font-size: 0.95rem; }
+        .empty-state .icon { font-size:3rem; color:var(--text-muted); margin-bottom:16px; opacity:0.5; }
+        .empty-state h3 { font-size:1.3rem; font-weight:700; margin-bottom:4px; }
+        .empty-state p { color:var(--text-secondary); font-size:0.95rem; }
 
-        /* ============================================================
-                   SEARCH OVERLAY
-                   ============================================================ */
+        /* ===== SEARCH OVERLAY ===== */
         .search-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(10, 10, 15, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 2000;
-            display: none;
-            align-items: flex-start;
-            justify-content: center;
-            padding: 60px 20px 20px;
-            overflow-y: auto;
+            position:fixed; top:0; left:0; right:0; bottom:0;
+            background:rgba(10,10,15,0.92); backdrop-filter:blur(20px);
+            -webkit-backdrop-filter:blur(20px); z-index:2000;
+            display:none; align-items:flex-start; justify-content:center;
+            padding:60px 20px 20px; overflow-y:auto;
         }
-        .search-overlay.open { display: flex; }
-
+        .search-overlay.open { display:flex; }
         .search-overlay .search-box {
-            max-width: 640px;
-            width: 100%;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 20px 24px;
-            box-shadow: var(--shadow-lg);
+            max-width:640px; width:100%; background:var(--bg-surface);
+            border:1px solid var(--border-subtle); border-radius:var(--radius-lg);
+            padding:20px 24px; box-shadow:var(--shadow-lg);
         }
         .search-overlay .search-box .search-input-wrap {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 12px;
+            display:flex; align-items:center; gap:12px;
+            border-bottom:1px solid var(--border-subtle); padding-bottom:12px;
         }
-        .search-overlay .search-box .search-input-wrap i { color: var(--text-muted); font-size: 1.2rem; }
+        .search-overlay .search-box .search-input-wrap i { color:var(--text-muted); font-size:1.2rem; }
         .search-overlay .search-box .search-input-wrap input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--text-primary);
-            font-family: var(--font);
+            flex:1; background:transparent; border:none; outline:none;
+            font-size:1.1rem; font-weight:500; color:var(--text-primary); font-family:var(--font);
         }
-        .search-overlay .search-box .search-input-wrap input::placeholder { color: var(--text-muted); font-weight: 400; }
+        .search-overlay .search-box .search-input-wrap input::placeholder { color:var(--text-muted); font-weight:400; }
         .search-overlay .search-box .search-input-wrap .close-search {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            padding: 4px;
-            border-radius: 50%;
-            transition: var(--duration);
+            color:var(--text-muted); font-size:1.2rem; padding:4px; border-radius:50%; transition:var(--duration);
         }
-        .search-overlay .search-box .search-input-wrap .close-search:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
-
-        .search-overlay .search-results {
-            margin-top: 16px;
-            max-height: 60vh;
-            overflow-y: auto;
-        }
+        .search-overlay .search-box .search-input-wrap .close-search:hover { color:var(--text-primary); background:rgba(255,255,255,0.05); }
+        .search-overlay .search-results { margin-top:16px; max-height:60vh; overflow-y:auto; }
         .search-overlay .search-results .result-item {
-            padding: 12px 14px;
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            transition: var(--duration);
-            border: 1px solid transparent;
-            cursor: pointer;
+            padding:12px 14px; border-radius:var(--radius);
+            display:flex; align-items:center; gap:14px;
+            transition:var(--duration); border:1px solid transparent; cursor:pointer;
         }
-        .search-overlay .search-results .result-item:hover { background: rgba(255,255,255,0.06); border-color: var(--border-hover); }
+        .search-overlay .search-results .result-item:hover { background:rgba(255,255,255,0.06); border-color:var(--border-hover); }
         .search-overlay .search-results .result-item .ri-icon {
-            width: 36px; height: 36px;
-            border-radius: var(--radius);
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            flex-shrink: 0;
-            overflow: hidden;
+            width:36px; height:36px; border-radius:var(--radius);
+            background:var(--bg-secondary); border:1px solid var(--border-subtle);
+            display:flex; align-items:center; justify-content:center;
+            font-size:0.8rem; color:var(--text-muted); flex-shrink:0; overflow:hidden;
         }
-        .search-overlay .search-results .result-item .ri-icon img { width: 100%; height: 100%; object-fit: cover; }
-        .search-overlay .search-results .result-item .ri-info { flex: 1; min-width: 0; }
-        .search-overlay .search-results .result-item .ri-info .ri-title { font-weight: 600; font-size: 0.95rem; color: var(--text-primary); }
-        .search-overlay .search-results .result-item .ri-info .ri-meta { font-size: 0.75rem; color: var(--text-muted); display: flex; gap: 12px; flex-wrap: wrap; }
-        .search-overlay .search-results .result-item .ri-info .ri-meta span { display: flex; align-items: center; gap: 4px; }
-        .search-overlay .search-results .result-item .ri-info .ri-meta i { font-size: 0.6rem; }
-        .search-overlay .search-results .no-results { text-align: center; padding: 40px 20px; color: var(--text-muted); }
-        .search-overlay .search-results .no-results i { font-size: 2rem; display: block; margin-bottom: 12px; opacity: 0.4; }
+        .search-overlay .search-results .result-item .ri-icon img { width:100%; height:100%; object-fit:cover; }
+        .search-overlay .search-results .result-item .ri-info { flex:1; min-width:0; }
+        .search-overlay .search-results .result-item .ri-info .ri-title { font-weight:600; font-size:0.95rem; color:var(--text-primary); }
+        .search-overlay .search-results .result-item .ri-info .ri-meta { font-size:0.75rem; color:var(--text-muted); display:flex; gap:12px; flex-wrap:wrap; }
+        .search-overlay .search-results .no-results { text-align:center; padding:40px 20px; color:var(--text-muted); }
+        .search-overlay .search-results .no-results i { font-size:2rem; display:block; margin-bottom:12px; opacity:0.4; }
 
-        /* ============================================================
-                   ACCOUNT MODAL
-                   ============================================================ */
+        /* ===== ACCOUNT MODAL ===== */
         .account-modal {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(10, 10, 15, 0.88);
-            backdrop-filter: blur(16px);
-            z-index: 3000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            position:fixed; top:0; left:0; right:0; bottom:0;
+            background:rgba(10,10,15,0.88); backdrop-filter:blur(16px);
+            z-index:3000;
+            display:none; align-items:center; justify-content:center; padding:20px;
         }
-        .account-modal.open { display: flex; }
-
+        .account-modal.open { display:flex; }
         .account-modal .modal-box {
-            max-width: 400px;
-            width: 100%;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 40px 32px;
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-            position: relative;
+            max-width:400px; width:100%; background:var(--bg-surface);
+            border:1px solid var(--border-subtle); border-radius:var(--radius-lg);
+            padding:40px 32px; text-align:center; box-shadow:var(--shadow-lg); position:relative;
         }
-        .account-modal .modal-box .modal-close {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            transition: var(--duration);
-        }
-        .account-modal .modal-box .modal-close:hover { color: var(--text-primary); }
-        .account-modal .modal-box .modal-icon { font-size: 3.2rem; color: var(--violet); margin-bottom: 12px; }
-        .account-modal .modal-box h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
-        .account-modal .modal-box p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px; }
+        .account-modal .modal-box .modal-close { position:absolute; top:12px; right:16px; font-size:1.2rem; color:var(--text-muted); transition:var(--duration); }
+        .account-modal .modal-box .modal-close:hover { color:var(--text-primary); }
+        .account-modal .modal-box .modal-icon { font-size:3.2rem; color:var(--violet); margin-bottom:12px; }
+        .account-modal .modal-box h3 { font-size:1.5rem; font-weight:700; margin-bottom:4px; }
+        .account-modal .modal-box p { color:var(--text-secondary); font-size:0.95rem; margin-bottom:20px; }
         .account-modal .modal-box .coming-badge {
-            display: inline-block;
-            background: var(--gold-glow);
-            color: var(--gold);
-            font-weight: 700;
-            font-size: 0.7rem;
-            padding: 4px 16px;
-            border-radius: var(--radius-full);
-            border: 1px solid rgba(245, 158, 11, 0.15);
-            letter-spacing: 0.5px;
+            display:inline-block; background:var(--gold-glow); color:var(--gold);
+            font-weight:700; font-size:0.7rem; padding:4px 16px;
+            border-radius:var(--radius-full); border:1px solid rgba(245,158,11,0.15); letter-spacing:0.5px;
         }
-        .account-modal .modal-box .feature-list { text-align: left; margin: 20px 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 2; }
-        .account-modal .modal-box .feature-list i { color: var(--violet); width: 20px; margin-right: 8px; }
+        .account-modal .modal-box .feature-list { text-align:left; margin:20px 0; color:var(--text-secondary); font-size:0.85rem; line-height:2; }
+        .account-modal .modal-box .feature-list i { color:var(--violet); width:20px; margin-right:8px; }
 
-        /* ============================================================
-                   FOOTER
-                   ============================================================ */
+        /* ===== FOOTER ===== */
         .footer {
-            border-top: 1px solid var(--border-subtle);
-            padding: 32px 20px 24px;
-            margin-top: 16px;
-            text-align: center;
+            border-top:1px solid var(--border-subtle);
+            padding:32px 20px 24px; margin-top:16px; text-align:center;
         }
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-        .footer .brand { font-weight: 700; font-size: 1rem; background: linear-gradient(135deg, var(--violet), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .footer .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; font-size: 0.8rem; color: var(--text-muted); }
-        .footer .links a { transition: var(--duration); }
-        .footer .links a:hover { color: var(--text-primary); }
-        .footer .copy { font-size: 0.7rem; color: var(--text-muted); opacity: 0.6; }
+        .footer-inner { max-width:1200px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:12px; }
+        .footer .brand { font-weight:700; font-size:1rem; background:linear-gradient(135deg, var(--violet), var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .footer .links { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; font-size:0.8rem; color:var(--text-muted); }
+        .footer .links a { transition:var(--duration); }
+        .footer .links a:hover { color:var(--text-primary); }
+        .footer .copy { font-size:0.7rem; color:var(--text-muted); opacity:0.6; }
 
-        /* ============================================================
-                   FLOATING PILL BOTTOM NAVIGATION
-                   ============================================================ */
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
-            position: fixed;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 9999;
-            background: rgba(16, 16, 26, 0.92);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 80px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            box-shadow: 0 12px 60px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.03), inset 0 1px 0 rgba(255,255,255,0.04);
-            width: auto;
-            max-width: 96vw;
-            min-height: 80px;
-            transition: all 0.25s var(--ease);
+            position:fixed; bottom:16px; left:50%; transform:translateX(-50%);
+            z-index:9999;
+            background:rgba(16,16,26,0.92);
+            backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);
+            border:1px solid rgba(255,255,255,0.07); border-radius:80px;
+            padding:12px 20px; display:flex; align-items:center; justify-content:center;
+            gap:6px; box-shadow:0 12px 60px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.03), inset 0 1px 0 rgba(255,255,255,0.04);
+            width:auto; max-width:96vw; min-height:80px; transition:all 0.25s var(--ease);
         }
-
         .bottom-nav .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 3px;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-family: var(--font);
-            font-size: 0.6rem;
-            font-weight: 600;
-            padding: 10px 18px;
-            border-radius: 60px;
-            transition: all 0.25s var(--ease);
-            cursor: pointer;
-            position: relative;
-            min-width: 72px;
-            min-height: 56px;
-            letter-spacing: 0.3px;
-            -webkit-tap-highlight-color: transparent;
-            white-space: nowrap;
-            touch-action: manipulation;
-            user-select: none;
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            gap:3px; background:transparent; border:none; color:var(--text-muted);
+            font-family:var(--font); font-size:0.6rem; font-weight:600;
+            padding:10px 18px; border-radius:60px; transition:all 0.25s var(--ease);
+            cursor:pointer; position:relative; min-width:72px; min-height:56px;
+            letter-spacing:0.3px; -webkit-tap-highlight-color:transparent;
+            white-space:nowrap; touch-action:manipulation; user-select:none;
         }
-
-        .bottom-nav .nav-item i { font-size: 1.5rem; transition: all 0.25s var(--ease); line-height: 1; pointer-events: none; }
-        .bottom-nav .nav-item span { line-height: 1.2; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.75; transition: opacity 0.2s; pointer-events: none; }
+        .bottom-nav .nav-item i { font-size:1.5rem; transition:all 0.25s var(--ease); line-height:1; pointer-events:none; }
+        .bottom-nav .nav-item span { line-height:1.2; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.6px; opacity:0.75; transition:opacity 0.2s; pointer-events:none; }
         .bottom-nav .nav-item.active {
-            color: #fff;
-            background: var(--violet);
-            box-shadow: 0 0 40px var(--violet-glow), inset 0 1px 0 rgba(255,255,255,0.1);
-            transform: scale(1.04);
+            color:#fff; background:var(--violet);
+            box-shadow:0 0 40px var(--violet-glow), inset 0 1px 0 rgba(255,255,255,0.1);
+            transform:scale(1.04);
         }
-        .bottom-nav .nav-item.active i { text-shadow: 0 0 20px rgba(255,255,255,0.25); }
-        .bottom-nav .nav-item.active span { opacity: 1; }
-        @media (hover: hover) { .bottom-nav .nav-item:hover:not(.active) { color: var(--text-primary); background: rgba(255,255,255,0.05); } }
+        .bottom-nav .nav-item.active i { text-shadow:0 0 20px rgba(255,255,255,0.25); }
+        .bottom-nav .nav-item.active span { opacity:1; }
+        @media (hover:hover) { .bottom-nav .nav-item:hover:not(.active) { color:var(--text-primary); background:rgba(255,255,255,0.05); } }
 
-        /* ============================================================
-                   RESPONSIVE
-                   ============================================================ */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .bottom-nav { padding: 10px 14px; bottom: 12px; border-radius: 70px; min-height: 72px; gap: 4px; max-width: 98vw; }
-            .bottom-nav .nav-item { padding: 8px 14px; min-width: 60px; min-height: 48px; font-size: 0.55rem; }
-            .bottom-nav .nav-item i { font-size: 1.3rem; }
-            .bottom-nav .nav-item span { font-size: 0.55rem; letter-spacing: 0.5px; }
-            body { padding-bottom: 95px; }
+            .bottom-nav { padding:10px 14px; bottom:12px; border-radius:70px; min-height:72px; gap:4px; max-width:98vw; }
+            .bottom-nav .nav-item { padding:8px 14px; min-width:60px; min-height:48px; font-size:0.55rem; }
+            .bottom-nav .nav-item i { font-size:1.3rem; }
+            .bottom-nav .nav-item span { font-size:0.55rem; letter-spacing:0.5px; }
+            body { padding-bottom:95px; }
         }
         @media (max-width: 500px) {
-            .bottom-nav { padding: 8px 10px; bottom: 10px; border-radius: 60px; min-height: 64px; gap: 2px; max-width: 100vw; margin: 0 8px; width: calc(100% - 16px); }
-            .bottom-nav .nav-item { padding: 6px 10px; min-width: 48px; min-height: 44px; font-size: 0.5rem; border-radius: 40px; }
-            .bottom-nav .nav-item i { font-size: 1.15rem; }
-            .bottom-nav .nav-item span { font-size: 0.5rem; letter-spacing: 0.4px; }
-            body { padding-bottom: 82px; }
+            .bottom-nav { padding:8px 10px; bottom:10px; border-radius:60px; min-height:64px; gap:2px; max-width:100vw; margin:0 8px; width:calc(100% - 16px); }
+            .bottom-nav .nav-item { padding:6px 10px; min-width:48px; min-height:44px; font-size:0.5rem; border-radius:40px; }
+            .bottom-nav .nav-item i { font-size:1.15rem; }
+            .bottom-nav .nav-item span { font-size:0.5rem; letter-spacing:0.4px; }
+            body { padding-bottom:82px; }
         }
         @media (max-width: 400px) {
-            .bottom-nav { padding: 6px 8px; border-radius: 50px; min-height: 56px; gap: 0; width: calc(100% - 12px); margin: 0 6px; bottom: 8px; }
-            .bottom-nav .nav-item { padding: 4px 8px; min-width: 38px; min-height: 40px; font-size: 0.45rem; border-radius: 30px; }
-            .bottom-nav .nav-item i { font-size: 1.1rem; }
-            .bottom-nav .nav-item span { display: none; }
-            body { padding-bottom: 72px; }
+            .bottom-nav { padding:6px 8px; border-radius:50px; min-height:56px; gap:0; width:calc(100% - 12px); margin:0 6px; bottom:8px; }
+            .bottom-nav .nav-item { padding:4px 8px; min-width:38px; min-height:40px; font-size:0.45rem; border-radius:30px; }
+            .bottom-nav .nav-item i { font-size:1.1rem; }
+            .bottom-nav .nav-item span { display:none; }
+            body { padding-bottom:72px; }
         }
         @media (max-width: 340px) {
-            .bottom-nav { padding: 4px 4px; border-radius: 40px; min-height: 48px; gap: 0; width: calc(100% - 8px); margin: 0 4px; bottom: 6px; }
-            .bottom-nav .nav-item { padding: 2px 4px; min-width: 32px; min-height: 34px; }
-            .bottom-nav .nav-item i { font-size: 0.95rem; }
-            body { padding-bottom: 62px; }
+            .bottom-nav { padding:4px 4px; border-radius:40px; min-height:48px; gap:0; width:calc(100% - 8px); margin:0 4px; bottom:6px; }
+            .bottom-nav .nav-item { padding:2px 4px; min-width:32px; min-height:34px; }
+            .bottom-nav .nav-item i { font-size:0.95rem; }
+            body { padding-bottom:62px; }
         }
         @media (min-width: 1024px) {
-            .bottom-nav { padding: 14px 28px; min-height: 88px; gap: 8px; max-width: 640px; border-radius: 100px; bottom: 24px; }
-            .bottom-nav .nav-item { padding: 12px 22px; min-width: 84px; min-height: 60px; font-size: 0.65rem; }
-            .bottom-nav .nav-item i { font-size: 1.6rem; }
-            .bottom-nav .nav-item span { font-size: 0.65rem; letter-spacing: 0.7px; }
-            body { padding-bottom: 120px; }
+            .bottom-nav { padding:14px 28px; min-height:88px; gap:8px; max-width:640px; border-radius:100px; bottom:24px; }
+            .bottom-nav .nav-item { padding:12px 22px; min-width:84px; min-height:60px; font-size:0.65rem; }
+            .bottom-nav .nav-item i { font-size:1.6rem; }
+            .bottom-nav .nav-item span { font-size:0.65rem; letter-spacing:0.7px; }
+            body { padding-bottom:120px; }
         }
-        @media (max-width: 1024px) { .download-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); } }
+        @media (max-width: 1024px) { .download-grid { grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); } }
         @media (max-width: 820px) {
-            .nav-categories { display: none; }
-            .hamburger { display: flex; }
-            .header-account-btn span { display: none; }
-            .header-account-btn { padding: 6px 12px; }
-            .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
-            .hero-stats { gap: 16px; }
-            .hero-stats .stat { font-size: 0.75rem; }
+            .nav-categories { display:none; }
+            .hamburger { display:flex; }
+            .header-account-btn span { display:none; }
+            .header-account-btn { padding:6px 12px; }
+            .hero h1 { font-size:clamp(2rem, 8vw, 3rem); }
+            .hero-stats { gap:16px; }
+            .hero-stats .stat { font-size:0.75rem; }
         }
         @media (max-width: 600px) {
-            .container { padding: 0 14px; }
-            .header { padding: 0 14px; height: 58px; }
-            .logo { font-size: 1rem; }
-            .logo-icon { width: 28px; height: 28px; font-size: 0.8rem; }
-            .download-grid { grid-template-columns: 1fr; gap: 16px; }
-            .download-card { padding: 16px; }
-            .download-card .card-top { gap: 12px; }
-            .download-card .card-thumb { width: 48px; height: 48px; }
-            .download-card .card-info .title { font-size: 0.95rem; }
-            .hero { padding: 32px 0 20px; }
-            .hero p { font-size: 0.95rem; }
-            .category-indicator .name { font-size: 1rem; }
-            .category-indicator .desc { font-size: 0.75rem; width: 100%; }
-            .search-overlay { padding: 40px 14px 14px; }
-            .search-overlay .search-box { padding: 16px 18px; }
-            .account-modal .modal-box { padding: 32px 20px; }
+            .container { padding:0 14px; }
+            .header { padding:0 14px; height:58px; }
+            .logo { font-size:1rem; }
+            .logo-icon { width:28px; height:28px; font-size:0.8rem; }
+            .download-grid { grid-template-columns:1fr; gap:16px; }
+            .download-card { padding:16px; }
+            .download-card .card-top { gap:12px; }
+            .download-card .card-thumb { width:48px; height:48px; }
+            .download-card .card-info .title { font-size:0.95rem; }
+            .hero { padding:32px 0 20px; }
+            .hero p { font-size:0.95rem; }
+            .category-indicator .name { font-size:1rem; }
+            .category-indicator .desc { font-size:0.75rem; width:100%; }
+            .search-overlay { padding:40px 14px 14px; }
+            .search-overlay .search-box { padding:16px 18px; }
+            .account-modal .modal-box { padding:32px 20px; }
+            .version-select-wrapper { flex-wrap:wrap; min-width:100%; gap:6px; }
+            .version-select-wrapper .version-label { font-size:0.6rem; }
+            .version-select { font-size:0.7rem; padding:4px 24px 4px 10px; min-width:70px; }
+            .version-badge-display { font-size:0.5rem; padding:2px 8px; }
+            .btn-download { font-size:0.7rem; padding:6px 14px; }
         }
         @media (max-width: 400px) {
-            .header-actions .header-search-btn { width: 34px; height: 34px; font-size: 0.85rem; }
-            .header-account-btn { padding: 4px 10px; font-size: 0.7rem; }
-            .hero h1 { font-size: 1.8rem; }
+            .header-actions .header-search-btn { width:34px; height:34px; font-size:0.85rem; }
+            .header-account-btn { padding:4px 10px; font-size:0.7rem; }
+            .hero h1 { font-size:1.8rem; }
+            .download-card .card-footer { flex-direction:column; align-items:stretch; gap:8px; }
+            .version-select-wrapper { min-width:100%; }
+            .btn-download { width:100%; justify-content:center; }
         }
 
-        .fade-in { animation: fadeUp 0.6s var(--ease) both; }
+        .fade-in { animation:fadeUp 0.6s var(--ease) both; }
         @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
         .fade-in-d1 { animation-delay:0.05s; }
         .fade-in-d2 { animation-delay:0.1s; }
@@ -1097,7 +711,7 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — Priority column (case-insensitive) + robust image fallback
+    JAVASCRIPT — FIXED: app_id/group_id priority grouping + full dynamic update
     ============================================================ -->
     <script>
         (function() {
@@ -1114,7 +728,7 @@
                 { id: 'plugins', label: 'Plugins', icon: 'fa-puzzle-piece', desc: 'Minecraft Paper, Velocity, Spigot' }
             ];
 
-            let DOWNLOADS = [];
+            let PRODUCTS = [];
             const CSV_URL = 'https://docs.google.com/spreadsheets/d/1MCyljQbTV0durL06lYcW-NuBeH19PvIrSxUqyKEzVAk/gviz/tq?tqx=out:csv';
 
             // ============================================================
@@ -1148,49 +762,86 @@
             }
 
             // ============================================================
-            // 3. CSV PARSER
+            // 3. ROBUST CSV PARSER (handles multiline quoted fields)
             // ============================================================
 
             function parseCSV(csvText) {
-                const lines = [];
-                let currentLine = '';
+                const rows = [];
+                let currentRow = [];
+                let currentField = '';
                 let insideQuotes = false;
-                for (let i = 0; i < csvText.length; i++) {
-                    const ch = csvText[i];
-                    if (ch === '"') { insideQuotes = !insideQuotes; continue; }
-                    if (ch === '\n' && !insideQuotes) {
-                        lines.push(currentLine.trim());
-                        currentLine = '';
-                        continue;
-                    }
-                    currentLine += ch;
-                }
-                if (currentLine.trim()) lines.push(currentLine.trim());
-                if (lines.length === 0) return [];
+                let i = 0;
 
-                const parsedRows = lines.map(line => {
-                    const fields = [];
-                    let current = '';
-                    let inQuotes = false;
-                    for (let i = 0; i < line.length; i++) {
-                        const ch = line[i];
-                        if (ch === '"') { inQuotes = !inQuotes; continue; }
-                        if (ch === ',' && !inQuotes) {
-                            fields.push(current.trim());
-                            current = '';
+                // Helper to trim field whitespace but keep content inside quotes
+                const trimField = (field) => field.trim();
+
+                while (i < csvText.length) {
+                    const ch = csvText[i];
+                    const next = csvText[i + 1] || '';
+
+                    if (insideQuotes) {
+                        if (ch === '"') {
+                            // Check for double quote (escaped)
+                            if (next === '"') {
+                                currentField += '"';
+                                i += 2;
+                                continue;
+                            } else {
+                                // Closing quote
+                                insideQuotes = false;
+                                i++;
+                                continue;
+                            }
+                        } else {
+                            currentField += ch;
+                            i++;
                             continue;
                         }
-                        current += ch;
+                    } else {
+                        if (ch === '"') {
+                            // Start of quoted field
+                            insideQuotes = true;
+                            i++;
+                            continue;
+                        } else if (ch === ',') {
+                            // End of field
+                            currentRow.push(trimField(currentField));
+                            currentField = '';
+                            i++;
+                            continue;
+                        } else if (ch === '\n') {
+                            // End of row
+                            if (currentField.trim() !== '' || currentRow.length > 0) {
+                                currentRow.push(trimField(currentField));
+                                if (currentRow.some(f => f !== '')) {
+                                    rows.push(currentRow);
+                                }
+                                currentRow = [];
+                                currentField = '';
+                            }
+                            i++;
+                            continue;
+                        } else {
+                            currentField += ch;
+                            i++;
+                            continue;
+                        }
                     }
-                    fields.push(current.trim());
-                    return fields;
-                });
+                }
 
-                if (parsedRows.length < 2) return [];
-                const headers = parsedRows[0];
+                // Handle last field / row
+                if (currentField.trim() !== '' || currentRow.length > 0) {
+                    currentRow.push(trimField(currentField));
+                    if (currentRow.some(f => f !== '')) {
+                        rows.push(currentRow);
+                    }
+                }
+
+                if (rows.length === 0) return [];
+                const headers = rows[0];
                 const result = [];
-                for (let r = 1; r < parsedRows.length; r++) {
-                    const rowData = parsedRows[r];
+                for (let r = 1; r < rows.length; r++) {
+                    const rowData = rows[r];
                     const obj = {};
                     for (let c = 0; c < headers.length; c++) {
                         const key = headers[c].trim();
@@ -1203,167 +854,7 @@
             }
 
             // ============================================================
-            // 4. FETCH DATA (case-insensitive column mapping + priority)
-            // ============================================================
-
-            async function fetchDownloads() {
-                try {
-                    const response = await fetch(CSV_URL);
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    const csvText = await response.text();
-                    const rawData = parseCSV(csvText);
-
-                    if (rawData.length === 0) {
-                        console.warn('No data from CSV, using fallback hardcoded data.');
-                        DOWNLOADS = getFallbackData();
-                    } else {
-                        // We need to find the actual column names case-insensitively
-                        // We'll map each row using the headers we have
-                        // But we have the rawData already with the headers as keys (exact case)
-                        // So we can use the keys from the first row as they are.
-
-                        // However, to be safe, we'll create a mapping function that looks for keys ignoring case.
-                        // Since we have the object with exact keys, we can check for lowercased versions.
-
-                        const firstRow = rawData[0];
-                        const columnMap = {};
-                        Object.keys(firstRow).forEach(key => {
-                            const lowerKey = key.toLowerCase();
-                            columnMap[lowerKey] = key; // maps e.g., 'priority' -> 'Priority'
-                        });
-
-                        DOWNLOADS = rawData
-                            .map(row => {
-                                // Use columnMap to get the actual key names
-                                const getVal = (name) => {
-                                    const actualKey = columnMap[name];
-                                    return actualKey ? (row[actualKey] || '').trim() : '';
-                                };
-
-                                const category = getVal('category');
-                                const matchedCat = matchCategory(category);
-                                if (!matchedCat) return null;
-
-                                let features = [];
-                                const featuresRaw = getVal('features');
-                                if (featuresRaw) {
-                                    features = featuresRaw.split(',').map(f => f.trim()).filter(f => f);
-                                }
-
-                                // Badge: try 'bedge' then 'badge'
-                                let badgeText = getVal('bedge');
-                                if (!badgeText) badgeText = getVal('badge');
-
-                                let edition = null;
-                                const subBadge = getVal('sub_badge');
-                                if (subBadge) {
-                                    const sub = subBadge.toLowerCase();
-                                    if (sub === 'bedrock' || sub === 'java') edition = sub;
-                                }
-
-                                // --- PRIORITY: read as integer, default 999 ---
-                                let priority = 999;
-                                const priorityRaw = getVal('priority');
-                                if (priorityRaw) {
-                                    const parsed = parseInt(priorityRaw, 10);
-                                    if (!isNaN(parsed)) priority = parsed;
-                                }
-
-                                let imageUrl = getVal('image_url');
-                                // If still empty, try 'image'
-                                if (!imageUrl) imageUrl = getVal('image');
-
-                                return {
-                                    id: row.id || 'id-' + Math.random().toString(36).substr(2, 6),
-                                    title: getVal('title') || 'Untitled',
-                                    category: matchedCat,
-                                    version: getVal('version') || '',
-                                    badgeText: badgeText,
-                                    edition: edition,
-                                    description: getVal('description') || '',
-                                    icon: imageUrl,
-                                    image: imageUrl,
-                                    downloadUrl: getVal('download_url') || '',
-                                    features: features,
-                                    priority: priority
-                                };
-                            })
-                            .filter(item => item !== null);
-                    }
-
-                    // --- SORT BY PRIORITY (ascending) ---
-                    DOWNLOADS.sort((a, b) => (a.priority || 999) - (b.priority || 999));
-
-                    initApp();
-                } catch (error) {
-                    console.error('Error fetching CSV:', error);
-                    DOWNLOADS = getFallbackData();
-                    initApp();
-                }
-            }
-
-            // ============================================================
-            // 5. FALLBACK DATA
-            // ============================================================
-
-            function getFallbackData() {
-                return [{
-                    id: 'minecraft-26-32',
-                    title: 'Minecraft PE',
-                    category: 'minecraft-pe',
-                    version: '26.32',
-                    badgeText: 'BEDROCK',
-                    edition: 'bedrock',
-                    description: 'Latest Minecraft PE version with new biomes, mobs, and performance improvements.',
-                    image: 'https://raw.githubusercontent.com/semxpro/Flat-Fusion-Website/main/file_00000000b9e081f5b35afc10ccbeef5c.png',
-                    icon: 'https://raw.githubusercontent.com/semxpro/Flat-Fusion-Website/main/file_00000000b9e081f5b35afc10ccbeef5c.png',
-                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Minecraft.1.26.32.apk',
-                    features: ['New Biomes', 'Performance Boost', 'Multiplayer'],
-                    priority: 1
-                }, {
-                    id: 'mojo-launcher',
-                    title: 'Mojo Launcher',
-                    category: 'launchers',
-                    version: '2.1.0',
-                    badgeText: 'SMOOTH FPS',
-                    edition: null,
-                    description: 'Boost FPS and enjoy smooth gameplay with this optimized launcher.',
-                    image: '',
-                    icon: 'https://res.cloudinary.com/p35rwudq/image/upload/20260628_192515_sxwegq.png',
-                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Mojo.Launcher.xapk',
-                    features: ['Smooth FPS', 'Low Latency', 'Stable'],
-                    priority: 2
-                }, {
-                    id: 'mj-launcher',
-                    title: 'MJ Launcher',
-                    category: 'launchers',
-                    version: '1.8.2',
-                    badgeText: null,
-                    edition: null,
-                    description: 'Lightweight and fast launcher, perfect for low-end devices.',
-                    image: '',
-                    icon: 'https://res.cloudinary.com/p35rwudq/image/upload/20260628_192621_hl8cbi.png',
-                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/MJ-Launcher.apk',
-                    features: ['Lightweight', 'Fast', 'Low-end Optimized'],
-                    priority: 3
-                }, {
-                    id: 'action-stuff',
-                    title: 'Action & Stuff',
-                    category: 'resource-packs',
-                    version: '1.11',
-                    badgeText: '3D MODELS',
-                    edition: 'bedrock',
-                    description: 'Vibrant textures and 3D models that bring your Bedrock world to life.',
-                    image: '',
-                    icon: 'https://res.cloudinary.com/p35rwudq/image/upload/20260628_192238_mflbn5.png',
-                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Actions.Stuff.1.11.Make.By.Semx.mcpack.zip',
-                    features: ['3D Models', 'Vibrant Textures', 'HD'],
-                    priority: 4
-                }];
-            }
-
-            // ============================================================
-            // 6. GET BADGE CLASS
+            // 4. GET BADGE CSS CLASS
             // ============================================================
 
             function getBadgeClass(text) {
@@ -1380,13 +871,304 @@
             }
 
             // ============================================================
-            // 7. STATE
+            // 5. GENERATE GROUP KEY — PRIORITIZE app_id / group_id
+            // ============================================================
+
+            function generateGroupKey(row, getVal) {
+                // 1. Use app_id or group_id if present
+                let key = getVal(row, 'app_id') || getVal(row, 'group_id');
+                if (key) return key.trim();
+
+                // 2. Fallback: category + normalized base title (strip version and suffixes)
+                const cat = getVal(row, 'category') || '';
+                const title = getVal(row, 'title') || '';
+
+                // Remove version numbers, "Beta", "Release", "v", etc.
+                let base = title
+                    .replace(/\s*[vV]?[\d.]+(\s*(Beta|Release|RC|ALPHA|BETA|RELEASE|SNAPSHOT|PREVIEW|TEST|STABLE)\s*)?/gi, '')
+                    .replace(/\s*\([^)]*\)\s*/g, ' ')
+                    .trim();
+
+                if (!base) base = title;
+
+                const normalizedBase = base.toLowerCase()
+                    .replace(/[^a-z0-9]/g, ' ')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+
+                const catClean = cat.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
+                return `${catClean}_${normalizedBase}`;
+            }
+
+            // ============================================================
+            // 6. FETCH, GROUP, SORT
+            // ============================================================
+
+            async function fetchDownloads() {
+                try {
+                    console.log('📡 Fetching data from Google Sheets...');
+                    const response = await fetch(CSV_URL);
+                    if (!response.ok) throw new Error('Network response was not ok: ' + response.status);
+                    const csvText = await response.text();
+
+                    const rawData = parseCSV(csvText);
+                    console.log('📊 Parsed rows:', rawData.length);
+
+                    if (rawData.length === 0) {
+                        console.warn('⚠️ No data from CSV, using fallback.');
+                        PRODUCTS = getFallbackProducts();
+                        initApp();
+                        return;
+                    }
+
+                    const firstRow = rawData[0];
+                    const columnMap = {};
+                    Object.keys(firstRow).forEach(key => {
+                        const lowerKey = key.toLowerCase().trim();
+                        columnMap[lowerKey] = key;
+                    });
+                    console.log('🗺️ Columns:', Object.keys(columnMap));
+
+                    const getVal = (row, name) => {
+                        const actualKey = columnMap[name.toLowerCase().trim()];
+                        return actualKey ? (row[actualKey] || '').trim() : '';
+                    };
+
+                    const flatItems = rawData
+                        .map(row => {
+                            const category = getVal(row, 'category');
+                            const matchedCat = matchCategory(category);
+                            if (!matchedCat) return null;
+
+                            let features = [];
+                            const featuresRaw = getVal(row, 'features');
+                            if (featuresRaw) {
+                                features = featuresRaw.split(',').map(f => f.trim()).filter(f => f);
+                            }
+
+                            let badgeText = getVal(row, 'bedge');
+                            if (!badgeText) badgeText = getVal(row, 'badge');
+
+                            let edition = null;
+                            const subBadge = getVal(row, 'sub_badge');
+                            if (subBadge) {
+                                const sub = subBadge.toLowerCase();
+                                if (sub === 'bedrock' || sub === 'java') edition = sub;
+                            }
+
+                            let priority = 999;
+                            const priorityRaw = getVal(row, 'priority');
+                            if (priorityRaw) {
+                                const parsed = parseInt(priorityRaw, 10);
+                                if (!isNaN(parsed) && parsed >= 0) priority = parsed;
+                            }
+
+                            let imageUrl = getVal(row, 'image_url');
+                            if (!imageUrl) imageUrl = getVal(row, 'image');
+
+                            const title = getVal(row, 'title') || 'Untitled';
+                            const groupKey = generateGroupKey(row, getVal);
+
+                            return {
+                                id: row.id || 'id-' + Math.random().toString(36).substr(2, 6),
+                                groupKey: groupKey,
+                                title: title,
+                                category: matchedCat,
+                                version: getVal(row, 'version') || '',
+                                badgeText: badgeText,
+                                edition: edition,
+                                description: getVal(row, 'description') || '',
+                                icon: imageUrl,
+                                image: imageUrl,
+                                downloadUrl: getVal(row, 'download_url') || '',
+                                features: features,
+                                priority: priority
+                            };
+                        })
+                        .filter(item => item !== null);
+
+                    console.log('✅ Parsed flat items:', flatItems.length);
+
+                    if (flatItems.length === 0) {
+                        PRODUCTS = getFallbackProducts();
+                        initApp();
+                        return;
+                    }
+
+                    // --- GROUP BY groupKey ---
+                    const grouped = new Map();
+                    flatItems.forEach(item => {
+                        const key = item.groupKey;
+                        if (!grouped.has(key)) {
+                            grouped.set(key, []);
+                        }
+                        grouped.get(key).push(item);
+                    });
+
+                    // Build PRODUCTS array
+                    PRODUCTS = [];
+                    grouped.forEach((items, groupKey) => {
+                        items.sort((a, b) => (a.priority || 999) - (b.priority || 999));
+                        const primary = items[0];
+                        const versions = items.map(item => ({
+                            version: item.version || '',
+                            badgeText: item.badgeText || null,
+                            downloadUrl: item.downloadUrl || '',
+                            priority: item.priority || 999,
+                            id: item.id,
+                            edition: item.edition || null,
+                            description: item.description || '',
+                            features: item.features || [],
+                            title: item.title || ''
+                        }));
+
+                        PRODUCTS.push({
+                            id: primary.id,
+                            groupKey: groupKey,
+                            title: primary.title || '',
+                            category: primary.category,
+                            description: primary.description || '',
+                            features: primary.features || [],
+                            image: primary.image || '',
+                            icon: primary.icon || '',
+                            edition: primary.edition || null,
+                            versions: versions,
+                            primaryVersion: versions[0]
+                        });
+                    });
+
+                    PRODUCTS.sort((a, b) => {
+                        const pa = a.primaryVersion?.priority || 999;
+                        const pb = b.primaryVersion?.priority || 999;
+                        return pa - pb;
+                    });
+
+                    console.log('📦 Grouped into', PRODUCTS.length, 'products');
+                    PRODUCTS.forEach(p => {
+                        console.log(`  ${p.title} (${p.versions.length} versions) [key: ${p.groupKey}]`);
+                    });
+
+                    initApp();
+                } catch (error) {
+                    console.error('❌ Error fetching CSV:', error);
+                    PRODUCTS = getFallbackProducts();
+                    initApp();
+                }
+            }
+
+            // ============================================================
+            // 7. FALLBACK DATA (with app_id for grouping)
+            // ============================================================
+
+            function getFallbackProducts() {
+                const raw = [{
+                    id: 'minecraft-26-32',
+                    groupKey: 'minecraft',
+                    title: 'Minecraft Release',
+                    category: 'minecraft-pe',
+                    version: '1.26.45.1',
+                    badgeText: 'BEDROCK',
+                    edition: 'bedrock',
+                    description: 'Latest Minecraft PE version with new biomes, mobs, and performance improvements.',
+                    image: 'https://raw.githubusercontent.com/semxpro/Flat-Fusion-Website/main/file_00000000b9e081f5b35afc10ccbeef5c.png',
+                    icon: 'https://raw.githubusercontent.com/semxpro/Flat-Fusion-Website/main/file_00000000b9e081f5b35afc10ccbeef5c.png',
+                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Minecraft.1.26.32.apk',
+                    features: ['New Biomes', 'Performance Boost', 'Multiplayer'],
+                    priority: 1
+                }, {
+                    id: 'minecraft-27-0',
+                    groupKey: 'minecraft',
+                    title: 'Minecraft Beta',
+                    category: 'minecraft-pe',
+                    version: '1.21.11',
+                    badgeText: null,
+                    edition: 'bedrock',
+                    description: 'Legacy version with classic gameplay and features.',
+                    image: '',
+                    icon: '',
+                    downloadUrl: '',
+                    features: ['Classic Gameplay', 'Stable', 'Compatible'],
+                    priority: 2
+                }, {
+                    id: 'mojo-launcher',
+                    groupKey: 'mojo-launcher',
+                    title: 'Mojo Launcher',
+                    category: 'launchers',
+                    version: '2.1.0',
+                    badgeText: 'SMOOTH FPS',
+                    edition: null,
+                    description: 'Boost FPS and enjoy smooth gameplay with this optimized launcher.',
+                    image: '',
+                    icon: 'https://res.cloudinary.com/p35rwudq/image/upload/20260628_192515_sxwegq.png',
+                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Mojo.Launcher.xapk',
+                    features: ['Smooth FPS', 'Low Latency', 'Stable'],
+                    priority: 3
+                }, {
+                    id: 'action-stuff',
+                    groupKey: 'action-stuff',
+                    title: 'Action & Stuff',
+                    category: 'resource-packs',
+                    version: '1.11',
+                    badgeText: 'GLOBAL PACK',
+                    edition: 'bedrock',
+                    description: 'Vibrant textures and 3D models that bring your Bedrock world to life.',
+                    image: '',
+                    icon: 'https://res.cloudinary.com/p35rwudq/image/upload/20260628_192238_mflbn5.png',
+                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Actions.Stuff.1.11.Make.By.Semx.mcpack.zip',
+                    features: ['3D Models', 'Vibrant Textures', 'HD'],
+                    priority: 4
+                }];
+
+                const grouped = new Map();
+                raw.forEach(item => {
+                    const key = item.groupKey;
+                    if (!grouped.has(key)) grouped.set(key, []);
+                    grouped.get(key).push(item);
+                });
+
+                const products = [];
+                grouped.forEach((items, groupKey) => {
+                    items.sort((a, b) => (a.priority || 999) - (b.priority || 999));
+                    const primary = items[0];
+                    const versions = items.map(item => ({
+                        version: item.version || '',
+                        badgeText: item.badgeText || null,
+                        downloadUrl: item.downloadUrl || '',
+                        priority: item.priority || 999,
+                        id: item.id,
+                        edition: item.edition || null,
+                        description: item.description || '',
+                        features: item.features || [],
+                        title: item.title || ''
+                    }));
+                    products.push({
+                        id: primary.id,
+                        groupKey: groupKey,
+                        title: primary.title || '',
+                        category: primary.category,
+                        description: primary.description || '',
+                        features: primary.features || [],
+                        image: primary.image || '',
+                        icon: primary.icon || '',
+                        edition: primary.edition || null,
+                        versions: versions,
+                        primaryVersion: versions[0]
+                    });
+                });
+
+                products.sort((a, b) => (a.primaryVersion?.priority || 999) - (b.primaryVersion?.priority || 999));
+                return products;
+            }
+
+            // ============================================================
+            // 8. STATE
             // ============================================================
 
             let currentCategory = 'all';
+            let currentSearchQuery = '';
 
             // ============================================================
-            // 8. DOM REFS
+            // 9. DOM REFS
             // ============================================================
 
             const navCategories = document.getElementById('navCategories');
@@ -1414,7 +1196,7 @@
             const bottomNav = document.getElementById('bottomNav');
 
             // ============================================================
-            // 9. HELPERS
+            // 10. HELPERS
             // ============================================================
 
             function getCategoryLabel(id) {
@@ -1429,19 +1211,21 @@
                 const found = CATEGORIES.find(c => c.id === id);
                 return found ? found.desc : '';
             }
-            function getItemsForCategory(categoryId) {
-                if (categoryId === 'all') return DOWNLOADS;
-                return DOWNLOADS.filter(item => item.category === categoryId);
+
+            function getProductsForCategory(categoryId) {
+                if (categoryId === 'all') return PRODUCTS;
+                return PRODUCTS.filter(p => p.category === categoryId);
             }
+
             function getCategoryCount(categoryId) {
-                return getItemsForCategory(categoryId).length;
+                return getProductsForCategory(categoryId).length;
             }
             function getTotalItems() {
-                return DOWNLOADS.length;
+                return PRODUCTS.length;
             }
 
             // ============================================================
-            // 10. RENDER
+            // 11. RENDER CATEGORIES
             // ============================================================
 
             function renderCategories() {
@@ -1485,21 +1269,36 @@
                     currentCategoryDesc.textContent = desc;
                 }
                 const count = getCategoryCount(categoryId);
-                currentCategoryCount.textContent = count + ' items';
+                currentCategoryCount.textContent = count + ' products';
 
                 totalItemsStat.textContent = getTotalItems();
                 totalCategoriesStat.textContent = CATEGORIES.length;
                 renderGrid(categoryId);
             }
 
-            function renderGrid(categoryId) {
-                const items = getItemsForCategory(categoryId);
-                // Items are already sorted globally, but we need to preserve order
-                // We can re-sort by priority just to be safe
-                items.sort((a, b) => (a.priority || 999) - (b.priority || 999));
+            // ============================================================
+            // 12. RENDER GRID — using event delegation for dropdown & buttons
+            // ============================================================
 
-                if (items.length === 0) {
-                    const label = categoryId === 'all' ? 'Downloads' : getCategoryLabel(categoryId);
+            function renderGrid(categoryId) {
+                let products = getProductsForCategory(categoryId);
+
+                if (currentSearchQuery.trim()) {
+                    const q = currentSearchQuery.trim().toLowerCase();
+                    products = products.filter(p => {
+                        const searchable = [
+                            p.title,
+                            p.description || '',
+                            ...(p.features || []),
+                            getCategoryLabel(p.category),
+                            ...(p.versions.map(v => v.version || ''))
+                        ].join(' ').toLowerCase();
+                        return searchable.includes(q);
+                    });
+                }
+
+                if (products.length === 0) {
+                    const label = categoryId === 'all' ? 'products' : getCategoryLabel(categoryId);
                     downloadGrid.innerHTML = `
                                 <div class="empty-state">
                                     <div class="icon"><i class="fas fa-inbox"></i></div>
@@ -1511,15 +1310,17 @@
                 }
 
                 let html = '';
-                items.forEach((item, index) => {
-                    const catLabel = getCategoryLabel(item.category);
-                    const catIcon = getCategoryIcon(item.category);
+                products.forEach((product, index) => {
+                    const catLabel = getCategoryLabel(product.category);
+                    const catIcon = getCategoryIcon(product.category);
+                    const hasMultipleVersions = product.versions.length > 1;
+                    const primaryVer = product.primaryVersion || product.versions[0];
 
-                    // ---- IMAGE: clean handling with onerror fallback ----
+                    // ---- IMAGE ----
                     let thumbContent;
-                    if (item.icon && item.icon.trim() !== '') {
+                    if (product.icon && product.icon.trim() !== '') {
                         thumbContent = `
-                                    <img src="${item.icon}" alt="${item.title}" loading="lazy" 
+                                    <img src="${product.icon}" alt="${product.title}" loading="lazy" 
                                          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
                                     <div class="image-placeholder" style="display:none;"><i class="fas ${catIcon}"></i></div>
                                 `;
@@ -1527,64 +1328,211 @@
                         thumbContent = `<div class="image-placeholder" style="display:flex;"><i class="fas ${catIcon}"></i></div>`;
                     }
 
-                    // Edition badge (from sub_badge)
+                    // ---- Edition badge ----
                     let editionBadge = '';
-                    if (item.edition) {
-                        editionBadge = `<span class="edition-badge">${item.edition.charAt(0).toUpperCase() + item.edition.slice(1)}</span>`;
+                    if (product.edition) {
+                        editionBadge = `<span class="edition-badge" data-edition-display="${product.id}">${product.edition.charAt(0).toUpperCase() + product.edition.slice(1)}</span>`;
+                    } else {
+                        editionBadge = `<span class="edition-badge" data-edition-display="${product.id}" style="display:none;"></span>`;
                     }
 
-                    // Badge from 'bedge' column
-                    let badgeHtml = '';
-                    if (item.badgeText) {
-                        const badgeClass = getBadgeClass(item.badgeText);
-                        badgeHtml = `<span class="badge-pill ${badgeClass}">${item.badgeText}</span>`;
-                    }
+                    // ---- Dropdown options with ALL data as data-* attributes ----
+                    let versionOptions = '';
+                    product.versions.forEach((v, idx) => {
+                        const vClass = getBadgeClass(v.badgeText) || '';
+                        const isSelected = idx === 0 ? 'selected' : '';
+                        versionOptions += `<option value="${idx}" ${isSelected} 
+                                    data-badge="${v.badgeText || ''}" 
+                                    data-badge-class="${vClass}" 
+                                    data-url="${v.downloadUrl || ''}"
+                                    data-description="${v.description || ''}"
+                                    data-features="${(v.features || []).join(',')}"
+                                    data-edition="${v.edition || ''}"
+                                    data-title="${v.title || ''}"
+                                    data-version="${v.version || ''}">
+                                    v${v.version || 'unknown'}
+                                </option>`;
+                    });
 
-                    // Features
+                    // ---- Features ----
                     let featuresHtml = '';
-                    if (item.features && item.features.length) {
-                        featuresHtml = `<ul class="feature-list">${item.features.map(f => `<li><i class="fas fa-circle"></i> ${f}</li>`).join('')}</ul>`;
+                    const primaryFeatures = product.features || primaryVer.features || [];
+                    if (primaryFeatures.length > 0) {
+                        featuresHtml = `<ul class="feature-list">${primaryFeatures.map(f => `<li><i class="fas fa-circle"></i> ${f}</li>`).join('')}</ul>`;
                     }
 
-                    // Download button
-                    const hasDownloadUrl = item.downloadUrl && item.downloadUrl.trim() !== '' && item.downloadUrl !== '#';
-                    const downloadBtnHtml = hasDownloadUrl ?
-                        `<button class="btn-download" data-url="${item.downloadUrl}" data-name="${item.title}"><i class="fas fa-download"></i> Download</button>` :
-                        `<button class="btn-download" disabled><i class="fas fa-ban"></i> Unavailable</button>`;
+                    // ---- Footer ----
+                    let footerHtml = '';
+                    const primaryBadgeText = primaryVer.badgeText || '';
+                    const badgeClass = getBadgeClass(primaryBadgeText);
 
+                    if (hasMultipleVersions) {
+                        footerHtml = `
+                                    <div class="version-select-wrapper">
+                                        <span class="version-label">Version</span>
+                                        <select class="version-select" data-product-id="${product.id}">
+                                            ${versionOptions}
+                                        </select>
+                                        <span class="version-badge-display ${badgeClass}" data-badge-display="${product.id}">
+                                            ${primaryBadgeText || 'STABLE'}
+                                        </span>
+                                    </div>
+                                    <button class="btn-download" data-product-id="${product.id}" data-url="${primaryVer.downloadUrl || ''}" ${!primaryVer.downloadUrl ? 'disabled' : ''}>
+                                        <i class="fas fa-download"></i> ${primaryVer.downloadUrl ? 'Download' : 'Unavailable'}
+                                    </button>
+                                `;
+                    } else {
+                        footerHtml = `
+                                    <div style="flex:1;min-width:10px;"></div>
+                                    <button class="btn-download" data-product-id="${product.id}" data-url="${primaryVer.downloadUrl || ''}" ${!primaryVer.downloadUrl ? 'disabled' : ''}>
+                                        <i class="fas fa-download"></i> ${primaryVer.downloadUrl ? 'Download' : 'Unavailable'}
+                                    </button>
+                                `;
+                    }
+
+                    // ---- Card ----
                     html += `
-                                <div class="download-card fade-in fade-in-d${Math.min(index % 4 + 1, 4)}">
+                                <div class="download-card fade-in fade-in-d${Math.min(index % 4 + 1, 4)}" data-product-id="${product.id}" data-group-key="${product.groupKey}">
                                     <div class="card-top">
                                         <div class="card-thumb">${thumbContent}</div>
                                         <div class="card-info">
                                             <div class="title-row">
-                                                <span class="title">${item.title}</span>
-                                                ${item.version ? `<span class="version">v${item.version}</span>` : ''}
-                                                ${badgeHtml}
+                                                <span class="title" data-title-display="${product.id}">${product.title}</span>
+                                                ${hasMultipleVersions ? `<span class="version" data-version-display="${product.id}">v${primaryVer.version || ''}</span>` : `<span class="version">v${primaryVer.version || ''}</span>`}
+                                                ${!hasMultipleVersions && primaryBadgeText ? `<span class="badge-pill ${badgeClass}">${primaryBadgeText}</span>` : ''}
                                                 ${editionBadge}
                                             </div>
                                             <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;">
                                                 <span class="category-tag"><i class="fas ${catIcon}"></i> ${catLabel}</span>
                                             </div>
-                                            ${item.description ? `<p class="desc">${item.description}</p>` : ''}
+                                            <p class="desc" data-description-display="${product.id}">${product.description || ''}</p>
                                         </div>
                                     </div>
-                                    ${featuresHtml}
+                                    <div class="feature-list-container" data-features-container="${product.id}">
+                                        ${featuresHtml}
+                                    </div>
                                     <div class="card-footer">
-                                        ${downloadBtnHtml}
+                                        ${footerHtml}
                                     </div>
                                 </div>
                             `;
                 });
                 downloadGrid.innerHTML = html;
 
-                // ---- DOWNLOAD BUTTON EVENT ----
-                document.querySelectorAll('.btn-download:not([disabled])').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
+                // ============================================================
+                // EVENT DELEGATION — single listener on grid for dropdown & buttons
+                // ============================================================
+                // Remove any previous listeners by using a new one.
+                // We'll attach fresh listeners after rendering.
+                // We'll use 'change' event for selects, and 'click' for buttons.
+                // We'll attach them directly to the grid container.
+                // But we need to handle multiple selects; we'll use event delegation.
+
+                // Remove old listeners by re-attaching each time? Instead, we'll use a single event listener
+                // on the grid container that checks the target.
+                // But we need to avoid duplicate listeners. We'll remove previous listeners if any.
+                // Since we don't have a reference, we'll use a flag to indicate if we've attached.
+                // But simpler: just attach the listeners each time, but first remove any existing ones
+                // using a specific event handler function. We'll store the handler on the grid element.
+
+                // We'll use a single delegated listener for change on .version-select and click on .btn-download.
+                // We'll remove any existing listener by overriding.
+
+                // Remove old listener if exists
+                if (downloadGrid._listener) {
+                    downloadGrid.removeEventListener('change', downloadGrid._listener);
+                    downloadGrid.removeEventListener('click', downloadGrid._listener);
+                }
+
+                // Create a new listener function
+                const gridListener = function(e) {
+                    const target = e.target;
+
+                    // ---- Dropdown change ----
+                    if (target.matches('.version-select')) {
+                        const select = target;
+                        const productId = select.dataset.productId;
+                        const selectedIndex = parseInt(select.value, 10);
+                        const option = select.options[selectedIndex];
+
+                        // Read all data from option attributes
+                        const url = option.dataset.url || '';
+                        const badge = option.dataset.badge || '';
+                        const badgeClass = option.dataset.badgeClass || '';
+                        const versionText = option.dataset.version || option.textContent.trim().replace(/^v/, '');
+                        const description = option.dataset.description || '';
+                        const featuresRaw = option.dataset.features || '';
+                        const edition = option.dataset.edition || '';
+                        const title = option.dataset.title || '';
+
+                        const features = featuresRaw ? featuresRaw.split(',').map(f => f.trim()).filter(f => f) : [];
+
+                        const card = document.querySelector(`.download-card[data-product-id="${productId}"]`);
+                        if (!card) return;
+
+                        // 1. Update TITLE
+                        const titleDisplay = card.querySelector(`[data-title-display="${productId}"]`);
+                        if (titleDisplay) titleDisplay.textContent = title || 'Untitled';
+
+                        // 2. Update VERSION
+                        const versionDisplay = card.querySelector(`[data-version-display="${productId}"]`);
+                        if (versionDisplay) versionDisplay.textContent = versionText ? `v${versionText}` : '';
+
+                        // 3. Update BADGE in footer
+                        const badgeDisplay = card.querySelector(`[data-badge-display="${productId}"]`);
+                        if (badgeDisplay) {
+                            badgeDisplay.textContent = badge || 'STABLE';
+                            badgeDisplay.className = `version-badge-display ${badgeClass}`;
+                        }
+
+                        // 4. Update DESCRIPTION
+                        const descElement = card.querySelector(`[data-description-display="${productId}"]`);
+                        if (descElement) descElement.textContent = description || '';
+
+                        // 5. Update EDITION BADGE
+                        const editionBadgeEl = card.querySelector(`[data-edition-display="${productId}"]`);
+                        if (editionBadgeEl) {
+                            if (edition) {
+                                editionBadgeEl.textContent = edition.charAt(0).toUpperCase() + edition.slice(1);
+                                editionBadgeEl.style.display = 'inline-block';
+                            } else {
+                                editionBadgeEl.style.display = 'none';
+                            }
+                        }
+
+                        // 6. Update FEATURES
+                        const featuresContainer = card.querySelector(`[data-features-container="${productId}"]`);
+                        if (featuresContainer) {
+                            if (features.length > 0) {
+                                const featuresHtml = `<ul class="feature-list">${features.map(f => `<li><i class="fas fa-circle"></i> ${f}</li>`).join('')}</ul>`;
+                                featuresContainer.innerHTML = featuresHtml;
+                            } else {
+                                featuresContainer.innerHTML = '';
+                            }
+                        }
+
+                        // 7. Update DOWNLOAD BUTTON
+                        const downloadBtn = card.querySelector(`.btn-download[data-product-id="${productId}"]`);
+                        if (downloadBtn) {
+                            if (url && url.trim() !== '') {
+                                downloadBtn.disabled = false;
+                                downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download';
+                                downloadBtn.dataset.url = url;
+                            } else {
+                                downloadBtn.disabled = true;
+                                downloadBtn.innerHTML = '<i class="fas fa-ban"></i> Unavailable';
+                                downloadBtn.dataset.url = '';
+                            }
+                        }
+
                         e.preventDefault();
-                        e.stopPropagation();
-                        const url = this.dataset.url;
-                        const name = this.dataset.name || 'File';
+                    }
+
+                    // ---- Download button click ----
+                    if (target.matches('.btn-download:not([disabled])')) {
+                        const btn = target;
+                        const url = btn.dataset.url;
+                        const name = btn.closest('.download-card')?.querySelector('.title')?.textContent || 'File';
                         if (url && url.trim() !== '' && url !== '#') {
                             const a = document.createElement('a');
                             a.href = url;
@@ -1596,79 +1544,37 @@
                         } else {
                             alert(`Download URL for "${name}" is not available.`);
                         }
-                    });
-                });
+                        e.preventDefault();
+                    }
+                };
+
+                // Store listener reference on the grid element
+                downloadGrid._listener = gridListener;
+
+                // Attach listeners for change and click
+                downloadGrid.addEventListener('change', gridListener);
+                downloadGrid.addEventListener('click', gridListener);
             }
 
             // ============================================================
-            // 11. SEARCH
+            // 13. SEARCH
             // ============================================================
 
             function performSearch(query) {
-                const q = query.trim().toLowerCase();
-                if (!q) {
-                    searchResults.innerHTML = `<div class="no-results"><i class="fas fa-search"></i><p>Type to search across all downloads…</p></div>`;
-                    return;
-                }
-
-                const results = DOWNLOADS.filter(item => {
-                    const searchable = [
-                        item.title,
-                        item.version || '',
-                        item.description || '',
-                        ...(item.features || []),
-                        getCategoryLabel(item.category)
-                    ].join(' ').toLowerCase();
-                    return searchable.includes(q);
-                });
-
-                if (results.length === 0) {
-                    searchResults.innerHTML =
-                        `<div class="no-results"><i class="fas fa-search-minus"></i><p>No results found for "<strong>${q}</strong>"</p></div>`;
-                    return;
-                }
-
-                let html = '';
-                results.forEach(item => {
-                    const catLabel = getCategoryLabel(item.category);
-                    const catIcon = getCategoryIcon(item.category);
-                    const thumbContent = item.icon ?
-                        `<img src="${item.icon}" alt="${item.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas ${catIcon}\\' style=\\'font-size:1.2rem;color:var(--text-muted);\\'></i>';" />` :
-                        `<i class="fas ${catIcon}"></i>`;
-                    html += `
-                                <div class="result-item" data-category="${item.category}">
-                                    <div class="ri-icon">${thumbContent}</div>
-                                    <div class="ri-info">
-                                        <div class="ri-title">${item.title} ${item.version ? `<span style="font-weight:400;color:var(--text-muted);font-size:0.8rem;">v${item.version}</span>` : ''}</div>
-                                        <div class="ri-meta">
-                                            <span><i class="fas ${catIcon}"></i> ${catLabel}</span>
-                                            ${item.features ? `<span><i class="fas fa-list"></i> ${item.features.slice(0,2).join(', ')}</span>` : ''}
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                });
-                searchResults.innerHTML = html;
-
-                document.querySelectorAll('.result-item').forEach(el => {
-                    el.addEventListener('click', function() {
-                        const category = this.dataset.category;
-                        if (category) {
-                            setActiveCategory(category);
-                            searchOverlay.classList.remove('open');
-                        }
-                    });
-                });
+                currentSearchQuery = query;
+                renderGrid(currentCategory);
             }
 
             // ============================================================
-            // 12. EVENTS
+            // 14. EVENTS
             // ============================================================
 
             document.addEventListener('click', function(e) {
                 const btn = e.target.closest('.cat-btn, .nav-item');
                 if (btn && btn.dataset.category) {
                     const cat = btn.dataset.category;
+                    currentSearchQuery = '';
+                    searchInput.value = '';
                     setActiveCategory(cat);
                     mobileNavEl.classList.remove('open');
                     hamburgerBtn.querySelector('i').className = 'fas fa-bars';
@@ -1678,6 +1584,8 @@
 
             logoHome.addEventListener('click', function(e) {
                 e.preventDefault();
+                currentSearchQuery = '';
+                searchInput.value = '';
                 setActiveCategory('all');
                 mobileNavEl.classList.remove('open');
                 hamburgerBtn.querySelector('i').className = 'fas fa-bars';
@@ -1691,7 +1599,7 @@
 
             openSearchBtn.addEventListener('click', function() {
                 searchOverlay.classList.add('open');
-                searchInput.value = '';
+                searchInput.value = currentSearchQuery || '';
                 searchResults.innerHTML =
                     `<div class="no-results"><i class="fas fa-search"></i><p>Type to search across all downloads…</p></div>`;
                 setTimeout(() => searchInput.focus(), 100);
@@ -1699,7 +1607,65 @@
 
             closeSearchBtn.addEventListener('click', function() { searchOverlay.classList.remove('open'); });
             searchOverlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
-            searchInput.addEventListener('input', function() { performSearch(this.value); });
+
+            searchInput.addEventListener('input', function() {
+                const q = this.value.trim();
+                currentSearchQuery = q;
+                if (!q) {
+                    searchResults.innerHTML =
+                        `<div class="no-results"><i class="fas fa-search"></i><p>Type to search across all downloads…</p></div>`;
+                } else {
+                    const results = PRODUCTS.filter(p => {
+                        const searchable = [
+                            p.title,
+                            p.description || '',
+                            ...(p.features || []),
+                            getCategoryLabel(p.category),
+                            ...(p.versions.map(v => v.version || ''))
+                        ].join(' ').toLowerCase();
+                        return searchable.includes(q.toLowerCase());
+                    });
+                    if (results.length === 0) {
+                        searchResults.innerHTML =
+                            `<div class="no-results"><i class="fas fa-search-minus"></i><p>No results found for "<strong>${q}</strong>"</p></div>`;
+                    } else {
+                        let html = '';
+                        results.forEach(p => {
+                            const catLabel = getCategoryLabel(p.category);
+                            const catIcon = getCategoryIcon(p.category);
+                            const thumbContent = p.icon ?
+                                `<img src="${p.icon}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas ${catIcon}\\' style=\\'font-size:1.2rem;color:var(--text-muted);\\'></i>';" />` :
+                                `<i class="fas ${catIcon}"></i>`;
+                            html += `
+                                        <div class="result-item" data-category="${p.category}">
+                                            <div class="ri-icon">${thumbContent}</div>
+                                            <div class="ri-info">
+                                                <div class="ri-title">${p.title}</div>
+                                                <div class="ri-meta">
+                                                    <span><i class="fas ${catIcon}"></i> ${catLabel}</span>
+                                                    <span><i class="fas fa-tag"></i> ${p.versions.length} version${p.versions.length > 1 ? 's' : ''}</span>
+                                                    ${p.primaryVersion?.version ? `<span><i class="fas fa-code"></i> v${p.primaryVersion.version}</span>` : ''}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                        });
+                        searchResults.innerHTML = html;
+                        document.querySelectorAll('.result-item').forEach(el => {
+                            el.addEventListener('click', function() {
+                                const cat = this.dataset.category;
+                                if (cat) {
+                                    currentSearchQuery = '';
+                                    searchInput.value = '';
+                                    setActiveCategory(cat);
+                                    searchOverlay.classList.remove('open');
+                                }
+                            });
+                        });
+                    }
+                }
+                renderGrid(currentCategory);
+            });
 
             document.addEventListener('keydown', function(e) {
                 if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault();
@@ -1715,7 +1681,7 @@
             accountModal.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
 
             // ============================================================
-            // 13. INIT
+            // 15. INIT
             // ============================================================
 
             function initApp() {
@@ -1729,8 +1695,8 @@
 
             window.__build = {
                 categories: CATEGORIES,
-                get downloads() { return DOWNLOADS; },
-                getItemsForCategory,
+                get products() { return PRODUCTS; },
+                getProductsForCategory,
                 setActiveCategory,
                 currentCategory: () => currentCategory,
             };
