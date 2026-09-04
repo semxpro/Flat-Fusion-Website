@@ -2,897 +2,1741 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNWJEQ7C29"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNWJEQ7C29">
+    </script>
     <script>
         window.dataLayer = window.dataLayer || [];
+
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-MNWJEQ7C29');
     </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Semx Free Premium Store</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/semxpro/Flat-Fusion-Website/main/file_00000000b9e081f5b35afc10ccbeef5c.png">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
+    <title>Build — Premium Minecraft Downloads</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/semxpro/Flat-Fusion-Website/main/file_00000000b9e081f5b35afc10ccbeef5c.png" />
+
     <style>
+        /* ============================================================
+                   ROOT — COMPLETE NEW DESIGN SYSTEM
+                   ============================================================ */
         :root {
-            --teal: #00ffcc;
-            --teal-glow: #00bb99;
-            --bg-deep: #030807;
-            --card-bg: rgba(6, 18, 16, 0.7);
-            --red: #ff0050;
-            --gold: #ffaa00;
-            --text-primary: #e6fff7;
-            --text-secondary: #b3dfd6;
-            --font: 'Inter', sans-serif;
+            /* ——— Colors ——— */
+            --bg-primary: #0A0A0F;
+            --bg-secondary: #10101A;
+            --bg-surface: #14141E;
+            --bg-card: #181824;
+            --bg-card-hover: #1E1E2E;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(139, 92, 246, 0.25);
+
+            --violet: #8B5CF6;
+            --violet-dark: #6D3BD9;
+            --violet-glow: rgba(139, 92, 246, 0.15);
+            --gold: #F59E0B;
+            --gold-glow: rgba(245, 158, 11, 0.12);
+            --rose: #F43F5E;
+            --rose-glow: rgba(244, 63, 94, 0.12);
+            --orange: #F97316;
+            --teal: #14B8A6;
+            --blue: #3B82F6;
+            --amber: #FBBF24;
+            --emerald: #34D399;
+            --pink: #EC4899;
+            --cyan: #22D3EE;
+
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --text-inverse: #0A0A0F;
+
+            /* ——— Typography ——— */
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+
+            /* ——— Shadows ——— */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.6);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.7);
+            --shadow-glow: 0 0 60px rgba(139, 92, 246, 0.08);
+
+            /* ——— Transitions ——— */
+            --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --duration: 0.3s;
         }
 
+        /* ============================================================
+                   RESET & BASE
+                   ============================================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            background: radial-gradient(circle at 20% 30%, #0b1a17, #030807);
-            font-family: var(--font);
-            color: var(--text-primary);
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            padding-bottom: 60px;
+        html {
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ========== PARTICLES ========== */
-        .particles {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-        .particle {
-            position: absolute;
-            width: 4px; height: 4px;
-            background: var(--teal);
-            border-radius: 50%;
-            box-shadow: 0 0 6px var(--teal);
-            animation: floatParticle linear infinite;
-            opacity: 0.25;
-        }
-        @keyframes floatParticle {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 0.5; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) scale(0.8); opacity: 0; }
+        body {
+            font-family: var(--font);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+            padding-bottom: 110px;
         }
 
-        /* ========== HEADER ========== */
+        ::-webkit-scrollbar {
+            width: 5px;
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--violet);
+            border-radius: var(--radius-full);
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+        }
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================================
+                   HEADER
+                   ============================================================ */
         .header {
             position: sticky;
             top: 0;
-            width: 100%;
-            max-width: 800px;
-            background: rgba(3, 8, 7, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
-            padding: 0.8rem 1.5rem;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 0 20px;
+            height: 64px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(0, 255, 200, 0.08);
-            margin-bottom: 1rem;
         }
-        .header-brand {
-            font-size: 1.4rem;
+
+        .header-inner {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--teal), #88ffdd);
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+            flex-shrink: 0;
+            color: var(--text-primary);
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--violet), var(--violet-dark));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .logo span {
+            background: linear-gradient(135deg, var(--violet), var(--gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
         }
-        .header-nav {
+
+        .nav-categories {
             display: flex;
-            gap: 1.2rem;
             align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+            flex: 1;
+            justify-content: center;
         }
-        .header-nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
+
+        .nav-categories .cat-btn {
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
             font-size: 0.8rem;
             font-weight: 600;
-            transition: color 0.3s;
-            position: relative;
-        }
-        .header-nav a:hover {
-            color: var(--teal);
-        }
-
-        /* ========== MAIN CONTAINER ========== */
-        .container {
-            max-width: 800px;
-            width: 100%;
-            padding: 0 1.2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ========== HERO LOGO ========== */
-        .hero-logo {
-            text-align: center;
-            padding: 1.5rem 0 0.8rem;
-            animation: fadeInUp 0.8s ease-out;
-        }
-        .main-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(0, 255, 200, 0.6), 0 0 40px rgba(0, 255, 200, 0.3), 0 0 80px rgba(0, 255, 200, 0.1);
-            letter-spacing: -1px;
-        }
-        @media (max-width: 420px) {
-            .main-title { font-size: 2.5rem; }
-        }
-
-        /* ========== BRAND BADGE ========== */
-        .brand-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: rgba(0, 255, 200, 0.05);
-            border: 1px solid rgba(0, 255, 200, 0.2);
-            padding: 0.4rem 1.8rem;
-            border-radius: 60px;
-            margin: 0 auto 0.5rem;
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #b3dfd6;
-            backdrop-filter: blur(4px);
-        }
-        .brand-badge i {
-            color: var(--teal);
-            font-size: 0.9rem;
-        }
-
-        /* ========== HERO SUB TEXT ========== */
-        .hero-sub-text {
-            margin-top: 0.5rem;
-        }
-        .premium-title {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--red);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-shadow: 0 0 20px rgba(255, 0, 80, 0.15);
-        }
-        .premium-title i {
-            font-size: 1.2rem;
-            color: var(--gold);
-        }
-        .hero-sub-text p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            max-width: 500px;
-            margin: 0.2rem auto 1.2rem;
-            line-height: 1.6;
+            transition: all var(--duration) var(--ease);
+            background: transparent;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+        .nav-categories .cat-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .nav-categories .cat-btn.active {
+            color: #fff;
+            background: var(--violet);
+            border-color: var(--violet);
+            box-shadow: 0 0 20px var(--violet-glow);
+        }
+        .nav-categories .cat-btn i {
+            margin-right: 6px;
+            font-size: 0.75rem;
         }
 
-        /* ========== COMMUNITY ========== */
-        .community-row {
+        .header-actions {
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin: 0.5rem 0 1.2rem 0;
+            gap: 8px;
+            flex-shrink: 0;
         }
-        .community-row a {
-            display: inline-flex;
+
+        .header-search-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            transition: all var(--duration) var(--ease);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+        }
+        .header-search-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border-hover);
+        }
+
+        .header-account-btn {
+            padding: 6px 18px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--violet), var(--violet-dark));
+            color: #fff;
+            transition: all var(--duration) var(--ease);
+            display: flex;
             align-items: center;
             gap: 6px;
-            background: rgba(6, 18, 16, 0.6);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(0, 255, 200, 0.08);
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-size: 0.75rem;
-            font-weight: 600;
-            transition: 0.3s;
+            border: none;
+            box-shadow: 0 0 20px var(--violet-glow);
         }
-        .community-row a:hover {
-            transform: translateY(-2px);
-            border-color: var(--teal);
-            background: rgba(0, 255, 200, 0.05);
+        .header-account-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 30px var(--violet-glow);
         }
-        .community-row a i { font-size: 1rem; }
-        .community-row a.tiktok i { color: #ff0050; }
-        .community-row a.youtube i { color: #ff0000; }
-        .community-row a.discord i { color: #5865F2; }
+        .header-account-btn i {
+            font-size: 0.8rem;
+        }
 
-        /* ========== DOWNLOAD BUTTON ========== */
-        .btn-start {
+        .hamburger {
+            display: none;
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================================
+                   MOBILE NAV OVERLAY
+                   ============================================================ */
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 15, 0.96);
+            backdrop-filter: blur(12px);
+            z-index: 999;
+            padding: 24px 20px;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .mobile-nav-overlay.open {
+            display: flex;
+        }
+        .mobile-nav-overlay .cat-btn {
+            padding: 14px 18px;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            width: 100%;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .mobile-nav-overlay .cat-btn.active {
+            color: #fff;
+            background: var(--violet);
+            border-color: var(--violet);
+        }
+        .mobile-nav-overlay .cat-btn i {
+            width: 24px;
+            text-align: center;
+        }
+
+        /* ============================================================
+                   HERO
+                   ============================================================ */
+        .hero {
+            padding: 48px 0 32px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--red);
-            color: #fff;
-            padding: 0.6rem 2rem;
-            border-radius: 60px;
-            text-decoration: none;
-            font-weight: 700;
-            box-shadow: 0 0 30px rgba(255,0,80,0.2);
-            transition: 0.3s;
-            margin-bottom: 1.5rem;
+            background: rgba(139, 92, 246, 0.08);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            padding: 4px 18px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--violet);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
         }
-        .btn-start:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(255,0,80,0.4);
+        .hero-badge i {
+            font-size: 0.6rem;
         }
 
-        /* ========== SECTION TITLES ========== */
-        .section-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
+        .hero h1 {
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
+        }
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--violet), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 560px;
+            margin: 0 auto 24px;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .hero-stats .stat {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .hero-stats .stat i {
+            color: var(--violet);
+            font-size: 1rem;
+        }
+        .hero-stats .stat strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* ============================================================
+                   CATEGORY INDICATOR
+                   ============================================================ */
+        .category-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 0 8px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        .category-indicator .label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        .category-indicator .name {
+            font-size: 1.2rem;
+            font-weight: 700;
             color: var(--text-primary);
         }
-        .section-title i { color: var(--teal); font-size: 1.4rem; }
-        .section-sub {
+        .category-indicator .desc {
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
+            margin-left: 4px;
+            font-weight: 400;
+        }
+        .category-indicator .count {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
+            margin-left: auto;
         }
 
-        /* ========== CARDS ========== */
-        .card-grid-3 {
+        /* ============================================================
+                   DOWNLOAD GRID
+                   ============================================================ */
+        .download-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding-bottom: 40px;
         }
-        @media (max-width: 650px) { .card-grid-3 { grid-template-columns: 1fr; } }
 
-        .card-item {
-            background: var(--card-bg);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(0, 255, 200, 0.1);
-            border-radius: 1.5rem;
-            padding: 1.5rem 1.2rem;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            overflow: hidden;
+        /* ============================================================
+                   CARD
+                   ============================================================ */
+        .download-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            transition: all var(--duration) var(--ease);
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(4px);
+        }
+        .download-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+            box-shadow: var(--shadow-md), var(--shadow-glow);
+        }
+
+        .download-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--violet), var(--teal));
+            opacity: 0;
+            transition: opacity var(--duration) var(--ease);
+        }
+        .download-card:hover::before {
+            opacity: 1;
+        }
+
+        .download-card .card-top {
+            display: flex;
+            gap: 14px;
             align-items: flex-start;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            cursor: default;
-        }
-        .card-item:hover {
-            transform: translateY(-6px);
-            border-color: var(--teal);
-            box-shadow: 0 12px 40px rgba(0, 255, 200, 0.15);
-        }
-        
-        /* ========== ENHANCED MOJO LAUNCHER CARD ========== */
-        .card-highlight {
-            border: 1px solid rgba(0, 255, 200, 0.4);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 255, 200, 0.05);
-        }
-        .card-highlight:hover {
-            transform: translateY(-6px);
-            border-color: var(--teal);
-            box-shadow: 0 12px 40px rgba(0, 255, 200, 0.25);
+            margin-bottom: 12px;
         }
 
-        .card-item .content { position: relative; z-index: 1; width: 100%; }
-        .card-item .icon-wrap {
-            width: 50px; height: 50px;
-            background: rgba(0, 255, 200, 0.08);
-            border-radius: 14px;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 0.8rem;
-            border: 1px solid rgba(0, 255, 200, 0.1);
+        .download-card .card-thumb {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            flex-shrink: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
-        .card-highlight .icon-wrap {
-            border: 1px solid rgba(0, 255, 200, 0.3);
+        .download-card .card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: var(--bg-secondary);
         }
-        .card-item .icon-wrap img { width: 30px; height: 30px; object-fit: contain; }
-        .card-item h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem; }
-        .card-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.8rem; }
-        
-        /* ========== LATEST BADGE STYLING (PILL SHAPE) ========== */
-        .card-item .badge {
-            display: inline-block; 
-            background: var(--gold); 
-            color: #000;
-            font-size: 0.6rem; 
-            font-weight: 700; 
-            padding: 4px 12px;
-            border-radius: 20px; 
-            margin-bottom: 0.5rem;
+        .download-card .card-thumb .fallback-icon {
+            font-size: 1.8rem;
+            color: var(--text-muted);
+        }
+        .download-card .card-thumb .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            font-size: 1.5rem;
+        }
+
+        .download-card .card-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .download-card .card-info .title-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 2px;
+        }
+        .download-card .card-info .title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+        .download-card .card-info .version {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--violet);
+            background: rgba(139, 92, 246, 0.12);
+            padding: 2px 10px;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            letter-spacing: 0.3px;
+            display: inline-block;
+        }
+
+        .download-card .card-info .badge-pill {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
+            padding: 2px 10px;
+            border-radius: var(--radius-full);
+            background: var(--amber);
+            color: #0A0A0F;
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.2);
+            display: inline-block;
+            line-height: 1.4;
+        }
+        .download-card .card-info .badge-pill.bedrock { background: var(--emerald); color: #0A0A0F; box-shadow: 0 0 12px rgba(52, 211, 153, 0.25); }
+        .download-card .card-info .badge-pill.java { background: var(--blue); color: #fff; box-shadow: 0 0 12px rgba(59, 130, 246, 0.25); }
+        .download-card .card-info .badge-pill.smooth { background: var(--teal); color: #0A0A0F; box-shadow: 0 0 12px rgba(20, 184, 166, 0.25); }
+        .download-card .card-info .badge-pill.premium { background: var(--violet); color: #fff; box-shadow: 0 0 12px rgba(139, 92, 246, 0.25); }
+        .download-card .card-info .badge-pill.fps { background: var(--rose); color: #fff; box-shadow: 0 0 12px rgba(244, 63, 94, 0.25); }
+        .download-card .card-info .badge-pill.models { background: var(--orange); color: #0A0A0F; box-shadow: 0 0 12px rgba(249, 115, 22, 0.25); }
+        .download-card .card-info .badge-pill.latest { background: var(--cyan); color: #0A0A0F; box-shadow: 0 0 12px rgba(34, 211, 238, 0.25); }
+
+        .download-card .card-info .category-tag {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 2px 10px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border-subtle);
+        }
+        .download-card .card-info .desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-top: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        /* ========== DOWNLOAD BUTTON ========== */
+        .download-card .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 10px;
+            margin: 10px 0 14px;
+            padding: 0;
+            list-style: none;
+        }
+        .download-card .feature-list li {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .download-card .feature-list li i {
+            color: var(--violet);
+            font-size: 0.5rem;
+        }
+
+        .download-card .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
         .btn-download {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: linear-gradient(135deg, var(--teal), #00997a);
-            color: #030807;
-            font-weight: 700;
-            padding: 0.4rem 1.2rem;
-            border-radius: 60px;
+            padding: 6px 18px;
+            border-radius: var(--radius-full);
             font-size: 0.8rem;
-            transition: 0.3s;
-            text-decoration: none;
-            cursor: pointer;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--violet), var(--violet-dark));
+            color: #fff;
             border: none;
+            transition: all var(--duration) var(--ease);
+            box-shadow: 0 0 20px var(--violet-glow);
+            flex-shrink: 0;
+            cursor: pointer;
         }
-        .btn-download i { font-size: 0.9rem; }
-        .btn-download:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 200, 0.3);
+        .btn-download:hover { transform: scale(1.04); box-shadow: 0 0 30px var(--violet-glow); }
+        .btn-download i { font-size: 0.75rem; }
+        .btn-download:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
-        /* ========== COUNTDOWN POPUP ========== */
-        .countdown-overlay {
+        /* ============================================================
+                   EMPTY STATE
+                   ============================================================ */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            grid-column: 1 / -1;
+        }
+        .empty-state .icon { font-size: 3rem; color: var(--text-muted); margin-bottom: 16px; opacity: 0.5; }
+        .empty-state h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+        .empty-state p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* ============================================================
+                   SEARCH OVERLAY
+                   ============================================================ */
+        .search-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 9999;
+            background: rgba(10, 10, 15, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 2000;
             display: none;
+            align-items: flex-start;
             justify-content: center;
-            align-items: center;
+            padding: 60px 20px 20px;
+            overflow-y: auto;
         }
-        .countdown-overlay.show {
-            display: flex;
-            animation: fadeIn 0.4s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .countdown-box {
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 255, 200, 0.2);
-            border-radius: 2rem;
-            padding: 2.5rem 2rem;
-            max-width: 350px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 0 50px rgba(0, 255, 200, 0.1);
-        }
-        .countdown-box .icon {
-            font-size: 3rem;
-            color: var(--teal);
-            margin-bottom: 0.5rem;
-            animation: spin 2s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .countdown-box h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.2rem;
-        }
-        .countdown-box p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-        }
-        .countdown-timer {
-            font-size: 4.5rem;
-            font-weight: 800;
-            color: var(--teal);
-            text-shadow: 0 0 30px rgba(0, 255, 200, 0.3);
-            line-height: 1;
-            margin-bottom: 1rem;
-        }
-        .countdown-box .sub-text {
-            font-size: 0.7rem;
-            color: #4a7a6e;
-            letter-spacing: 1px;
-        }
-        .countdown-box .close-btn {
-            margin-top: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-secondary);
-            padding: 0.4rem 1.5rem;
-            border-radius: 40px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            transition: 0.3s;
-        }
-        .countdown-box .close-btn:hover {
-            background: rgba(255, 0, 80, 0.1);
-            border-color: var(--red);
-            color: #fff;
-        }
+        .search-overlay.open { display: flex; }
 
-        /* ========== FOOTER ========== */
-        .footer {
-            max-width: 800px;
+        .search-overlay .search-box {
+            max-width: 640px;
             width: 100%;
-            padding: 1.5rem 1.2rem 1rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(0, 255, 200, 0.05);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 20px 24px;
+            box-shadow: var(--shadow-lg);
+        }
+        .search-overlay .search-box .search-input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 12px;
+        }
+        .search-overlay .search-box .search-input-wrap i { color: var(--text-muted); font-size: 1.2rem; }
+        .search-overlay .search-box .search-input-wrap input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-family: var(--font);
+        }
+        .search-overlay .search-box .search-input-wrap input::placeholder { color: var(--text-muted); font-weight: 400; }
+        .search-overlay .search-box .search-input-wrap .close-search {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            padding: 4px;
+            border-radius: 50%;
+            transition: var(--duration);
+        }
+        .search-overlay .search-box .search-input-wrap .close-search:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+        .search-overlay .search-results {
+            margin-top: 16px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .search-overlay .search-results .result-item {
+            padding: 12px 14px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: var(--duration);
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        .search-overlay .search-results .result-item:hover { background: rgba(255,255,255,0.06); border-color: var(--border-hover); }
+        .search-overlay .search-results .result-item .ri-icon {
+            width: 36px; height: 36px;
+            border-radius: var(--radius);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .search-overlay .search-results .result-item .ri-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .search-overlay .search-results .result-item .ri-info { flex: 1; min-width: 0; }
+        .search-overlay .search-results .result-item .ri-info .ri-title { font-weight: 600; font-size: 0.95rem; color: var(--text-primary); }
+        .search-overlay .search-results .result-item .ri-info .ri-meta { font-size: 0.75rem; color: var(--text-muted); display: flex; gap: 12px; flex-wrap: wrap; }
+        .search-overlay .search-results .result-item .ri-info .ri-meta span { display: flex; align-items: center; gap: 4px; }
+        .search-overlay .search-results .result-item .ri-info .ri-meta i { font-size: 0.6rem; }
+        .search-overlay .search-results .no-results { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+        .search-overlay .search-results .no-results i { font-size: 2rem; display: block; margin-bottom: 12px; opacity: 0.4; }
+
+        /* ============================================================
+                   ACCOUNT MODAL
+                   ============================================================ */
+        .account-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 10, 15, 0.88);
+            backdrop-filter: blur(16px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .account-modal.open { display: flex; }
+
+        .account-modal .modal-box {
+            max-width: 400px;
+            width: 100%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .account-modal .modal-box .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            transition: var(--duration);
+        }
+        .account-modal .modal-box .modal-close:hover { color: var(--text-primary); }
+        .account-modal .modal-box .modal-icon { font-size: 3.2rem; color: var(--violet); margin-bottom: 12px; }
+        .account-modal .modal-box h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+        .account-modal .modal-box p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px; }
+        .account-modal .modal-box .coming-badge {
+            display: inline-block;
+            background: var(--gold-glow);
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 4px 16px;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            letter-spacing: 0.5px;
+        }
+        .account-modal .modal-box .feature-list { text-align: left; margin: 20px 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 2; }
+        .account-modal .modal-box .feature-list i { color: var(--violet); width: 20px; margin-right: 8px; }
+
+        /* ============================================================
+                   FOOTER
+                   ============================================================ */
+        .footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 32px 20px 24px;
+            margin-top: 16px;
+            text-align: center;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.6rem;
+            gap: 12px;
         }
-        .footer-badge-row {
+        .footer .brand { font-weight: 700; font-size: 1rem; background: linear-gradient(135deg, var(--violet), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .footer .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; font-size: 0.8rem; color: var(--text-muted); }
+        .footer .links a { transition: var(--duration); }
+        .footer .links a:hover { color: var(--text-primary); }
+        .footer .copy { font-size: 0.7rem; color: var(--text-muted); opacity: 0.6; }
+
+        /* ============================================================
+                   FLOATING PILL BOTTOM NAVIGATION
+                   ============================================================ */
+        .bottom-nav {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            background: rgba(16, 16, 26, 0.92);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 80px;
+            padding: 12px 20px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             align-items: center;
-            gap: 1.2rem 2rem;
-            font-size: 0.75rem;
-            font-weight: 400;
-            color: #8cd4c5;
-        }
-        .footer-badge-row i {
-            color: var(--teal);
-            margin-right: 6px;
-            font-size: 0.85rem;
-        }
-        .footer-dot-row {
-            display: flex;
             justify-content: center;
-            align-items: center;
             gap: 6px;
-            font-size: 0.65rem;
-            color: #4a7a6e;
-            text-transform: lowercase;
-            letter-spacing: 1.2px;
-            font-weight: 400;
-        }
-        .footer-dot-row i {
-            color: var(--teal);
-            font-size: 0.35rem;
+            box-shadow: 0 12px 60px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.03), inset 0 1px 0 rgba(255,255,255,0.04);
+            width: auto;
+            max-width: 96vw;
+            min-height: 80px;
+            transition: all 0.25s var(--ease);
         }
 
-        /* ========== FLOATING SUPPORT ========== */
-        .floating-bar {
-            position: fixed; bottom: 20px; right: 20px; z-index: 100;
-            display: flex; flex-direction: column; gap: 0.6rem;
-        }
-        .floating-btn {
-            width: 55px; height: 55px; border-radius: 50%;
-            background: rgba(6, 18, 16, 0.85); backdrop-filter: blur(8px);
-            border: 1px solid rgba(0, 255, 200, 0.15);
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; text-decoration: none; font-size: 1.4rem;
-            transition: 0.3s; box-shadow: 0 4px 16px rgba(0,0,0,0.6);
-        }
-        .floating-btn:hover { transform: scale(1.1); border-color: var(--teal); background: #0a2a22; }
-        .floating-btn.support i { color: var(--teal); }
-
-        /* ========== UTILITIES ========== */
-        .fade-in { animation: fadeInUp 0.8s ease-out; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        ::-webkit-scrollbar { width: 6px; background: #030807; }
-        ::-webkit-scrollbar-thumb { background: var(--teal-glow); border-radius: 10px; }
-
-        /* ========== BANNER STYLE (UPDATED BG & BORDER-RADIUS) ========== */
-        .banner-game-card {
-            width: 100%;
-            border-radius: 1.5rem; /* Mojo Launcher এর মত বর্ডার-রেডিয়াস */
-            overflow: hidden;
-            background: var(--card-bg); /* Mojo Launcher এর মত ব্যাকগ্রাউন্ড */
-            margin: 0 auto 1.5rem;
-        }
-        .banner-img {
-            width: 100%;
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        .banner-badge-fixed {
-            display: inline-block; 
-            background: var(--gold); 
-            color: #000;
-            font-size: 0.6rem; 
-            font-weight: 700; 
-            padding: 4px 12px;
-            border-radius: 20px; /* হুবহু Mojo Launcher এর পিল শেপ (Pill Shape) */
-            letter-spacing: 0.5px;
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            z-index: 2;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        }
-        .banner-icon {
-            position: absolute;
-            bottom: -25px;
-            left: 15px;
-            width: 50px;
-            height: 50px;
-            background: #030807;
-            border-radius: 14px;
+        .bottom-nav .nav-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            gap: 3px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: var(--font);
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 60px;
+            transition: all 0.25s var(--ease);
+            cursor: pointer;
+            position: relative;
+            min-width: 72px;
+            min-height: 56px;
+            letter-spacing: 0.3px;
+            -webkit-tap-highlight-color: transparent;
+            white-space: nowrap;
+            touch-action: manipulation;
+            user-select: none;
         }
-        .banner-icon img {
-            width: 30px;
-            height: 30px;
-            object-fit: contain;
+
+        .bottom-nav .nav-item i { font-size: 1.5rem; transition: all 0.25s var(--ease); line-height: 1; pointer-events: none; }
+        .bottom-nav .nav-item span { line-height: 1.2; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.75; transition: opacity 0.2s; pointer-events: none; }
+        .bottom-nav .nav-item.active {
+            color: #fff;
+            background: var(--violet);
+            box-shadow: 0 0 40px var(--violet-glow), inset 0 1px 0 rgba(255,255,255,0.1);
+            transform: scale(1.04);
         }
-        .banner-content {
-            padding: 1.8rem 1.5rem 1.5rem 1.5rem;
-            background: #030807; /* এটা আগের মত থাকবে, নিচের ডাউনলোড সেকশন কালার ডার্ক থাকে */
+        .bottom-nav .nav-item.active i { text-shadow: 0 0 20px rgba(255,255,255,0.25); }
+        .bottom-nav .nav-item.active span { opacity: 1; }
+        @media (hover: hover) { .bottom-nav .nav-item:hover:not(.active) { color: var(--text-primary); background: rgba(255,255,255,0.05); } }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 768px) {
+            .bottom-nav { padding: 10px 14px; bottom: 12px; border-radius: 70px; min-height: 72px; gap: 4px; max-width: 98vw; }
+            .bottom-nav .nav-item { padding: 8px 14px; min-width: 60px; min-height: 48px; font-size: 0.55rem; }
+            .bottom-nav .nav-item i { font-size: 1.3rem; }
+            .bottom-nav .nav-item span { font-size: 0.55rem; letter-spacing: 0.5px; }
+            body { padding-bottom: 95px; }
         }
-        .banner-content h3 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 0.2rem;
-            letter-spacing: -0.5px;
-            text-shadow: 0 0 15px rgba(0, 255, 200, 0.25);
+        @media (max-width: 500px) {
+            .bottom-nav { padding: 8px 10px; bottom: 10px; border-radius: 60px; min-height: 64px; gap: 2px; max-width: 100vw; margin: 0 8px; width: calc(100% - 16px); }
+            .bottom-nav .nav-item { padding: 6px 10px; min-width: 48px; min-height: 44px; font-size: 0.5rem; border-radius: 40px; }
+            .bottom-nav .nav-item i { font-size: 1.15rem; }
+            .bottom-nav .nav-item span { font-size: 0.5rem; letter-spacing: 0.4px; }
+            body { padding-bottom: 82px; }
         }
-        @media (max-width: 450px) {
-            .banner-content h3 { font-size: 1.6rem; }
+        @media (max-width: 400px) {
+            .bottom-nav { padding: 6px 8px; border-radius: 50px; min-height: 56px; gap: 0; width: calc(100% - 12px); margin: 0 6px; bottom: 8px; }
+            .bottom-nav .nav-item { padding: 4px 8px; min-width: 38px; min-height: 40px; font-size: 0.45rem; border-radius: 30px; }
+            .bottom-nav .nav-item i { font-size: 1.1rem; }
+            .bottom-nav .nav-item span { display: none; }
+            body { padding-bottom: 72px; }
         }
-        .banner-content p {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 1.2rem;
+        @media (max-width: 340px) {
+            .bottom-nav { padding: 4px 4px; border-radius: 40px; min-height: 48px; gap: 0; width: calc(100% - 8px); margin: 0 4px; bottom: 6px; }
+            .bottom-nav .nav-item { padding: 2px 4px; min-width: 32px; min-height: 34px; }
+            .bottom-nav .nav-item i { font-size: 0.95rem; }
+            body { padding-bottom: 62px; }
         }
-        /* =========================================================== */
+        @media (min-width: 1024px) {
+            .bottom-nav { padding: 14px 28px; min-height: 88px; gap: 8px; max-width: 640px; border-radius: 100px; bottom: 24px; }
+            .bottom-nav .nav-item { padding: 12px 22px; min-width: 84px; min-height: 60px; font-size: 0.65rem; }
+            .bottom-nav .nav-item i { font-size: 1.6rem; }
+            .bottom-nav .nav-item span { font-size: 0.65rem; letter-spacing: 0.7px; }
+            body { padding-bottom: 120px; }
+        }
+        @media (max-width: 1024px) { .download-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); } }
+        @media (max-width: 820px) {
+            .nav-categories { display: none; }
+            .hamburger { display: flex; }
+            .header-account-btn span { display: none; }
+            .header-account-btn { padding: 6px 12px; }
+            .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
+            .hero-stats { gap: 16px; }
+            .hero-stats .stat { font-size: 0.75rem; }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 0 14px; }
+            .header { padding: 0 14px; height: 58px; }
+            .logo { font-size: 1rem; }
+            .logo-icon { width: 28px; height: 28px; font-size: 0.8rem; }
+            .download-grid { grid-template-columns: 1fr; gap: 16px; }
+            .download-card { padding: 16px; }
+            .download-card .card-top { gap: 12px; }
+            .download-card .card-thumb { width: 48px; height: 48px; }
+            .download-card .card-info .title { font-size: 0.95rem; }
+            .hero { padding: 32px 0 20px; }
+            .hero p { font-size: 0.95rem; }
+            .category-indicator .name { font-size: 1rem; }
+            .category-indicator .desc { font-size: 0.75rem; width: 100%; }
+            .search-overlay { padding: 40px 14px 14px; }
+            .search-overlay .search-box { padding: 16px 18px; }
+            .account-modal .modal-box { padding: 32px 20px; }
+        }
+        @media (max-width: 400px) {
+            .header-actions .header-search-btn { width: 34px; height: 34px; font-size: 0.85rem; }
+            .header-account-btn { padding: 4px 10px; font-size: 0.7rem; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+
+        .fade-in { animation: fadeUp 0.6s var(--ease) both; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+        .fade-in-d1 { animation-delay:0.05s; }
+        .fade-in-d2 { animation-delay:0.1s; }
+        .fade-in-d3 { animation-delay:0.15s; }
+        .fade-in-d4 { animation-delay:0.2s; }
     </style>
 </head>
+
 <body>
 
-    <div class="particles" id="particlesContainer"></div>
-
-    <header class="header">
-        <div class="header-brand">Flat Fusion</div>
-        <nav class="header-nav">
-            <a href="#community">Community</a>
-        </nav>
+    <!-- ============================================================
+    HEADER
+    ============================================================ -->
+    <header class="header" id="appHeader">
+        <div class="header-inner">
+            <a href="#" class="logo" id="logoHome">
+                <span class="logo-icon"><i class="fas fa-cube"></i></span>
+                <span>Semx Free Premium Store</span>
+            </a>
+            <nav class="nav-categories" id="navCategories"></nav>
+            <div class="header-actions">
+                <button class="header-search-btn" id="openSearchBtn" aria-label="Search"><i class="fas fa-search"></i></button>
+                <button class="header-account-btn" id="openAccountBtn"><i class="fas fa-user"></i><span>Account</span></button>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
     </header>
 
-    <div class="container">
+    <div class="mobile-nav-overlay" id="mobileNav"></div>
 
-        <!-- ====== HERO ====== -->
-        <section class="hero-logo fade-in">
-            <h1 class="main-title">Flat Fusion</h1>
-            <div class="brand-badge">
-                <i class="fas fa-crown"></i>
-                <span>BY SEMX</span>
-                <i class="fas fa-code"></i>
-            </div>
+    <!-- ============================================================
+    MAIN
+    ============================================================ -->
+    <main class="container" id="mainContent">
 
-            <div class="hero-sub-text">
-                <h2 class="premium-title">
-                    <i class="fas fa-crown"></i> Premium Minecraft Download
-                </h2>
-                <p>Download latest Minecraft versions, optimized launchers & premium research packs – 100% safe & free.</p>
-            </div>
-
-            <div class="community-row">
-                <a href="https://www.tiktok.com/@semxpro?_r=1&_t=ZS-97XtjmAg1CK" target="_blank" class="tiktok" data-btn="TikTok">
-                    <i class="fab fa-tiktok"></i> TikTok
-                </a>
-                <a href="https://youtube.com/@flatfusion?si=BVG4mQMlb33TvRT2" target="_blank" class="youtube" data-btn="YouTube">
-                    <i class="fab fa-youtube"></i> YouTube
-                </a>
-                <a href="https://discord.gg/ZGHKKUx44w" target="_blank" class="discord" data-btn="Discord">
-                    <i class="fab fa-discord"></i> Discord
-                </a>
-            </div>
-
-            <a href="#downloads" class="btn-start">
-                <i class="fas fa-arrow-down"></i> Start Downloading
-            </a>
-        </section>
-
-        <!-- ====== DOWNLOADS ====== -->
-        <section id="downloads" class="fade-in">
-            <h2 class="section-title"><i class="fas fa-download"></i> Download Free Minecraft Bedrock And Java</h2>
-            <!-- নির্দেশিত 24px গ্যাপ যুক্ত করা হয়েছে -->
-            <div style="height: 24px;"></div> 
-            
-            <!-- ====== CUSTOM MINECRAFT 26.32 BANNER (MATCHING MOJO STYLE) ====== -->
-            <div style="width: 100%; max-width: 728px; margin: 0 auto 1.5rem auto;">
-                <div class="banner-game-card card-highlight">
-                    <div class="banner-img" style="background-image: url('https://res.cloudinary.com/p35rwudq/image/upload/v1782915854/Picsart_26-07-01_20-22-27-117_pbmnht.jpg');">
-                        <!-- পিল শেপে (Pill shape) রূপান্তরিত Latest ব্যাজ -->
-                        <span class="banner-badge-fixed">Latest</span>
-                        <div class="banner-icon">
-                            <img src="https://res.cloudinary.com/p35rwudq/image/upload/20260630_183545_sxcb8o.png" alt="icon">
-                        </div>
-                    </div>
-                    <div class="banner-content">
-                        <h3>Minecraft 26.32</h3>
-                        <p>Minecraft 26.32 and later versions, updated with new biomes & fixes.</p>
-                        <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Minecraft.1.26.32.apk" data-name="Minecraft Download">
-                            <i class="fas fa-cloud-download-alt"></i> Download
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- =================================================== -->
-
-            <div class="card-grid-3">
-                <!-- Mojo Launcher (Stylish Highlighted Card) -->
-                <div class="card-item card-highlight">
-                    <div class="content">
-                        <div class="icon-wrap"><img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192515_sxwegq.png" alt="Mojo"></div>
-                        <span class="badge" style="background:#00ffcc; color:#000;">Smooth FPS</span>
-                        <h3>Mojo Launcher</h3>
-                        <p>Boost FPS & smooth gameplay. Updated alongside new versions.</p>
-                        <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Mojo.Launcher.xapk" data-name="Mojo Launcher">
-                            <i class="fas fa-cloud-download-alt"></i> Download
-                        </button>
-                    </div>
-                </div>
-
-                <!-- MJ Launcher -->
-                <div class="card-item">
-                    <div class="content">
-                        <div class="icon-wrap"><img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192621_hl8cbi.png" alt="MJ"></div>
-                        <h3>MJ Launcher</h3>
-                        <p>Lightweight, fast, and regularly updated for low-end devices.</p>
-                        <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/MJ-Launcher.apk" data-name="MJ Launcher">
-                            <i class="fas fa-cloud-download-alt"></i> Download
-                        </button>
-                    </div>
-                </div>
+        <section class="hero fade-in">
+            <div class="hero-badge"><i class="fas fa-bolt"></i> Premium Downloads</div>
+            <h1>Minecraft <span class="highlight">Downloads</span><br />Made Simple</h1>
+            <p>Discover the latest Minecraft PE versions, optimized launchers, resource packs, and more — all free and safe.</p>
+            <div class="hero-stats">
+                <span class="stat"><i class="fas fa-database"></i> <strong id="totalItemsStat">0</strong> items</span>
+                <span class="stat"><i class="fas fa-tag"></i> <strong id="totalCategoriesStat">0</strong> categories</span>
+                <span class="stat"><i class="fas fa-clock"></i> updated regularly</span>
             </div>
         </section>
 
-        <!-- ====== BEDROCK RESEARCH PACK ====== -->
-        <section id="resource-pack" class="fade-in">
-            <h2 class="section-title"><i class="fas fa-puzzle-piece"></i> Bedrock Research Pack</h2>
-            <p class="section-sub">Enhance your game with stunning visuals.</p>
+        <div class="category-indicator" id="categoryIndicator">
+            <span class="label">Category</span>
+            <span class="name" id="currentCategoryLabel">All Downloads</span>
+            <span class="desc" id="currentCategoryDesc"></span>
+            <span class="count" id="currentCategoryCount">0 items</span>
+        </div>
 
-            <div style="display: flex; justify-content: center; width: 100%;">
-                <div class="card-item" style="max-width: 380px; width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;">
-                    <div class="content" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                        <div class="icon-wrap"><img src="https://res.cloudinary.com/p35rwudq/image/upload/20260628_192238_mflbn5.png" alt="Action"></div>
-                        <span class="badge" style="background:#ffaa00; color:#000;">Resource Pack</span>
-                        <h3>Action & Stuff</h3>
-                        <p>Vibrant textures & 3D models. Up-to-date for Bedrock.</p>
-                        <button class="btn-download" data-url="https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Actions.Stuff.1.11.Make.By.Semx.mcpack.zip" data-name="Action & Stuff">
-                            <i class="fas fa-cloud-download-alt"></i> Download
-                        </button>
-                    </div>
-                </div>
+        <div class="download-grid" id="downloadGrid">
+            <div class="empty-state" style="grid-column:1/-1;">
+                <div class="icon"><i class="fas fa-spinner fa-pulse"></i></div>
+                <h3>Loading Downloads...</h3>
+                <p>Fetching the latest data from Google Sheets.</p>
             </div>
-        </section>
+        </div>
 
-        <!-- ====== FOOTER ====== -->
-        <footer class="footer">
-            <div class="footer-badge-row">
-                <span><i class="fas fa-leaf"></i> 100% original · no copyright</span>
-                <span><i class="fas fa-check-circle"></i> FlatFusion · by Semx</span>
-                <span><i class="fas fa-shield-alt"></i> 100% Safe</span>
+    </main>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="brand">Build <span style="color:var(--text-muted);font-weight:400;">· by Semx</span></div>
+            <div class="links">
+                <a href="https://www.tiktok.com/@semxpro?_r=1&_t=ZS-97XtjmAg1CK" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                <a href="https://youtube.com/@flatfusion?si=BVG4mQMlb33TvRT2" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                <a href="https://discord.gg/ZGHKKUx44w" target="_blank"><i class="fab fa-discord"></i> Discord</a>
             </div>
-            <div class="footer-dot-row">
-                <i class="fas fa-circle"></i>
-                <i class="fas fa-circle"></i>
-                <i class="fas fa-circle"></i>
-                premium minecraft
+            <div class="copy">&copy; 2026 Build — Premium Minecraft Downloads</div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    BOTTOM NAV
+    ============================================================ -->
+    <nav class="bottom-nav" id="bottomNav">
+        <button class="nav-item" data-category="minecraft-pe"><i class="fas fa-cube"></i><span>PE</span></button>
+        <button class="nav-item" data-category="resource-packs"><i class="fas fa-palette"></i><span>Pack</span></button>
+        <button class="nav-item active" data-category="all"><i class="fas fa-home"></i><span>Home</span></button>
+        <button class="nav-item" data-category="launchers"><i class="fas fa-rocket"></i><span>Launch</span></button>
+        <button class="nav-item" data-category="plugins"><i class="fas fa-puzzle-piece"></i><span>Plugin</span></button>
+    </nav>
+
+    <!-- ============================================================
+    SEARCH OVERLAY
+    ============================================================ -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box">
+            <div class="search-input-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search by title, version, category, or tag…" autofocus />
+                <button class="close-search" id="closeSearchBtn"><i class="fas fa-times"></i></button>
             </div>
-        </footer>
-
-    </div>
-
-    <!-- ====== COUNTDOWN POPUP ====== -->
-    <div class="countdown-overlay" id="countdownOverlay">
-        <div class="countdown-box">
-            <div class="icon"><i class="fas fa-cloud-download-alt"></i></div>
-            <h3 id="cdTitle">Preparing Download</h3>
-            <p id="cdSub">Your download will start automatically in...</p>
-            <div class="countdown-timer" id="cdTimer">10</div>
-            <div class="sub-text">Please wait while we prepare your file</div>
-            <button class="close-btn" id="cdClose">Cancel</button>
+            <div class="search-results" id="searchResults"></div>
         </div>
     </div>
 
-    <!-- ====== FLOATING SUPPORT ====== -->
-    <div class="floating-bar">
-        <a href="https://discord.com/channels/1433382145858207858/1520230104436051988" target="_blank" class="floating-btn support" data-btn="Support-Float">
-            <i class="fas fa-headset"></i>
-        </a>
+    <!-- ============================================================
+    ACCOUNT MODAL
+    ============================================================ -->
+    <div class="account-modal" id="accountModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeAccountBtn"><i class="fas fa-times"></i></button>
+            <div class="modal-icon"><i class="fas fa-user-circle"></i></div>
+            <h3>Account</h3>
+            <p>Manage your downloads and preferences.</p>
+            <div class="coming-badge"><i class="fas fa-clock"></i> Coming Soon</div>
+            <div class="feature-list">
+                <div><i class="fas fa-check-circle"></i> Download history</div>
+                <div><i class="fas fa-check-circle"></i> Favourite items</div>
+                <div><i class="fas fa-check-circle"></i> Update notifications</div>
+                <div><i class="fas fa-check-circle"></i> Personalised feed</div>
+            </div>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">We're building something great. Stay tuned!</p>
+        </div>
     </div>
 
+    <!-- ============================================================
+    JAVASCRIPT — Priority column (case-insensitive) + robust image fallback
+    ============================================================ -->
     <script>
         (function() {
             'use strict';
 
-            const WEBHOOK_URL = 'https://discord.com/api/webhooks/1520880497801298141/VPrgAt2QKJa516KZkqbD-rnvyc_cuGitb6vRQEVw5VyM5dSqxDynw-AryKIVElXkJXLL';
-            const ROLE_PING = '<@&1496755414023536680>';
-            const PAGE_NAME = 'Flat Fusion';
+            // ============================================================
+            // 1. CONFIGURATION
+            // ============================================================
 
-            // Particles
-            const container = document.getElementById('particlesContainer');
-            for (let i = 0; i < 22; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                const size = Math.random() * 4 + 2;
-                p.style.width = size + 'px'; p.style.height = size + 'px';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDuration = (Math.random() * 20 + 15) + 's';
-                p.style.animationDelay = (Math.random() * 20) + 's';
-                container.appendChild(p);
+            const CATEGORIES = [
+                { id: 'minecraft-pe', label: 'Minecraft PE', icon: 'fa-cube', desc: 'Minecraft Premium Free Download' },
+                { id: 'launchers', label: 'Launchers', icon: 'fa-rocket', desc: 'Minecraft All Launcher Download Free Link' },
+                { id: 'resource-packs', label: 'Resource Packs', icon: 'fa-palette', desc: 'Minecraft Bedrock & Java Resource Packs' },
+                { id: 'plugins', label: 'Plugins', icon: 'fa-puzzle-piece', desc: 'Minecraft Paper, Velocity, Spigot' }
+            ];
+
+            let DOWNLOADS = [];
+            const CSV_URL = 'https://docs.google.com/spreadsheets/d/1MCyljQbTV0durL06lYcW-NuBeH19PvIrSxUqyKEzVAk/gviz/tq?tqx=out:csv';
+
+            // ============================================================
+            // 2. CATEGORY MATCHING
+            // ============================================================
+
+            function matchCategory(catFromSheet) {
+                if (!catFromSheet) return null;
+                const raw = catFromSheet.trim().toLowerCase()
+                    .replace(/[-_]/g, ' ')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+
+                const pePatterns = ['minecraft pe', 'minecraftpe', 'mcpe', 'pe', 'pocket edition', 'bedrock', 'mobile',
+                    'mc bedrock', 'minecraft bedrock', 'minecraft pocket'
+                ];
+                if (pePatterns.some(p => raw.includes(p) || p.includes(raw))) return 'minecraft-pe';
+
+                const launcherPatterns = ['launchers', 'launcher', 'mc launcher', 'minecraft launcher'];
+                if (launcherPatterns.some(p => raw.includes(p) || p.includes(raw))) return 'launchers';
+
+                const rpPatterns = ['resource packs', 'resource-packs', 'resourcepack', 'texture', 'texture pack', 'packs',
+                    'resource pack', 'texture packs'
+                ];
+                if (rpPatterns.some(p => raw.includes(p) || p.includes(raw))) return 'resource-packs';
+
+                const pluginPatterns = ['plugins', 'plugin', 'mc plugin', 'minecraft plugin'];
+                if (pluginPatterns.some(p => raw.includes(p) || p.includes(raw))) return 'plugins';
+
+                return null;
             }
 
-            // Time
-            function getBangladeshTime() {
-                const now = new Date();
-                const options = { timeZone: 'Asia/Dhaka', hour12: true, hour: 'numeric', minute: '2-digit', day: '2-digit', month: '2-digit', year: '2-digit' };
-                const formatter = new Intl.DateTimeFormat('en-US', options);
-                const parts = formatter.formatToParts(now);
-                let h, m, ap, d, mo, y;
-                parts.forEach(p => { if(p.type==='hour') h=p.value; if(p.type==='minute') m=p.value; if(p.type==='dayPeriod') ap=p.value; if(p.type==='day') d=p.value; if(p.type==='month') mo=p.value; if(p.type==='year') y=p.value.slice(-2); });
-                return `${h}:${m} ${ap} · ${d}/${mo}/${y}`;
+            // ============================================================
+            // 3. CSV PARSER
+            // ============================================================
+
+            function parseCSV(csvText) {
+                const lines = [];
+                let currentLine = '';
+                let insideQuotes = false;
+                for (let i = 0; i < csvText.length; i++) {
+                    const ch = csvText[i];
+                    if (ch === '"') { insideQuotes = !insideQuotes; continue; }
+                    if (ch === '\n' && !insideQuotes) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                        continue;
+                    }
+                    currentLine += ch;
+                }
+                if (currentLine.trim()) lines.push(currentLine.trim());
+                if (lines.length === 0) return [];
+
+                const parsedRows = lines.map(line => {
+                    const fields = [];
+                    let current = '';
+                    let inQuotes = false;
+                    for (let i = 0; i < line.length; i++) {
+                        const ch = line[i];
+                        if (ch === '"') { inQuotes = !inQuotes; continue; }
+                        if (ch === ',' && !inQuotes) {
+                            fields.push(current.trim());
+                            current = '';
+                            continue;
+                        }
+                        current += ch;
+                    }
+                    fields.push(current.trim());
+                    return fields;
+                });
+
+                if (parsedRows.length < 2) return [];
+                const headers = parsedRows[0];
+                const result = [];
+                for (let r = 1; r < parsedRows.length; r++) {
+                    const rowData = parsedRows[r];
+                    const obj = {};
+                    for (let c = 0; c < headers.length; c++) {
+                        const key = headers[c].trim();
+                        const value = (rowData[c] || '').trim();
+                        obj[key] = value;
+                    }
+                    result.push(obj);
+                }
+                return result;
             }
 
-            function sendToDiscord(content) {
-                const payload = { content: content };
-                const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-                const sent = navigator.sendBeacon(WEBHOOK_URL, blob);
-                if (!sent) {
-                    fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true }).catch(()=>{});
+            // ============================================================
+            // 4. FETCH DATA (case-insensitive column mapping + priority)
+            // ============================================================
+
+            async function fetchDownloads() {
+                try {
+                    const response = await fetch(CSV_URL);
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    const csvText = await response.text();
+                    const rawData = parseCSV(csvText);
+
+                    if (rawData.length === 0) {
+                        console.warn('No data from CSV, using fallback hardcoded data.');
+                        DOWNLOADS = getFallbackData();
+                    } else {
+                        // We need to find the actual column names case-insensitively
+                        // We'll map each row using the headers we have
+                        // But we have the rawData already with the headers as keys (exact case)
+                        // So we can use the keys from the first row as they are.
+
+                        // However, to be safe, we'll create a mapping function that looks for keys ignoring case.
+                        // Since we have the object with exact keys, we can check for lowercased versions.
+
+                        const firstRow = rawData[0];
+                        const columnMap = {};
+                        Object.keys(firstRow).forEach(key => {
+                            const lowerKey = key.toLowerCase();
+                            columnMap[lowerKey] = key; // maps e.g., 'priority' -> 'Priority'
+                        });
+
+                        DOWNLOADS = rawData
+                            .map(row => {
+                                // Use columnMap to get the actual key names
+                                const getVal = (name) => {
+                                    const actualKey = columnMap[name];
+                                    return actualKey ? (row[actualKey] || '').trim() : '';
+                                };
+
+                                const category = getVal('category');
+                                const matchedCat = matchCategory(category);
+                                if (!matchedCat) return null;
+
+                                let features = [];
+                                const featuresRaw = getVal('features');
+                                if (featuresRaw) {
+                                    features = featuresRaw.split(',').map(f => f.trim()).filter(f => f);
+                                }
+
+                                // Badge: try 'bedge' then 'badge'
+                                let badgeText = getVal('bedge');
+                                if (!badgeText) badgeText = getVal('badge');
+
+                                let edition = null;
+                                const subBadge = getVal('sub_badge');
+                                if (subBadge) {
+                                    const sub = subBadge.toLowerCase();
+                                    if (sub === 'bedrock' || sub === 'java') edition = sub;
+                                }
+
+                                // --- PRIORITY: read as integer, default 999 ---
+                                let priority = 999;
+                                const priorityRaw = getVal('priority');
+                                if (priorityRaw) {
+                                    const parsed = parseInt(priorityRaw, 10);
+                                    if (!isNaN(parsed)) priority = parsed;
+                                }
+
+                                let imageUrl = getVal('image_url');
+                                // If still empty, try 'image'
+                                if (!imageUrl) imageUrl = getVal('image');
+
+                                return {
+                                    id: row.id || 'id-' + Math.random().toString(36).substr(2, 6),
+                                    title: getVal('title') || 'Untitled',
+                                    category: matchedCat,
+                                    version: getVal('version') || '',
+                                    badgeText: badgeText,
+                                    edition: edition,
+                                    description: getVal('description') || '',
+                                    icon: imageUrl,
+                                    image: imageUrl,
+                                    downloadUrl: getVal('download_url') || '',
+                                    features: features,
+                                    priority: priority
+                                };
+                            })
+                            .filter(item => item !== null);
+                    }
+
+                    // --- SORT BY PRIORITY (ascending) ---
+                    DOWNLOADS.sort((a, b) => (a.priority || 999) - (b.priority || 999));
+
+                    initApp();
+                } catch (error) {
+                    console.error('Error fetching CSV:', error);
+                    DOWNLOADS = getFallbackData();
+                    initApp();
                 }
             }
 
-            // Visitor
-            function getStoredCount() { return parseInt(localStorage.getItem('flatfusion_total_visits') || '0'); }
-            function incrementCount() { const c = getStoredCount()+1; localStorage.setItem('flatfusion_total_visits', c.toString()); return c; }
+            // ============================================================
+            // 5. FALLBACK DATA
+            // ============================================================
 
-            async function checkAndNotifyVisit() {
-                try {
-                    const res = await fetch('https://api.ipify.org?format=json');
-                    const data = await res.json();
-                    const ip = data.ip;
-                    if (!ip) return;
-                    const visited = JSON.parse(localStorage.getItem('flatfusion_visited_ips') || '[]');
-                    if (visited.includes(ip)) return;
-                    visited.push(ip); if(visited.length>500) visited.shift();
-                    localStorage.setItem('flatfusion_visited_ips', JSON.stringify(visited));
-                    const total = incrementCount();
-                    const bd = getBangladeshTime();
-                    sendToDiscord(`🚀 **New Visitor!**\n🌊 **${PAGE_NAME}**\n⏰ ${bd}\n👁️ Total: **${total}**\n\n${ROLE_PING}`);
-                } catch(e) {}
+            function getFallbackData() {
+                return [{
+                    id: 'minecraft-26-32',
+                    title: 'Minecraft PE',
+                    category: 'minecraft-pe',
+                    version: '26.32',
+                    badgeText: 'BEDROCK',
+                    edition: 'bedrock',
+                    description: 'Latest Minecraft PE version with new biomes, mobs, and performance improvements.',
+                    image: 'https://raw.githubusercontent.com/semxpro/Flat-Fusion-Website/main/file_00000000b9e081f5b35afc10ccbeef5c.png',
+                    icon: 'https://raw.githubusercontent.com/semxpro/Flat-Fusion-Website/main/file_00000000b9e081f5b35afc10ccbeef5c.png',
+                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Minecraft.1.26.32.apk',
+                    features: ['New Biomes', 'Performance Boost', 'Multiplayer'],
+                    priority: 1
+                }, {
+                    id: 'mojo-launcher',
+                    title: 'Mojo Launcher',
+                    category: 'launchers',
+                    version: '2.1.0',
+                    badgeText: 'SMOOTH FPS',
+                    edition: null,
+                    description: 'Boost FPS and enjoy smooth gameplay with this optimized launcher.',
+                    image: '',
+                    icon: 'https://res.cloudinary.com/p35rwudq/image/upload/20260628_192515_sxwegq.png',
+                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Mojo.Launcher.xapk',
+                    features: ['Smooth FPS', 'Low Latency', 'Stable'],
+                    priority: 2
+                }, {
+                    id: 'mj-launcher',
+                    title: 'MJ Launcher',
+                    category: 'launchers',
+                    version: '1.8.2',
+                    badgeText: null,
+                    edition: null,
+                    description: 'Lightweight and fast launcher, perfect for low-end devices.',
+                    image: '',
+                    icon: 'https://res.cloudinary.com/p35rwudq/image/upload/20260628_192621_hl8cbi.png',
+                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/MJ-Launcher.apk',
+                    features: ['Lightweight', 'Fast', 'Low-end Optimized'],
+                    priority: 3
+                }, {
+                    id: 'action-stuff',
+                    title: 'Action & Stuff',
+                    category: 'resource-packs',
+                    version: '1.11',
+                    badgeText: '3D MODELS',
+                    edition: 'bedrock',
+                    description: 'Vibrant textures and 3D models that bring your Bedrock world to life.',
+                    image: '',
+                    icon: 'https://res.cloudinary.com/p35rwudq/image/upload/20260628_192238_mflbn5.png',
+                    downloadUrl: 'https://github.com/semxpro/Flat-Fusion-Website/releases/download/V1.0/Actions.Stuff.1.11.Make.By.Semx.mcpack.zip',
+                    features: ['3D Models', 'Vibrant Textures', 'HD'],
+                    priority: 4
+                }];
             }
-            checkAndNotifyVisit();
 
-            // ========== COUNTDOWN LOGIC ==========
-            const overlay = document.getElementById('countdownOverlay');
-            const cdTitle = document.getElementById('cdTitle');
-            const cdSub = document.getElementById('cdSub');
-            const cdTimer = document.getElementById('cdTimer');
-            const cdClose = document.getElementById('cdClose');
-            let countdownInterval = null;
-            let downloadUrl = '';
-            let downloadName = '';
-            let isCountingDown = false;
+            // ============================================================
+            // 6. GET BADGE CLASS
+            // ============================================================
 
-            function startCountdown(url, name) {
-                if (isCountingDown) return;
-                isCountingDown = true;
-                downloadUrl = url;
-                downloadName = name;
-                
-                cdTitle.textContent = `Preparing ${name}`;
-                cdSub.textContent = 'Your download will start automatically in...';
-                cdTimer.textContent = '10';
-                overlay.classList.add('show');
-                
-                let count = 10;
-                countdownInterval = setInterval(() => {
-                    count--;
-                    cdTimer.textContent = count;
-                    if (count <= 0) {
-                        clearInterval(countdownInterval);
-                        countdownInterval = null;
-                        isCountingDown = false;
-                        overlay.classList.remove('show');
-                        if (downloadUrl) {
+            function getBadgeClass(text) {
+                if (!text) return '';
+                const t = text.toLowerCase().trim();
+                if (t.includes('bedrock')) return 'bedrock';
+                if (t.includes('java')) return 'java';
+                if (t.includes('smooth') || t.includes('fps')) return 'smooth';
+                if (t.includes('premium')) return 'premium';
+                if (t.includes('model')) return 'models';
+                if (t.includes('latest')) return 'latest';
+                if (t.includes('fps')) return 'fps';
+                return '';
+            }
+
+            // ============================================================
+            // 7. STATE
+            // ============================================================
+
+            let currentCategory = 'all';
+
+            // ============================================================
+            // 8. DOM REFS
+            // ============================================================
+
+            const navCategories = document.getElementById('navCategories');
+            const mobileNav = document.getElementById('mobileNav');
+            const downloadGrid = document.getElementById('downloadGrid');
+            const currentCategoryLabel = document.getElementById('currentCategoryLabel');
+            const currentCategoryDesc = document.getElementById('currentCategoryDesc');
+            const currentCategoryCount = document.getElementById('currentCategoryCount');
+            const totalItemsStat = document.getElementById('totalItemsStat');
+            const totalCategoriesStat = document.getElementById('totalCategoriesStat');
+            const logoHome = document.getElementById('logoHome');
+
+            const searchOverlay = document.getElementById('searchOverlay');
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const openSearchBtn = document.getElementById('openSearchBtn');
+            const closeSearchBtn = document.getElementById('closeSearchBtn');
+
+            const accountModal = document.getElementById('accountModal');
+            const openAccountBtn = document.getElementById('openAccountBtn');
+            const closeAccountBtn = document.getElementById('closeAccountBtn');
+
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileNavEl = document.getElementById('mobileNav');
+            const bottomNav = document.getElementById('bottomNav');
+
+            // ============================================================
+            // 9. HELPERS
+            // ============================================================
+
+            function getCategoryLabel(id) {
+                const found = CATEGORIES.find(c => c.id === id);
+                return found ? found.label : id;
+            }
+            function getCategoryIcon(id) {
+                const found = CATEGORIES.find(c => c.id === id);
+                return found ? found.icon : 'fa-folder';
+            }
+            function getCategoryDesc(id) {
+                const found = CATEGORIES.find(c => c.id === id);
+                return found ? found.desc : '';
+            }
+            function getItemsForCategory(categoryId) {
+                if (categoryId === 'all') return DOWNLOADS;
+                return DOWNLOADS.filter(item => item.category === categoryId);
+            }
+            function getCategoryCount(categoryId) {
+                return getItemsForCategory(categoryId).length;
+            }
+            function getTotalItems() {
+                return DOWNLOADS.length;
+            }
+
+            // ============================================================
+            // 10. RENDER
+            // ============================================================
+
+            function renderCategories() {
+                let html = '';
+                html += `<button class="cat-btn active" data-category="all">All</button>`;
+                CATEGORIES.forEach(cat => {
+                    const count = getCategoryCount(cat.id);
+                    html += `<button class="cat-btn" data-category="${cat.id}"><i class="fas ${cat.icon}"></i> ${cat.label}<span style="font-weight:400;opacity:0.5;font-size:0.65rem;margin-left:2px;">${count}</span></button>`;
+                });
+                navCategories.innerHTML = html;
+
+                let mobileHtml = '';
+                mobileHtml += `<button class="cat-btn active" data-category="all"><i class="fas fa-th"></i> All</button>`;
+                CATEGORIES.forEach(cat => {
+                    const count = getCategoryCount(cat.id);
+                    mobileHtml += `<button class="cat-btn" data-category="${cat.id}"><i class="fas ${cat.icon}"></i> ${cat.label}<span style="font-weight:400;opacity:0.5;font-size:0.7rem;margin-left:auto;">${count}</span></button>`;
+                });
+                mobileNav.innerHTML = mobileHtml;
+                setActiveCategory(currentCategory);
+            }
+
+            function setActiveCategory(categoryId) {
+                currentCategory = categoryId;
+                document.querySelectorAll('#navCategories .cat-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.category === categoryId);
+                });
+                document.querySelectorAll('#mobileNav .cat-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.category === categoryId);
+                });
+                document.querySelectorAll('#bottomNav .nav-item').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.category === categoryId);
+                });
+
+                if (categoryId === 'all') {
+                    currentCategoryLabel.textContent = 'All Downloads';
+                    currentCategoryDesc.textContent = 'Browse all available Minecraft downloads';
+                } else {
+                    const label = getCategoryLabel(categoryId);
+                    const desc = getCategoryDesc(categoryId);
+                    currentCategoryLabel.textContent = label;
+                    currentCategoryDesc.textContent = desc;
+                }
+                const count = getCategoryCount(categoryId);
+                currentCategoryCount.textContent = count + ' items';
+
+                totalItemsStat.textContent = getTotalItems();
+                totalCategoriesStat.textContent = CATEGORIES.length;
+                renderGrid(categoryId);
+            }
+
+            function renderGrid(categoryId) {
+                const items = getItemsForCategory(categoryId);
+                // Items are already sorted globally, but we need to preserve order
+                // We can re-sort by priority just to be safe
+                items.sort((a, b) => (a.priority || 999) - (b.priority || 999));
+
+                if (items.length === 0) {
+                    const label = categoryId === 'all' ? 'Downloads' : getCategoryLabel(categoryId);
+                    downloadGrid.innerHTML = `
+                                <div class="empty-state">
+                                    <div class="icon"><i class="fas fa-inbox"></i></div>
+                                    <h3>No ${label} Available</h3>
+                                    <p>Content for this category will be added soon. Check back later!</p>
+                                </div>
+                            `;
+                    return;
+                }
+
+                let html = '';
+                items.forEach((item, index) => {
+                    const catLabel = getCategoryLabel(item.category);
+                    const catIcon = getCategoryIcon(item.category);
+
+                    // ---- IMAGE: clean handling with onerror fallback ----
+                    let thumbContent;
+                    if (item.icon && item.icon.trim() !== '') {
+                        thumbContent = `
+                                    <img src="${item.icon}" alt="${item.title}" loading="lazy" 
+                                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                                    <div class="image-placeholder" style="display:none;"><i class="fas ${catIcon}"></i></div>
+                                `;
+                    } else {
+                        thumbContent = `<div class="image-placeholder" style="display:flex;"><i class="fas ${catIcon}"></i></div>`;
+                    }
+
+                    // Edition badge (from sub_badge)
+                    let editionBadge = '';
+                    if (item.edition) {
+                        editionBadge = `<span class="edition-badge">${item.edition.charAt(0).toUpperCase() + item.edition.slice(1)}</span>`;
+                    }
+
+                    // Badge from 'bedge' column
+                    let badgeHtml = '';
+                    if (item.badgeText) {
+                        const badgeClass = getBadgeClass(item.badgeText);
+                        badgeHtml = `<span class="badge-pill ${badgeClass}">${item.badgeText}</span>`;
+                    }
+
+                    // Features
+                    let featuresHtml = '';
+                    if (item.features && item.features.length) {
+                        featuresHtml = `<ul class="feature-list">${item.features.map(f => `<li><i class="fas fa-circle"></i> ${f}</li>`).join('')}</ul>`;
+                    }
+
+                    // Download button
+                    const hasDownloadUrl = item.downloadUrl && item.downloadUrl.trim() !== '' && item.downloadUrl !== '#';
+                    const downloadBtnHtml = hasDownloadUrl ?
+                        `<button class="btn-download" data-url="${item.downloadUrl}" data-name="${item.title}"><i class="fas fa-download"></i> Download</button>` :
+                        `<button class="btn-download" disabled><i class="fas fa-ban"></i> Unavailable</button>`;
+
+                    html += `
+                                <div class="download-card fade-in fade-in-d${Math.min(index % 4 + 1, 4)}">
+                                    <div class="card-top">
+                                        <div class="card-thumb">${thumbContent}</div>
+                                        <div class="card-info">
+                                            <div class="title-row">
+                                                <span class="title">${item.title}</span>
+                                                ${item.version ? `<span class="version">v${item.version}</span>` : ''}
+                                                ${badgeHtml}
+                                                ${editionBadge}
+                                            </div>
+                                            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;">
+                                                <span class="category-tag"><i class="fas ${catIcon}"></i> ${catLabel}</span>
+                                            </div>
+                                            ${item.description ? `<p class="desc">${item.description}</p>` : ''}
+                                        </div>
+                                    </div>
+                                    ${featuresHtml}
+                                    <div class="card-footer">
+                                        ${downloadBtnHtml}
+                                    </div>
+                                </div>
+                            `;
+                });
+                downloadGrid.innerHTML = html;
+
+                // ---- DOWNLOAD BUTTON EVENT ----
+                document.querySelectorAll('.btn-download:not([disabled])').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const url = this.dataset.url;
+                        const name = this.dataset.name || 'File';
+                        if (url && url.trim() !== '' && url !== '#') {
                             const a = document.createElement('a');
-                            a.href = downloadUrl;
+                            a.href = url;
                             a.target = '_blank';
                             a.rel = 'noopener noreferrer';
                             document.body.appendChild(a);
                             a.click();
                             document.body.removeChild(a);
+                        } else {
+                            alert(`Download URL for "${name}" is not available.`);
                         }
-                    }
-                }, 1000);
+                    });
+                });
             }
 
-            function cancelCountdown() {
-                if (countdownInterval) {
-                    clearInterval(countdownInterval);
-                    countdownInterval = null;
+            // ============================================================
+            // 11. SEARCH
+            // ============================================================
+
+            function performSearch(query) {
+                const q = query.trim().toLowerCase();
+                if (!q) {
+                    searchResults.innerHTML = `<div class="no-results"><i class="fas fa-search"></i><p>Type to search across all downloads…</p></div>`;
+                    return;
                 }
-                isCountingDown = false;
-                overlay.classList.remove('show');
+
+                const results = DOWNLOADS.filter(item => {
+                    const searchable = [
+                        item.title,
+                        item.version || '',
+                        item.description || '',
+                        ...(item.features || []),
+                        getCategoryLabel(item.category)
+                    ].join(' ').toLowerCase();
+                    return searchable.includes(q);
+                });
+
+                if (results.length === 0) {
+                    searchResults.innerHTML =
+                        `<div class="no-results"><i class="fas fa-search-minus"></i><p>No results found for "<strong>${q}</strong>"</p></div>`;
+                    return;
+                }
+
+                let html = '';
+                results.forEach(item => {
+                    const catLabel = getCategoryLabel(item.category);
+                    const catIcon = getCategoryIcon(item.category);
+                    const thumbContent = item.icon ?
+                        `<img src="${item.icon}" alt="${item.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas ${catIcon}\\' style=\\'font-size:1.2rem;color:var(--text-muted);\\'></i>';" />` :
+                        `<i class="fas ${catIcon}"></i>`;
+                    html += `
+                                <div class="result-item" data-category="${item.category}">
+                                    <div class="ri-icon">${thumbContent}</div>
+                                    <div class="ri-info">
+                                        <div class="ri-title">${item.title} ${item.version ? `<span style="font-weight:400;color:var(--text-muted);font-size:0.8rem;">v${item.version}</span>` : ''}</div>
+                                        <div class="ri-meta">
+                                            <span><i class="fas ${catIcon}"></i> ${catLabel}</span>
+                                            ${item.features ? `<span><i class="fas fa-list"></i> ${item.features.slice(0,2).join(', ')}</span>` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                });
+                searchResults.innerHTML = html;
+
+                document.querySelectorAll('.result-item').forEach(el => {
+                    el.addEventListener('click', function() {
+                        const category = this.dataset.category;
+                        if (category) {
+                            setActiveCategory(category);
+                            searchOverlay.classList.remove('open');
+                        }
+                    });
+                });
             }
 
-            cdClose.addEventListener('click', cancelCountdown);
-            overlay.addEventListener('click', function(e) {
-                if (e.target === this) cancelCountdown();
+            // ============================================================
+            // 12. EVENTS
+            // ============================================================
+
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.cat-btn, .nav-item');
+                if (btn && btn.dataset.category) {
+                    const cat = btn.dataset.category;
+                    setActiveCategory(cat);
+                    mobileNavEl.classList.remove('open');
+                    hamburgerBtn.querySelector('i').className = 'fas fa-bars';
+                    searchOverlay.classList.remove('open');
+                }
             });
 
-            // শুধুমাত্র Download বাটনে ক্লিক করলেই কাজ করবে (পুরো কার্ডে ক্লিক করলে কিছু হবে না)
-            document.querySelectorAll('.btn-download').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const url = this.getAttribute('data-url');
-                    const name = this.getAttribute('data-name') || 'File';
-                    
-                    const btnName = name;
-                    const clicked = JSON.parse(localStorage.getItem('flatfusion_clicked_buttons') || '[]');
-                    if (!clicked.includes(btnName)) {
-                        clicked.push(btnName);
-                        localStorage.setItem('flatfusion_clicked_buttons', JSON.stringify(clicked));
-                    }
-                    const total = getStoredCount();
-                    const bd = getBangladeshTime();
-                    const clickedStr = clicked.join(', ');
-                    sendToDiscord(`🖱️ **Download Clicked**\n🌊 **${PAGE_NAME}**\n⏰ ${bd}\n👁️ Total: **${total}**\n🔘 Clicked: ${clickedStr}\n\n${ROLE_PING}`);
-                    
-                    startCountdown(url, name);
-                });
+            logoHome.addEventListener('click', function(e) {
+                e.preventDefault();
+                setActiveCategory('all');
+                mobileNavEl.classList.remove('open');
+                hamburgerBtn.querySelector('i').className = 'fas fa-bars';
+                searchOverlay.classList.remove('open');
             });
 
-            // শুধুমাত্র কমিউনিটি (TikTok, YouTube, Discord) লিংকের জন্য ট্র্যাকিং রাখা হয়েছে
-            document.querySelectorAll('[data-btn]:not(.btn-download)').forEach(el => {
-                el.addEventListener('click', function(e) {
-                    // গার্ড কন্ডিশন: বাটনের ক্লিক যেন এখানে ডুপ্লিকেট না হয়
-                    if (e.target.closest('.btn-download')) return;
-
-                    const name = this.getAttribute('data-btn') || this.innerText.trim();
-                    const clicked = JSON.parse(localStorage.getItem('flatfusion_clicked_buttons') || '[]');
-                    if (!clicked.includes(name)) {
-                        clicked.push(name);
-                        localStorage.setItem('flatfusion_clicked_buttons', JSON.stringify(clicked));
-                    }
-                    const total = getStoredCount();
-                    const bd = getBangladeshTime();
-                    const clickedStr = clicked.join(', ');
-                    sendToDiscord(`🖱️ **Click Detected**\n🌊 **${PAGE_NAME}**\n⏰ ${bd}\n👁️ Total: **${total}**\n🔘 Clicked: ${clickedStr}\n\n${ROLE_PING}`);
-                });
+            hamburgerBtn.addEventListener('click', function() {
+                const isOpen = mobileNavEl.classList.toggle('open');
+                this.querySelector('i').className = isOpen ? 'fas fa-times' : 'fas fa-bars';
             });
+
+            openSearchBtn.addEventListener('click', function() {
+                searchOverlay.classList.add('open');
+                searchInput.value = '';
+                searchResults.innerHTML =
+                    `<div class="no-results"><i class="fas fa-search"></i><p>Type to search across all downloads…</p></div>`;
+                setTimeout(() => searchInput.focus(), 100);
+            });
+
+            closeSearchBtn.addEventListener('click', function() { searchOverlay.classList.remove('open'); });
+            searchOverlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
+            searchInput.addEventListener('input', function() { performSearch(this.value); });
+
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault();
+                    openSearchBtn.click(); }
+                if (e.key === 'Escape') {
+                    searchOverlay.classList.remove('open');
+                    accountModal.classList.remove('open');
+                }
+            });
+
+            openAccountBtn.addEventListener('click', function() { accountModal.classList.add('open'); });
+            closeAccountBtn.addEventListener('click', function() { accountModal.classList.remove('open'); });
+            accountModal.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
+
+            // ============================================================
+            // 13. INIT
+            // ============================================================
+
+            function initApp() {
+                renderCategories();
+                setActiveCategory('all');
+                totalItemsStat.textContent = getTotalItems();
+                totalCategoriesStat.textContent = CATEGORIES.length;
+            }
+
+            fetchDownloads();
+
+            window.__build = {
+                categories: CATEGORIES,
+                get downloads() { return DOWNLOADS; },
+                getItemsForCategory,
+                setActiveCategory,
+                currentCategory: () => currentCategory,
+            };
 
         })();
     </script>
+
 </body>
 </html>
