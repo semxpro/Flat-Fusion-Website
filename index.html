@@ -243,7 +243,7 @@
         .download-card .card-info .title-row {
             display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:2px;
         }
-        .download-card .card-info .title { 
+        .download-card .card-info .title {
             font-size:1.05rem; font-weight:700; color:var(--text-primary); line-height:1.3;
             transition:all var(--duration);
         }
@@ -360,6 +360,7 @@
         .version-badge-display.models { background:var(--orange); color:#0A0A0F; }
         .version-badge-display.latest { background:var(--cyan); color:#0A0A0F; }
 
+        /* ---- Download Button ---- */
         .btn-download {
             display:inline-flex; align-items:center; gap:6px;
             padding:6px 18px; border-radius:var(--radius-full);
@@ -380,6 +381,49 @@
             background:var(--bg-secondary);
             color:var(--text-muted);
             pointer-events:none;
+        }
+
+        /* ===== DOWNLOAD COUNT BADGE — Bottom‑right above download button ===== */
+        .download-count-badge {
+            display:inline-flex;
+            align-items:center;
+            gap:5px;
+            background:rgba(10,10,15,0.85);
+            backdrop-filter:blur(8px);
+            -webkit-backdrop-filter:blur(8px);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:var(--radius-full);
+            padding:3px 10px;
+            font-size:0.7rem;
+            font-weight:600;
+            color:var(--text-secondary);
+            transition:all var(--duration) var(--ease);
+            box-shadow:0 2px 12px rgba(0,0,0,0.4);
+            white-space:nowrap;
+            line-height:1.4;
+        }
+        .download-count-badge i {
+            font-size:0.65rem;
+            color:var(--teal);
+        }
+        .download-count-badge .count {
+            color:var(--text-primary);
+            font-weight:700;
+            min-width:12px;
+            display:inline-block;
+            text-align:center;
+        }
+        .download-card:hover .download-count-badge {
+            border-color:rgba(139,92,246,0.25);
+            background:rgba(20,20,30,0.9);
+        }
+
+        /* right-aligned group for badge + button */
+        .footer-right {
+            display:flex;
+            align-items:center;
+            gap:10px;
+            flex-shrink:0;
         }
 
         /* ===== EMPTY STATE ===== */
@@ -576,6 +620,8 @@
             .version-select { font-size:0.7rem; padding:4px 24px 4px 10px; min-width:70px; }
             .version-badge-display { font-size:0.5rem; padding:2px 8px; }
             .btn-download { font-size:0.7rem; padding:6px 14px; }
+            .download-count-badge { font-size:0.6rem; padding:2px 8px; }
+            .download-count-badge i { font-size:0.55rem; }
         }
         @media (max-width: 400px) {
             .header-actions .header-search-btn { width:34px; height:34px; font-size:0.85rem; }
@@ -584,6 +630,7 @@
             .download-card .card-footer { flex-direction:column; align-items:stretch; gap:8px; }
             .version-select-wrapper { min-width:100%; }
             .btn-download { width:100%; justify-content:center; }
+            .footer-right { width:100%; justify-content:flex-end; }
         }
 
         .fade-in { animation:fadeUp 0.6s var(--ease) both; }
@@ -711,11 +758,103 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — FIXED: app_id/group_id priority grouping + full dynamic update
+    JAVASCRIPT — FULL WEBSITE WITH REPOSITIONED DOWNLOAD BADGE
     ============================================================ -->
     <script>
         (function() {
             'use strict';
+
+            // ============================================================
+            // 0. DOWNLOAD COUNTER SYSTEM (LocalStorage based)
+            // ============================================================
+
+            /**
+             * Strips color tags from a title for clean key generation.
+             * Example: "<yellow>Minecraft beta" → "Minecraft beta"
+             */
+            function stripColorTags(text) {
+                if (!text) return text;
+                return text.replace(/<[^>]+>/g, '');
+            }
+
+            /**
+             * Generate a unique storage key for a product + version.
+             * @param {string} cleanTitle - The product title without color tags.
+             * @param {string} version - The version string.
+             * @returns {string} e.g. "download_count_Minecraft beta_v26.60"
+             */
+            function getStorageKey(cleanTitle, version) {
+                const clean = cleanTitle ? cleanTitle.trim() : 'untitled';
+                const ver = version ? version.trim() : 'unknown';
+                return `download_count_${clean}_${ver}`;
+            }
+
+            /**
+             * Gets the download count for a specific product version from localStorage.
+             * @param {string} cleanTitle - The product title without color tags.
+             * @param {string} version - The version string.
+             * @returns {number} The download count (defaults to 0).
+             */
+            function getDownloadCount(cleanTitle, version) {
+                if (!cleanTitle) return 0;
+                try {
+                    const key = getStorageKey(cleanTitle, version);
+                    const val = localStorage.getItem(key);
+                    return val ? parseInt(val, 10) || 0 : 0;
+                } catch (e) {
+                    return 0;
+                }
+            }
+
+            /**
+             * Increments the download count for a specific product version.
+             * @param {string} cleanTitle - The product title without color tags.
+             * @param {string} version - The version string.
+             * @returns {number} The new download count.
+             */
+            function incrementDownloadCount(cleanTitle, version) {
+                if (!cleanTitle) return 0;
+                try {
+                    const key = getStorageKey(cleanTitle, version);
+                    const current = parseInt(localStorage.getItem(key) || '0', 10) || 0;
+                    const newCount = current + 1;
+                    localStorage.setItem(key, String(newCount));
+                    return newCount;
+                } catch (e) {
+                    return 1;
+                }
+            }
+
+            /**
+             * Renders the download count badge HTML (compact, bottom‑right position).
+             * @param {string} cleanTitle - The product title without color tags.
+             * @param {string} version - The version string.
+             * @param {string} productId - The product ID for data attributes.
+             * @returns {string} HTML string for the badge.
+             */
+            function renderDownloadBadge(cleanTitle, version, productId) {
+                const count = getDownloadCount(cleanTitle, version);
+                return `
+                            <span class="download-count-badge" data-download-badge="${productId}" data-clean-title="${cleanTitle}" data-version="${version}">
+                                <i class="fas fa-download"></i>
+                                <span class="count">${count}</span>
+                            </span>
+                        `;
+            }
+
+            /**
+             * Updates the download count badge UI for a specific product.
+             * @param {string} productId - The product ID.
+             * @param {string} cleanTitle - The clean title.
+             * @param {string} version - The version string.
+             */
+            function updateDownloadBadgeUI(productId, cleanTitle, version) {
+                const badgeEl = document.querySelector(`[data-download-badge="${productId}"]`);
+                if (!badgeEl) return;
+                const count = getDownloadCount(cleanTitle, version);
+                const countSpan = badgeEl.querySelector('.count');
+                if (countSpan) countSpan.textContent = count;
+            }
 
             // ============================================================
             // 1. CONFIGURATION
@@ -762,7 +901,7 @@
             }
 
             // ============================================================
-            // 3. ROBUST CSV PARSER (handles multiline quoted fields)
+            // 3. ROBUST CSV PARSER
             // ============================================================
 
             function parseCSV(csvText) {
@@ -772,7 +911,6 @@
                 let insideQuotes = false;
                 let i = 0;
 
-                // Helper to trim field whitespace but keep content inside quotes
                 const trimField = (field) => field.trim();
 
                 while (i < csvText.length) {
@@ -781,13 +919,11 @@
 
                     if (insideQuotes) {
                         if (ch === '"') {
-                            // Check for double quote (escaped)
                             if (next === '"') {
                                 currentField += '"';
                                 i += 2;
                                 continue;
                             } else {
-                                // Closing quote
                                 insideQuotes = false;
                                 i++;
                                 continue;
@@ -799,18 +935,15 @@
                         }
                     } else {
                         if (ch === '"') {
-                            // Start of quoted field
                             insideQuotes = true;
                             i++;
                             continue;
                         } else if (ch === ',') {
-                            // End of field
                             currentRow.push(trimField(currentField));
                             currentField = '';
                             i++;
                             continue;
                         } else if (ch === '\n') {
-                            // End of row
                             if (currentField.trim() !== '' || currentRow.length > 0) {
                                 currentRow.push(trimField(currentField));
                                 if (currentRow.some(f => f !== '')) {
@@ -829,7 +962,6 @@
                     }
                 }
 
-                // Handle last field / row
                 if (currentField.trim() !== '' || currentRow.length > 0) {
                     currentRow.push(trimField(currentField));
                     if (currentRow.some(f => f !== '')) {
@@ -871,22 +1003,26 @@
             }
 
             // ============================================================
-            // 5. GENERATE GROUP KEY — PRIORITIZE app_id / group_id
+            // 5. GENERATE GROUP KEY — strips color tags before processing
             // ============================================================
 
             function generateGroupKey(row, getVal) {
-                // 1. Use app_id or group_id if present
+                // Priority: app_id or group_id
                 let key = getVal(row, 'app_id') || getVal(row, 'group_id');
                 if (key) return key.trim();
 
-                // 2. Fallback: category + normalized base title (strip version and suffixes)
                 const cat = getVal(row, 'category') || '';
-                const title = getVal(row, 'title') || '';
+                let title = getVal(row, 'title') || '';
 
-                // Remove version numbers, "Beta", "Release", "v", etc.
+                // Strip color tags before grouping
+                title = stripColorTags(title);
+
+                // Remove parentheses content, version numbers, and suffix words
                 let base = title
-                    .replace(/\s*[vV]?[\d.]+(\s*(Beta|Release|RC|ALPHA|BETA|RELEASE|SNAPSHOT|PREVIEW|TEST|STABLE)\s*)?/gi, '')
                     .replace(/\s*\([^)]*\)\s*/g, ' ')
+                    .replace(/\b(v|V)?\d+\.\d+(\.\d+)?\b/g, '')
+                    .replace(/\b(Beta|Release|RC|ALPHA|BETA|RELEASE|SNAPSHOT|PREVIEW|TEST|STABLE)\b/gi, '')
+                    .replace(/\s+/g, ' ')
                     .trim();
 
                 if (!base) base = title;
@@ -972,7 +1108,7 @@
                             return {
                                 id: row.id || 'id-' + Math.random().toString(36).substr(2, 6),
                                 groupKey: groupKey,
-                                title: title,
+                                title: title, // raw title with color tags preserved for display
                                 category: matchedCat,
                                 version: getVal(row, 'version') || '',
                                 badgeText: badgeText,
@@ -1019,13 +1155,17 @@
                             edition: item.edition || null,
                             description: item.description || '',
                             features: item.features || [],
-                            title: item.title || ''
+                            title: item.title || '' // raw title with color tags
                         }));
+
+                        // Compute clean title for download counter key
+                        const cleanTitle = stripColorTags(primary.title || '').trim();
 
                         PRODUCTS.push({
                             id: primary.id,
                             groupKey: groupKey,
                             title: primary.title || '',
+                            cleanTitle: cleanTitle,
                             category: primary.category,
                             description: primary.description || '',
                             features: primary.features || [],
@@ -1057,7 +1197,7 @@
             }
 
             // ============================================================
-            // 7. FALLBACK DATA (with app_id for grouping)
+            // 7. FALLBACK DATA
             // ============================================================
 
             function getFallbackProducts() {
@@ -1141,10 +1281,12 @@
                         features: item.features || [],
                         title: item.title || ''
                     }));
+                    const cleanTitle = stripColorTags(primary.title || '').trim();
                     products.push({
                         id: primary.id,
                         groupKey: groupKey,
                         title: primary.title || '',
+                        cleanTitle: cleanTitle,
                         category: primary.category,
                         description: primary.description || '',
                         features: primary.features || [],
@@ -1277,8 +1419,56 @@
             }
 
             // ============================================================
-            // 12. RENDER GRID — using event delegation for dropdown & buttons
+            // 12. RENDER GRID — with repositioned download badge (bottom‑right)
             // ============================================================
+
+            /**
+             * Parses a title string containing <color> tags and converts them to HTML spans.
+             * Example: "<red>Minecraft <blue>PE" → '<span style="color:red;">Minecraft </span><span style="color:blue;">PE</span>'
+             */
+            function parseColorTitle(text) {
+                if (!text) return text;
+                if (!/<[^>]+>/.test(text)) return text;
+
+                let result = '';
+                let i = 0;
+                let currentColor = null;
+                let buffer = '';
+
+                while (i < text.length) {
+                    const ch = text[i];
+
+                    if (ch === '<') {
+                        const closeIndex = text.indexOf('>', i + 1);
+                        if (closeIndex !== -1) {
+                            if (buffer) {
+                                if (currentColor) {
+                                    result += `<span style="color: ${currentColor};">${buffer}</span>`;
+                                } else {
+                                    result += buffer;
+                                }
+                                buffer = '';
+                            }
+                            currentColor = text.substring(i + 1, closeIndex).trim();
+                            i = closeIndex + 1;
+                            continue;
+                        }
+                    }
+
+                    buffer += ch;
+                    i++;
+                }
+
+                if (buffer) {
+                    if (currentColor) {
+                        result += `<span style="color: ${currentColor};">${buffer}</span>`;
+                    } else {
+                        result += buffer;
+                    }
+                }
+
+                return result;
+            }
 
             function renderGrid(categoryId) {
                 let products = getProductsForCategory(categoryId);
@@ -1287,7 +1477,7 @@
                     const q = currentSearchQuery.trim().toLowerCase();
                     products = products.filter(p => {
                         const searchable = [
-                            p.title,
+                            stripColorTags(p.title),
                             p.description || '',
                             ...(p.features || []),
                             getCategoryLabel(p.category),
@@ -1316,12 +1506,14 @@
                     const hasMultipleVersions = product.versions.length > 1;
                     const primaryVer = product.primaryVersion || product.versions[0];
 
+                    // ---- Parse title with color tags ----
+                    const parsedTitle = parseColorTitle(product.title);
+
                     // ---- IMAGE ----
                     let thumbContent;
                     if (product.icon && product.icon.trim() !== '') {
                         thumbContent = `
-                                    <img src="${product.icon}" alt="${product.title}" loading="lazy" 
-                                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                                    <img src="${product.icon}" alt="${product.title}" loading="lazy" />
                                     <div class="image-placeholder" style="display:none;"><i class="fas ${catIcon}"></i></div>
                                 `;
                     } else {
@@ -1336,7 +1528,14 @@
                         editionBadge = `<span class="edition-badge" data-edition-display="${product.id}" style="display:none;"></span>`;
                     }
 
-                    // ---- Dropdown options with ALL data as data-* attributes ----
+                    // ---- Clean title & version for download count ----
+                    const cleanTitle = product.cleanTitle || stripColorTags(product.title).trim();
+                    const currentVersion = primaryVer.version || '';
+
+                    // ---- Top-Right Badge removed — now placed in footer ----
+                    // The badge will be rendered inside the .footer-right section.
+
+                    // ---- Dropdown options — store raw title ----
                     let versionOptions = '';
                     product.versions.forEach((v, idx) => {
                         const vClass = getBadgeClass(v.badgeText) || '';
@@ -1350,7 +1549,7 @@
                                     data-edition="${v.edition || ''}"
                                     data-title="${v.title || ''}"
                                     data-version="${v.version || ''}">
-                                    v${v.version || 'unknown'}
+                                    ${v.version || 'unknown'}
                                 </option>`;
                     });
 
@@ -1361,11 +1560,12 @@
                         featuresHtml = `<ul class="feature-list">${primaryFeatures.map(f => `<li><i class="fas fa-circle"></i> ${f}</li>`).join('')}</ul>`;
                     }
 
-                    // ---- Footer ----
-                    let footerHtml = '';
+                    // ---- Footer with badge in .footer-right group ----
+                    const badgeHtml = renderDownloadBadge(cleanTitle, currentVersion, product.id);
                     const primaryBadgeText = primaryVer.badgeText || '';
                     const badgeClass = getBadgeClass(primaryBadgeText);
 
+                    let footerHtml = '';
                     if (hasMultipleVersions) {
                         footerHtml = `
                                     <div class="version-select-wrapper">
@@ -1377,28 +1577,44 @@
                                             ${primaryBadgeText || 'STABLE'}
                                         </span>
                                     </div>
-                                    <button class="btn-download" data-product-id="${product.id}" data-url="${primaryVer.downloadUrl || ''}" ${!primaryVer.downloadUrl ? 'disabled' : ''}>
-                                        <i class="fas fa-download"></i> ${primaryVer.downloadUrl ? 'Download' : 'Unavailable'}
-                                    </button>
+                                    <div class="footer-right">
+                                        ${badgeHtml}
+                                        <button class="btn-download" data-product-id="${product.id}" data-url="${primaryVer.downloadUrl || ''}" ${!primaryVer.downloadUrl ? 'disabled' : ''}>
+                                            <i class="fas fa-download"></i> ${primaryVer.downloadUrl ? 'Download' : 'Unavailable'}
+                                        </button>
+                                    </div>
                                 `;
                     } else {
                         footerHtml = `
                                     <div style="flex:1;min-width:10px;"></div>
-                                    <button class="btn-download" data-product-id="${product.id}" data-url="${primaryVer.downloadUrl || ''}" ${!primaryVer.downloadUrl ? 'disabled' : ''}>
-                                        <i class="fas fa-download"></i> ${primaryVer.downloadUrl ? 'Download' : 'Unavailable'}
-                                    </button>
+                                    <div class="footer-right">
+                                        ${badgeHtml}
+                                        <button class="btn-download" data-product-id="${product.id}" data-url="${primaryVer.downloadUrl || ''}" ${!primaryVer.downloadUrl ? 'disabled' : ''}>
+                                            <i class="fas fa-download"></i> ${primaryVer.downloadUrl ? 'Download' : 'Unavailable'}
+                                        </button>
+                                    </div>
                                 `;
                     }
 
+                    // ---- Conditional version display with "v" prefix ----
+                    const displayVersion = (ver) => {
+                        if (!ver || ver.trim() === '') return '';
+                        if (ver.trim().toLowerCase().startsWith('v')) return ver.trim();
+                        return 'v' + ver.trim();
+                    };
+                    const primaryVersionDisplay = displayVersion(primaryVer.version || '');
+
                     // ---- Card ----
                     html += `
-                                <div class="download-card fade-in fade-in-d${Math.min(index % 4 + 1, 4)}" data-product-id="${product.id}" data-group-key="${product.groupKey}">
+                                <div class="download-card fade-in fade-in-d${Math.min(index % 4 + 1, 4)}" data-product-id="${product.id}" data-group-key="${product.groupKey}" data-clean-title="${cleanTitle}">
                                     <div class="card-top">
-                                        <div class="card-thumb">${thumbContent}</div>
+                                        <div class="card-thumb">
+                                            ${thumbContent}
+                                        </div>
                                         <div class="card-info">
                                             <div class="title-row">
-                                                <span class="title" data-title-display="${product.id}">${product.title}</span>
-                                                ${hasMultipleVersions ? `<span class="version" data-version-display="${product.id}">v${primaryVer.version || ''}</span>` : `<span class="version">v${primaryVer.version || ''}</span>`}
+                                                <span class="title" data-title-display="${product.id}">${parsedTitle}</span>
+                                                ${hasMultipleVersions ? `<span class="version" data-version-display="${product.id}">${primaryVersionDisplay}</span>` : (primaryVersionDisplay ? `<span class="version">${primaryVersionDisplay}</span>` : '')}
                                                 ${!hasMultipleVersions && primaryBadgeText ? `<span class="badge-pill ${badgeClass}">${primaryBadgeText}</span>` : ''}
                                                 ${editionBadge}
                                             </div>
@@ -1419,32 +1635,26 @@
                 });
                 downloadGrid.innerHTML = html;
 
+                // Fix image fallback using event listener
+                document.querySelectorAll('.card-thumb img').forEach(img => {
+                    img.addEventListener('error', function() {
+                        this.style.display = 'none';
+                        const placeholder = this.nextElementSibling;
+                        if (placeholder && placeholder.classList.contains('image-placeholder')) {
+                            placeholder.style.display = 'flex';
+                        }
+                    });
+                });
+
                 // ============================================================
                 // EVENT DELEGATION — single listener on grid for dropdown & buttons
                 // ============================================================
-                // Remove any previous listeners by using a new one.
-                // We'll attach fresh listeners after rendering.
-                // We'll use 'change' event for selects, and 'click' for buttons.
-                // We'll attach them directly to the grid container.
-                // But we need to handle multiple selects; we'll use event delegation.
 
-                // Remove old listeners by re-attaching each time? Instead, we'll use a single event listener
-                // on the grid container that checks the target.
-                // But we need to avoid duplicate listeners. We'll remove previous listeners if any.
-                // Since we don't have a reference, we'll use a flag to indicate if we've attached.
-                // But simpler: just attach the listeners each time, but first remove any existing ones
-                // using a specific event handler function. We'll store the handler on the grid element.
-
-                // We'll use a single delegated listener for change on .version-select and click on .btn-download.
-                // We'll remove any existing listener by overriding.
-
-                // Remove old listener if exists
                 if (downloadGrid._listener) {
                     downloadGrid.removeEventListener('change', downloadGrid._listener);
                     downloadGrid.removeEventListener('click', downloadGrid._listener);
                 }
 
-                // Create a new listener function
                 const gridListener = function(e) {
                     const target = e.target;
 
@@ -1459,24 +1669,42 @@
                         const url = option.dataset.url || '';
                         const badge = option.dataset.badge || '';
                         const badgeClass = option.dataset.badgeClass || '';
-                        const versionText = option.dataset.version || option.textContent.trim().replace(/^v/, '');
+                        const rawVersion = option.dataset.version || option.textContent.trim();
                         const description = option.dataset.description || '';
                         const featuresRaw = option.dataset.features || '';
                         const edition = option.dataset.edition || '';
-                        const title = option.dataset.title || '';
+                        const rawTitle = option.dataset.title || '';
 
                         const features = featuresRaw ? featuresRaw.split(',').map(f => f.trim()).filter(f => f) : [];
 
                         const card = document.querySelector(`.download-card[data-product-id="${productId}"]`);
                         if (!card) return;
 
-                        // 1. Update TITLE
+                        // Get clean title from card data attribute
+                        const cleanTitle = card.dataset.cleanTitle || '';
+
+                        // ---- Parse title with color tags ----
+                        const parsedTitle = parseColorTitle(rawTitle);
+
+                        // ---- Conditional version display ----
+                        const displayVersion = (ver) => {
+                            if (!ver || ver.trim() === '') return '';
+                            if (ver.trim().toLowerCase().startsWith('v')) return ver.trim();
+                            return 'v' + ver.trim();
+                        };
+                        const versionDisplayStr = displayVersion(rawVersion);
+
+                        // 1. Update TITLE (using innerHTML for color spans)
                         const titleDisplay = card.querySelector(`[data-title-display="${productId}"]`);
-                        if (titleDisplay) titleDisplay.textContent = title || 'Untitled';
+                        if (titleDisplay) {
+                            titleDisplay.innerHTML = parsedTitle || 'Untitled';
+                        }
 
                         // 2. Update VERSION
                         const versionDisplay = card.querySelector(`[data-version-display="${productId}"]`);
-                        if (versionDisplay) versionDisplay.textContent = versionText ? `v${versionText}` : '';
+                        if (versionDisplay) {
+                            versionDisplay.textContent = versionDisplayStr;
+                        }
 
                         // 3. Update BADGE in footer
                         const badgeDisplay = card.querySelector(`[data-badge-display="${productId}"]`);
@@ -1525,6 +1753,11 @@
                             }
                         }
 
+                        // 8. Update DOWNLOAD BADGE for the new version
+                        if (cleanTitle) {
+                            updateDownloadBadgeUI(productId, cleanTitle, rawVersion);
+                        }
+
                         e.preventDefault();
                     }
 
@@ -1532,8 +1765,40 @@
                     if (target.matches('.btn-download:not([disabled])')) {
                         const btn = target;
                         const url = btn.dataset.url;
-                        const name = btn.closest('.download-card')?.querySelector('.title')?.textContent || 'File';
+                        const productId = btn.dataset.productId;
+                        const card = btn.closest('.download-card');
+                        if (!card) return;
+                        const cleanTitle = card.dataset.cleanTitle || '';
+
+                        // Get the currently selected version from the dropdown (or primary version)
+                        const select = card.querySelector('.version-select');
+                        let version = '';
+                        if (select) {
+                            const selectedIndex = parseInt(select.value, 10);
+                            const option = select.options[selectedIndex];
+                            version = option.dataset.version || option.textContent.trim();
+                        } else {
+                            // No dropdown -> single version, get from data-version-display or fallback
+                            const verDisplay = card.querySelector('[data-version-display]');
+                            if (verDisplay) {
+                                const txt = verDisplay.textContent.trim().replace(/^v/, '');
+                                version = txt;
+                            } else {
+                                const product = PRODUCTS.find(p => p.id === productId);
+                                if (product) version = product.primaryVersion?.version || '';
+                            }
+                        }
+
+                        const name = card.querySelector('.title')?.textContent || 'File';
+
                         if (url && url.trim() !== '' && url !== '#') {
+                            // --- Increment download count for the specific version ---
+                            if (cleanTitle && version) {
+                                const newCount = incrementDownloadCount(cleanTitle, version);
+                                updateDownloadBadgeUI(productId, cleanTitle, version);
+                            }
+
+                            // --- Trigger download ---
                             const a = document.createElement('a');
                             a.href = url;
                             a.target = '_blank';
@@ -1548,20 +1813,81 @@
                     }
                 };
 
-                // Store listener reference on the grid element
                 downloadGrid._listener = gridListener;
-
-                // Attach listeners for change and click
                 downloadGrid.addEventListener('change', gridListener);
                 downloadGrid.addEventListener('click', gridListener);
             }
 
             // ============================================================
-            // 13. SEARCH
+            // 13. SEARCH — supports color tags in search results
             // ============================================================
 
             function performSearch(query) {
-                currentSearchQuery = query;
+                const q = query.trim().toLowerCase();
+                currentSearchQuery = q;
+
+                if (!q) {
+                    searchResults.innerHTML =
+                        `<div class="no-results"><i class="fas fa-search"></i><p>Type to search across all downloads…</p></div>`;
+                    renderGrid(currentCategory);
+                    return;
+                }
+
+                const results = PRODUCTS.filter(p => {
+                    const searchable = [
+                        stripColorTags(p.title),
+                        p.description || '',
+                        ...(p.features || []),
+                        getCategoryLabel(p.category),
+                        ...(p.versions.map(v => v.version || ''))
+                    ].join(' ').toLowerCase();
+                    return searchable.includes(q);
+                });
+
+                if (results.length === 0) {
+                    searchResults.innerHTML =
+                        `<div class="no-results"><i class="fas fa-search-minus"></i><p>No results found for "<strong>${q}</strong>"</p></div>`;
+                } else {
+                    let html = '';
+                    results.forEach(p => {
+                        const catLabel = getCategoryLabel(p.category);
+                        const catIcon = getCategoryIcon(p.category);
+                        const parsedTitle = parseColorTitle(p.title);
+                        const thumbContent = p.icon ?
+                            `<img src="${p.icon}" alt="${p.title}" loading="lazy" />` :
+                            `<i class="fas ${catIcon}"></i>`;
+                        const cleanTitle = p.cleanTitle || stripColorTags(p.title).trim();
+                        const primaryVer = p.primaryVersion || p.versions[0];
+                        const count = getDownloadCount(cleanTitle, primaryVer?.version || '');
+                        html += `
+                                    <div class="result-item" data-category="${p.category}">
+                                        <div class="ri-icon">${thumbContent}</div>
+                                        <div class="ri-info">
+                                            <div class="ri-title">${parsedTitle}</div>
+                                            <div class="ri-meta">
+                                                <span><i class="fas ${catIcon}"></i> ${catLabel}</span>
+                                                <span><i class="fas fa-tag"></i> ${p.versions.length} version${p.versions.length > 1 ? 's' : ''}</span>
+                                                ${p.primaryVersion?.version ? `<span><i class="fas fa-code"></i> ${p.primaryVersion.version}</span>` : ''}
+                                                <span><i class="fas fa-download"></i> ${count}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                    });
+                    searchResults.innerHTML = html;
+                    document.querySelectorAll('.result-item').forEach(el => {
+                        el.addEventListener('click', function() {
+                            const cat = this.dataset.category;
+                            if (cat) {
+                                currentSearchQuery = '';
+                                searchInput.value = '';
+                                setActiveCategory(cat);
+                                searchOverlay.classList.remove('open');
+                            }
+                        });
+                    });
+                }
+
                 renderGrid(currentCategory);
             }
 
@@ -1609,62 +1935,7 @@
             searchOverlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
 
             searchInput.addEventListener('input', function() {
-                const q = this.value.trim();
-                currentSearchQuery = q;
-                if (!q) {
-                    searchResults.innerHTML =
-                        `<div class="no-results"><i class="fas fa-search"></i><p>Type to search across all downloads…</p></div>`;
-                } else {
-                    const results = PRODUCTS.filter(p => {
-                        const searchable = [
-                            p.title,
-                            p.description || '',
-                            ...(p.features || []),
-                            getCategoryLabel(p.category),
-                            ...(p.versions.map(v => v.version || ''))
-                        ].join(' ').toLowerCase();
-                        return searchable.includes(q.toLowerCase());
-                    });
-                    if (results.length === 0) {
-                        searchResults.innerHTML =
-                            `<div class="no-results"><i class="fas fa-search-minus"></i><p>No results found for "<strong>${q}</strong>"</p></div>`;
-                    } else {
-                        let html = '';
-                        results.forEach(p => {
-                            const catLabel = getCategoryLabel(p.category);
-                            const catIcon = getCategoryIcon(p.category);
-                            const thumbContent = p.icon ?
-                                `<img src="${p.icon}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas ${catIcon}\\' style=\\'font-size:1.2rem;color:var(--text-muted);\\'></i>';" />` :
-                                `<i class="fas ${catIcon}"></i>`;
-                            html += `
-                                        <div class="result-item" data-category="${p.category}">
-                                            <div class="ri-icon">${thumbContent}</div>
-                                            <div class="ri-info">
-                                                <div class="ri-title">${p.title}</div>
-                                                <div class="ri-meta">
-                                                    <span><i class="fas ${catIcon}"></i> ${catLabel}</span>
-                                                    <span><i class="fas fa-tag"></i> ${p.versions.length} version${p.versions.length > 1 ? 's' : ''}</span>
-                                                    ${p.primaryVersion?.version ? `<span><i class="fas fa-code"></i> v${p.primaryVersion.version}</span>` : ''}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `;
-                        });
-                        searchResults.innerHTML = html;
-                        document.querySelectorAll('.result-item').forEach(el => {
-                            el.addEventListener('click', function() {
-                                const cat = this.dataset.category;
-                                if (cat) {
-                                    currentSearchQuery = '';
-                                    searchInput.value = '';
-                                    setActiveCategory(cat);
-                                    searchOverlay.classList.remove('open');
-                                }
-                            });
-                        });
-                    }
-                }
-                renderGrid(currentCategory);
+                performSearch(this.value);
             });
 
             document.addEventListener('keydown', function(e) {
@@ -1699,6 +1970,11 @@
                 getProductsForCategory,
                 setActiveCategory,
                 currentCategory: () => currentCategory,
+                parseColorTitle: parseColorTitle,
+                stripColorTags: stripColorTags,
+                getDownloadCount: getDownloadCount,
+                incrementDownloadCount: incrementDownloadCount,
+                getStorageKey: getStorageKey,
             };
 
         })();
