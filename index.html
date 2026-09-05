@@ -639,9 +639,9 @@
         .fade-in-d4 { animation-delay:0.2s; }
 
         /* ============================================================
-           PLUGINS MODRINTH API SYSTEM — ISOLATED CSS
+           PLUGINS & RESOURCE PACKS MODRINTH API SYSTEM — SHARED STYLES
            ============================================================ */
-        .semox-plugin-filter-bar {
+        .semox-filter-bar {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
@@ -653,10 +653,10 @@
             gap: 12px 16px;
             transition: all var(--duration) var(--ease);
         }
-        .semox-plugin-filter-bar:hover {
+        .semox-filter-bar:hover {
             border-color: var(--border-hover);
         }
-        .semox-plugin-filter-bar .semox-filter-search-wrap {
+        .semox-filter-bar .semox-filter-search-wrap {
             flex: 2;
             min-width: 160px;
             display: flex;
@@ -667,16 +667,16 @@
             padding: 0 14px;
             transition: all var(--duration) var(--ease);
         }
-        .semox-plugin-filter-bar .semox-filter-search-wrap:focus-within {
+        .semox-filter-bar .semox-filter-search-wrap:focus-within {
             border-color: var(--violet);
             box-shadow: 0 0 0 2px var(--violet-glow);
         }
-        .semox-plugin-filter-bar .semox-filter-search-wrap i {
+        .semox-filter-bar .semox-filter-search-wrap i {
             color: var(--text-muted);
             font-size: 0.85rem;
             margin-right: 10px;
         }
-        .semox-plugin-filter-bar .semox-filter-search-wrap input {
+        .semox-filter-bar .semox-filter-search-wrap input {
             flex: 1;
             background: transparent;
             border: none;
@@ -688,11 +688,11 @@
             padding: 10px 0;
             min-width: 80px;
         }
-        .semox-plugin-filter-bar .semox-filter-search-wrap input::placeholder {
+        .semox-filter-bar .semox-filter-search-wrap input::placeholder {
             color: var(--text-muted);
             font-weight: 400;
         }
-        .semox-plugin-filter-bar .semox-filter-group {
+        .semox-filter-bar .semox-filter-group {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -700,7 +700,7 @@
             flex: 1;
             min-width: 120px;
         }
-        .semox-plugin-filter-bar .semox-filter-group label {
+        .semox-filter-bar .semox-filter-group label {
             font-size: 0.65rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -708,7 +708,7 @@
             color: var(--text-muted);
             white-space: nowrap;
         }
-        .semox-plugin-filter-bar .semox-filter-select {
+        .semox-filter-bar .semox-filter-select {
             background: var(--bg-secondary);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-full);
@@ -728,19 +728,19 @@
             transition: all var(--duration) var(--ease);
             outline: none;
         }
-        .semox-plugin-filter-bar .semox-filter-select:hover {
+        .semox-filter-bar .semox-filter-select:hover {
             border-color: var(--border-hover);
         }
-        .semox-plugin-filter-bar .semox-filter-select:focus {
+        .semox-filter-bar .semox-filter-select:focus {
             border-color: var(--violet);
             box-shadow: 0 0 0 2px var(--violet-glow);
         }
-        .semox-plugin-filter-bar .semox-filter-select option {
+        .semox-filter-bar .semox-filter-select option {
             background: var(--bg-secondary);
             color: var(--text-primary);
             padding: 4px 8px;
         }
-        .semox-plugin-filter-bar .semox-btn-reset {
+        .semox-filter-bar .semox-btn-reset {
             padding: 8px 20px;
             border-radius: var(--radius-full);
             font-size: 0.8rem;
@@ -754,20 +754,20 @@
             align-items: center;
             gap: 6px;
         }
-        .semox-plugin-filter-bar .semox-btn-reset:hover {
+        .semox-filter-bar .semox-btn-reset:hover {
             color: var(--text-primary);
             background: rgba(255, 255, 255, 0.08);
             border-color: var(--border-hover);
         }
 
-        /* Plugin Cards */
-        .semox-plugin-grid {
+        /* Plugin & Resource Pack Cards (shared) */
+        .semox-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 18px;
             padding-bottom: 40px;
         }
-        .semox-plugin-card {
+        .semox-card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
@@ -778,13 +778,13 @@
             position: relative;
             overflow: hidden;
         }
-        .semox-plugin-card:hover {
+        .semox-card:hover {
             transform: translateY(-3px);
             border-color: var(--border-hover);
             background: var(--bg-card-hover);
             box-shadow: var(--shadow-md), var(--shadow-glow);
         }
-        .semox-plugin-card::before {
+        .semox-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -795,16 +795,16 @@
             opacity: 0;
             transition: opacity var(--duration) var(--ease);
         }
-        .semox-plugin-card:hover::before {
+        .semox-card:hover::before {
             opacity: 1;
         }
-        .semox-plugin-card .semox-p-top {
+        .semox-card .semox-p-top {
             display: flex;
             gap: 14px;
             align-items: flex-start;
             margin-bottom: 8px;
         }
-        .semox-plugin-card .semox-p-icon {
+        .semox-card .semox-p-icon {
             width: 48px;
             height: 48px;
             border-radius: var(--radius);
@@ -818,13 +818,13 @@
             font-size: 1.3rem;
             color: var(--text-muted);
         }
-        .semox-plugin-card .semox-p-icon img {
+        .semox-card .semox-p-icon img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             background: var(--bg-secondary);
         }
-        .semox-plugin-card .semox-p-icon .semox-icon-placeholder {
+        .semox-card .semox-p-icon .semox-icon-placeholder {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -833,18 +833,18 @@
             color: var(--text-muted);
             font-size: 1.3rem;
         }
-        .semox-plugin-card .semox-p-info {
+        .semox-card .semox-p-info {
             flex: 1;
             min-width: 0;
         }
-        .semox-plugin-card .semox-p-info .semox-p-name {
+        .semox-card .semox-p-info .semox-p-name {
             font-size: 1.05rem;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.3;
             margin-bottom: 1px;
         }
-        .semox-plugin-card .semox-p-info .semox-p-badge {
+        .semox-card .semox-p-info .semox-p-badge {
             font-size: 0.55rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -858,7 +858,7 @@
             margin-left: 6px;
             vertical-align: middle;
         }
-        .semox-plugin-card .semox-p-desc {
+        .semox-card .semox-p-desc {
             font-size: 0.85rem;
             color: var(--text-secondary);
             line-height: 1.6;
@@ -868,13 +868,13 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        .semox-plugin-card .semox-p-meta {
+        .semox-card .semox-p-meta {
             display: flex;
             flex-wrap: wrap;
             gap: 6px 12px;
             margin: 4px 0 12px;
         }
-        .semox-plugin-card .semox-p-meta .semox-p-tag {
+        .semox-card .semox-p-meta .semox-p-tag {
             font-size: 0.6rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -885,22 +885,22 @@
             border: 1px solid var(--border-subtle);
             color: var(--text-secondary);
         }
-        .semox-plugin-card .semox-p-meta .semox-p-tag i {
+        .semox-card .semox-p-meta .semox-p-tag i {
             margin-right: 4px;
             font-size: 0.5rem;
             color: var(--violet);
         }
-        .semox-plugin-card .semox-p-meta .semox-p-tag.semox-loader {
+        .semox-card .semox-p-meta .semox-p-tag.semox-loader {
             background: rgba(139, 92, 246, 0.08);
             border-color: rgba(139, 92, 246, 0.15);
             color: var(--violet);
         }
-        .semox-plugin-card .semox-p-meta .semox-p-tag.semox-version {
+        .semox-card .semox-p-meta .semox-p-tag.semox-version {
             background: rgba(52, 211, 153, 0.08);
             border-color: rgba(52, 211, 153, 0.15);
             color: var(--emerald);
         }
-        .semox-plugin-card .semox-p-footer {
+        .semox-card .semox-p-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -910,7 +910,7 @@
             flex-wrap: wrap;
             gap: 8px;
         }
-        .semox-plugin-card .semox-p-dl-count {
+        .semox-card .semox-p-dl-count {
             display: flex;
             align-items: center;
             gap: 5px;
@@ -918,15 +918,15 @@
             font-weight: 600;
             color: var(--text-muted);
         }
-        .semox-plugin-card .semox-p-dl-count i {
+        .semox-card .semox-p-dl-count i {
             color: var(--teal);
             font-size: 0.65rem;
         }
-        .semox-plugin-card .semox-p-dl-count .semox-count {
+        .semox-card .semox-p-dl-count .semox-count {
             color: var(--text-primary);
             font-weight: 700;
         }
-        .semox-btn-download-plugin {
+        .semox-btn-download {
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -941,11 +941,11 @@
             box-shadow: 0 0 20px var(--violet-glow);
             cursor: pointer;
         }
-        .semox-btn-download-plugin:hover {
+        .semox-btn-download:hover {
             transform: scale(1.04);
             box-shadow: 0 0 30px var(--violet-glow);
         }
-        .semox-btn-download-plugin:disabled {
+        .semox-btn-download:disabled {
             opacity: 0.45;
             cursor: not-allowed;
             transform: none !important;
@@ -1004,7 +1004,7 @@
             width: 100%;
         }
 
-        /* Plugin Details Modal */
+        /* Details Modal (shared) */
         .semox-details-modal {
             position: fixed;
             top: 0;
@@ -1136,7 +1136,7 @@
             box-shadow: 0 0 30px var(--violet-glow);
         }
 
-        /* Download Modal */
+        /* Download Modal (shared) */
         .semox-download-modal {
             position: fixed;
             top: 0;
@@ -1318,7 +1318,7 @@
             opacity: 1;
         }
 
-        /* Pagination styling (numbered) */
+        /* Pagination (shared) */
         .semox-pagination {
             display: flex;
             justify-content: center;
@@ -1367,20 +1367,20 @@
             font-size: 0.8rem;
         }
 
-        /* Responsive for plugin section */
+        /* Responsive adjustments for filter bars */
         @media (max-width: 768px) {
-            .semox-plugin-filter-bar {
+            .semox-filter-bar {
                 flex-direction: column;
                 align-items: stretch;
             }
-            .semox-plugin-filter-bar .semox-filter-group {
+            .semox-filter-bar .semox-filter-group {
                 flex: 1 1 100%;
             }
-            .semox-plugin-filter-bar .semox-filter-select {
+            .semox-filter-bar .semox-filter-select {
                 flex: 1;
                 min-width: 80px;
             }
-            .semox-plugin-grid {
+            .semox-grid {
                 grid-template-columns: 1fr;
             }
             .semox-details-modal .semox-dm-content {
@@ -1400,10 +1400,10 @@
             }
         }
         @media (max-width: 500px) {
-            .semox-plugin-filter-bar .semox-filter-search-wrap {
+            .semox-filter-bar .semox-filter-search-wrap {
                 flex: 1 1 100%;
             }
-            .semox-plugin-filter-bar .semox-filter-group {
+            .semox-filter-bar .semox-filter-group {
                 flex: 1 1 100%;
                 justify-content: space-between;
             }
@@ -1418,7 +1418,7 @@
             }
         }
         /* ============================================================
-           END PLUGINS MODRINTH API SYSTEM
+           END PLUGINS & RESOURCE PACKS MODRINTH API SYSTEM
            ============================================================ */
     </style>
 </head>
@@ -1469,9 +1469,9 @@
         </div>
 
         <!-- ============================================================
-        PLUGIN FILTER BAR
+        PLUGIN FILTER BAR (unchanged)
         ============================================================ -->
-        <div class="semox-plugin-filter-bar" id="semoxPluginFilterBar">
+        <div class="semox-filter-bar" id="semoxPluginFilterBar">
             <div class="semox-filter-search-wrap">
                 <i class="fas fa-search"></i>
                 <input type="text" id="semoxPluginSearch" placeholder="Search plugins..." autocomplete="off" />
@@ -1489,6 +1489,29 @@
                 </select>
             </div>
             <button class="semox-btn-reset" id="semoxResetFilters"><i class="fas fa-undo"></i> Reset</button>
+        </div>
+
+        <!-- ============================================================
+        RESOURCE PACK FILTER BAR (NEW)
+        ============================================================ -->
+        <div class="semox-filter-bar" id="semoxRpFilterBar">
+            <div class="semox-filter-search-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="semoxRpSearch" placeholder="Search resource packs..." autocomplete="off" />
+            </div>
+            <div class="semox-filter-group">
+                <label>Loader</label>
+                <select id="semoxRpLoaderFilter" class="semox-filter-select">
+                    <option value="all">All Loaders</option>
+                </select>
+            </div>
+            <div class="semox-filter-group">
+                <label>Version</label>
+                <select id="semoxRpVersionFilter" class="semox-filter-select">
+                    <option value="all">All Versions</option>
+                </select>
+            </div>
+            <button class="semox-btn-reset" id="semoxRpResetFilters"><i class="fas fa-undo"></i> Reset</button>
         </div>
 
         <!-- ============================================================
@@ -1565,7 +1588,7 @@
     </div>
 
     <!-- ============================================================
-    PLUGIN DETAILS MODAL
+    PLUGIN / RESOURCE PACK DETAILS MODAL (shared)
     ============================================================ -->
     <div class="semox-details-modal" id="semoxDetailsModal">
         <div class="semox-dm-content">
@@ -1575,7 +1598,7 @@
     </div>
 
     <!-- ============================================================
-    DOWNLOAD MODAL
+    PLUGIN / RESOURCE PACK DOWNLOAD MODAL (shared)
     ============================================================ -->
     <div class="semox-download-modal" id="semoxDownloadModal">
         <div class="semox-dl-content">
@@ -1585,7 +1608,7 @@
     </div>
 
     <!-- ============================================================
-    LIGHTBOX
+    LIGHTBOX (shared)
     ============================================================ -->
     <div class="semox-lightbox" id="semoxLightbox">
         <button class="semox-lb-close" id="semoxLbClose"><i class="fas fa-times"></i></button>
@@ -1593,7 +1616,7 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — FULL WEBSITE WITH PLUGIN MODRINTH API (UPDATED PAGINATION)
+    JAVASCRIPT — FULL WEBSITE WITH PLUGIN + RESOURCE PACK MODRINTH API
     ============================================================ -->
     <script>
         (function() {
@@ -2102,7 +2125,7 @@
             let currentSearchQuery = '';
 
             // ============================================================
-            // 9. DOM REFS
+            // 9. DOM REFS (unchanged)
             // ============================================================
 
             const navCategories = document.getElementById('navCategories');
@@ -2129,12 +2152,21 @@
             const mobileNavEl = document.getElementById('mobileNav');
             const bottomNav = document.getElementById('bottomNav');
 
-            // Plugin elements
+            // Plugin elements (unchanged)
             const pluginFilterBar = document.getElementById('semoxPluginFilterBar');
             const pluginSearchInput = document.getElementById('semoxPluginSearch');
             const pluginLoaderFilter = document.getElementById('semoxLoaderFilter');
             const pluginVersionFilter = document.getElementById('semoxVersionFilter');
             const resetFiltersBtn = document.getElementById('semoxResetFilters');
+
+            // Resource Pack elements (NEW)
+            const rpFilterBar = document.getElementById('semoxRpFilterBar');
+            const rpSearchInput = document.getElementById('semoxRpSearch');
+            const rpLoaderFilter = document.getElementById('semoxRpLoaderFilter');
+            const rpVersionFilter = document.getElementById('semoxRpVersionFilter');
+            const rpResetFiltersBtn = document.getElementById('semoxRpResetFilters');
+
+            // Shared modals
             const detailsModal = document.getElementById('semoxDetailsModal');
             const dmClose = document.getElementById('semoxDmClose');
             const dmBody = document.getElementById('semoxDmBody');
@@ -2241,13 +2273,23 @@
                 setActiveCategory(currentCategory);
             }
 
+            // ============================================================
+            // 12. SET ACTIVE CATEGORY (UPDATED to show/hide both filter bars)
+            // ============================================================
+
             function setActiveCategory(categoryId) {
                 currentCategory = categoryId;
 
+                // Show/hide plugin filter bar
                 if (pluginFilterBar) {
                     pluginFilterBar.style.display = (categoryId === 'plugins') ? 'flex' : 'none';
                 }
+                // Show/hide resource pack filter bar
+                if (rpFilterBar) {
+                    rpFilterBar.style.display = (categoryId === 'resource-packs') ? 'flex' : 'none';
+                }
 
+                // Reset plugin filters when switching away
                 if (categoryId !== 'plugins') {
                     if (pluginSearchInput) pluginSearchInput.value = '';
                     if (pluginLoaderFilter) pluginLoaderFilter.value = 'all';
@@ -2256,6 +2298,16 @@
                     loadPluginsFromModrinth();
                 }
 
+                // Reset resource pack filters when switching away
+                if (categoryId !== 'resource-packs') {
+                    if (rpSearchInput) rpSearchInput.value = '';
+                    if (rpLoaderFilter) rpLoaderFilter.value = 'all';
+                    if (rpVersionFilter) rpVersionFilter.value = 'all';
+                } else {
+                    loadResourcePacksFromModrinth();
+                }
+
+                // Update category buttons
                 document.querySelectorAll('#navCategories .cat-btn').forEach(btn => {
                     btn.classList.toggle('active', btn.dataset.category === categoryId);
                 });
@@ -2266,6 +2318,7 @@
                     btn.classList.toggle('active', btn.dataset.category === categoryId);
                 });
 
+                // Update indicator
                 if (categoryId === 'all') {
                     currentCategoryLabel.textContent = 'All Downloads';
                     currentCategoryDesc.textContent = 'Browse all available Minecraft downloads';
@@ -2284,11 +2337,12 @@
             }
 
             // ============================================================
-            // 12. RENDER GRID (unchanged for non-plugin)
+            // 13. RENDER GRID (unchanged for non-plugin/resource-pack)
             // ============================================================
 
             function renderGrid(categoryId) {
-                if (categoryId === 'plugins') {
+                // If plugins or resource-packs, skip regular rendering (handled separately)
+                if (categoryId === 'plugins' || categoryId === 'resource-packs') {
                     return;
                 }
 
@@ -2596,7 +2650,7 @@
             }
 
             // ============================================================
-            // 13. SEARCH (global overlay) — unchanged
+            // 14. SEARCH (global overlay) — unchanged
             // ============================================================
 
             function performSearch(query) {
@@ -2669,7 +2723,7 @@
             }
 
             // ============================================================
-            // 14. PLUGIN MODRINTH API SYSTEM (UPDATED PAGINATION)
+            // 15. PLUGIN MODRINTH API SYSTEM (unchanged)
             // ============================================================
 
             let pluginCurrentPage = 1;
@@ -2677,17 +2731,17 @@
             let pluginLimit = 24;
             let pluginData = [];
             let pluginLoading = false;
-            let abortController = null;
+            let pluginAbortController = null;
 
             let pluginSearchTerm = '';
             let pluginLoader = 'all';
             let pluginVersion = 'all';
 
-            let availableLoaders = ['Paper', 'Spigot', 'Fabric', 'Forge'];
-            let availableVersions = [];
+            let pluginAvailableLoaders = ['Paper', 'Spigot', 'Fabric', 'Forge'];
+            let pluginAvailableVersions = [];
 
-            const versionCache = new Map();
-            const projectCache = new Map();
+            const pluginVersionCache = new Map();
+            const pluginProjectCache = new Map();
 
             function getPluginDownloadCount(projectId, version, loader) {
                 const key = `semx_plugin_downloads_${projectId}_${version}_${loader}`;
@@ -2707,7 +2761,7 @@
                 } catch (e) { return 1; }
             }
 
-            async function fetchGameVersions() {
+            async function fetchPluginGameVersions() {
                 try {
                     const res = await fetch('https://api.modrinth.com/v2/tag/game_version');
                     if (!res.ok) throw new Error('Failed to fetch versions');
@@ -2723,46 +2777,46 @@
                         }
                         return 0;
                     });
-                    availableVersions = versions;
-                    populateVersionFilter();
+                    pluginAvailableVersions = versions;
+                    populatePluginVersionFilter();
                 } catch (e) {
-                    console.warn('Could not fetch game versions:', e);
-                    availableVersions = ['1.21.11', '1.21.10', '1.21.9', '1.21.8', '1.21.7', '1.21.6', '1.21.5', '1.21.4',
+                    console.warn('Could not fetch plugin game versions:', e);
+                    pluginAvailableVersions = ['1.21.11', '1.21.10', '1.21.9', '1.21.8', '1.21.7', '1.21.6', '1.21.5', '1.21.4',
                         '1.21.3', '1.21.2', '1.21.1', '1.21', '1.20.6', '1.20.4', '1.20.1'
                     ];
-                    populateVersionFilter();
+                    populatePluginVersionFilter();
                 }
             }
 
-            function populateVersionFilter() {
+            function populatePluginVersionFilter() {
                 if (!pluginVersionFilter) return;
                 const currentVal = pluginVersionFilter.value;
                 pluginVersionFilter.innerHTML = '<option value="all">All Versions</option>';
-                availableVersions.forEach(v => {
+                pluginAvailableVersions.forEach(v => {
                     pluginVersionFilter.innerHTML += `<option value="${v}">${v}</option>`;
                 });
-                if (currentVal && availableVersions.includes(currentVal)) {
+                if (currentVal && pluginAvailableVersions.includes(currentVal)) {
                     pluginVersionFilter.value = currentVal;
                 } else {
                     pluginVersionFilter.value = 'all';
                 }
             }
 
-            function populateLoaderFilter() {
+            function populatePluginLoaderFilter() {
                 if (!pluginLoaderFilter) return;
                 const currentVal = pluginLoaderFilter.value;
                 pluginLoaderFilter.innerHTML = '<option value="all">All Loaders</option>';
-                availableLoaders.forEach(l => {
+                pluginAvailableLoaders.forEach(l => {
                     pluginLoaderFilter.innerHTML += `<option value="${l}">${l}</option>`;
                 });
-                if (currentVal && availableLoaders.includes(currentVal)) {
+                if (currentVal && pluginAvailableLoaders.includes(currentVal)) {
                     pluginLoaderFilter.value = currentVal;
                 } else {
                     pluginLoaderFilter.value = 'all';
                 }
             }
 
-            function buildFacets(loader, version) {
+            function buildPluginFacets(loader, version) {
                 const facets = [
                     ['all_project_types:plugin']
                 ];
@@ -2779,10 +2833,10 @@
                 if (pluginLoading) return;
                 pluginLoading = true;
 
-                if (abortController) {
-                    abortController.abort();
+                if (pluginAbortController) {
+                    pluginAbortController.abort();
                 }
-                abortController = new AbortController();
+                pluginAbortController = new AbortController();
 
                 const offset = (page - 1) * pluginLimit;
                 const query = pluginSearchTerm.trim() || '';
@@ -2794,7 +2848,7 @@
                 params.set('limit', String(pluginLimit));
                 params.set('offset', String(offset));
 
-                const facets = buildFacets(pluginLoader, pluginVersion);
+                const facets = buildPluginFacets(pluginLoader, pluginVersion);
                 if (facets.length > 0) {
                     params.set('facets', JSON.stringify(facets));
                 }
@@ -2804,7 +2858,7 @@
                 showSkeleton();
 
                 try {
-                    const res = await fetch(url, { signal: abortController.signal });
+                    const res = await fetch(url, { signal: pluginAbortController.signal });
                     if (!res.ok) throw new Error('API error');
                     const data = await res.json();
                     pluginTotalHits = data.total_hits || 0;
@@ -2812,19 +2866,19 @@
                     renderPluginResults(page);
                 } catch (err) {
                     if (err.name === 'AbortError') {
-                        console.log('Search aborted');
+                        console.log('Plugin search aborted');
                         return;
                     }
                     console.error('Error fetching plugins:', err);
                     showPluginError();
                 } finally {
                     pluginLoading = false;
-                    abortController = null;
+                    pluginAbortController = null;
                 }
             }
 
             function showSkeleton() {
-                let skeletonHtml = '<div class="semox-plugin-grid">';
+                let skeletonHtml = '<div class="semox-grid">';
                 for (let i = 0; i < 8; i++) {
                     skeletonHtml += `
                                 <div class="semox-skeleton">
@@ -2846,7 +2900,7 @@
                                 <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
                                 <h3>Unable to load plugins</h3>
                                 <p>Please try again later.</p>
-                                <button class="semox-btn-download-plugin" id="semoxRetryBtn" style="margin-top:12px;"><i class="fas fa-redo"></i> Retry</button>
+                                <button class="semox-btn-download" id="semoxRetryBtn" style="margin-top:12px;"><i class="fas fa-redo"></i> Retry</button>
                             </div>
                         `;
                 const retryBtn = document.getElementById('semoxRetryBtn');
@@ -2867,55 +2921,54 @@
                         `;
             }
 
-            // ---- Helper: build numbered pagination ----
             function buildPagination(currentPage, totalPages) {
                 const pages = [];
-                const delta = 2; // number of pages to show around current
-
-                // Always show first page
+                const delta = 2;
                 pages.push(1);
-
                 let start = Math.max(2, currentPage - delta);
                 let end = Math.min(totalPages - 1, currentPage + delta);
-
-                // If first page is not adjacent to start, add ellipsis
                 if (start > 2) {
                     pages.push('...');
                 }
-
                 for (let i = start; i <= end; i++) {
                     if (i > 1 && i < totalPages) {
                         pages.push(i);
                     }
                 }
-
-                // Add ellipsis before last page if needed
                 if (end < totalPages - 1) {
                     pages.push('...');
                 }
-
-                // Always show last page if totalPages > 1
                 if (totalPages > 1 && !pages.includes(totalPages)) {
                     pages.push(totalPages);
                 }
-
                 return pages;
             }
 
-            // ---- Render plugin results with numbered pagination ----
+            function scrollToFirstCard() {
+                const firstCard = document.querySelector('.semox-card');
+                if (firstCard) {
+                    firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    const grid = document.querySelector('.semox-grid');
+                    if (grid) {
+                        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            }
+
             function renderPluginResults(page) {
                 if (!pluginData || pluginData.length === 0) {
                     showPluginEmpty();
                     return;
                 }
 
-                let html = '<div class="semox-plugin-grid">';
+                let html = '<div class="semox-grid">';
                 pluginData.forEach((plugin, idx) => {
                     const projectId = plugin.project_id;
                     const name = plugin.title || 'Unnamed';
                     const description = plugin.description || '';
                     const icon = plugin.icon_url || '';
-                    const loaders = plugin.categories ? plugin.categories.filter(c => availableLoaders.includes(c
+                    const loaders = plugin.categories ? plugin.categories.filter(c => pluginAvailableLoaders.includes(c
                         .charAt(0).toUpperCase() + c.slice(1))) : [];
                     const displayLoaders = loaders.length ? loaders : (plugin.categories ? [plugin.categories[0]] :
                         []);
@@ -2935,7 +2988,7 @@
                         `<div class="semox-icon-placeholder"><i class="fas fa-puzzle-piece"></i></div>`;
 
                     html += `
-                                <div class="semox-plugin-card" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}">
+                                <div class="semox-card" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}">
                                     <div class="semox-p-top">
                                         <div class="semox-p-icon">
                                             ${iconHtml}
@@ -2959,7 +3012,7 @@
                                         </div>
                                         <div style="display:flex;gap:8px;">
                                             <button class="semox-btn-details" data-project-id="${projectId}">Details</button>
-                                            <button class="semox-btn-download-plugin" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}"><i class="fas fa-download"></i> Download</button>
+                                            <button class="semox-btn-download" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}"><i class="fas fa-download"></i> Download</button>
                                         </div>
                                     </div>
                                 </div>
@@ -2967,14 +3020,11 @@
                 });
                 html += '</div>';
 
-                // ---- Numbered Pagination ----
                 const totalPages = Math.ceil(pluginTotalHits / pluginLimit);
                 if (totalPages > 1) {
                     const pageNumbers = buildPagination(page, totalPages);
                     html += `<div class="semox-pagination">`;
-                    // Previous button
                     html += `<button class="semox-page-btn" data-page="${page - 1}" ${page <= 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>`;
-
                     pageNumbers.forEach(p => {
                         if (p === '...') {
                             html += `<span class="semox-page-ellipsis">…</span>`;
@@ -2983,57 +3033,41 @@
                             html += `<button class="semox-page-btn ${active}" data-page="${p}">${p}</button>`;
                         }
                     });
-
-                    // Next button
                     html += `<button class="semox-page-btn" data-page="${page + 1}" ${page >= totalPages ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>`;
                     html += `</div>`;
                 }
 
                 downloadGrid.innerHTML = html;
 
-                // ---- Attach events ----
-                // Details
+                // Attach events
                 document.querySelectorAll('.semox-btn-details').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const id = this.dataset.projectId;
-                        openDetailsModal(id);
+                        openDetailsModal(id, 'plugin');
                     });
                 });
 
-                // Download (only if data-project-id exists)
-                document.querySelectorAll('.semox-btn-download-plugin').forEach(btn => {
+                document.querySelectorAll('.semox-btn-download').forEach(btn => {
                     btn.addEventListener('click', function() {
                         if (!this.dataset.projectId) return;
                         const id = this.dataset.projectId;
                         const name = this.dataset.projectName || 'Plugin';
                         const icon = this.dataset.projectIcon || '';
-                        openDownloadModal(id, name, icon);
+                        openDownloadModal(id, name, icon, 'plugin');
                     });
                 });
 
-                // Pagination clicks
                 document.querySelectorAll('.semox-pagination .semox-page-btn[data-page]').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', async function() {
                         const targetPage = parseInt(this.dataset.page, 10);
                         if (isNaN(targetPage) || targetPage < 1 || targetPage > totalPages) return;
-                        if (targetPage === page) return; // already on this page
-
+                        if (targetPage === page) return;
                         pluginCurrentPage = targetPage;
-                        fetchPlugins(targetPage);
-
-                        // Scroll to the first plugin card (anchor)
-                        const firstCard = document.querySelector('.semox-plugin-card');
-                        if (firstCard) {
-                            const rect = firstCard.getBoundingClientRect();
-                            const scrollTarget = window.scrollY + rect.top - 20; // 20px padding above
-                            window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-                        } else {
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }
+                        await fetchPlugins(targetPage);
+                        scrollToFirstCard();
                     });
                 });
 
-                // Fix image fallback
                 document.querySelectorAll('.semox-p-icon img').forEach(img => {
                     img.addEventListener('error', function() {
                         this.style.display = 'none';
@@ -3045,7 +3079,6 @@
                     });
                 });
 
-                // Update download counts
                 pluginData.forEach(p => {
                     const countEl = document.querySelector(`[data-plugin-count="${p.project_id}"]`);
                     if (countEl) {
@@ -3062,27 +3095,373 @@
                 pluginSearchTerm = pluginSearchInput ? pluginSearchInput.value : '';
                 pluginLoader = pluginLoaderFilter ? pluginLoaderFilter.value : 'all';
                 pluginVersion = pluginVersionFilter ? pluginVersionFilter.value : 'all';
-                fetchPlugins(1);
+                fetchPlugins(1).then(() => {
+                    scrollToFirstCard();
+                });
             }
 
-            async function openDetailsModal(projectId) {
-                if (projectCache.has(projectId)) {
-                    renderDetails(projectCache.get(projectId));
+            // ============================================================
+            // 16. RESOURCE PACK MODRINTH API SYSTEM (NEW)
+            // ============================================================
+
+            let rpCurrentPage = 1;
+            let rpTotalHits = 0;
+            let rpLimit = 24;
+            let rpData = [];
+            let rpLoading = false;
+            let rpAbortController = null;
+
+            let rpSearchTerm = '';
+            let rpLoader = 'all';
+            let rpVersion = 'all';
+
+            // Resource pack "loaders" – common platforms
+            let rpAvailableLoaders = ['Bedrock', 'Java', 'OptiFine'];
+            let rpAvailableVersions = [];
+
+            const rpVersionCache = new Map();
+            const rpProjectCache = new Map();
+
+            function getRpDownloadCount(projectId, version, loader) {
+                const key = `semx_rp_downloads_${projectId}_${version}_${loader}`;
+                try {
+                    const val = localStorage.getItem(key);
+                    return val ? parseInt(val, 10) || 0 : 0;
+                } catch (e) { return 0; }
+            }
+
+            function incrementRpDownloadCount(projectId, version, loader) {
+                const key = `semx_rp_downloads_${projectId}_${version}_${loader}`;
+                try {
+                    const current = parseInt(localStorage.getItem(key) || '0', 10) || 0;
+                    const newCount = current + 1;
+                    localStorage.setItem(key, String(newCount));
+                    return newCount;
+                } catch (e) { return 1; }
+            }
+
+            async function fetchRpGameVersions() {
+                try {
+                    const res = await fetch('https://api.modrinth.com/v2/tag/game_version');
+                    if (!res.ok) throw new Error('Failed to fetch versions');
+                    const data = await res.json();
+                    const versions = data.map(v => v.version).filter(v => v && v.startsWith('1.'));
+                    versions.sort((a, b) => {
+                        const aParts = a.split('.').map(Number);
+                        const bParts = b.split('.').map(Number);
+                        for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+                            const av = aParts[i] || 0;
+                            const bv = bParts[i] || 0;
+                            if (av !== bv) return bv - av;
+                        }
+                        return 0;
+                    });
+                    rpAvailableVersions = versions;
+                    populateRpVersionFilter();
+                } catch (e) {
+                    console.warn('Could not fetch resource pack game versions:', e);
+                    rpAvailableVersions = ['1.21.11', '1.21.10', '1.21.9', '1.21.8', '1.21.7', '1.21.6', '1.21.5', '1.21.4',
+                        '1.21.3', '1.21.2', '1.21.1', '1.21', '1.20.6', '1.20.4', '1.20.1'
+                    ];
+                    populateRpVersionFilter();
+                }
+            }
+
+            function populateRpVersionFilter() {
+                if (!rpVersionFilter) return;
+                const currentVal = rpVersionFilter.value;
+                rpVersionFilter.innerHTML = '<option value="all">All Versions</option>';
+                rpAvailableVersions.forEach(v => {
+                    rpVersionFilter.innerHTML += `<option value="${v}">${v}</option>`;
+                });
+                if (currentVal && rpAvailableVersions.includes(currentVal)) {
+                    rpVersionFilter.value = currentVal;
+                } else {
+                    rpVersionFilter.value = 'all';
+                }
+            }
+
+            function populateRpLoaderFilter() {
+                if (!rpLoaderFilter) return;
+                const currentVal = rpLoaderFilter.value;
+                rpLoaderFilter.innerHTML = '<option value="all">All Loaders</option>';
+                rpAvailableLoaders.forEach(l => {
+                    rpLoaderFilter.innerHTML += `<option value="${l}">${l}</option>`;
+                });
+                if (currentVal && rpAvailableLoaders.includes(currentVal)) {
+                    rpLoaderFilter.value = currentVal;
+                } else {
+                    rpLoaderFilter.value = 'all';
+                }
+            }
+
+            function buildRpFacets(loader, version) {
+                const facets = [
+                    ['project_type:resourcepack']
+                ];
+                // For loaders we use categories facet; for resource packs we can map to "bedrock", "java", "optifine"
+                if (loader && loader !== 'all') {
+                    const loaderMap = {
+                        'Bedrock': 'bedrock',
+                        'Java': 'java',
+                        'OptiFine': 'optifine'
+                    };
+                    const mapped = loaderMap[loader] || loader.toLowerCase();
+                    facets.push([`categories:${mapped}`]);
+                }
+                if (version && version !== 'all') {
+                    facets.push([`versions:${version}`]);
+                }
+                return facets;
+            }
+
+            async function fetchResourcePacks(page = 1) {
+                if (rpLoading) return;
+                rpLoading = true;
+
+                if (rpAbortController) {
+                    rpAbortController.abort();
+                }
+                rpAbortController = new AbortController();
+
+                const offset = (page - 1) * rpLimit;
+                const query = rpSearchTerm.trim() || '';
+                const index = query ? 'relevance' : 'downloads';
+
+                const params = new URLSearchParams();
+                params.set('query', query);
+                params.set('index', index);
+                params.set('limit', String(rpLimit));
+                params.set('offset', String(offset));
+
+                const facets = buildRpFacets(rpLoader, rpVersion);
+                if (facets.length > 0) {
+                    params.set('facets', JSON.stringify(facets));
+                }
+
+                const url = `https://api.modrinth.com/v2/search?${params.toString()}`;
+
+                showSkeleton(); // reuse skeleton
+
+                try {
+                    const res = await fetch(url, { signal: rpAbortController.signal });
+                    if (!res.ok) throw new Error('API error');
+                    const data = await res.json();
+                    rpTotalHits = data.total_hits || 0;
+                    rpData = data.hits || [];
+                    renderResourcePackResults(page);
+                } catch (err) {
+                    if (err.name === 'AbortError') {
+                        console.log('Resource pack search aborted');
+                        return;
+                    }
+                    console.error('Error fetching resource packs:', err);
+                    showRpError();
+                } finally {
+                    rpLoading = false;
+                    rpAbortController = null;
+                }
+            }
+
+            function showRpError() {
+                downloadGrid.innerHTML = `
+                            <div class="empty-state" style="grid-column:1/-1;">
+                                <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+                                <h3>Unable to load resource packs</h3>
+                                <p>Please try again later.</p>
+                                <button class="semox-btn-download" id="semoxRpRetryBtn" style="margin-top:12px;"><i class="fas fa-redo"></i> Retry</button>
+                            </div>
+                        `;
+                const retryBtn = document.getElementById('semoxRpRetryBtn');
+                if (retryBtn) {
+                    retryBtn.addEventListener('click', () => {
+                        loadResourcePacksFromModrinth();
+                    });
+                }
+            }
+
+            function showRpEmpty() {
+                downloadGrid.innerHTML = `
+                            <div class="empty-state" style="grid-column:1/-1;">
+                                <div class="icon"><i class="fas fa-search-minus"></i></div>
+                                <h3>No resource packs found</h3>
+                                <p>Try another search or adjust filters.</p>
+                            </div>
+                        `;
+            }
+
+            function renderResourcePackResults(page) {
+                if (!rpData || rpData.length === 0) {
+                    showRpEmpty();
+                    return;
+                }
+
+                let html = '<div class="semox-grid">';
+                rpData.forEach((pack, idx) => {
+                    const projectId = pack.project_id;
+                    const name = pack.title || 'Unnamed';
+                    const description = pack.description || '';
+                    const icon = pack.icon_url || '';
+                    // Categories may include "bedrock", "java", "optifine" – map to display names
+                    const categories = pack.categories || [];
+                    const loaderDisplay = categories.map(c => {
+                        if (c === 'bedrock') return 'Bedrock';
+                        if (c === 'java') return 'Java';
+                        if (c === 'optifine') return 'OptiFine';
+                        return c.charAt(0).toUpperCase() + c.slice(1);
+                    }).filter(l => rpAvailableLoaders.includes(l));
+                    const displayLoaders = loaderDisplay.length ? loaderDisplay : ['Any'];
+                    const version = pack.versions && pack.versions.length > 0 ? pack.versions[0] : '';
+                    const downloads = getRpDownloadCount(projectId, version, displayLoaders[0] || 'default');
+
+                    const loaderTags = displayLoaders.map(l =>
+                        `<span class="semox-p-tag semox-loader"><i class="fas fa-cube"></i> ${l}</span>`
+                    ).join('');
+
+                    const versionTag = version ?
+                        `<span class="semox-p-tag semox-version"><i class="fas fa-tag"></i> ${version}</span>` :
+                        '';
+
+                    const iconHtml = icon ?
+                        `<img src="${icon}" alt="${name}" loading="lazy" />` :
+                        `<div class="semox-icon-placeholder"><i class="fas fa-palette"></i></div>`;
+
+                    html += `
+                                <div class="semox-card" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}">
+                                    <div class="semox-p-top">
+                                        <div class="semox-p-icon">
+                                            ${iconHtml}
+                                        </div>
+                                        <div class="semox-p-info">
+                                            <div class="semox-p-name">
+                                                ${name}
+                                                <span class="semox-p-badge">Resource Pack</span>
+                                            </div>
+                                            <div class="semox-p-desc">${description}</div>
+                                        </div>
+                                    </div>
+                                    <div class="semox-p-meta">
+                                        ${loaderTags}
+                                        ${versionTag}
+                                    </div>
+                                    <div class="semox-p-footer">
+                                        <div class="semox-p-dl-count">
+                                            <i class="fas fa-download"></i>
+                                            <span class="semox-count" data-rp-count="${projectId}">${downloads}</span>
+                                        </div>
+                                        <div style="display:flex;gap:8px;">
+                                            <button class="semox-btn-details" data-project-id="${projectId}">Details</button>
+                                            <button class="semox-btn-download" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}"><i class="fas fa-download"></i> Download</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                });
+                html += '</div>';
+
+                const totalPages = Math.ceil(rpTotalHits / rpLimit);
+                if (totalPages > 1) {
+                    const pageNumbers = buildPagination(page, totalPages);
+                    html += `<div class="semox-pagination">`;
+                    html += `<button class="semox-page-btn" data-page="${page - 1}" ${page <= 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>`;
+                    pageNumbers.forEach(p => {
+                        if (p === '...') {
+                            html += `<span class="semox-page-ellipsis">…</span>`;
+                        } else {
+                            const active = p === page ? 'active' : '';
+                            html += `<button class="semox-page-btn ${active}" data-page="${p}">${p}</button>`;
+                        }
+                    });
+                    html += `<button class="semox-page-btn" data-page="${page + 1}" ${page >= totalPages ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>`;
+                    html += `</div>`;
+                }
+
+                downloadGrid.innerHTML = html;
+
+                // Attach events
+                document.querySelectorAll('.semox-btn-details').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.projectId;
+                        openDetailsModal(id, 'resourcepack');
+                    });
+                });
+
+                document.querySelectorAll('.semox-btn-download').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        if (!this.dataset.projectId) return;
+                        const id = this.dataset.projectId;
+                        const name = this.dataset.projectName || 'Resource Pack';
+                        const icon = this.dataset.projectIcon || '';
+                        openDownloadModal(id, name, icon, 'resourcepack');
+                    });
+                });
+
+                document.querySelectorAll('.semox-pagination .semox-page-btn[data-page]').forEach(btn => {
+                    btn.addEventListener('click', async function() {
+                        const targetPage = parseInt(this.dataset.page, 10);
+                        if (isNaN(targetPage) || targetPage < 1 || targetPage > totalPages) return;
+                        if (targetPage === page) return;
+                        rpCurrentPage = targetPage;
+                        await fetchResourcePacks(targetPage);
+                        scrollToFirstCard();
+                    });
+                });
+
+                document.querySelectorAll('.semox-p-icon img').forEach(img => {
+                    img.addEventListener('error', function() {
+                        this.style.display = 'none';
+                        const parent = this.closest('.semox-p-icon');
+                        if (parent) {
+                            const placeholder = parent.querySelector('.semox-icon-placeholder');
+                            if (placeholder) placeholder.style.display = 'flex';
+                        }
+                    });
+                });
+
+                rpData.forEach(p => {
+                    const countEl = document.querySelector(`[data-rp-count="${p.project_id}"]`);
+                    if (countEl) {
+                        const ver = p.versions?.[0] || '';
+                        const loader = p.categories?.[0] || '';
+                        const count = getRpDownloadCount(p.project_id, ver, loader);
+                        countEl.textContent = count;
+                    }
+                });
+            }
+
+            function loadResourcePacksFromModrinth() {
+                rpCurrentPage = 1;
+                rpSearchTerm = rpSearchInput ? rpSearchInput.value : '';
+                rpLoader = rpLoaderFilter ? rpLoaderFilter.value : 'all';
+                rpVersion = rpVersionFilter ? rpVersionFilter.value : 'all';
+                fetchResourcePacks(1).then(() => {
+                    scrollToFirstCard();
+                });
+            }
+
+            // ============================================================
+            // 17. SHARED DETAILS & DOWNLOAD MODALS (plugin & resource pack)
+            // ============================================================
+
+            async function openDetailsModal(projectId, type) {
+                const cache = type === 'plugin' ? pluginProjectCache : rpProjectCache;
+                if (cache.has(projectId)) {
+                    renderDetails(cache.get(projectId), type);
                     return;
                 }
                 try {
                     const res = await fetch(`https://api.modrinth.com/v2/project/${projectId}`);
                     if (!res.ok) throw new Error('Failed to fetch project details');
                     const data = await res.json();
-                    projectCache.set(projectId, data);
-                    renderDetails(data);
+                    cache.set(projectId, data);
+                    renderDetails(data, type);
                 } catch (e) {
                     console.error('Error fetching details:', e);
-                    alert('Could not load plugin details.');
+                    alert('Could not load details.');
                 }
             }
 
-            function renderDetails(data) {
+            function renderDetails(data, type) {
                 const name = data.title || 'Unnamed';
                 const icon = data.icon_url || '';
                 const description = data.description || '';
@@ -3092,8 +3471,8 @@
 
                 let html = `
                             <div class="semox-dm-header">
-                                ${icon ? `<img src="${icon}" alt="${name}" />` : `<div style="width:64px;height:64px;background:var(--bg-secondary);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--text-muted);"><i class="fas fa-puzzle-piece"></i></div>`}
-                                <div class="semox-dm-title">${name} <span class="semox-p-badge" style="font-size:0.6rem;">Plugins</span></div>
+                                ${icon ? `<img src="${icon}" alt="${name}" />` : `<div style="width:64px;height:64px;background:var(--bg-secondary);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--text-muted);"><i class="fas ${type === 'plugin' ? 'fa-puzzle-piece' : 'fa-palette'}"></i></div>`}
+                                <div class="semox-dm-title">${name} <span class="semox-p-badge" style="font-size:0.6rem;">${type === 'plugin' ? 'Plugin' : 'Resource Pack'}</span></div>
                             </div>
                             <div class="semox-dm-desc">${description}</div>
                             <div class="semox-dm-meta">
@@ -3115,7 +3494,7 @@
                 }
 
                 html += `
-                            <button class="semox-dm-download-btn" id="semoxDmDownloadBtn" data-project-id="${data.id}" data-project-name="${name}" data-project-icon="${icon}"><i class="fas fa-download"></i> Download ${name}</button>
+                            <button class="semox-dm-download-btn" id="semoxDmDownloadBtn" data-project-id="${data.id}" data-project-name="${name}" data-project-icon="${icon}" data-type="${type}"><i class="fas fa-download"></i> Download ${name}</button>
                         `;
 
                 dmBody.innerHTML = html;
@@ -3127,8 +3506,9 @@
                         const id = this.dataset.projectId;
                         const name = this.dataset.projectName;
                         const icon = this.dataset.projectIcon;
+                        const type = this.dataset.type;
                         detailsModal.classList.remove('open');
-                        openDownloadModal(id, name, icon);
+                        openDownloadModal(id, name, icon, type);
                     });
                 }
 
@@ -3141,10 +3521,10 @@
                 });
             }
 
-            async function openDownloadModal(projectId, name, icon) {
+            async function openDownloadModal(projectId, name, icon, type) {
                 dlBody.innerHTML = `
                             <div class="semox-dl-header">
-                                ${icon ? `<img src="${icon}" alt="${name}" />` : `<div style="width:40px;height:40px;background:var(--bg-secondary);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text-muted);"><i class="fas fa-puzzle-piece"></i></div>`}
+                                ${icon ? `<img src="${icon}" alt="${name}" />` : `<div style="width:40px;height:40px;background:var(--bg-secondary);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text-muted);"><i class="fas ${type === 'plugin' ? 'fa-puzzle-piece' : 'fa-palette'}"></i></div>`}
                                 <div class="semox-dl-title">${name}</div>
                             </div>
                             <div class="semox-dl-info">
@@ -3154,20 +3534,21 @@
                         `;
                 downloadModal.classList.add('open');
 
+                const cache = type === 'plugin' ? pluginVersionCache : rpVersionCache;
                 let versionsData;
-                if (versionCache.has(projectId)) {
-                    versionsData = versionCache.get(projectId);
+                if (cache.has(projectId)) {
+                    versionsData = cache.get(projectId);
                 } else {
                     try {
                         const res = await fetch(`https://api.modrinth.com/v2/project/${projectId}/version`);
                         if (!res.ok) throw new Error('Failed to fetch versions');
                         versionsData = await res.json();
-                        versionCache.set(projectId, versionsData);
+                        cache.set(projectId, versionsData);
                     } catch (e) {
                         console.error('Error fetching versions:', e);
                         dlBody.innerHTML = `
                                     <div class="semox-dl-header">
-                                        ${icon ? `<img src="${icon}" alt="${name}" />` : `<div style="width:40px;height:40px;background:var(--bg-secondary);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text-muted);"><i class="fas fa-puzzle-piece"></i></div>`}
+                                        ${icon ? `<img src="${icon}" alt="${name}" />` : `<div style="width:40px;height:40px;background:var(--bg-secondary);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text-muted);"><i class="fas ${type === 'plugin' ? 'fa-puzzle-piece' : 'fa-palette'}"></i></div>`}
                                         <div class="semox-dl-title">${name}</div>
                                     </div>
                                     <div class="semox-dl-info" style="color:var(--rose);">Failed to load versions. Please try again.</div>
@@ -3192,7 +3573,7 @@
 
                 let html = `
                             <div class="semox-dl-header">
-                                ${icon ? `<img src="${icon}" alt="${name}" />` : `<div style="width:40px;height:40px;background:var(--bg-secondary);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text-muted);"><i class="fas fa-puzzle-piece"></i></div>`}
+                                ${icon ? `<img src="${icon}" alt="${name}" />` : `<div style="width:40px;height:40px;background:var(--bg-secondary);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text-muted);"><i class="fas ${type === 'plugin' ? 'fa-puzzle-piece' : 'fa-palette'}"></i></div>`}
                                 <div class="semox-dl-title">${name}</div>
                             </div>
                             <div class="semox-dl-field">
@@ -3258,11 +3639,20 @@
                     const projectId = this.dataset.projectId;
                     if (!url) return;
 
-                    incrementPluginDownloadCount(projectId, version, loader);
-                    const countEl = document.querySelector(`[data-plugin-count="${projectId}"]`);
-                    if (countEl) {
-                        const newCount = getPluginDownloadCount(projectId, version, loader);
-                        countEl.textContent = newCount;
+                    if (type === 'plugin') {
+                        incrementPluginDownloadCount(projectId, version, loader);
+                        const countEl = document.querySelector(`[data-plugin-count="${projectId}"]`);
+                        if (countEl) {
+                            const newCount = getPluginDownloadCount(projectId, version, loader);
+                            countEl.textContent = newCount;
+                        }
+                    } else {
+                        incrementRpDownloadCount(projectId, version, loader);
+                        const countEl = document.querySelector(`[data-rp-count="${projectId}"]`);
+                        if (countEl) {
+                            const newCount = getRpDownloadCount(projectId, version, loader);
+                            countEl.textContent = newCount;
+                        }
                     }
 
                     const a = document.createElement('a');
@@ -3290,7 +3680,7 @@
             lbClose.addEventListener('click', () => { lightbox.classList.remove('open'); });
             lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
 
-            // ---- Plugin filter handlers ----
+            // ---- Plugin filter handlers (unchanged) ----
             function handlePluginSearch() {
                 if (currentCategory !== 'plugins') return;
                 clearTimeout(window._pluginDebounce);
@@ -3314,8 +3704,8 @@
             }
 
             function initPluginFilters() {
-                populateLoaderFilter();
-                fetchGameVersions();
+                populatePluginLoaderFilter();
+                fetchPluginGameVersions();
                 if (pluginSearchInput) {
                     pluginSearchInput.addEventListener('input', handlePluginSearch);
                 }
@@ -3330,8 +3720,48 @@
                 }
             }
 
+            // ---- Resource pack filter handlers (NEW) ----
+            function handleRpSearch() {
+                if (currentCategory !== 'resource-packs') return;
+                clearTimeout(window._rpDebounce);
+                window._rpDebounce = setTimeout(() => {
+                    loadResourcePacksFromModrinth();
+                }, 300);
+            }
+
+            function handleRpFilterChange() {
+                if (currentCategory !== 'resource-packs') return;
+                loadResourcePacksFromModrinth();
+            }
+
+            function resetRpFilters() {
+                if (rpSearchInput) rpSearchInput.value = '';
+                if (rpLoaderFilter) rpLoaderFilter.value = 'all';
+                if (rpVersionFilter) rpVersionFilter.value = 'all';
+                if (currentCategory === 'resource-packs') {
+                    loadResourcePacksFromModrinth();
+                }
+            }
+
+            function initRpFilters() {
+                populateRpLoaderFilter();
+                fetchRpGameVersions();
+                if (rpSearchInput) {
+                    rpSearchInput.addEventListener('input', handleRpSearch);
+                }
+                if (rpLoaderFilter) {
+                    rpLoaderFilter.addEventListener('change', handleRpFilterChange);
+                }
+                if (rpVersionFilter) {
+                    rpVersionFilter.addEventListener('change', handleRpFilterChange);
+                }
+                if (rpResetFiltersBtn) {
+                    rpResetFiltersBtn.addEventListener('click', resetRpFilters);
+                }
+            }
+
             // ============================================================
-            // 15. EVENTS (unchanged)
+            // 18. EVENTS (unchanged)
             // ============================================================
 
             document.addEventListener('click', function(e) {
@@ -3394,7 +3824,7 @@
             accountModal.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
 
             // ============================================================
-            // 16. INIT
+            // 19. INIT
             // ============================================================
 
             function initApp() {
@@ -3403,8 +3833,11 @@
                 totalItemsStat.textContent = getTotalItems();
                 totalCategoriesStat.textContent = CATEGORIES.length;
                 initPluginFilters();
+                initRpFilters();
                 if (currentCategory === 'plugins') {
                     loadPluginsFromModrinth();
+                } else if (currentCategory === 'resource-packs') {
+                    loadResourcePacksFromModrinth();
                 }
             }
 
@@ -3422,9 +3855,14 @@
                 incrementDownloadCount: incrementDownloadCount,
                 getStorageKey: getStorageKey,
                 loadPluginsFromModrinth,
+                loadResourcePacksFromModrinth,
                 fetchPlugins,
-                versionCache,
-                projectCache,
+                fetchResourcePacks,
+                // expose caches for debugging
+                pluginVersionCache,
+                pluginProjectCache,
+                rpVersionCache,
+                rpProjectCache,
             };
 
         })();
