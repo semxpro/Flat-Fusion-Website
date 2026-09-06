@@ -1170,18 +1170,17 @@
         }
 
         /* ============================================================
-           GLASSY BOTTOM NAV — UPDATED: Moved higher (increased bottom),
-           larger icons, better spacing, and loading optimizations
+           GLASSY BOTTOM NAV
            ============================================================ */
         .glassy-bottom-nav {
             position: fixed;
-            bottom: 40px; /* increased from 20px to move higher */
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 9999;
             width: auto;
             max-width: 96vw;
-            min-height: 88px; /* slightly taller */
+            min-height: 88px;
             background: rgba(12, 12, 22, 0.78);
             backdrop-filter: blur(18px) saturate(1.3);
             -webkit-backdrop-filter: blur(18px) saturate(1.3);
@@ -1223,12 +1222,17 @@
         }
 
         .glassy-nav-item i {
-            font-size: 1.5rem; /* slightly larger */
+            font-size: 1.5rem;
             transition: all 0.25s var(--ease);
             line-height: 1;
             pointer-events: none;
             position: relative;
             z-index: 1;
+             width: 52px;
+             height: 52px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
         }
 
         .glassy-nav-item span {
@@ -1242,7 +1246,6 @@
             display: block;
         }
 
-        /* ---- Active HOME button: purple circle behind icon ---- */
         .glassy-nav-item.active {
             color: #fff;
         }
@@ -1267,10 +1270,9 @@
         }
 
         .glassy-nav-item.active i {
-            margin-top: -6px;
+             margin-top: 0;
         }
 
-        /* Hover for non-active items */
         @media (hover: hover) {
             .glassy-nav-item:hover:not(.active) {
                 color: var(--text-primary);
@@ -1282,14 +1284,12 @@
         }
 
         /* ---- Responsive: Glassy Bottom Nav ---- */
-
-        /* Large screens */
         @media (min-width: 1024px) {
             .glassy-bottom-nav {
                 padding: 18px 40px;
                 gap: 10px;
                 min-height: 96px;
-                bottom: 44px; /* higher on desktop */
+                bottom: 44px;
                 border-radius: 100px;
                 max-width: 800px;
             }
@@ -1301,6 +1301,8 @@
             }
             .glassy-nav-item i {
                 font-size: 1.6rem;
+                width: 56px;
+                height: 56px;
             }
             .glassy-nav-item span {
                 font-size: 0.65rem;
@@ -1312,11 +1314,10 @@
                 font-size: 1.6rem;
             }
             body {
-                padding-bottom: 150px; /* adjust to avoid overlap */
+                padding-bottom: 150px;
             }
         }
 
-        /* Tablets & small laptops */
         @media (max-width: 1024px) {
             .glassy-bottom-nav {
                 padding: 14px 24px;
@@ -1334,6 +1335,8 @@
             }
             .glassy-nav-item i {
                 font-size: 1.4rem;
+                width: 48px;
+                height: 48px;
             }
             .glassy-nav-item span {
                 font-size: 0.55rem;
@@ -1349,7 +1352,6 @@
             }
         }
 
-        /* Mobile phones */
         @media (max-width: 820px) {
             .glassy-bottom-nav {
                 padding: 12px 18px;
@@ -1367,6 +1369,8 @@
             }
             .glassy-nav-item i {
                 font-size: 1.2rem;
+                width: 42px;
+                height: 42px;
             }
             .glassy-nav-item span {
                 font-size: 0.5rem;
@@ -1403,6 +1407,8 @@
             }
             .glassy-nav-item i {
                 font-size: 1.1rem;
+                width: 36px;
+                height: 36px;
             }
             .glassy-nav-item span {
                 font-size: 0.45rem;
@@ -1437,6 +1443,8 @@
             }
             .glassy-nav-item i {
                 font-size: 0.95rem;
+                width: 32px;
+                height: 32px;
             }
             .glassy-nav-item span {
                 font-size: 0.4rem;
@@ -1466,6 +1474,8 @@
             }
             .glassy-nav-item i {
                 font-size: 0.8rem;
+                width: 28px;
+                height: 28px;
             }
             .glassy-nav-item span {
                 display: none;
@@ -1950,14 +1960,15 @@
         }
         .semox-details-modal .semox-dm-screenshots .semox-dm-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 10px;
         }
         .semox-details-modal .semox-dm-screenshots .semox-dm-gallery img {
             width: 100%;
-            height: 100px;
+             aspect-ratio: 1 / 1;
+             height: auto;
             object-fit: cover;
-            border-radius: var(--radius);
+             border-radius: 12px;
             border: 1px solid var(--border-subtle);
             transition: var(--duration);
             cursor: pointer;
@@ -2018,6 +2029,9 @@
             font-size: 1.2rem;
             color: var(--text-muted);
             transition: var(--duration);
+            background: transparent;
+            border: none;
+            cursor: pointer;
         }
         .semox-download-modal .semox-dl-close:hover {
             color: var(--text-primary);
@@ -2163,6 +2177,9 @@
             color: #fff;
             opacity: 0.7;
             transition: var(--duration);
+            background: transparent;
+            border: none;
+            cursor: pointer;
         }
         .semox-lightbox .semox-lb-close:hover {
             opacity: 1;
@@ -2459,6 +2476,506 @@
         .fade-in-d4 {
             animation-delay: 0.2s;
         }
+
+        /* ============================================================
+           LIQUID GLASS MOTION SYSTEM
+           ============================================================ */
+        .header {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 55%),
+                rgba(10, 10, 15, 0.68);
+            backdrop-filter: blur(20px) saturate(1.35);
+            -webkit-backdrop-filter: blur(20px) saturate(1.35);
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            inset: auto 7% -1px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), rgba(34, 211, 238, 0.35), transparent);
+            opacity: 0.55;
+            pointer-events: none;
+        }
+        .header.scrolled {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 55%),
+                rgba(10, 10, 15, 0.82);
+            box-shadow: 0 8px 34px rgba(0, 0, 0, 0.42), 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+        .nav-categories {
+            position: relative;
+            isolation: isolate;
+        }
+        .nav-categories::before {
+            content: '';
+            position: absolute;
+            inset: 3px 5%;
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.045);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+            pointer-events: none;
+            z-index: -1;
+        }
+        .nav-categories .cat-btn {
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.018);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+        }
+        .nav-categories .cat-btn::before {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            border-radius: inherit;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.13), transparent 38%, transparent 68%, rgba(34, 211, 238, 0.08));
+            opacity: 0;
+            transform: translateX(-18%);
+            transition: opacity 0.35s ease, transform 0.5s var(--ease);
+            pointer-events: none;
+        }
+        .nav-categories .cat-btn:hover::before,
+        .nav-categories .cat-btn.active::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .nav-categories .cat-btn.active {
+            background:
+                linear-gradient(135deg, rgba(139, 92, 246, 0.82), rgba(109, 59, 217, 0.72)),
+                rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow:
+                0 8px 22px rgba(109, 59, 217, 0.28),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.14);
+        }
+
+        .glassy-bottom-nav {
+            isolation: isolate;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 16% 0%, rgba(255, 255, 255, 0.1), transparent 26%),
+                radial-gradient(circle at 84% 100%, rgba(34, 211, 238, 0.05), transparent 30%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.055), transparent 42%, rgba(139, 92, 246, 0.06)),
+                rgba(16, 16, 26, 0.72);
+            backdrop-filter: blur(22px) saturate(1.4);
+            -webkit-backdrop-filter: blur(22px) saturate(1.4);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow:
+                0 16px 56px rgba(0, 0, 0, 0.72),
+                0 0 0 1px rgba(255, 255, 255, 0.035),
+                inset 0 1px 0 rgba(255, 255, 255, 0.14),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.28);
+            transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+        .glassy-bottom-nav::before {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            border-radius: inherit;
+            background: linear-gradient(112deg, rgba(255, 255, 255, 0.09), transparent 25%, transparent 68%, rgba(255, 255, 255, 0.035));
+            opacity: 0.55;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .glassy-bottom-nav::after {
+            content: '';
+            position: absolute;
+            width: 42%;
+            height: 140%;
+            left: -16%;
+            top: -20%;
+            background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            filter: blur(18px);
+            transform: rotate(18deg);
+            opacity: 0.22;
+            pointer-events: none;
+            z-index: 0;
+            animation: navGlassSweep 6.5s ease-in-out infinite;
+        }
+        .glassy-nav-item {
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.25s ease, background 0.3s ease, box-shadow 0.3s ease, filter 0.25s ease;
+        }
+        .glassy-nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%, rgba(34, 211, 238, 0.035));
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+        .glassy-nav-item:hover::before,
+        .glassy-nav-item.active::before {
+            opacity: 1;
+        }
+        .glassy-nav-item.active {
+            background: rgba(255, 255, 255, 0.075);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+        .glassy-nav-item.active i {
+            background:
+                radial-gradient(circle at 30% 18%, rgba(255, 255, 255, 0.3), transparent 25%),
+                linear-gradient(145deg, rgba(160, 132, 230, 0.98), rgba(109, 59, 217, 0.92) 68%, rgba(34, 211, 238, 0.22));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow:
+                0 7px 22px rgba(139, 92, 246, 0.26),
+                0 0 0 4px rgba(139, 92, 246, 0.055),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -4px 9px rgba(52, 20, 126, 0.16);
+            animation: navIconFloat 2.8s ease-in-out infinite;
+            will-change: transform, box-shadow;
+        }
+        .glassy-nav-item.active::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 3px;
+            width: 18px;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.75);
+            transform: translateX(-50%) scaleX(0.65);
+            transform-origin: center;
+            opacity: 0.72;
+            animation: navActiveLine 2.2s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .glassy-nav-item:active {
+            filter: brightness(1.08);
+        }
+        .glassy-nav-item.active:active {
+            filter: brightness(1.08);
+        }
+
+        .semox-filter-bar,
+        .category-indicator,
+        .semox-pagination {
+            scroll-margin-top: 92px;
+        }
+        .semox-filter-bar {
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+        .semox-filter-bar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg, rgba(255, 255, 255, 0.05), transparent 32%, rgba(139, 92, 246, 0.04));
+            pointer-events: none;
+        }
+        .download-card,
+        .semox-card {
+            will-change: transform;
+        }
+        .semox-card {
+            animation: liquidCardIn 0.55s var(--ease) both;
+        }
+        .semox-card:nth-child(2) { animation-delay: 0.04s; }
+        .semox-card:nth-child(3) { animation-delay: 0.08s; }
+        .semox-card:nth-child(4) { animation-delay: 0.12s; }
+        .semox-card:nth-child(5) { animation-delay: 0.16s; }
+        .semox-card:nth-child(6) { animation-delay: 0.2s; }
+
+        button:not(:disabled),
+        a,
+        select,
+        .result-item {
+            -webkit-tap-highlight-color: transparent;
+        }
+        button:not(:disabled):active,
+        .result-item:active {
+            filter: brightness(1.12);
+        }
+        @keyframes liquidCardIn {
+            from { opacity: 0; transform: translateY(12px) scale(0.985); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes navGlassSweep {
+            0%, 100% { transform: translate3d(-28%, 0, 0) rotate(18deg); opacity: 0.14; }
+            50% { transform: translate3d(250%, 0, 0) rotate(18deg); opacity: 0.3; }
+        }
+        @keyframes navIconFloat {
+            0%, 100% { transform: scale(1.1) translateY(0); }
+            50% { transform: scale(1.14) translateY(-2px); }
+        }
+        @keyframes navActiveLine {
+            0%, 100% { opacity: 0.42; transform: translateX(-50%) scaleX(0.55); }
+            50% { opacity: 0.95; transform: translateX(-50%) scaleX(1); }
+        }
+
+        /* ============================================================
+           INTERACTION MOTION — layered, contained, and layout-safe
+           ============================================================ */
+        .hamburger {
+            position: relative;
+            overflow: hidden;
+        }
+        .hamburger::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.3), transparent 66%);
+            opacity: 0;
+            transform: scale(0.6);
+            transition: opacity 0.35s ease, transform 0.45s var(--ease);
+            pointer-events: none;
+        }
+        .hamburger i {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.45s var(--ease), color 0.25s ease;
+        }
+        .hamburger.open {
+            color: #fff;
+            border-color: rgba(139, 92, 246, 0.45);
+            background: rgba(139, 92, 246, 0.14);
+            box-shadow: 0 0 24px rgba(139, 92, 246, 0.2);
+        }
+        .hamburger.open::before {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        .hamburger.open i {
+            transform: rotate(180deg) scale(1.08);
+        }
+        .mobile-nav-overlay {
+            display: flex;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-14px);
+            transition: opacity 0.3s ease, transform 0.45s var(--ease), visibility 0.3s ease;
+        }
+        .mobile-nav-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        .mobile-nav-overlay.open .cat-btn {
+            animation: menuItemIn 0.42s var(--ease) both;
+        }
+        .mobile-nav-overlay.open .cat-btn:nth-child(2) { animation-delay: 0.035s; }
+        .mobile-nav-overlay.open .cat-btn:nth-child(3) { animation-delay: 0.07s; }
+        .mobile-nav-overlay.open .cat-btn:nth-child(4) { animation-delay: 0.105s; }
+        .mobile-nav-overlay.open .cat-btn:nth-child(5) { animation-delay: 0.14s; }
+        .mobile-nav-overlay.open .cat-btn:nth-child(6) { animation-delay: 0.175s; }
+
+        .search-overlay,
+        .account-modal,
+        .semox-details-modal,
+        .semox-download-modal,
+        .semox-lightbox {
+            display: flex;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .search-overlay.open,
+        .account-modal.open,
+        .semox-details-modal.open,
+        .semox-download-modal.open,
+        .semox-lightbox.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .search-overlay .search-box,
+        .account-modal .modal-box,
+        .semox-details-modal .semox-dm-content,
+        .semox-download-modal .semox-dl-content {
+            opacity: 0;
+            transform: translateY(18px) scale(0.965);
+            transition: opacity 0.42s ease, transform 0.55s var(--ease);
+        }
+        .search-overlay.open .search-box,
+        .account-modal.open .modal-box,
+        .semox-details-modal.open .semox-dm-content,
+        .semox-download-modal.open .semox-dl-content {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .semox-lightbox img {
+            opacity: 0;
+            transform: scale(0.86) rotate(-1.5deg);
+            transition: opacity 0.35s ease, transform 0.5s var(--ease);
+        }
+        .semox-lightbox.open img {
+            opacity: 1;
+            transform: scale(1) rotate(0);
+        }
+        .semox-details-modal.open .semox-dm-header,
+        .semox-details-modal.open .semox-dm-desc,
+        .semox-details-modal.open .semox-dm-meta,
+        .semox-details-modal.open .semox-dm-screenshots,
+        .semox-details-modal.open .semox-dm-download-btn {
+            animation: modalContentIn 0.45s var(--ease) both;
+        }
+        .semox-details-modal.open .semox-dm-desc { animation-delay: 0.04s; }
+        .semox-details-modal.open .semox-dm-meta { animation-delay: 0.08s; }
+        .semox-details-modal.open .semox-dm-screenshots { animation-delay: 0.12s; }
+        .semox-details-modal.open .semox-dm-download-btn { animation-delay: 0.16s; }
+        .semox-details-modal .semox-dm-gallery img {
+            animation: galleryTileIn 0.45s var(--ease) both;
+        }
+        .semox-details-modal .semox-dm-gallery img:nth-child(2) { animation-delay: 0.04s; }
+        .semox-details-modal .semox-dm-gallery img:nth-child(3) { animation-delay: 0.08s; }
+        .semox-details-modal .semox-dm-gallery img:nth-child(4) { animation-delay: 0.12s; }
+        .semox-details-modal .semox-dm-gallery img:nth-child(5) { animation-delay: 0.16s; }
+        .semox-details-modal .semox-dm-gallery img:nth-child(6) { animation-delay: 0.2s; }
+
+        .semox-btn-download,
+        .semox-btn-details,
+        .semox-dm-download-btn,
+        .semox-dl-action-btn,
+        .semox-btn-reset,
+        .semox-page-btn {
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+        .semox-btn-download::after,
+        .semox-dm-download-btn::after,
+        .semox-dl-action-btn::after,
+        .semox-btn-reset::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg, transparent 25%, rgba(255, 255, 255, 0.24), transparent 75%);
+            transform: translateX(-130%);
+            pointer-events: none;
+        }
+        .semox-btn-download:hover::after,
+        .semox-dm-download-btn:hover::after,
+        .semox-dl-action-btn:hover::after,
+        .semox-btn-reset:hover::after {
+            animation: buttonSheen 0.7s ease;
+        }
+        .semox-btn-download.is-launching,
+        .semox-dm-download-btn.is-launching,
+        .semox-dl-action-btn.is-launching {
+            animation: actionLaunch 0.58s var(--ease);
+        }
+        .semox-btn-details.is-opening {
+            animation: detailsTap 0.5s var(--ease);
+        }
+        .semox-btn-reset.is-resetting {
+            animation: resetPulse 0.58s var(--ease);
+        }
+        .semox-btn-reset.is-resetting i {
+            animation: resetSpin 0.58s var(--ease);
+        }
+        .semox-filter-bar.is-resetting {
+            animation: filterResetPulse 0.58s ease;
+        }
+        .semox-filter-select,
+        .semox-dl-field select {
+            transform-origin: center;
+        }
+        .semox-filter-select:focus,
+        .semox-dl-field select:focus {
+            animation: selectFocus 0.35s var(--ease);
+        }
+        .semox-card .semox-p-icon {
+            transition: transform 0.35s var(--ease), box-shadow 0.35s ease;
+        }
+        .semox-card:hover .semox-p-icon {
+            transform: translateY(-2px) rotate(-2deg);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.18);
+        }
+        .semox-page-btn:active,
+        .semox-btn-download:active,
+        .semox-btn-details:active,
+        .semox-btn-reset:active,
+        .semox-dm-download-btn:active,
+        .semox-dl-action-btn:active {
+            transform: translateY(1px) scale(0.965);
+        }
+        @keyframes menuItemIn {
+            from { opacity: 0; transform: translateX(18px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes modalContentIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes galleryTileIn {
+            from { opacity: 0; transform: translateY(12px) scale(0.94); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes buttonSheen {
+            from { transform: translateX(-130%); }
+            to { transform: translateX(130%); }
+        }
+        @keyframes actionLaunch {
+            0% { transform: scale(1); }
+            38% { transform: scale(0.94); }
+            72% { transform: scale(1.045); }
+            100% { transform: scale(1); }
+        }
+        @keyframes detailsTap {
+            0%, 100% { transform: scale(1); }
+            45% { transform: scale(0.95); }
+            75% { transform: scale(1.03); }
+        }
+        @keyframes resetSpin {
+            from { transform: rotate(0); }
+            to { transform: rotate(-360deg); }
+        }
+        @keyframes resetPulse {
+            0%, 100% { transform: scale(1); }
+            45% { transform: scale(0.94); }
+            75% { transform: scale(1.04); }
+        }
+        @keyframes filterResetPulse {
+            0%, 100% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04); }
+            50% { box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+        }
+        @keyframes selectFocus {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.012); }
+            100% { transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .glassy-bottom-nav,
+            .glassy-bottom-nav::after,
+            .glassy-nav-item.active i,
+            .glassy-nav-item.active::after,
+            .hamburger i,
+            .mobile-nav-overlay .cat-btn,
+            .semox-details-modal .semox-dm-gallery img,
+            .semox-card {
+                animation: none !important;
+            }
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ============================================================
+           DETAILS GALLERY — consistent two-column screenshot layout
+           ============================================================ */
+        .semox-details-modal .semox-dm-screenshots .semox-dm-gallery {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+        .semox-details-modal .semox-dm-screenshots .semox-dm-gallery img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            border-radius: 18px;
+        }
     </style>
 </head>
 
@@ -2624,7 +3141,7 @@
     </footer>
 
     <!-- ============================================================
-    GLASSY BOTTOM NAV — UPDATED: Moved higher, larger icons, better spacing
+    GLASSY BOTTOM NAV
     Order: LAUNCH, PE, PACK, HOME (centered), PLUGIN, MOD, SHADER
     ============================================================ -->
     <nav class="glassy-bottom-nav" id="bottomNav">
@@ -2700,14 +3217,14 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — FULL WEBSITE (with glitch fix: prevent redundant category changes)
+    JAVASCRIPT — FULL WEBSITE
     ============================================================ -->
     <script>
         (function() {
             'use strict';
 
             // ============================================================
-            // 0. DOWNLOAD COUNTER SYSTEM (unchanged)
+            // 0. DOWNLOAD COUNTER SYSTEM
             // ============================================================
 
             function stripColorTags(text) {
@@ -2781,7 +3298,7 @@
             const CSV_URL = 'https://docs.google.com/spreadsheets/d/1MCyljQbTV0durL06lYcW-NuBeH19PvIrSxUqyKEzVAk/gviz/tq?tqx=out:csv';
 
             // ============================================================
-            // 2. CATEGORY MATCHING (unchanged)
+            // 2. CATEGORY MATCHING
             // ============================================================
 
             function matchCategory(catFromSheet) {
@@ -2807,11 +3324,17 @@
                 const pluginPatterns = ['plugins', 'plugin', 'mc plugin', 'minecraft plugin'];
                 if (pluginPatterns.some(p => raw.includes(p) || p.includes(raw))) return 'plugins';
 
+                const modPatterns = ['mods', 'mod', 'minecraft mod', 'mc mod'];
+                if (modPatterns.some(p => raw.includes(p) || p.includes(raw))) return 'mods';
+
+                const shaderPatterns = ['shaders', 'shader', 'minecraft shader', 'mc shader'];
+                if (shaderPatterns.some(p => raw.includes(p) || p.includes(raw))) return 'shaders';
+
                 return null;
             }
 
             // ============================================================
-            // 3. ROBUST CSV PARSER (unchanged)
+            // 3. ROBUST CSV PARSER
             // ============================================================
 
             function parseCSV(csvText) {
@@ -2896,7 +3419,7 @@
             }
 
             // ============================================================
-            // 4. GET BADGE CSS CLASS (unchanged)
+            // 4. GET BADGE CSS CLASS
             // ============================================================
 
             function getBadgeClass(text) {
@@ -2913,7 +3436,7 @@
             }
 
             // ============================================================
-            // 5. GENERATE GROUP KEY (unchanged)
+            // 5. GENERATE GROUP KEY
             // ============================================================
 
             function generateGroupKey(row, getVal) {
@@ -2943,7 +3466,7 @@
             }
 
             // ============================================================
-            // 6. FETCH, GROUP, SORT (unchanged)
+            // 6. FETCH, GROUP, SORT
             // ============================================================
 
             async function fetchDownloads() {
@@ -2985,7 +3508,10 @@
                             let features = [];
                             const featuresRaw = getVal(row, 'features');
                             if (featuresRaw) {
-                                features = featuresRaw.split(',').map(f => f.trim()).filter(f => f);
+                                features = featuresRaw
+                                    .split(/[,🔹|]+/)
+                                    .map(f => f.trim())
+                                    .filter(f => f);
                             }
 
                             let badgeText = getVal(row, 'bedge');
@@ -3100,7 +3626,7 @@
             }
 
             // ============================================================
-            // 7. FALLBACK DATA (unchanged)
+            // 7. FALLBACK DATA
             // ============================================================
 
             function getFallbackProducts() {
@@ -3208,7 +3734,7 @@
             // 8. STATE
             // ============================================================
 
-            let currentCategory = 'all';
+            let currentCategory = null;
             let currentSearchQuery = '';
 
             // ============================================================
@@ -3357,7 +3883,7 @@
             }
 
             // ============================================================
-            // 11. RENDER CATEGORIES (updated with new categories)
+            // 11. RENDER CATEGORIES
             // ============================================================
 
             function renderCategories() {
@@ -3382,13 +3908,11 @@
             }
 
             // ============================================================
-            // 12. SET ACTIVE CATEGORY — with glitch fix (avoid redundant calls)
+            // 12. SET ACTIVE CATEGORY
             // ============================================================
 
             function setActiveCategory(categoryId) {
-                // Prevent redundant calls (fix for glitch/lag)
                 if (currentCategory === categoryId) {
-                    // Still update UI elements just in case
                     updateNavButtons(categoryId);
                     return;
                 }
@@ -3454,7 +3978,6 @@
                 renderGrid(categoryId);
             }
 
-            // Helper to update nav buttons without re-triggering setActiveCategory
             function updateNavButtons(categoryId) {
                 document.querySelectorAll('#navCategories .cat-btn').forEach(btn => {
                     btn.classList.toggle('active', btn.dataset.category === categoryId);
@@ -3468,321 +3991,332 @@
             }
 
             // ============================================================
-            // 13. RENDER GRID (handles all categories)
+            // 13. RENDER GRID
             // ============================================================
 
             function renderGrid(categoryId) {
-                // API-driven categories are handled separately
-                if (categoryId === 'plugins' || categoryId === 'resource-packs' ||
-                    categoryId === 'mods' || categoryId === 'shaders') {
-                    return;
-                }
-
-                let products = getProductsForCategory(categoryId);
-
-                if (currentSearchQuery.trim()) {
-                    const q = currentSearchQuery.trim().toLowerCase();
-                    products = products.filter(p => {
-                        const searchable = [
-                            stripColorTags(p.title),
-                            p.description || '',
-                            ...(p.features || []),
-                            getCategoryLabel(p.category),
-                            ...(p.versions.map(v => v.version || ''))
-                        ].join(' ').toLowerCase();
-                        return searchable.includes(q);
-                    });
-                }
-
-                if (products.length === 0) {
-                    const label = categoryId === 'all' ? 'products' : getCategoryLabel(categoryId);
-                    downloadGrid.innerHTML = `
-                                <div class="empty-state">
-                                    <div class="icon"><i class="fas fa-inbox"></i></div>
-                                    <h3>No ${label} Available</h3>
-                                    <p>Content for this category will be added soon. Check back later!</p>
-                                </div>
-                            `;
-                    return;
-                }
-
-                let html = '';
-                products.forEach((product, index) => {
-                    const catLabel = getCategoryLabel(product.category);
-                    const catIcon = getCategoryIcon(product.category);
-                    const hasMultipleVersions = product.versions.length > 1;
-                    const primaryVer = product.primaryVersion || product.versions[0];
-                    const parsedTitle = parseColorTitle(product.title);
-
-                    let thumbContent;
-                    if (product.icon && product.icon.trim() !== '') {
-                        thumbContent = `
-                                    <img src="${product.icon}" alt="${product.title}" loading="lazy" />
-                                    <div class="image-placeholder" style="display:none;"><i class="fas ${catIcon}"></i></div>
-                                `;
-                    } else {
-                        thumbContent = `<div class="image-placeholder" style="display:flex;"><i class="fas ${catIcon}"></i></div>`;
+                try {
+                    if (categoryId === 'plugins' || categoryId === 'resource-packs' ||
+                        categoryId === 'mods' || categoryId === 'shaders') {
+                        return;
                     }
 
-                    let editionBadge = '';
-                    if (product.edition) {
-                        editionBadge =
-                            `<span class="edition-badge" data-edition-display="${product.id}">${product.edition.charAt(0).toUpperCase() + product.edition.slice(1)}</span>`;
-                    } else {
-                        editionBadge =
-                            `<span class="edition-badge" data-edition-display="${product.id}" style="display:none;"></span>`;
+                    let products = getProductsForCategory(categoryId);
+
+                    if (currentSearchQuery.trim()) {
+                        const q = currentSearchQuery.trim().toLowerCase();
+                        products = products.filter(p => {
+                            const searchable = [
+                                stripColorTags(p.title),
+                                p.description || '',
+                                ...(p.features || []),
+                                getCategoryLabel(p.category),
+                                ...(p.versions.map(v => v.version || ''))
+                            ].join(' ').toLowerCase();
+                            return searchable.includes(q);
+                        });
                     }
 
-                    const cleanTitle = product.cleanTitle || stripColorTags(product.title).trim();
-                    const currentVersion = primaryVer.version || '';
-
-                    let versionOptions = '';
-                    product.versions.forEach((v, idx) => {
-                        const vClass = getBadgeClass(v.badgeText) || '';
-                        const isSelected = idx === 0 ? 'selected' : '';
-                        versionOptions += `<option value="${idx}" ${isSelected} 
-                                    data-badge="${v.badgeText || ''}" 
-                                    data-badge-class="${vClass}" 
-                                    data-url="${v.downloadUrl || ''}"
-                                    data-description="${v.description || ''}"
-                                    data-features="${(v.features || []).join(',')}"
-                                    data-edition="${v.edition || ''}"
-                                    data-title="${v.title || ''}"
-                                    data-version="${v.version || ''}">
-                                    ${v.version || 'unknown'}
-                                </option>`;
-                    });
-
-                    let featuresHtml = '';
-                    const primaryFeatures = product.features || primaryVer.features || [];
-                    if (primaryFeatures.length > 0) {
-                        featuresHtml =
-                            `<ul class="feature-list">${primaryFeatures.map(f => `<li><i class="fas fa-circle"></i> ${f}</li>`).join('')}</ul>`;
-                    }
-
-                    const badgeHtml = renderDownloadBadge(cleanTitle, currentVersion, product.id);
-                    const primaryBadgeText = primaryVer.badgeText || '';
-                    const badgeClass = getBadgeClass(primaryBadgeText);
-
-                    let footerHtml = '';
-                    if (hasMultipleVersions) {
-                        footerHtml = `
-                                    <div class="version-select-wrapper">
-                                        <span class="version-label">Version</span>
-                                        <select class="version-select" data-product-id="${product.id}">
-                                            ${versionOptions}
-                                        </select>
-                                        <span class="version-badge-display ${badgeClass}" data-badge-display="${product.id}">
-                                            ${primaryBadgeText || 'STABLE'}
-                                        </span>
-                                    </div>
-                                    <div class="footer-right">
-                                        ${badgeHtml}
-                                        <button class="btn-download" data-product-id="${product.id}" data-url="${primaryVer.downloadUrl || ''}" ${!primaryVer.downloadUrl ? 'disabled' : ''}>
-                                            <i class="fas fa-download"></i> ${primaryVer.downloadUrl ? 'Download' : 'Unavailable'}
-                                        </button>
+                    if (products.length === 0) {
+                        const label = categoryId === 'all' ? 'products' : getCategoryLabel(categoryId);
+                        downloadGrid.innerHTML = `
+                                    <div class="empty-state">
+                                        <div class="icon"><i class="fas fa-inbox"></i></div>
+                                        <h3>No ${label} Available</h3>
+                                        <p>Content for this category will be added soon. Check back later!</p>
                                     </div>
                                 `;
-                    } else {
-                        footerHtml = `
-                                    <div style="flex:1;min-width:10px;"></div>
-                                    <div class="footer-right">
-                                        ${badgeHtml}
-                                        <button class="btn-download" data-product-id="${product.id}" data-url="${primaryVer.downloadUrl || ''}" ${!primaryVer.downloadUrl ? 'disabled' : ''}>
-                                            <i class="fas fa-download"></i> ${primaryVer.downloadUrl ? 'Download' : 'Unavailable'}
-                                        </button>
-                                    </div>
-                                `;
+                        return;
                     }
 
-                    const displayVersion = (ver) => {
-                        if (!ver || ver.trim() === '') return '';
-                        if (ver.trim().toLowerCase().startsWith('v')) return ver.trim();
-                        return 'v' + ver.trim();
-                    };
-                    const primaryVersionDisplay = displayVersion(primaryVer.version || '');
+                    let html = '';
+                    products.forEach((product, index) => {
+                        const catLabel = getCategoryLabel(product.category);
+                        const catIcon = getCategoryIcon(product.category);
+                        const hasMultipleVersions = product.versions.length > 1;
+                        const primaryVer = product.primaryVersion || product.versions[0];
+                        const parsedTitle = parseColorTitle(product.title);
 
-                    html += `
-                                <div class="download-card fade-in fade-in-d${Math.min(index % 4 + 1, 4)}" data-product-id="${product.id}" data-group-key="${product.groupKey}" data-clean-title="${cleanTitle}">
-                                    <div class="card-top">
-                                        <div class="card-thumb">
-                                            ${thumbContent}
-                                        </div>
-                                        <div class="card-info">
-                                            <div class="title-row">
-                                                <span class="title" data-title-display="${product.id}">${parsedTitle}</span>
-                                                ${hasMultipleVersions ? `<span class="version" data-version-display="${product.id}">${primaryVersionDisplay}</span>` : (primaryVersionDisplay ? `<span class="version">${primaryVersionDisplay}</span>` : '')}
-                                                ${!hasMultipleVersions && primaryBadgeText ? `<span class="badge-pill ${badgeClass}">${primaryBadgeText}</span>` : ''}
-                                                ${editionBadge}
-                                            </div>
-                                            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;">
-                                                <span class="category-tag"><i class="fas ${catIcon}"></i> ${catLabel}</span>
-                                            </div>
-                                            <p class="desc" data-description-display="${product.id}">${product.description || ''}</p>
-                                        </div>
-                                    </div>
-                                    <div class="feature-list-container" data-features-container="${product.id}">
-                                        ${featuresHtml}
-                                    </div>
-                                    <div class="card-footer">
-                                        ${footerHtml}
-                                    </div>
-                                </div>
-                            `;
-                });
-                downloadGrid.innerHTML = html;
-
-                document.querySelectorAll('.card-thumb img').forEach(img => {
-                    img.addEventListener('error', function() {
-                        this.style.display = 'none';
-                        const placeholder = this.nextElementSibling;
-                        if (placeholder && placeholder.classList.contains('image-placeholder')) {
-                            placeholder.style.display = 'flex';
+                        let thumbContent;
+                        if (product.icon && product.icon.trim() !== '') {
+                            thumbContent = `
+                                        <img src="${product.icon}" alt="${product.title}" loading="lazy" />
+                                        <div class="image-placeholder" style="display:none;"><i class="fas ${catIcon}"></i></div>
+                                    `;
+                        } else {
+                            thumbContent = `<div class="image-placeholder" style="display:flex;"><i class="fas ${catIcon}"></i></div>`;
                         }
-                    });
-                });
 
-                if (downloadGrid._listener) {
-                    downloadGrid.removeEventListener('change', downloadGrid._listener);
-                    downloadGrid.removeEventListener('click', downloadGrid._listener);
-                }
+                        let editionBadge = '';
+                        if (product.edition) {
+                            editionBadge =
+                                `<span class="edition-badge" data-edition-display="${product.id}">${product.edition.charAt(0).toUpperCase() + product.edition.slice(1)}</span>`;
+                        } else {
+                            editionBadge =
+                                `<span class="edition-badge" data-edition-display="${product.id}" style="display:none;"></span>`;
+                        }
 
-                const gridListener = function(e) {
-                    const target = e.target;
+                        const cleanTitle = product.cleanTitle || stripColorTags(product.title).trim();
+                        const currentVersion = primaryVer.version || '';
 
-                    if (target.matches('.version-select')) {
-                        const select = target;
-                        const productId = select.dataset.productId;
-                        const selectedIndex = parseInt(select.value, 10);
-                        const option = select.options[selectedIndex];
+                        let versionOptions = '';
+                        product.versions.forEach((v, idx) => {
+                            const vClass = getBadgeClass(v.badgeText) || '';
+                            const isSelected = idx === 0 ? 'selected' : '';
+                            versionOptions += `<option value="${idx}" ${isSelected} 
+                                        data-badge="${v.badgeText || ''}" 
+                                        data-badge-class="${vClass}" 
+                                        data-url="${v.downloadUrl || ''}"
+                                        data-description="${v.description || ''}"
+                                        data-features="${(v.features || []).join(',')}"
+                                        data-edition="${v.edition || ''}"
+                                        data-title="${v.title || ''}"
+                                        data-version="${v.version || ''}">
+                                        ${v.version || 'unknown'}
+                                    </option>`;
+                        });
 
-                        const url = option.dataset.url || '';
-                        const badge = option.dataset.badge || '';
-                        const badgeClass = option.dataset.badgeClass || '';
-                        const rawVersion = option.dataset.version || option.textContent.trim();
-                        const description = option.dataset.description || '';
-                        const featuresRaw = option.dataset.features || '';
-                        const edition = option.dataset.edition || '';
-                        const rawTitle = option.dataset.title || '';
+                        let featuresHtml = '';
+                        const primaryFeatures = product.features || primaryVer.features || [];
+                        if (primaryFeatures.length > 0) {
+                            featuresHtml =
+                                `<ul class="feature-list">${primaryFeatures.map(f => `<li><i class="fas fa-circle"></i> ${f}</li>`).join('')}</ul>`;
+                        }
 
-                        const features = featuresRaw ? featuresRaw.split(',').map(f => f.trim()).filter(f => f) : [];
+                        const badgeHtml = renderDownloadBadge(cleanTitle, currentVersion, product.id);
+                        const primaryBadgeText = primaryVer.badgeText || '';
+                        const badgeClass = getBadgeClass(primaryBadgeText);
 
-                        const card = document.querySelector(`.download-card[data-product-id="${productId}"]`);
-                        if (!card) return;
-
-                        const cleanTitle = card.dataset.cleanTitle || '';
-                        const parsedTitle = parseColorTitle(rawTitle);
+                        let footerHtml = '';
+                        if (hasMultipleVersions) {
+                            footerHtml = `
+                                        <div class="version-select-wrapper">
+                                            <span class="version-label">Version</span>
+                                            <select class="version-select" data-product-id="${product.id}">
+                                                ${versionOptions}
+                                            </select>
+                                            <span class="version-badge-display ${badgeClass}" data-badge-display="${product.id}">
+                                                ${primaryBadgeText || 'STABLE'}
+                                            </span>
+                                        </div>
+                                        <div class="footer-right">
+                                            ${badgeHtml}
+                                            <button class="btn-download" data-product-id="${product.id}" data-url="${primaryVer.downloadUrl || ''}" ${!primaryVer.downloadUrl ? 'disabled' : ''}>
+                                                <i class="fas fa-download"></i> ${primaryVer.downloadUrl ? 'Download' : 'Unavailable'}
+                                            </button>
+                                        </div>
+                                    `;
+                        } else {
+                            footerHtml = `
+                                        <div style="flex:1;min-width:10px;"></div>
+                                        <div class="footer-right">
+                                            ${badgeHtml}
+                                            <button class="btn-download" data-product-id="${product.id}" data-url="${primaryVer.downloadUrl || ''}" ${!primaryVer.downloadUrl ? 'disabled' : ''}>
+                                                <i class="fas fa-download"></i> ${primaryVer.downloadUrl ? 'Download' : 'Unavailable'}
+                                            </button>
+                                        </div>
+                                    `;
+                        }
 
                         const displayVersion = (ver) => {
                             if (!ver || ver.trim() === '') return '';
                             if (ver.trim().toLowerCase().startsWith('v')) return ver.trim();
                             return 'v' + ver.trim();
                         };
-                        const versionDisplayStr = displayVersion(rawVersion);
+                        const primaryVersionDisplay = displayVersion(primaryVer.version || '');
 
-                        const titleDisplay = card.querySelector(`[data-title-display="${productId}"]`);
-                        if (titleDisplay) titleDisplay.innerHTML = parsedTitle || 'Untitled';
+                        html += `
+                                    <div class="download-card fade-in fade-in-d${Math.min(index % 4 + 1, 4)}" data-product-id="${product.id}" data-group-key="${product.groupKey}" data-clean-title="${cleanTitle}">
+                                        <div class="card-top">
+                                            <div class="card-thumb">
+                                                ${thumbContent}
+                                            </div>
+                                            <div class="card-info">
+                                                <div class="title-row">
+                                                    <span class="title" data-title-display="${product.id}">${parsedTitle}</span>
+                                                    ${hasMultipleVersions ? `<span class="version" data-version-display="${product.id}">${primaryVersionDisplay}</span>` : (primaryVersionDisplay ? `<span class="version">${primaryVersionDisplay}</span>` : '')}
+                                                    ${!hasMultipleVersions && primaryBadgeText ? `<span class="badge-pill ${badgeClass}">${primaryBadgeText}</span>` : ''}
+                                                    ${editionBadge}
+                                                </div>
+                                                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;">
+                                                    <span class="category-tag"><i class="fas ${catIcon}"></i> ${catLabel}</span>
+                                                </div>
+                                                <p class="desc" data-description-display="${product.id}">${product.description || ''}</p>
+                                            </div>
+                                        </div>
+                                        <div class="feature-list-container" data-features-container="${product.id}">
+                                            ${featuresHtml}
+                                        </div>
+                                        <div class="card-footer">
+                                            ${footerHtml}
+                                        </div>
+                                    </div>
+                                `;
+                    });
+                    downloadGrid.innerHTML = html;
 
-                        const versionDisplay = card.querySelector(`[data-version-display="${productId}"]`);
-                        if (versionDisplay) versionDisplay.textContent = versionDisplayStr;
-
-                        const badgeDisplay = card.querySelector(`[data-badge-display="${productId}"]`);
-                        if (badgeDisplay) {
-                            badgeDisplay.textContent = badge || 'STABLE';
-                            badgeDisplay.className = `version-badge-display ${badgeClass}`;
-                        }
-
-                        const descElement = card.querySelector(`[data-description-display="${productId}"]`);
-                        if (descElement) descElement.textContent = description || '';
-
-                        const editionBadgeEl = card.querySelector(`[data-edition-display="${productId}"]`);
-                        if (editionBadgeEl) {
-                            if (edition) {
-                                editionBadgeEl.textContent = edition.charAt(0).toUpperCase() + edition.slice(1);
-                                editionBadgeEl.style.display = 'inline-block';
-                            } else {
-                                editionBadgeEl.style.display = 'none';
+                    document.querySelectorAll('.card-thumb img').forEach(img => {
+                        img.addEventListener('error', function() {
+                            this.style.display = 'none';
+                            const placeholder = this.nextElementSibling;
+                            if (placeholder && placeholder.classList.contains('image-placeholder')) {
+                                placeholder.style.display = 'flex';
                             }
-                        }
+                        });
+                    });
 
-                        const featuresContainer = card.querySelector(`[data-features-container="${productId}"]`);
-                        if (featuresContainer) {
-                            if (features.length > 0) {
-                                featuresContainer.innerHTML =
-                                    `<ul class="feature-list">${features.map(f => `<li><i class="fas fa-circle"></i> ${f}</li>`).join('')}</ul>`;
-                            } else {
-                                featuresContainer.innerHTML = '';
-                            }
-                        }
-
-                        const downloadBtn = card.querySelector(`.btn-download[data-product-id="${productId}"]`);
-                        if (downloadBtn) {
-                            if (url && url.trim() !== '') {
-                                downloadBtn.disabled = false;
-                                downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download';
-                                downloadBtn.dataset.url = url;
-                            } else {
-                                downloadBtn.disabled = true;
-                                downloadBtn.innerHTML = '<i class="fas fa-ban"></i> Unavailable';
-                                downloadBtn.dataset.url = '';
-                            }
-                        }
-
-                        if (cleanTitle) {
-                            updateDownloadBadgeUI(productId, cleanTitle, rawVersion);
-                        }
-
-                        e.preventDefault();
+                    if (downloadGrid._listener) {
+                        downloadGrid.removeEventListener('change', downloadGrid._listener);
+                        downloadGrid.removeEventListener('click', downloadGrid._listener);
                     }
 
-                    if (target.matches('.btn-download:not([disabled])')) {
-                        const btn = target;
-                        const url = btn.dataset.url;
-                        const productId = btn.dataset.productId;
-                        const card = btn.closest('.download-card');
-                        if (!card) return;
-                        const cleanTitle = card.dataset.cleanTitle || '';
+                    const gridListener = function(e) {
+                        const target = e.target;
 
-                        const select = card.querySelector('.version-select');
-                        let version = '';
-                        if (select) {
+                        if (target.matches('.version-select')) {
+                            const select = target;
+                            const productId = select.dataset.productId;
                             const selectedIndex = parseInt(select.value, 10);
                             const option = select.options[selectedIndex];
-                            version = option.dataset.version || option.textContent.trim();
-                        } else {
-                            const verDisplay = card.querySelector('[data-version-display]');
-                            if (verDisplay) {
-                                version = verDisplay.textContent.trim().replace(/^v/, '');
+
+                            const url = option.dataset.url || '';
+                            const badge = option.dataset.badge || '';
+                            const badgeClass = option.dataset.badgeClass || '';
+                            const rawVersion = option.dataset.version || option.textContent.trim();
+                            const description = option.dataset.description || '';
+                            const featuresRaw = option.dataset.features || '';
+                            const edition = option.dataset.edition || '';
+                            const rawTitle = option.dataset.title || '';
+
+                            const features = featuresRaw ? featuresRaw.split(',').map(f => f.trim()).filter(f => f) : [];
+
+                            const card = document.querySelector(`.download-card[data-product-id="${productId}"]`);
+                            if (!card) return;
+
+                            const cleanTitle = card.dataset.cleanTitle || '';
+                            const parsedTitle = parseColorTitle(rawTitle);
+
+                            const displayVersion = (ver) => {
+                                if (!ver || ver.trim() === '') return '';
+                                if (ver.trim().toLowerCase().startsWith('v')) return ver.trim();
+                                return 'v' + ver.trim();
+                            };
+                            const versionDisplayStr = displayVersion(rawVersion);
+
+                            const titleDisplay = card.querySelector(`[data-title-display="${productId}"]`);
+                            if (titleDisplay) titleDisplay.innerHTML = parsedTitle || 'Untitled';
+
+                            const versionDisplay = card.querySelector(`[data-version-display="${productId}"]`);
+                            if (versionDisplay) versionDisplay.textContent = versionDisplayStr;
+
+                            const badgeDisplay = card.querySelector(`[data-badge-display="${productId}"]`);
+                            if (badgeDisplay) {
+                                badgeDisplay.textContent = badge || 'STABLE';
+                                badgeDisplay.className = `version-badge-display ${badgeClass}`;
+                            }
+
+                            const descElement = card.querySelector(`[data-description-display="${productId}"]`);
+                            if (descElement) descElement.textContent = description || '';
+
+                            const editionBadgeEl = card.querySelector(`[data-edition-display="${productId}"]`);
+                            if (editionBadgeEl) {
+                                if (edition) {
+                                    editionBadgeEl.textContent = edition.charAt(0).toUpperCase() + edition.slice(1);
+                                    editionBadgeEl.style.display = 'inline-block';
+                                } else {
+                                    editionBadgeEl.style.display = 'none';
+                                }
+                            }
+
+                            const featuresContainer = card.querySelector(`[data-features-container="${productId}"]`);
+                            if (featuresContainer) {
+                                if (features.length > 0) {
+                                    featuresContainer.innerHTML =
+                                        `<ul class="feature-list">${features.map(f => `<li><i class="fas fa-circle"></i> ${f}</li>`).join('')}</ul>`;
+                                } else {
+                                    featuresContainer.innerHTML = '';
+                                }
+                            }
+
+                            const downloadBtn = card.querySelector(`.btn-download[data-product-id="${productId}"]`);
+                            if (downloadBtn) {
+                                if (url && url.trim() !== '') {
+                                    downloadBtn.disabled = false;
+                                    downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download';
+                                    downloadBtn.dataset.url = url;
+                                } else {
+                                    downloadBtn.disabled = true;
+                                    downloadBtn.innerHTML = '<i class="fas fa-ban"></i> Unavailable';
+                                    downloadBtn.dataset.url = '';
+                                }
+                            }
+
+                            if (cleanTitle) {
+                                updateDownloadBadgeUI(productId, cleanTitle, rawVersion);
+                            }
+
+                            e.preventDefault();
+                        }
+
+                        const downloadTarget = target.closest('.btn-download:not([disabled])');
+                        if (downloadTarget) {
+                            const btn = downloadTarget;
+                            const url = btn.dataset.url;
+                            const productId = btn.dataset.productId;
+                            const card = btn.closest('.download-card');
+                            if (!card) return;
+                            const cleanTitle = card.dataset.cleanTitle || '';
+
+                            const select = card.querySelector('.version-select');
+                            let version = '';
+                            if (select) {
+                                const selectedIndex = parseInt(select.value, 10);
+                                const option = select.options[selectedIndex];
+                                version = option.dataset.version || option.textContent.trim();
                             } else {
-                                const product = PRODUCTS.find(p => p.id === productId);
-                                if (product) version = product.primaryVersion?.version || '';
+                                const verDisplay = card.querySelector('[data-version-display]');
+                                if (verDisplay) {
+                                    version = verDisplay.textContent.trim().replace(/^v/, '');
+                                } else {
+                                    const product = PRODUCTS.find(p => p.id === productId);
+                                    if (product) version = product.primaryVersion?.version || '';
+                                }
                             }
-                        }
 
-                        if (url && url.trim() !== '' && url !== '#') {
-                            if (cleanTitle && version) {
-                                incrementDownloadCount(cleanTitle, version);
-                                updateDownloadBadgeUI(productId, cleanTitle, version);
+                            if (url && url.trim() !== '' && url !== '#') {
+                                if (cleanTitle && version) {
+                                    incrementDownloadCount(cleanTitle, version);
+                                    updateDownloadBadgeUI(productId, cleanTitle, version);
+                                }
+                                const a = document.createElement('a');
+                                a.href = url;
+                                a.target = '_blank';
+                                a.rel = 'noopener noreferrer';
+                                document.body.appendChild(a);
+                                a.click();
+                                document.body.removeChild(a);
+                            } else {
+                                alert(
+                                    `Download URL for "${card.querySelector('.title')?.textContent || 'file'}" is not available.`
+                                    );
                             }
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.target = '_blank';
-                            a.rel = 'noopener noreferrer';
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
-                        } else {
-                            alert(
-                                `Download URL for "${card.querySelector('.title')?.textContent || 'file'}" is not available.`
-                                );
+                            e.preventDefault();
                         }
-                        e.preventDefault();
-                    }
-                };
+                    };
 
-                downloadGrid._listener = gridListener;
-                downloadGrid.addEventListener('change', gridListener);
-                downloadGrid.addEventListener('click', gridListener);
+                    downloadGrid._listener = gridListener;
+                    downloadGrid.addEventListener('change', gridListener);
+                    downloadGrid.addEventListener('click', gridListener);
+                } catch (error) {
+                    console.error('Error in renderGrid:', error);
+                    downloadGrid.innerHTML = `
+                                <div class="empty-state">
+                                    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+                                    <h3>Error Loading Content</h3>
+                                    <p>${error.message}</p>
+                                </div>
+                            `;
+                }
             }
 
             // ============================================================
@@ -3859,7 +4393,7 @@
             }
 
             // ============================================================
-            // 15. PLUGIN MODRINTH API (unchanged)
+            // 15. PLUGIN MODRINTH API
             // ============================================================
 
             let pluginCurrentPage = 1;
@@ -4090,14 +4624,22 @@
             }
 
             function scrollToFirstCard() {
+                const filterIds = {
+                    plugins: 'semoxPluginFilterBar',
+                    'resource-packs': 'semoxRpFilterBar',
+                    mods: 'semoxModFilterBar',
+                    shaders: 'semoxShaderFilterBar'
+                };
+                const filterBar = document.getElementById(filterIds[currentCategory] || '');
+                if (filterBar && getComputedStyle(filterBar).display !== 'none') {
+                    filterBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    return;
+                }
+
                 const firstCard = document.querySelector('.semox-card') || document.querySelector('.download-card');
-                if (firstCard) {
-                    firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                    const grid = document.querySelector('.semox-grid') || document.querySelector('.download-grid');
-                    if (grid) {
-                        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
+                const target = firstCard || document.querySelector('.semox-grid') || document.querySelector('.download-grid');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             }
 
@@ -4187,7 +4729,7 @@
             }
 
             // ============================================================
-            // 16. RESOURCE PACK MODRINTH API (unchanged, updated label)
+            // 16. RESOURCE PACK MODRINTH API
             // ============================================================
 
             let rpCurrentPage = 1;
@@ -4437,7 +4979,7 @@
             }
 
             // ============================================================
-            // 17. MODS MODRINTH API (NEW)
+            // 17. MODS MODRINTH API
             // ============================================================
 
             let modCurrentPage = 1;
@@ -4677,7 +5219,7 @@
             }
 
             // ============================================================
-            // 18. SHADERS MODRINTH API (NEW)
+            // 18. SHADERS MODRINTH API
             // ============================================================
 
             let shaderCurrentPage = 1;
@@ -4925,12 +5467,15 @@
             }
 
             // ============================================================
-            // 19. SHARED SEMOX EVENTS (details + download)
+            // 19. SHARED SEMOX EVENTS
             // ============================================================
 
             function attachSemoxEvents(type) {
                 document.querySelectorAll('.semox-btn-details').forEach(btn => {
                     btn.addEventListener('click', function() {
+                        this.classList.remove('is-opening');
+                        requestAnimationFrame(() => this.classList.add('is-opening'));
+                        window.setTimeout(() => this.classList.remove('is-opening'), 560);
                         const id = this.dataset.projectId;
                         const type = this.dataset.type || 'plugin';
                         openDetailsModal(id, type);
@@ -4940,6 +5485,9 @@
                 document.querySelectorAll('.semox-btn-download').forEach(btn => {
                     btn.addEventListener('click', function() {
                         if (!this.dataset.projectId) return;
+                        this.classList.remove('is-launching');
+                        requestAnimationFrame(() => this.classList.add('is-launching'));
+                        window.setTimeout(() => this.classList.remove('is-launching'), 620);
                         const id = this.dataset.projectId;
                         const name = this.dataset.projectName || 'Item';
                         const icon = this.dataset.projectIcon || '';
@@ -4983,7 +5531,7 @@
             }
 
             // ============================================================
-            // 20. DETAILS & DOWNLOAD MODALS (shared across all types)
+            // 20. DETAILS & DOWNLOAD MODALS
             // ============================================================
 
             async function openDetailsModal(projectId, type) {
@@ -5271,7 +5819,21 @@
                 loadPluginsFromModrinth();
             }
 
+            function animateFilterReset(button, filterBar) {
+                if (button) {
+                    button.classList.remove('is-resetting');
+                    requestAnimationFrame(() => button.classList.add('is-resetting'));
+                    window.setTimeout(() => button.classList.remove('is-resetting'), 650);
+                }
+                if (filterBar) {
+                    filterBar.classList.remove('is-resetting');
+                    requestAnimationFrame(() => filterBar.classList.add('is-resetting'));
+                    window.setTimeout(() => filterBar.classList.remove('is-resetting'), 650);
+                }
+            }
+
             function resetPluginFilters() {
+                animateFilterReset(resetFiltersBtn, pluginFilterBar);
                 if (pluginSearchInput) pluginSearchInput.value = '';
                 if (pluginLoaderFilter) pluginLoaderFilter.value = 'all';
                 if (pluginVersionFilter) pluginVersionFilter.value = 'all';
@@ -5290,6 +5852,7 @@
             }
 
             function resetRpFilters() {
+                animateFilterReset(rpResetFiltersBtn, rpFilterBar);
                 if (rpSearchInput) rpSearchInput.value = '';
                 if (rpLoaderFilter) rpLoaderFilter.value = 'all';
                 if (rpVersionFilter) rpVersionFilter.value = 'all';
@@ -5308,6 +5871,7 @@
             }
 
             function resetModFilters() {
+                animateFilterReset(modResetFiltersBtn, modFilterBar);
                 if (modSearchInput) modSearchInput.value = '';
                 if (modLoaderFilter) modLoaderFilter.value = 'all';
                 if (modVersionFilter) modVersionFilter.value = 'all';
@@ -5326,6 +5890,7 @@
             }
 
             function resetShaderFilters() {
+                animateFilterReset(shaderResetFiltersBtn, shaderFilterBar);
                 if (shaderSearchInput) shaderSearchInput.value = '';
                 if (shaderLoaderFilter) shaderLoaderFilter.value = 'all';
                 if (shaderVersionFilter) shaderVersionFilter.value = 'all';
@@ -5333,7 +5898,7 @@
             }
 
             // ============================================================
-            // 22. LOAD FUNCTIONS (exported)
+            // 22. LOAD FUNCTIONS
             // ============================================================
 
             function loadPluginsFromModrinth() {
@@ -5409,19 +5974,19 @@
             }
 
             // ============================================================
-            // 24. EVENTS (updated for glassy-nav-item, with glitch fix)
+            // 24. EVENTS
             // ============================================================
 
             document.addEventListener('click', function(e) {
                 const btn = e.target.closest('.cat-btn, .glassy-nav-item');
                 if (btn && btn.dataset.category) {
                     const cat = btn.dataset.category;
-                    // Avoid redundant calls — setActiveCategory already handles this
                     if (currentCategory === cat) return;
                     currentSearchQuery = '';
                     searchInput.value = '';
                     setActiveCategory(cat);
                     mobileNavEl.classList.remove('open');
+                    hamburgerBtn.classList.remove('open');
                     hamburgerBtn.querySelector('i').className = 'fas fa-bars';
                     searchOverlay.classList.remove('open');
                 }
@@ -5434,12 +5999,14 @@
                 searchInput.value = '';
                 setActiveCategory('all');
                 mobileNavEl.classList.remove('open');
+                hamburgerBtn.classList.remove('open');
                 hamburgerBtn.querySelector('i').className = 'fas fa-bars';
                 searchOverlay.classList.remove('open');
             });
 
             hamburgerBtn.addEventListener('click', function() {
                 const isOpen = mobileNavEl.classList.toggle('open');
+                this.classList.toggle('open', isOpen);
                 this.querySelector('i').className = isOpen ? 'fas fa-times' : 'fas fa-bars';
             });
 
