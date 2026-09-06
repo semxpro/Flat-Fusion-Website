@@ -14,7 +14,7 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
-    <title>Mod Forge</title>
+    <title>Mob Forge</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
@@ -2976,6 +2976,55 @@
             object-fit: cover;
             border-radius: 18px;
         }
+
+        /* ============================================================
+           FINAL UI LAYER FIX — desktop nav must never cover a modal
+           ============================================================ */
+        .glassy-bottom-nav {
+            z-index: 900;
+        }
+        .semox-details-modal {
+            z-index: 9500;
+        }
+        .semox-download-modal {
+            z-index: 10000;
+        }
+        .semox-download-modal .semox-dl-content,
+        .semox-details-modal .semox-dm-content {
+            position: relative;
+            z-index: 1;
+            max-height: calc(100dvh - 40px);
+            overflow-y: auto;
+        }
+
+        @media (min-width: 821px) {
+            body {
+                padding-bottom: 150px;
+            }
+            .glassy-bottom-nav {
+                bottom: 24px;
+                max-width: calc(100vw - 48px);
+                z-index: 900;
+            }
+            .semox-download-modal {
+                padding: 32px;
+                z-index: 10000;
+            }
+            .semox-download-modal .semox-dl-content {
+                max-width: min(480px, calc(100vw - 64px));
+            }
+        }
+
+        @media (max-width: 820px) {
+            .semox-download-modal,
+            .semox-details-modal {
+                z-index: 10000;
+            }
+            .semox-download-modal .semox-dl-content,
+            .semox-details-modal .semox-dm-content {
+                max-height: calc(100dvh - 32px);
+            }
+        }
     </style>
 </head>
 
@@ -2988,7 +3037,7 @@
         <div class="header-inner">
             <a href="#" class="logo" id="logoHome">
                 <span class="logo-icon"><i class="fas fa-cube"></i></span>
-                <span>Mod Forge</span>
+                <span>Mob Forge</span>
             </a>
             <nav class="nav-categories" id="navCategories"></nav>
             <div class="header-actions">
@@ -3007,7 +3056,7 @@
     <main class="container" id="mainContent">
 
         <section class="hero fade-in">
-            <div class="hero-badge"><i class="fas fa-bolt"></i> Premium Downloads</div>
+            <div class="hero-badge"><i class="fas fa-bolt"></i> SemxPro </div>
             <h1>Minecraft <span class="highlight">Downloads</span><br />Made Simple</h1>
             <p>Discover the latest Minecraft PE versions, optimized launchers, resource packs, mods, shaders, and plugins — all free and safe.</p>
             <div class="hero-stats">
@@ -3232,40 +3281,95 @@
                 return text.replace(/<[^>]+>/g, '');
             }
 
+            // Counts are held in memory only for rendering. The source of
+            // truth is the Express/SQLite API, so refreshes and other users
+            // see the same global number.
+            const DOWNLOAD_API_URL = window.DOWNLOAD_API_URL || '/api/downloads';
+            const downloadCounts = new Map();
+
             function getStorageKey(cleanTitle, version) {
                 const clean = cleanTitle ? cleanTitle.trim() : 'untitled';
                 const ver = version ? version.trim() : 'unknown';
-                return `download_count_${clean}_${ver}`;
+                return `sheet:${clean}:${ver}`;
+            }
+
+            function modrinthDownloadKey(type, projectId, version, loader) {
+                return `modrinth:${type}:${projectId}:${version || 'unknown'}:${loader || 'unknown'}`;
             }
 
             function getDownloadCount(cleanTitle, version) {
                 if (!cleanTitle) return 0;
+                return downloadCounts.get(getStorageKey(cleanTitle, version)) || 0;
+            }
+
+            function updateAllDownloadBadges() {
+                document.querySelectorAll('[data-download-key]').forEach((element) => {
+                    const count = downloadCounts.get(element.dataset.downloadKey) || 0;
+                    const target = element.classList.contains('count') ||
+                        element.classList.contains('semox-count') ? element : element.querySelector('.count');
+                    if (target) target.textContent = count;
+                });
+            }
+
+            async function fetchDownloadCounts() {
                 try {
-                    const key = getStorageKey(cleanTitle, version);
-                    const val = localStorage.getItem(key);
-                    return val ? parseInt(val, 10) || 0 : 0;
-                } catch (e) {
-                    return 0;
+                    const response = await fetch(DOWNLOAD_API_URL, {
+                        headers: { Accept: 'application/json' },
+                        cache: 'no-store'
+                    });
+                    if (!response.ok) throw new Error(`Download API returned ${response.status}`);
+                    const payload = await response.json();
+                    downloadCounts.clear();
+                    Object.entries(payload.counts || {}).forEach(([key, value]) => {
+                        downloadCounts.set(key, Number(value) || 0);
+                    });
+                    updateAllDownloadBadges();
+                    return payload.counts || {};
+                } catch (error) {
+                    console.warn('Global download counts are temporarily unavailable:', error);
+                    return {};
                 }
+            }
+
+            function recordDownload(itemKey, metadata = {}) {
+                const optimisticCount = (downloadCounts.get(itemKey) || 0) + 1;
+                downloadCounts.set(itemKey, optimisticCount);
+                updateAllDownloadBadges();
+
+                fetch(DOWNLOAD_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                    body: JSON.stringify({ itemKey, ...metadata })
+                })
+                    .then((response) => {
+                        if (!response.ok) throw new Error(`Download API returned ${response.status}`);
+                        return response.json();
+                    })
+                    .then((payload) => {
+                        if (payload.itemKey) downloadCounts.set(payload.itemKey, Number(payload.count) || 0);
+                        updateAllDownloadBadges();
+                    })
+                    .catch((error) => {
+                        console.warn('Download could not be persisted:', error);
+                        fetchDownloadCounts();
+                    });
+
+                return optimisticCount;
             }
 
             function incrementDownloadCount(cleanTitle, version) {
                 if (!cleanTitle) return 0;
-                try {
-                    const key = getStorageKey(cleanTitle, version);
-                    const current = parseInt(localStorage.getItem(key) || '0', 10) || 0;
-                    const newCount = current + 1;
-                    localStorage.setItem(key, String(newCount));
-                    return newCount;
-                } catch (e) {
-                    return 1;
-                }
+                return recordDownload(getStorageKey(cleanTitle, version), {
+                    category: 'sheet',
+                    title: cleanTitle,
+                    version: version || ''
+                });
             }
 
             function renderDownloadBadge(cleanTitle, version, productId) {
                 const count = getDownloadCount(cleanTitle, version);
                 return `
-                            <span class="download-count-badge" data-download-badge="${productId}" data-clean-title="${cleanTitle}" data-version="${version}">
+                            <span class="download-count-badge" data-download-badge="${productId}" data-download-key="${getStorageKey(cleanTitle, version)}" data-clean-title="${cleanTitle}" data-version="${version}">
                                 <i class="fas fa-download"></i>
                                 <span class="count">${count}</span>
                             </span>
@@ -4414,21 +4518,13 @@
             const pluginProjectCache = new Map();
 
             function getPluginDownloadCount(projectId, version, loader) {
-                const key = `semx_plugin_downloads_${projectId}_${version}_${loader}`;
-                try {
-                    const val = localStorage.getItem(key);
-                    return val ? parseInt(val, 10) || 0 : 0;
-                } catch (e) { return 0; }
+                return downloadCounts.get(modrinthDownloadKey('plugin', projectId, version, loader)) || 0;
             }
 
             function incrementPluginDownloadCount(projectId, version, loader) {
-                const key = `semx_plugin_downloads_${projectId}_${version}_${loader}`;
-                try {
-                    const current = parseInt(localStorage.getItem(key) || '0', 10) || 0;
-                    const newCount = current + 1;
-                    localStorage.setItem(key, String(newCount));
-                    return newCount;
-                } catch (e) { return 1; }
+                return recordDownload(modrinthDownloadKey('plugin', projectId, version, loader), {
+                    category: 'plugin', projectId, version, loader
+                });
             }
 
             async function fetchPluginGameVersions() {
@@ -4695,7 +4791,7 @@
                                     <div class="semox-p-footer">
                                         <div class="semox-p-dl-count">
                                             <i class="fas fa-download"></i>
-                                            <span class="semox-count" data-plugin-count="${projectId}">${downloads}</span>
+                                            <span class="semox-count" data-plugin-count="${projectId}" data-download-key="${modrinthDownloadKey('plugin', projectId, version, displayLoaders[0] || 'default')}">${downloads}</span>
                                         </div>
                                         <div style="display:flex;gap:8px;">
                                             <button class="semox-btn-details" data-project-id="${projectId}" data-type="plugin">Details</button>
@@ -4750,21 +4846,13 @@
             const rpProjectCache = new Map();
 
             function getRpDownloadCount(projectId, version, loader) {
-                const key = `semx_rp_downloads_${projectId}_${version}_${loader}`;
-                try {
-                    const val = localStorage.getItem(key);
-                    return val ? parseInt(val, 10) || 0 : 0;
-                } catch (e) { return 0; }
+                return downloadCounts.get(modrinthDownloadKey('resourcepack', projectId, version, loader)) || 0;
             }
 
             function incrementRpDownloadCount(projectId, version, loader) {
-                const key = `semx_rp_downloads_${projectId}_${version}_${loader}`;
-                try {
-                    const current = parseInt(localStorage.getItem(key) || '0', 10) || 0;
-                    const newCount = current + 1;
-                    localStorage.setItem(key, String(newCount));
-                    return newCount;
-                } catch (e) { return 1; }
+                return recordDownload(modrinthDownloadKey('resourcepack', projectId, version, loader), {
+                    category: 'resourcepack', projectId, version, loader
+                });
             }
 
             async function fetchRpGameVersions() {
@@ -4945,7 +5033,7 @@
                                     <div class="semox-p-footer">
                                         <div class="semox-p-dl-count">
                                             <i class="fas fa-download"></i>
-                                            <span class="semox-count" data-rp-count="${projectId}">${downloads}</span>
+                                            <span class="semox-count" data-rp-count="${projectId}" data-download-key="${modrinthDownloadKey('resourcepack', projectId, version, displayLoaders[0] || 'default')}">${downloads}</span>
                                         </div>
                                         <div style="display:flex;gap:8px;">
                                             <button class="semox-btn-details" data-project-id="${projectId}" data-type="resourcepack">Details</button>
@@ -5000,21 +5088,13 @@
             const modProjectCache = new Map();
 
             function getModDownloadCount(projectId, version, loader) {
-                const key = `semx_mod_downloads_${projectId}_${version}_${loader}`;
-                try {
-                    const val = localStorage.getItem(key);
-                    return val ? parseInt(val, 10) || 0 : 0;
-                } catch (e) { return 0; }
+                return downloadCounts.get(modrinthDownloadKey('mod', projectId, version, loader)) || 0;
             }
 
             function incrementModDownloadCount(projectId, version, loader) {
-                const key = `semx_mod_downloads_${projectId}_${version}_${loader}`;
-                try {
-                    const current = parseInt(localStorage.getItem(key) || '0', 10) || 0;
-                    const newCount = current + 1;
-                    localStorage.setItem(key, String(newCount));
-                    return newCount;
-                } catch (e) { return 1; }
+                return recordDownload(modrinthDownloadKey('mod', projectId, version, loader), {
+                    category: 'mod', projectId, version, loader
+                });
             }
 
             async function fetchModGameVersions() {
@@ -5185,7 +5265,7 @@
                                     <div class="semox-p-footer">
                                         <div class="semox-p-dl-count">
                                             <i class="fas fa-download"></i>
-                                            <span class="semox-count" data-mod-count="${projectId}">${downloads}</span>
+                                            <span class="semox-count" data-mod-count="${projectId}" data-download-key="${modrinthDownloadKey('mod', projectId, version, displayLoaders[0] || 'default')}">${downloads}</span>
                                         </div>
                                         <div style="display:flex;gap:8px;">
                                             <button class="semox-btn-details" data-project-id="${projectId}" data-type="mod">Details</button>
@@ -5240,21 +5320,13 @@
             const shaderProjectCache = new Map();
 
             function getShaderDownloadCount(projectId, version, loader) {
-                const key = `semx_shader_downloads_${projectId}_${version}_${loader}`;
-                try {
-                    const val = localStorage.getItem(key);
-                    return val ? parseInt(val, 10) || 0 : 0;
-                } catch (e) { return 0; }
+                return downloadCounts.get(modrinthDownloadKey('shader', projectId, version, loader)) || 0;
             }
 
             function incrementShaderDownloadCount(projectId, version, loader) {
-                const key = `semx_shader_downloads_${projectId}_${version}_${loader}`;
-                try {
-                    const current = parseInt(localStorage.getItem(key) || '0', 10) || 0;
-                    const newCount = current + 1;
-                    localStorage.setItem(key, String(newCount));
-                    return newCount;
-                } catch (e) { return 1; }
+                return recordDownload(modrinthDownloadKey('shader', projectId, version, loader), {
+                    category: 'shader', projectId, version, loader
+                });
             }
 
             async function fetchShaderGameVersions() {
@@ -5433,7 +5505,7 @@
                                     <div class="semox-p-footer">
                                         <div class="semox-p-dl-count">
                                             <i class="fas fa-download"></i>
-                                            <span class="semox-count" data-shader-count="${projectId}">${downloads}</span>
+                                            <span class="semox-count" data-shader-count="${projectId}" data-download-key="${modrinthDownloadKey('shader', projectId, version, displayLoaders[0] || 'default')}">${downloads}</span>
                                         </div>
                                         <div style="display:flex;gap:8px;">
                                             <button class="semox-btn-details" data-project-id="${projectId}" data-type="shader">Details</button>
@@ -5771,10 +5843,10 @@
                     };
                     const handler = countMap[type];
                     if (handler) {
-                        handler.inc(projectId, version, loader);
+                        const newCount = handler.inc(projectId, version, loader);
                         const countEl = document.querySelector(`[${handler.countAttr}="${projectId}"]`);
                         if (countEl) {
-                            const newCount = handler.get(projectId, version, loader);
+                            countEl.dataset.downloadKey = modrinthDownloadKey(type, projectId, version, loader);
                             countEl.textContent = newCount;
                         }
                     }
@@ -6074,6 +6146,8 @@
                 else if (currentCategory === 'shaders') loadShadersFromModrinth();
             }
 
+            fetchDownloadCounts();
+            window.setInterval(fetchDownloadCounts, 15000);
             fetchDownloads();
 
             window.__build = {
