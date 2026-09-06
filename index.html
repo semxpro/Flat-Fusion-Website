@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/semxpro/Flat-Fusion-Website/main/file_00000000b9e081f5b35afc10ccbeef5c.png" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         /* ============================================================
@@ -2978,6 +2979,111 @@
         }
 
         /* ============================================================
+           PREMIUM MOD-DOWNLOAD SURFACE — lightweight, GPU-friendly
+           ============================================================ */
+        .hero {
+            isolation: isolate;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            width: min(760px, 92vw);
+            height: 300px;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at center, rgba(139, 92, 246, 0.12), transparent 62%),
+                radial-gradient(ellipse at 72% 22%, rgba(34, 211, 238, 0.08), transparent 38%);
+            filter: blur(16px);
+            opacity: 0.9;
+        }
+        .hero h1 {
+            letter-spacing: -1.8px;
+            text-shadow: 0 12px 38px rgba(0, 0, 0, 0.34);
+        }
+        .hero .highlight {
+            background: linear-gradient(110deg, #c4b5fd 0%, #8b5cf6 48%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        .glassy-bottom-nav {
+            contain: layout paint;
+            transform: translate3d(-50%, 0, 0);
+            will-change: transform;
+            backdrop-filter: blur(14px) saturate(1.25);
+            -webkit-backdrop-filter: blur(14px) saturate(1.25);
+        }
+        .glassy-bottom-nav::after {
+            animation: none;
+            opacity: 0.16;
+        }
+        .glassy-nav-item,
+        .glassy-nav-item i {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .glassy-nav-item {
+            transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .glassy-nav-item.active::after {
+            animation: none;
+        }
+        .glassy-nav-item.active i {
+            animation: none;
+        }
+        .footer .links {
+            gap: 10px;
+        }
+        .footer .links a {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.035);
+            box-shadow: 0 0 0 rgba(139, 92, 246, 0);
+            transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .footer .links a:hover,
+        .footer .links a:focus-visible {
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .footer .links a:nth-child(1):hover,
+        .footer .links a:nth-child(1):focus-visible {
+            border-color: rgba(236, 72, 153, 0.75);
+            background: rgba(236, 72, 153, 0.12);
+            box-shadow: 0 0 24px rgba(236, 72, 153, 0.26);
+        }
+        .footer .links a:nth-child(2):hover,
+        .footer .links a:nth-child(2):focus-visible {
+            border-color: rgba(255, 72, 72, 0.75);
+            background: rgba(255, 72, 72, 0.12);
+            box-shadow: 0 0 24px rgba(255, 72, 72, 0.26);
+        }
+        .footer .links a:nth-child(3):hover,
+        .footer .links a:nth-child(3):focus-visible {
+            border-color: rgba(88, 101, 242, 0.85);
+            background: rgba(88, 101, 242, 0.15);
+            box-shadow: 0 0 24px rgba(88, 101, 242, 0.3);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .glassy-bottom-nav::after,
+            .glassy-nav-item.active i {
+                animation: none !important;
+            }
+            .footer .links a:hover,
+            .footer .links a:focus-visible {
+                transform: none;
+            }
+        }
+
+        /* ============================================================
            FINAL UI LAYER FIX — desktop nav must never cover a modal
            ============================================================ */
         .glassy-bottom-nav {
@@ -3057,8 +3163,8 @@
 
         <section class="hero fade-in">
             <div class="hero-badge"><i class="fas fa-bolt"></i> SemxPro </div>
-            <h1>Minecraft <span class="highlight">Downloads</span><br />Made Simple</h1>
-            <p>Discover the latest Minecraft PE versions, optimized launchers, resource packs, mods, shaders, and plugins — all free and safe.</p>
+            <h1>Minecraft <span class="highlight">Mods &amp; Downloads</span><br />Built for Your Game</h1>
+            <p>Discover premium Minecraft PE releases, launchers, resource packs, mods, shaders, and plugins — curated for a clean, fast download experience.</p>
             <div class="hero-stats">
                 <span class="stat"><i class="fas fa-database"></i> <strong id="totalItemsStat">0</strong> items</span>
                 <span class="stat"><i class="fas fa-tag"></i> <strong id="totalCategoriesStat">0</strong> categories</span>
@@ -3281,11 +3387,21 @@
                 return text.replace(/<[^>]+>/g, '');
             }
 
-            // Counts are held in memory only for rendering. The source of
-            // truth is the Express/SQLite API, so refreshes and other users
-            // see the same global number.
-            const DOWNLOAD_API_URL = window.DOWNLOAD_API_URL || '/api/downloads';
+            // Supabase is the source of truth. The publishable/anon key is
+            // safe to expose in a static frontend; table writes are blocked
+            // by RLS and can only happen through the increment RPC below.
+            const SUPABASE_URL = 'https://kxnazztteaezcknrldzx.supabase.co';
+            const SUPABASE_PUBLIC_KEY = 'sb_publishable_atgMDfgXC48ZjESmNfxMEA_g4Ikor5l';
+            const SUPABASE_DOWNLOAD_TABLE = 'downloads';
             const downloadCounts = new Map();
+            const pendingDownloadKeys = new Set();
+            const { createClient } = window.supabase;
+            const supabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLIC_KEY, {
+                auth: {
+                    persistSession: false,
+                    autoRefreshToken: false
+                }
+            });
 
             function getStorageKey(cleanTitle, version) {
                 const clean = cleanTitle ? cleanTitle.trim() : 'untitled';
@@ -3313,48 +3429,77 @@
 
             async function fetchDownloadCounts() {
                 try {
-                    const response = await fetch(DOWNLOAD_API_URL, {
-                        headers: { Accept: 'application/json' },
-                        cache: 'no-store'
-                    });
-                    if (!response.ok) throw new Error(`Download API returned ${response.status}`);
-                    const payload = await response.json();
+                    const { data, error } = await supabaseClient
+                        .from(SUPABASE_DOWNLOAD_TABLE)
+                        .select('id,count');
+                    if (error) throw error;
                     downloadCounts.clear();
-                    Object.entries(payload.counts || {}).forEach(([key, value]) => {
-                        downloadCounts.set(key, Number(value) || 0);
+                    (data || []).forEach((row) => {
+                        const serverCount = Number(row.count) || 0;
+                        const localCount = downloadCounts.get(row.id) || 0;
+                        downloadCounts.set(
+                            row.id,
+                            pendingDownloadKeys.has(row.id) ? Math.max(localCount, serverCount) : serverCount
+                        );
                     });
                     updateAllDownloadBadges();
-                    return payload.counts || {};
+                    return data || [];
                 } catch (error) {
-                    console.warn('Global download counts are temporarily unavailable:', error);
-                    return {};
+                    console.warn('Supabase download counts are temporarily unavailable:', error.message || error);
+                    return [];
                 }
             }
 
             function recordDownload(itemKey, metadata = {}) {
                 const optimisticCount = (downloadCounts.get(itemKey) || 0) + 1;
+                pendingDownloadKeys.add(itemKey);
                 downloadCounts.set(itemKey, optimisticCount);
                 updateAllDownloadBadges();
 
-                fetch(DOWNLOAD_API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                    body: JSON.stringify({ itemKey, ...metadata })
-                })
-                    .then((response) => {
-                        if (!response.ok) throw new Error(`Download API returned ${response.status}`);
-                        return response.json();
-                    })
-                    .then((payload) => {
-                        if (payload.itemKey) downloadCounts.set(payload.itemKey, Number(payload.count) || 0);
+                supabaseClient
+                    .rpc('increment_download', { p_item_id: itemKey })
+                    .then(({ data, error }) => {
+                        if (error) throw error;
+                        downloadCounts.set(itemKey, Number(data) || optimisticCount);
+                        pendingDownloadKeys.delete(itemKey);
                         updateAllDownloadBadges();
                     })
                     .catch((error) => {
-                        console.warn('Download could not be persisted:', error);
+                        console.warn('Supabase download could not be persisted:', error.message || error);
+                        pendingDownloadKeys.delete(itemKey);
                         fetchDownloadCounts();
                     });
 
                 return optimisticCount;
+            }
+
+            function subscribeToDownloadChanges() {
+                supabaseClient
+                    .channel('downloads-live-counter')
+                    .on(
+                        'postgres_changes',
+                        { event: '*', schema: 'public', table: SUPABASE_DOWNLOAD_TABLE },
+                        (payload) => {
+                            const row = payload.new || payload.old;
+                            if (!row?.id) return;
+                            if (payload.eventType === 'DELETE') {
+                                downloadCounts.delete(row.id);
+                            } else {
+                                const serverCount = Number(row.count) || 0;
+                                const localCount = downloadCounts.get(row.id) || 0;
+                                downloadCounts.set(
+                                    row.id,
+                                    pendingDownloadKeys.has(row.id) ? Math.max(localCount, serverCount) : serverCount
+                                );
+                            }
+                            updateAllDownloadBadges();
+                        }
+                    )
+                    .subscribe((status) => {
+                        if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+                            console.warn('Supabase realtime unavailable; polling fallback remains active.');
+                        }
+                    });
             }
 
             function incrementDownloadCount(cleanTitle, version) {
@@ -6146,8 +6291,15 @@
                 else if (currentCategory === 'shaders') loadShadersFromModrinth();
             }
 
+            subscribeToDownloadChanges();
             fetchDownloadCounts();
-            window.setInterval(fetchDownloadCounts, 15000);
+            window.setInterval(() => {
+                if (document.visibilityState === 'visible') fetchDownloadCounts();
+            }, 15000);
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible') fetchDownloadCounts();
+            });
+            window.addEventListener('focus', fetchDownloadCounts);
             fetchDownloads();
 
             window.__build = {
