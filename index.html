@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/semxpro/Flat-Fusion-Website/main/file_00000000b9e081f5b35afc10ccbeef5c.png" />
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         /* ============================================================
@@ -2155,7 +2154,7 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.9);
-            z-index: 6000;
+            z-index: 20000;
             display: none;
             align-items: center;
             justify-content: center;
@@ -3131,6 +3130,166 @@
                 max-height: calc(100dvh - 32px);
             }
         }
+        /* Modrinth project actions */
+        .semox-card {
+            overflow: visible;
+        }
+        .semox-project-menu-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 24px;
+            height: 26px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border-radius: 0;
+            color: var(--text-secondary);
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            font-size: 1.1rem;
+            transition: all var(--duration) var(--ease);
+            cursor: pointer;
+            z-index: 5;
+        }
+        .semox-project-menu-btn:hover,
+        .semox-project-menu-btn:focus-visible {
+            color: var(--text-primary);
+            background: transparent;
+            transform: scale(1.12);
+            outline: none;
+        }
+        .semox-project-menu-btn i {
+            pointer-events: none;
+        }
+        .semox-project-menu {
+            position: fixed;
+            min-width: 150px;
+            padding: 6px;
+            display: none;
+            background: rgba(20, 20, 30, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            box-shadow: var(--shadow-lg), 0 0 30px rgba(139, 92, 246, 0.12);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 7000;
+        }
+        .semox-project-menu.open {
+            display: grid;
+            gap: 2px;
+        }
+        .semox-project-menu button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 9px 11px;
+            border-radius: 9px;
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            text-align: left;
+            white-space: nowrap;
+        }
+        .semox-project-menu button:hover,
+        .semox-project-menu button:focus-visible {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.08);
+            outline: none;
+        }
+        .semox-share-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .semox-share-actions button {
+            flex: 1 1 130px;
+            padding: 9px 12px;
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-subtle);
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .semox-share-actions button:hover {
+            border-color: var(--border-hover);
+            background: rgba(139, 92, 246, 0.14);
+        }
+        .semox-share-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(10, 10, 15, 0.78);
+            backdrop-filter: blur(12px);
+            z-index: 19000;
+        }
+        .semox-share-modal.open {
+            display: flex;
+        }
+        .semox-share-modal .semox-share-box {
+            width: min(420px, 100%);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .semox-share-modal h3 {
+            margin-bottom: 6px;
+            font-size: 1.05rem;
+        }
+        .semox-share-modal p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            word-break: break-all;
+        }
+        .semox-share-close {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        .semox-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 30px;
+            transform: translate(-50%, 18px);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 8000;
+            padding: 10px 16px;
+            border-radius: var(--radius-full);
+            background: rgba(20, 20, 30, 0.94);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            font-size: 0.8rem;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .semox-toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+        @media (max-width: 600px) {
+            .semox-project-menu-btn {
+                top: 14px;
+                right: 14px;
+                width: 24px;
+                height: 26px;
+            }
+            .semox-project-menu {
+                min-width: 160px;
+            }
+        }
     </style>
 </head>
 
@@ -3371,6 +3530,25 @@
         <img id="semoxLbImg" src="" alt="Screenshot" />
     </div>
 
+    <!-- Project action menu and Web Share fallback -->
+    <div class="semox-project-menu" id="semoxProjectMenu" role="menu" aria-hidden="true">
+        <button type="button" data-menu-action="share"><i class="fas fa-arrow-up-right-from-square"></i> Share</button>
+        <button type="button" data-menu-action="copy"><i class="fas fa-link"></i> Copy Link</button>
+    </div>
+    <div class="semox-share-modal" id="semoxShareModal" aria-hidden="true">
+        <div class="semox-share-box">
+            <button type="button" class="semox-share-close" id="semoxShareClose" aria-label="Close share options"><i class="fas fa-times"></i></button>
+            <h3>Share project</h3>
+            <p id="semoxShareUrl"></p>
+            <div class="semox-share-actions">
+                <button type="button" id="semoxShareWhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                <button type="button" id="semoxShareFacebook"><i class="fab fa-facebook"></i> Facebook</button>
+                <button type="button" id="semoxShareCopy"><i class="fas fa-link"></i> Copy Link</button>
+            </div>
+        </div>
+    </div>
+    <div class="semox-toast" id="semoxToast" role="status" aria-live="polite"></div>
+
     <!-- ============================================================
     JAVASCRIPT — FULL WEBSITE
     ============================================================ -->
@@ -3379,7 +3557,7 @@
             'use strict';
 
             // ============================================================
-            // 0. DOWNLOAD COUNTER SYSTEM
+            // 0. DOWNLOAD DISPLAY
             // ============================================================
 
             function stripColorTags(text) {
@@ -3387,146 +3565,22 @@
                 return text.replace(/<[^>]+>/g, '');
             }
 
-            // Supabase is the source of truth. The publishable/anon key is
-            // safe to expose in a static frontend; table writes are blocked
-            // by RLS and can only happen through the increment RPC below.
-            const SUPABASE_URL = 'https://kxnazztteaezcknrldzx.supabase.co';
-            const SUPABASE_PUBLIC_KEY = 'sb_publishable_atgMDfgXC48ZjESmNfxMEA_g4Ikor5l';
-            const SUPABASE_DOWNLOAD_TABLE = 'downloads';
-            const downloadCounts = new Map();
-            const pendingDownloadKeys = new Set();
-            const { createClient } = window.supabase;
-            const supabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLIC_KEY, {
-                auth: {
-                    persistSession: false,
-                    autoRefreshToken: false
-                }
-            });
-
-            function getStorageKey(cleanTitle, version) {
-                const clean = cleanTitle ? cleanTitle.trim() : 'untitled';
-                const ver = version ? version.trim() : 'unknown';
-                return `sheet:${clean}:${ver}`;
+            // Modrinth is the only source of truth for Modrinth projects.
+            // Sheet-backed products intentionally do not maintain a counter.
+            function formatOfficialDownloads(value) {
+                const count = Number(value);
+                return Number.isFinite(count) && count >= 0
+                    ? count.toLocaleString()
+                    : '—';
             }
 
-            function modrinthDownloadKey(type, projectId, version, loader) {
-                return `modrinth:${type}:${projectId}:${version || 'unknown'}:${loader || 'unknown'}`;
-            }
-
-            function getDownloadCount(cleanTitle, version) {
-                if (!cleanTitle) return 0;
-                return downloadCounts.get(getStorageKey(cleanTitle, version)) || 0;
-            }
-
-            function updateAllDownloadBadges() {
-                document.querySelectorAll('[data-download-key]').forEach((element) => {
-                    const count = downloadCounts.get(element.dataset.downloadKey) || 0;
-                    const target = element.classList.contains('count') ||
-                        element.classList.contains('semox-count') ? element : element.querySelector('.count');
-                    if (target) target.textContent = count;
-                });
-            }
-
-            async function fetchDownloadCounts() {
-                try {
-                    const { data, error } = await supabaseClient
-                        .from(SUPABASE_DOWNLOAD_TABLE)
-                        .select('id,count');
-                    if (error) throw error;
-                    downloadCounts.clear();
-                    (data || []).forEach((row) => {
-                        const serverCount = Number(row.count) || 0;
-                        const localCount = downloadCounts.get(row.id) || 0;
-                        downloadCounts.set(
-                            row.id,
-                            pendingDownloadKeys.has(row.id) ? Math.max(localCount, serverCount) : serverCount
-                        );
-                    });
-                    updateAllDownloadBadges();
-                    return data || [];
-                } catch (error) {
-                    console.warn('Supabase download counts are temporarily unavailable:', error.message || error);
-                    return [];
-                }
-            }
-
-            function recordDownload(itemKey, metadata = {}) {
-                const optimisticCount = (downloadCounts.get(itemKey) || 0) + 1;
-                pendingDownloadKeys.add(itemKey);
-                downloadCounts.set(itemKey, optimisticCount);
-                updateAllDownloadBadges();
-
-                supabaseClient
-                    .rpc('increment_download', { p_item_id: itemKey })
-                    .then(({ data, error }) => {
-                        if (error) throw error;
-                        downloadCounts.set(itemKey, Number(data) || optimisticCount);
-                        pendingDownloadKeys.delete(itemKey);
-                        updateAllDownloadBadges();
-                    })
-                    .catch((error) => {
-                        console.warn('Supabase download could not be persisted:', error.message || error);
-                        pendingDownloadKeys.delete(itemKey);
-                        fetchDownloadCounts();
-                    });
-
-                return optimisticCount;
-            }
-
-            function subscribeToDownloadChanges() {
-                supabaseClient
-                    .channel('downloads-live-counter')
-                    .on(
-                        'postgres_changes',
-                        { event: '*', schema: 'public', table: SUPABASE_DOWNLOAD_TABLE },
-                        (payload) => {
-                            const row = payload.new || payload.old;
-                            if (!row?.id) return;
-                            if (payload.eventType === 'DELETE') {
-                                downloadCounts.delete(row.id);
-                            } else {
-                                const serverCount = Number(row.count) || 0;
-                                const localCount = downloadCounts.get(row.id) || 0;
-                                downloadCounts.set(
-                                    row.id,
-                                    pendingDownloadKeys.has(row.id) ? Math.max(localCount, serverCount) : serverCount
-                                );
-                            }
-                            updateAllDownloadBadges();
-                        }
-                    )
-                    .subscribe((status) => {
-                        if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
-                            console.warn('Supabase realtime unavailable; polling fallback remains active.');
-                        }
-                    });
-            }
-
-            function incrementDownloadCount(cleanTitle, version) {
-                if (!cleanTitle) return 0;
-                return recordDownload(getStorageKey(cleanTitle, version), {
-                    category: 'sheet',
-                    title: cleanTitle,
-                    version: version || ''
-                });
-            }
-
-            function renderDownloadBadge(cleanTitle, version, productId) {
-                const count = getDownloadCount(cleanTitle, version);
+            function renderDownloadBadge() {
                 return `
-                            <span class="download-count-badge" data-download-badge="${productId}" data-download-key="${getStorageKey(cleanTitle, version)}" data-clean-title="${cleanTitle}" data-version="${version}">
+                            <span class="download-count-badge" aria-label="Download count unavailable">
                                 <i class="fas fa-download"></i>
-                                <span class="count">${count}</span>
+                                <span class="count">—</span>
                             </span>
                         `;
-            }
-
-            function updateDownloadBadgeUI(productId, cleanTitle, version) {
-                const badgeEl = document.querySelector(`[data-download-badge="${productId}"]`);
-                if (!badgeEl) return;
-                const count = getDownloadCount(cleanTitle, version);
-                const countSpan = badgeEl.querySelector('.count');
-                if (countSpan) countSpan.textContent = count;
             }
 
             // ============================================================
@@ -3834,7 +3888,8 @@
                             edition: item.edition || null,
                             description: item.description || '',
                             features: item.features || [],
-                            title: item.title || ''
+                            title: item.title || '',
+                            image: item.image || ''
                         }));
 
                         const cleanTitle = stripColorTags(primary.title || '').trim();
@@ -3849,6 +3904,9 @@
                             features: primary.features || [],
                             image: primary.image || '',
                             icon: primary.icon || '',
+                            imageCandidates: items
+                                .map(item => item.image || item.icon || '')
+                                .filter((url, index, all) => url && all.indexOf(url) === index),
                             edition: primary.edition || null,
                             versions: versions,
                             primaryVersion: versions[0]
@@ -3985,6 +4043,7 @@
 
             let currentCategory = null;
             let currentSearchQuery = '';
+            let currentRouteProject = null;
 
             // ============================================================
             // 9. DOM REFS
@@ -4054,6 +4113,14 @@
             const lightbox = document.getElementById('semoxLightbox');
             const lbClose = document.getElementById('semoxLbClose');
             const lbImg = document.getElementById('semoxLbImg');
+            const projectMenu = document.getElementById('semoxProjectMenu');
+            const shareModal = document.getElementById('semoxShareModal');
+            const shareClose = document.getElementById('semoxShareClose');
+            const shareUrlEl = document.getElementById('semoxShareUrl');
+            const shareWhatsApp = document.getElementById('semoxShareWhatsApp');
+            const shareFacebook = document.getElementById('semoxShareFacebook');
+            const shareCopy = document.getElementById('semoxShareCopy');
+            const toast = document.getElementById('semoxToast');
 
             // ============================================================
             // 10. HELPERS
@@ -4072,6 +4139,294 @@
             function getCategoryDesc(id) {
                 const found = CATEGORIES.find(c => c.id === id);
                 return found ? found.desc : '';
+            }
+
+            function escapeHtml(value) {
+                return String(value ?? '').replace(/[&<>"']/g, char => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                }[char]));
+            }
+
+            const routeCategoryMap = {
+                '/': 'all',
+                '/mod': 'mods',
+                '/plugin': 'plugins',
+                '/shader': 'shaders',
+                '/resourcepack': 'resource-packs'
+            };
+
+            const categoryRouteMap = {
+                all: '/',
+                mods: '/mod',
+                plugins: '/plugin',
+                shaders: '/shader',
+                'resource-packs': '/resourcepack'
+            };
+
+            const projectTypeRouteMap = {
+                mod: 'mod',
+                plugin: 'plugin',
+                shader: 'shader',
+                resourcepack: 'resourcepack'
+            };
+
+            function getProjectRoute(type, projectSlug) {
+                const segment = projectTypeRouteMap[type];
+                const slug = String(projectSlug || '').trim();
+                return segment && slug
+                    ? `/${segment}/${encodeURIComponent(slug)}`
+                    : '/';
+            }
+
+            function parseAppRoute() {
+                const parts = window.location.pathname.split('/').filter(Boolean);
+                const basePath = parts.length ? `/${parts[0].toLowerCase()}` : '/';
+                const category = routeCategoryMap[basePath];
+                if (!category) return { category: 'all', projectSlug: null };
+                let projectSlug = null;
+                if (parts[1]) {
+                    try {
+                        projectSlug = decodeURIComponent(parts.slice(1).join('/'));
+                    } catch (error) {
+                        projectSlug = parts.slice(1).join('/');
+                    }
+                }
+                return {
+                    category,
+                    projectSlug
+                };
+            }
+
+            function updateUrlForCategory(categoryId, replace = false) {
+                const path = categoryRouteMap[categoryId] || '/';
+                if (window.location.pathname !== path || window.location.search) {
+                    history[replace ? 'replaceState' : 'pushState'](
+                        { category: categoryId },
+                        '',
+                        path
+                    );
+                }
+            }
+
+            function showToast(message) {
+                if (!toast) return;
+                toast.textContent = message;
+                toast.classList.add('show');
+                clearTimeout(showToast.timer);
+                showToast.timer = window.setTimeout(() => toast.classList.remove('show'), 2200);
+            }
+
+            function getCurrentProjectUrl(type, slugOrId) {
+                return new URL(getProjectRoute(type, slugOrId), window.location.origin).href;
+            }
+
+            function renderProjectMenuButton(project, type, name) {
+                const projectId = project.project_id || project.id || '';
+                const projectSlug = project.slug || projectId;
+                const sourceId = `${type}:${projectId}`;
+                return `
+                    <button type="button" class="semox-project-menu-btn"
+                        data-source-id="${escapeHtml(sourceId)}"
+                        data-project-id="${escapeHtml(projectId)}"
+                        data-project-slug="${escapeHtml(projectSlug)}"
+                        data-project-type="${escapeHtml(type)}"
+                        data-project-name="${escapeHtml(name)}"
+                        aria-label="More actions for ${escapeHtml(name)}"
+                        aria-haspopup="menu">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                `;
+            }
+
+            async function copyProjectLink(url) {
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(url);
+                    } else {
+                        const helper = document.createElement('textarea');
+                        helper.value = url;
+                        helper.setAttribute('readonly', '');
+                        helper.style.position = 'fixed';
+                        helper.style.opacity = '0';
+                        document.body.appendChild(helper);
+                        helper.select();
+                        document.execCommand('copy');
+                        helper.remove();
+                    }
+                    showToast('✓ Link copied!');
+                    return true;
+                } catch (error) {
+                    console.warn('Could not copy project link:', error);
+                    showToast('Copy failed — please try again');
+                    return false;
+                }
+            }
+
+            function closeProjectMenu() {
+                if (!projectMenu) return;
+                projectMenu.classList.remove('open');
+                projectMenu.setAttribute('aria-hidden', 'true');
+                projectMenu.dataset.url = '';
+                projectMenu.dataset.name = '';
+                projectMenu.dataset.type = '';
+            }
+
+            function openProjectMenu(button) {
+                if (!projectMenu || !button) return;
+                if (projectMenu.classList.contains('open') &&
+                    projectMenu.dataset.sourceId === button.dataset.sourceId) {
+                    closeProjectMenu();
+                    return;
+                }
+
+                const rect = button.getBoundingClientRect();
+                const projectType = button.dataset.projectType || button.dataset.type || '';
+                projectMenu.dataset.sourceId = button.dataset.sourceId || '';
+                projectMenu.dataset.url = getCurrentProjectUrl(
+                    projectType,
+                    button.dataset.projectSlug || button.dataset.projectId
+                );
+                projectMenu.dataset.name = button.dataset.projectName || 'Mob Forge project';
+                projectMenu.dataset.type = projectType;
+                projectMenu.classList.add('open');
+                projectMenu.setAttribute('aria-hidden', 'false');
+
+                const menuRect = projectMenu.getBoundingClientRect();
+                const gap = 8;
+                let left = rect.right - menuRect.width;
+                let top = rect.bottom + gap;
+                if (left < gap) left = gap;
+                if (left + menuRect.width > window.innerWidth - gap) {
+                    left = window.innerWidth - menuRect.width - gap;
+                }
+                if (top + menuRect.height > window.innerHeight - gap) {
+                    top = rect.top - menuRect.height - gap;
+                }
+                if (top < gap) top = gap;
+                projectMenu.style.left = `${left}px`;
+                projectMenu.style.top = `${top}px`;
+            }
+
+            function showShareFallback(url, name) {
+                if (!shareModal) return;
+                shareUrlEl.textContent = url;
+                shareModal.dataset.url = url;
+                shareModal.dataset.name = name || 'Mob Forge project';
+                shareModal.classList.add('open');
+                shareModal.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeShareFallback() {
+                if (!shareModal) return;
+                shareModal.classList.remove('open');
+                shareModal.setAttribute('aria-hidden', 'true');
+            }
+
+            function openLightbox(src, alt = 'Screenshot') {
+                if (!src || !lightbox || !lbImg) return;
+                lbImg.alt = alt;
+                lbImg.src = src;
+                lightbox.classList.add('open');
+                lightbox.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeLightbox() {
+                if (!lightbox || !lbImg) return;
+                lightbox.classList.remove('open');
+                lightbox.setAttribute('aria-hidden', 'true');
+                window.setTimeout(() => {
+                    if (!lightbox.classList.contains('open')) lbImg.removeAttribute('src');
+                }, 350);
+            }
+
+            async function shareProject(url, name) {
+                closeProjectMenu();
+                if (typeof navigator.share === 'function') {
+                    try {
+                        await navigator.share({
+                            title: name || 'Mob Forge project',
+                            text: `${name || 'Project'} · Mob Forge`,
+                            url
+                        });
+                        return;
+                    } catch (error) {
+                        if (error && error.name === 'AbortError') return;
+                    }
+                }
+                showShareFallback(url, name);
+            }
+
+            function setupProjectActions() {
+                if (setupProjectActions.ready) return;
+                setupProjectActions.ready = true;
+
+                document.addEventListener('click', (event) => {
+                    const galleryImage = event.target.closest('.semox-dm-gallery img');
+                    if (galleryImage) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        openLightbox(
+                            galleryImage.dataset.src || galleryImage.currentSrc || galleryImage.src,
+                            galleryImage.alt
+                        );
+                        return;
+                    }
+
+                    const detailShare = event.target.closest('.semox-detail-share');
+                    if (detailShare) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        shareProject(detailShare.dataset.projectUrl, detailShare.dataset.projectName);
+                        return;
+                    }
+
+                    const detailCopy = event.target.closest('.semox-detail-copy');
+                    if (detailCopy) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        copyProjectLink(detailCopy.dataset.projectUrl);
+                        return;
+                    }
+
+                    const menuButton = event.target.closest('.semox-project-menu-btn');
+                    if (menuButton) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        openProjectMenu(menuButton);
+                        return;
+                    }
+
+                    const menuAction = event.target.closest('[data-menu-action]');
+                    if (menuAction && projectMenu?.classList.contains('open')) {
+                        const url = projectMenu.dataset.url;
+                        const name = projectMenu.dataset.name;
+                        if (menuAction.dataset.menuAction === 'copy') {
+                            closeProjectMenu();
+                            copyProjectLink(url);
+                        } else {
+                            shareProject(url, name);
+                        }
+                        return;
+                    }
+
+                    if (projectMenu?.classList.contains('open') &&
+                        !event.target.closest('#semoxProjectMenu')) {
+                        closeProjectMenu();
+                    }
+                });
+
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') {
+                        closeProjectMenu();
+                        closeShareFallback();
+                    }
+                });
+                window.addEventListener('resize', closeProjectMenu);
+                window.addEventListener('scroll', closeProjectMenu, { passive: true });
             }
 
             function getProductsForCategory(categoryId) {
@@ -4153,20 +4508,22 @@
                         `<button class="cat-btn" data-category="${cat.id}"><i class="fas ${cat.icon}"></i> ${cat.label}<span class="cat-count">${count}</span></button>`;
                 });
                 mobileNav.innerHTML = mobileHtml;
-                setActiveCategory(currentCategory);
+                if (currentCategory) updateNavButtons(currentCategory);
             }
 
             // ============================================================
             // 12. SET ACTIVE CATEGORY
             // ============================================================
 
-            function setActiveCategory(categoryId) {
+            function setActiveCategory(categoryId, options = {}) {
                 if (currentCategory === categoryId) {
                     updateNavButtons(categoryId);
+                    if (options.updateUrl !== false) updateUrlForCategory(categoryId);
                     return;
                 }
 
                 currentCategory = categoryId;
+                if (options.updateUrl !== false) updateUrlForCategory(categoryId);
 
                 // Show/hide filter bars
                 pluginFilterBar.style.display = (categoryId === 'plugins') ? 'flex' : 'none';
@@ -4288,8 +4645,9 @@
 
                         let thumbContent;
                         if (product.icon && product.icon.trim() !== '') {
+                            const imageCandidates = escapeHtml(JSON.stringify(product.imageCandidates || [product.icon]));
                             thumbContent = `
-                                        <img src="${product.icon}" alt="${product.title}" loading="lazy" />
+                                        <img src="${escapeHtml(product.icon)}" alt="${escapeHtml(product.title)}" loading="lazy" data-image-candidates="${imageCandidates}" />
                                         <div class="image-placeholder" style="display:none;"><i class="fas ${catIcon}"></i></div>
                                     `;
                         } else {
@@ -4332,7 +4690,7 @@
                                 `<ul class="feature-list">${primaryFeatures.map(f => `<li><i class="fas fa-circle"></i> ${f}</li>`).join('')}</ul>`;
                         }
 
-                        const badgeHtml = renderDownloadBadge(cleanTitle, currentVersion, product.id);
+                        const badgeHtml = renderDownloadBadge();
                         const primaryBadgeText = primaryVer.badgeText || '';
                         const badgeClass = getBadgeClass(primaryBadgeText);
 
@@ -4406,6 +4764,24 @@
 
                     document.querySelectorAll('.card-thumb img').forEach(img => {
                         img.addEventListener('error', function() {
+                            let candidates = [];
+                            try {
+                                candidates = JSON.parse(this.dataset.imageCandidates || '[]');
+                            } catch (error) {
+                                candidates = [];
+                            }
+
+                            const failedImage = this.getAttribute('src') || this.src;
+                            const remainingCandidates = candidates.filter(url =>
+                                url && url !== failedImage && url !== this.src
+                            );
+                            const nextImage = remainingCandidates.shift();
+                            if (nextImage) {
+                                this.dataset.imageCandidates = JSON.stringify(remainingCandidates);
+                                this.src = nextImage;
+                                return;
+                            }
+
                             this.style.display = 'none';
                             const placeholder = this.nextElementSibling;
                             if (placeholder && placeholder.classList.contains('image-placeholder')) {
@@ -4500,10 +4876,6 @@
                                 }
                             }
 
-                            if (cleanTitle) {
-                                updateDownloadBadgeUI(productId, cleanTitle, rawVersion);
-                            }
-
                             e.preventDefault();
                         }
 
@@ -4533,10 +4905,6 @@
                             }
 
                             if (url && url.trim() !== '' && url !== '#') {
-                                if (cleanTitle && version) {
-                                    incrementDownloadCount(cleanTitle, version);
-                                    updateDownloadBadgeUI(productId, cleanTitle, version);
-                                }
                                 const a = document.createElement('a');
                                 a.href = url;
                                 a.target = '_blank';
@@ -4608,7 +4976,7 @@
                             `<i class="fas ${catIcon}"></i>`;
                         const cleanTitle = p.cleanTitle || stripColorTags(p.title).trim();
                         const primaryVer = p.primaryVersion || p.versions[0];
-                        const count = getDownloadCount(cleanTitle, primaryVer?.version || '');
+                        const count = '—';
                         html += `
                                     <div class="result-item" data-category="${p.category}">
                                         <div class="ri-icon">${thumbContent}</div>
@@ -4661,16 +5029,6 @@
 
             const pluginVersionCache = new Map();
             const pluginProjectCache = new Map();
-
-            function getPluginDownloadCount(projectId, version, loader) {
-                return downloadCounts.get(modrinthDownloadKey('plugin', projectId, version, loader)) || 0;
-            }
-
-            function incrementPluginDownloadCount(projectId, version, loader) {
-                return recordDownload(modrinthDownloadKey('plugin', projectId, version, loader), {
-                    category: 'plugin', projectId, version, loader
-                });
-            }
 
             async function fetchPluginGameVersions() {
                 try {
@@ -4896,12 +5254,15 @@
                     const name = plugin.title || 'Unnamed';
                     const description = plugin.description || '';
                     const icon = plugin.icon_url || '';
+                    const safeName = escapeHtml(name);
+                    const safeDescription = escapeHtml(description);
+                    const safeIcon = escapeHtml(icon);
                     const loaders = plugin.categories ? plugin.categories.filter(c => pluginAvailableLoaders.includes(c
                         .charAt(0).toUpperCase() + c.slice(1))) : [];
                     const displayLoaders = loaders.length ? loaders : (plugin.categories ? [plugin.categories[0]] :
                         []);
                     const version = plugin.versions && plugin.versions.length > 0 ? plugin.versions[0] : '';
-                    const downloads = getPluginDownloadCount(projectId, version, displayLoaders[0] || 'default');
+                    const downloads = formatOfficialDownloads(plugin.downloads);
 
                     const loaderTags = displayLoaders.map(l =>
                         `<span class="semox-p-tag semox-loader"><i class="fas fa-cube"></i> ${l.charAt(0).toUpperCase() + l.slice(1)}</span>`
@@ -4912,21 +5273,22 @@
                         '';
 
                     const iconHtml = icon ?
-                        `<img src="${icon}" alt="${name}" loading="lazy" />` :
+                        `<img src="${safeIcon}" alt="${safeName}" loading="lazy" />` :
                         `<div class="semox-icon-placeholder"><i class="fas fa-puzzle-piece"></i></div>`;
 
                     html += `
-                                <div class="semox-card" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}">
+                                <div class="semox-card" data-project-id="${escapeHtml(projectId)}" data-project-name="${safeName}" data-project-icon="${safeIcon}">
+                                    ${renderProjectMenuButton(plugin, 'plugin', name)}
                                     <div class="semox-p-top">
                                         <div class="semox-p-icon">
                                             ${iconHtml}
                                         </div>
                                         <div class="semox-p-info">
                                             <div class="semox-p-name">
-                                                ${name}
+                                                ${safeName}
                                                 <span class="semox-p-badge">Plugin</span>
                                             </div>
-                                            <div class="semox-p-desc">${description}</div>
+                                            <div class="semox-p-desc">${safeDescription}</div>
                                         </div>
                                     </div>
                                     <div class="semox-p-meta">
@@ -4936,11 +5298,11 @@
                                     <div class="semox-p-footer">
                                         <div class="semox-p-dl-count">
                                             <i class="fas fa-download"></i>
-                                            <span class="semox-count" data-plugin-count="${projectId}" data-download-key="${modrinthDownloadKey('plugin', projectId, version, displayLoaders[0] || 'default')}">${downloads}</span>
+                                            <span class="semox-count" data-plugin-count="${projectId}">${downloads}</span>
                                         </div>
                                         <div style="display:flex;gap:8px;">
                                             <button class="semox-btn-details" data-project-id="${projectId}" data-type="plugin">Details</button>
-                                            <button class="semox-btn-download" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}" data-type="plugin"><i class="fas fa-download"></i> Download</button>
+                                            <button class="semox-btn-download" data-project-id="${escapeHtml(projectId)}" data-project-name="${safeName}" data-project-icon="${safeIcon}" data-type="plugin"><i class="fas fa-download"></i> Download</button>
                                         </div>
                                     </div>
                                 </div>
@@ -4989,16 +5351,6 @@
 
             const rpVersionCache = new Map();
             const rpProjectCache = new Map();
-
-            function getRpDownloadCount(projectId, version, loader) {
-                return downloadCounts.get(modrinthDownloadKey('resourcepack', projectId, version, loader)) || 0;
-            }
-
-            function incrementRpDownloadCount(projectId, version, loader) {
-                return recordDownload(modrinthDownloadKey('resourcepack', projectId, version, loader), {
-                    category: 'resourcepack', projectId, version, loader
-                });
-            }
 
             async function fetchRpGameVersions() {
                 try {
@@ -5134,6 +5486,9 @@
                     const name = pack.title || 'Unnamed';
                     const description = pack.description || '';
                     const icon = pack.icon_url || '';
+                    const safeName = escapeHtml(name);
+                    const safeDescription = escapeHtml(description);
+                    const safeIcon = escapeHtml(icon);
                     const categories = pack.categories || [];
                     const loaderDisplay = categories.map(c => {
                         if (c === 'bedrock') return 'Bedrock';
@@ -5143,7 +5498,7 @@
                     }).filter(l => rpAvailableLoaders.includes(l));
                     const displayLoaders = loaderDisplay.length ? loaderDisplay : ['Any'];
                     const version = pack.versions && pack.versions.length > 0 ? pack.versions[0] : '';
-                    const downloads = getRpDownloadCount(projectId, version, displayLoaders[0] || 'default');
+                    const downloads = formatOfficialDownloads(pack.downloads);
 
                     const loaderTags = displayLoaders.map(l =>
                         `<span class="semox-p-tag semox-loader"><i class="fas fa-cube"></i> ${l}</span>`
@@ -5154,21 +5509,22 @@
                         '';
 
                     const iconHtml = icon ?
-                        `<img src="${icon}" alt="${name}" loading="lazy" />` :
+                        `<img src="${safeIcon}" alt="${safeName}" loading="lazy" />` :
                         `<div class="semox-icon-placeholder"><i class="fas fa-palette"></i></div>`;
 
                     html += `
-                                <div class="semox-card" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}">
+                                <div class="semox-card" data-project-id="${escapeHtml(projectId)}" data-project-name="${safeName}" data-project-icon="${safeIcon}">
+                                    ${renderProjectMenuButton(pack, 'resourcepack', name)}
                                     <div class="semox-p-top">
                                         <div class="semox-p-icon">
                                             ${iconHtml}
                                         </div>
                                         <div class="semox-p-info">
                                             <div class="semox-p-name">
-                                                ${name}
+                                                ${safeName}
                                                 <span class="semox-p-badge">Resource Pack</span>
                                             </div>
-                                            <div class="semox-p-desc">${description}</div>
+                                            <div class="semox-p-desc">${safeDescription}</div>
                                         </div>
                                     </div>
                                     <div class="semox-p-meta">
@@ -5178,11 +5534,11 @@
                                     <div class="semox-p-footer">
                                         <div class="semox-p-dl-count">
                                             <i class="fas fa-download"></i>
-                                            <span class="semox-count" data-rp-count="${projectId}" data-download-key="${modrinthDownloadKey('resourcepack', projectId, version, displayLoaders[0] || 'default')}">${downloads}</span>
+                                            <span class="semox-count" data-rp-count="${projectId}">${downloads}</span>
                                         </div>
                                         <div style="display:flex;gap:8px;">
                                             <button class="semox-btn-details" data-project-id="${projectId}" data-type="resourcepack">Details</button>
-                                            <button class="semox-btn-download" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}" data-type="resourcepack"><i class="fas fa-download"></i> Download</button>
+                                            <button class="semox-btn-download" data-project-id="${escapeHtml(projectId)}" data-project-name="${safeName}" data-project-icon="${safeIcon}" data-type="resourcepack"><i class="fas fa-download"></i> Download</button>
                                         </div>
                                     </div>
                                 </div>
@@ -5231,16 +5587,6 @@
 
             const modVersionCache = new Map();
             const modProjectCache = new Map();
-
-            function getModDownloadCount(projectId, version, loader) {
-                return downloadCounts.get(modrinthDownloadKey('mod', projectId, version, loader)) || 0;
-            }
-
-            function incrementModDownloadCount(projectId, version, loader) {
-                return recordDownload(modrinthDownloadKey('mod', projectId, version, loader), {
-                    category: 'mod', projectId, version, loader
-                });
-            }
 
             async function fetchModGameVersions() {
                 try {
@@ -5370,12 +5716,15 @@
                     const name = mod.title || 'Unnamed';
                     const description = mod.description || '';
                     const icon = mod.icon_url || '';
+                    const safeName = escapeHtml(name);
+                    const safeDescription = escapeHtml(description);
+                    const safeIcon = escapeHtml(icon);
                     const loaders = mod.categories ? mod.categories.filter(c => modAvailableLoaders.includes(c
                         .charAt(0).toUpperCase() + c.slice(1))) : [];
                     const displayLoaders = loaders.length ? loaders : (mod.categories ? [mod.categories[0]] :
                         []);
                     const version = mod.versions && mod.versions.length > 0 ? mod.versions[0] : '';
-                    const downloads = getModDownloadCount(projectId, version, displayLoaders[0] || 'default');
+                    const downloads = formatOfficialDownloads(mod.downloads);
 
                     const loaderTags = displayLoaders.map(l =>
                         `<span class="semox-p-tag semox-loader"><i class="fas fa-cube"></i> ${l.charAt(0).toUpperCase() + l.slice(1)}</span>`
@@ -5386,21 +5735,22 @@
                         '';
 
                     const iconHtml = icon ?
-                        `<img src="${icon}" alt="${name}" loading="lazy" />` :
+                        `<img src="${safeIcon}" alt="${safeName}" loading="lazy" />` :
                         `<div class="semox-icon-placeholder"><i class="fas fa-cogs"></i></div>`;
 
                     html += `
-                                <div class="semox-card" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}">
+                                <div class="semox-card" data-project-id="${escapeHtml(projectId)}" data-project-name="${safeName}" data-project-icon="${safeIcon}">
+                                    ${renderProjectMenuButton(mod, 'mod', name)}
                                     <div class="semox-p-top">
                                         <div class="semox-p-icon">
                                             ${iconHtml}
                                         </div>
                                         <div class="semox-p-info">
                                             <div class="semox-p-name">
-                                                ${name}
+                                                ${safeName}
                                                 <span class="semox-p-badge">Mod</span>
                                             </div>
-                                            <div class="semox-p-desc">${description}</div>
+                                            <div class="semox-p-desc">${safeDescription}</div>
                                         </div>
                                     </div>
                                     <div class="semox-p-meta">
@@ -5410,11 +5760,11 @@
                                     <div class="semox-p-footer">
                                         <div class="semox-p-dl-count">
                                             <i class="fas fa-download"></i>
-                                            <span class="semox-count" data-mod-count="${projectId}" data-download-key="${modrinthDownloadKey('mod', projectId, version, displayLoaders[0] || 'default')}">${downloads}</span>
+                                            <span class="semox-count" data-mod-count="${projectId}">${downloads}</span>
                                         </div>
                                         <div style="display:flex;gap:8px;">
                                             <button class="semox-btn-details" data-project-id="${projectId}" data-type="mod">Details</button>
-                                            <button class="semox-btn-download" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}" data-type="mod"><i class="fas fa-download"></i> Download</button>
+                                            <button class="semox-btn-download" data-project-id="${escapeHtml(projectId)}" data-project-name="${safeName}" data-project-icon="${safeIcon}" data-type="mod"><i class="fas fa-download"></i> Download</button>
                                         </div>
                                     </div>
                                 </div>
@@ -5463,16 +5813,6 @@
 
             const shaderVersionCache = new Map();
             const shaderProjectCache = new Map();
-
-            function getShaderDownloadCount(projectId, version, loader) {
-                return downloadCounts.get(modrinthDownloadKey('shader', projectId, version, loader)) || 0;
-            }
-
-            function incrementShaderDownloadCount(projectId, version, loader) {
-                return recordDownload(modrinthDownloadKey('shader', projectId, version, loader), {
-                    category: 'shader', projectId, version, loader
-                });
-            }
 
             async function fetchShaderGameVersions() {
                 try {
@@ -5607,6 +5947,9 @@
                     const name = shader.title || 'Unnamed';
                     const description = shader.description || '';
                     const icon = shader.icon_url || '';
+                    const safeName = escapeHtml(name);
+                    const safeDescription = escapeHtml(description);
+                    const safeIcon = escapeHtml(icon);
                     const categories = shader.categories || [];
                     const loaderDisplay = categories.map(c => {
                         if (c === 'iris') return 'Iris';
@@ -5615,7 +5958,7 @@
                     }).filter(l => shaderAvailableLoaders.includes(l));
                     const displayLoaders = loaderDisplay.length ? loaderDisplay : ['Any'];
                     const version = shader.versions && shader.versions.length > 0 ? shader.versions[0] : '';
-                    const downloads = getShaderDownloadCount(projectId, version, displayLoaders[0] || 'default');
+                    const downloads = formatOfficialDownloads(shader.downloads);
 
                     const loaderTags = displayLoaders.map(l =>
                         `<span class="semox-p-tag semox-loader"><i class="fas fa-cube"></i> ${l}</span>`
@@ -5626,21 +5969,22 @@
                         '';
 
                     const iconHtml = icon ?
-                        `<img src="${icon}" alt="${name}" loading="lazy" />` :
+                        `<img src="${safeIcon}" alt="${safeName}" loading="lazy" />` :
                         `<div class="semox-icon-placeholder"><i class="fas fa-sun"></i></div>`;
 
                     html += `
-                                <div class="semox-card" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}">
+                                <div class="semox-card" data-project-id="${escapeHtml(projectId)}" data-project-name="${safeName}" data-project-icon="${safeIcon}">
+                                    ${renderProjectMenuButton(shader, 'shader', name)}
                                     <div class="semox-p-top">
                                         <div class="semox-p-icon">
                                             ${iconHtml}
                                         </div>
                                         <div class="semox-p-info">
                                             <div class="semox-p-name">
-                                                ${name}
+                                                ${safeName}
                                                 <span class="semox-p-badge">Shader</span>
                                             </div>
-                                            <div class="semox-p-desc">${description}</div>
+                                            <div class="semox-p-desc">${safeDescription}</div>
                                         </div>
                                     </div>
                                     <div class="semox-p-meta">
@@ -5650,11 +5994,11 @@
                                     <div class="semox-p-footer">
                                         <div class="semox-p-dl-count">
                                             <i class="fas fa-download"></i>
-                                            <span class="semox-count" data-shader-count="${projectId}" data-download-key="${modrinthDownloadKey('shader', projectId, version, displayLoaders[0] || 'default')}">${downloads}</span>
+                                            <span class="semox-count" data-shader-count="${projectId}">${downloads}</span>
                                         </div>
                                         <div style="display:flex;gap:8px;">
                                             <button class="semox-btn-details" data-project-id="${projectId}" data-type="shader">Details</button>
-                                            <button class="semox-btn-download" data-project-id="${projectId}" data-project-name="${name}" data-project-icon="${icon}" data-type="shader"><i class="fas fa-download"></i> Download</button>
+                                            <button class="semox-btn-download" data-project-id="${escapeHtml(projectId)}" data-project-name="${safeName}" data-project-icon="${safeIcon}" data-type="shader"><i class="fas fa-download"></i> Download</button>
                                         </div>
                                     </div>
                                 </div>
@@ -5776,6 +6120,50 @@
                 }
             }
 
+            async function openDirectProjectRoute(category, projectSlug) {
+                const typeByCategory = {
+                    plugins: 'plugin',
+                    'resource-packs': 'resourcepack',
+                    mods: 'mod',
+                    shaders: 'shader'
+                };
+                const type = typeByCategory[category];
+                if (!type || !projectSlug) return;
+
+                currentRouteProject = { category, type, projectSlug };
+                try {
+                    const res = await fetch(
+                        `https://api.modrinth.com/v2/project/${encodeURIComponent(projectSlug)}`
+                    );
+                    if (!res.ok) throw new Error('Project not found');
+                    const data = await res.json();
+                    const cacheMap = {
+                        plugin: pluginProjectCache,
+                        resourcepack: rpProjectCache,
+                        mod: modProjectCache,
+                        shader: shaderProjectCache
+                    };
+                    (cacheMap[type] || pluginProjectCache).set(data.id, data);
+                    renderDetails(data, type);
+                } catch (error) {
+                    console.warn('Could not load direct project route:', error);
+                    dmBody.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon"><i class="fas fa-compass"></i></div>
+                            <h3>Project not found</h3>
+                            <p>This ${escapeHtml(type)} could not be found on Modrinth.</p>
+                            <button type="button" class="semox-btn-details" id="semoxRouteBackBtn">Back to ${escapeHtml(getCategoryLabel(category))}</button>
+                        </div>
+                    `;
+                    detailsModal.classList.add('open');
+                    document.getElementById('semoxRouteBackBtn')?.addEventListener('click', () => {
+                        closeShareFallback();
+                        detailsModal.classList.remove('open');
+                        updateUrlForCategory(category);
+                    });
+                }
+            }
+
             function renderDetails(data, type) {
                 const name = data.title || 'Unnamed';
                 const icon = data.icon_url || '';
@@ -5783,6 +6171,10 @@
                 const loaders = data.loaders || [];
                 const versions = data.game_versions || [];
                 const gallery = data.gallery || [];
+                const projectUrl = getCurrentProjectUrl(type, data.slug || data.id);
+                const safeName = escapeHtml(name);
+                const safeDescription = escapeHtml(description);
+                const safeIcon = escapeHtml(icon);
 
                 const iconMap = {
                     'plugin': 'fa-puzzle-piece',
@@ -5801,10 +6193,14 @@
 
                 let html = `
                             <div class="semox-dm-header">
-                                ${icon ? `<img src="${icon}" alt="${name}" />` : `<div style="width:64px;height:64px;background:var(--bg-secondary);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--text-muted);"><i class="fas ${iconClass}"></i></div>`}
-                                <div class="semox-dm-title">${name} <span class="semox-p-badge" style="font-size:0.6rem;">${label}</span></div>
+                                ${safeIcon ? `<img src="${safeIcon}" alt="${safeName}" />` : `<div style="width:64px;height:64px;background:var(--bg-secondary);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--text-muted);"><i class="fas ${iconClass}"></i></div>`}
+                                <div class="semox-dm-title">${safeName} <span class="semox-p-badge" style="font-size:0.6rem;">${label}</span></div>
                             </div>
-                            <div class="semox-dm-desc">${description}</div>
+                            <div class="semox-dm-desc">${safeDescription}</div>
+                            <div class="semox-dm-meta">
+                                <span><i class="fas fa-download"></i> ${formatOfficialDownloads(data.downloads)} downloads</span>
+                                <span><i class="fas fa-link"></i> Mob Forge project link</span>
+                            </div>
                             <div class="semox-dm-meta">
                                 ${loaders.map(l => `<span><i class="fas fa-cube"></i> ${l}</span>`).join('')}
                                 ${versions.slice(0, 5).map(v => `<span><i class="fas fa-tag"></i> ${v}</span>`).join('')}
@@ -5817,14 +6213,22 @@
                                 <div class="semox-dm-screenshots">
                                     <h4>Screenshots</h4>
                                     <div class="semox-dm-gallery">
-                                        ${gallery.map(g => `<img src="${g.url}" alt="${g.title || 'Screenshot'}" loading="lazy" data-src="${g.url}" />`).join('')}
+                                        ${gallery.map(g => {
+                                            const galleryUrl = escapeHtml(g.url || '');
+                                            const galleryAlt = escapeHtml(g.title || 'Screenshot');
+                                            return `<img src="${galleryUrl}" alt="${galleryAlt}" loading="eager" decoding="async" data-src="${galleryUrl}" />`;
+                                        }).join('')}
                                     </div>
                                 </div>
                             `;
                 }
 
                 html += `
-                            <button class="semox-dm-download-btn" id="semoxDmDownloadBtn" data-project-id="${data.id}" data-project-name="${name}" data-project-icon="${icon}" data-type="${type}"><i class="fas fa-download"></i> Download ${name}</button>
+                            <div class="semox-share-actions">
+                                <button type="button" class="semox-detail-share" data-project-url="${escapeHtml(projectUrl)}" data-project-name="${escapeHtml(name)}"><i class="fas fa-arrow-up-right-from-square"></i> Share</button>
+                                <button type="button" class="semox-detail-copy" data-project-url="${escapeHtml(projectUrl)}"><i class="fas fa-link"></i> Copy Link</button>
+                            </div>
+                            <button class="semox-dm-download-btn" id="semoxDmDownloadBtn" data-project-id="${escapeHtml(data.id)}" data-project-name="${safeName}" data-project-icon="${safeIcon}" data-type="${type}"><i class="fas fa-download"></i> Download ${safeName}</button>
                         `;
 
                 dmBody.innerHTML = html;
@@ -5841,14 +6245,6 @@
                         openDownloadModal(id, name, icon, type);
                     });
                 }
-
-                document.querySelectorAll('.semox-dm-gallery img').forEach(img => {
-                    img.addEventListener('click', function() {
-                        const src = this.dataset.src || this.src;
-                        lbImg.src = src;
-                        lightbox.classList.add('open');
-                    });
-                });
             }
 
             async function openDownloadModal(projectId, name, icon, type) {
@@ -5976,26 +6372,6 @@
                     const projectId = this.dataset.projectId;
                     if (!url) return;
 
-                    const countMap = {
-                        'plugin': { get: getPluginDownloadCount, inc: incrementPluginDownloadCount,
-                            countAttr: 'data-plugin-count' },
-                        'resourcepack': { get: getRpDownloadCount, inc: incrementRpDownloadCount,
-                            countAttr: 'data-rp-count' },
-                        'mod': { get: getModDownloadCount, inc: incrementModDownloadCount,
-                        countAttr: 'data-mod-count' },
-                        'shader': { get: getShaderDownloadCount, inc: incrementShaderDownloadCount,
-                            countAttr: 'data-shader-count' }
-                    };
-                    const handler = countMap[type];
-                    if (handler) {
-                        const newCount = handler.inc(projectId, version, loader);
-                        const countEl = document.querySelector(`[${handler.countAttr}="${projectId}"]`);
-                        if (countEl) {
-                            countEl.dataset.downloadKey = modrinthDownloadKey(type, projectId, version, loader);
-                            countEl.textContent = newCount;
-                        }
-                    }
-
                     const a = document.createElement('a');
                     a.href = url;
                     a.download = '';
@@ -6018,8 +6394,8 @@
             downloadModal.addEventListener('click', (e) => { if (e.target === downloadModal) downloadModal.classList.remove(
                     'open'); });
 
-            lbClose.addEventListener('click', () => { lightbox.classList.remove('open'); });
-            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+            lbClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
             // ============================================================
             // 21. FILTER HANDLERS
@@ -6198,10 +6574,19 @@
                 const btn = e.target.closest('.cat-btn, .glassy-nav-item');
                 if (btn && btn.dataset.category) {
                     const cat = btn.dataset.category;
-                    if (currentCategory === cat) return;
+                    if (currentCategory === cat) {
+                        if (window.location.pathname !== (categoryRouteMap[cat] || '/')) {
+                            currentRouteProject = null;
+                            detailsModal.classList.remove('open');
+                            updateUrlForCategory(cat);
+                        }
+                        return;
+                    }
                     currentSearchQuery = '';
                     searchInput.value = '';
                     setActiveCategory(cat);
+                    currentRouteProject = null;
+                    detailsModal.classList.remove('open');
                     mobileNavEl.classList.remove('open');
                     hamburgerBtn.classList.remove('open');
                     hamburgerBtn.querySelector('i').className = 'fas fa-bars';
@@ -6211,10 +6596,12 @@
 
             logoHome.addEventListener('click', function(e) {
                 e.preventDefault();
-                if (currentCategory === 'all') return;
+                if (currentCategory === 'all' && window.location.pathname === '/') return;
                 currentSearchQuery = '';
                 searchInput.value = '';
                 setActiveCategory('all');
+                currentRouteProject = null;
+                detailsModal.classList.remove('open');
                 mobileNavEl.classList.remove('open');
                 hamburgerBtn.classList.remove('open');
                 hamburgerBtn.querySelector('i').className = 'fas fa-bars';
@@ -6248,13 +6635,40 @@
                     accountModal.classList.remove('open');
                     detailsModal.classList.remove('open');
                     downloadModal.classList.remove('open');
-                    lightbox.classList.remove('open');
+                    closeLightbox();
                 }
             });
 
             openAccountBtn.addEventListener('click', function() { accountModal.classList.add('open'); });
             closeAccountBtn.addEventListener('click', function() { accountModal.classList.remove('open'); });
             accountModal.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
+
+            shareClose.addEventListener('click', closeShareFallback);
+            shareModal.addEventListener('click', (event) => {
+                if (event.target === shareModal) closeShareFallback();
+            });
+            shareWhatsApp.addEventListener('click', () => {
+                const url = shareModal.dataset.url;
+                const text = encodeURIComponent(`${shareModal.dataset.name} · Mob Forge ${url}`);
+                window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
+            });
+            shareFacebook.addEventListener('click', () => {
+                const url = encodeURIComponent(shareModal.dataset.url);
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'noopener,noreferrer');
+            });
+            shareCopy.addEventListener('click', () => copyProjectLink(shareModal.dataset.url));
+
+            window.addEventListener('popstate', () => {
+                const route = parseAppRoute();
+                currentRouteProject = null;
+                detailsModal.classList.remove('open');
+                currentSearchQuery = '';
+                searchInput.value = '';
+                setActiveCategory(route.category, { updateUrl: false });
+                if (route.projectSlug) {
+                    openDirectProjectRoute(route.category, route.projectSlug);
+                }
+            });
 
             // ============================================================
             // 25. HEADER SCROLL EFFECT
@@ -6277,29 +6691,21 @@
             // ============================================================
 
             function initApp() {
+                const route = parseAppRoute();
+                setupProjectActions();
                 renderCategories();
-                setActiveCategory('all');
                 totalItemsStat.textContent = getTotalItems();
                 totalCategoriesStat.textContent = CATEGORIES.length;
                 initPluginFilters();
                 initRpFilters();
                 initModFilters();
                 initShaderFilters();
-                if (currentCategory === 'plugins') loadPluginsFromModrinth();
-                else if (currentCategory === 'resource-packs') loadResourcePacksFromModrinth();
-                else if (currentCategory === 'mods') loadModsFromModrinth();
-                else if (currentCategory === 'shaders') loadShadersFromModrinth();
+                setActiveCategory(route.category, { updateUrl: false });
+                if (route.projectSlug) {
+                    openDirectProjectRoute(route.category, route.projectSlug);
+                }
             }
 
-            subscribeToDownloadChanges();
-            fetchDownloadCounts();
-            window.setInterval(() => {
-                if (document.visibilityState === 'visible') fetchDownloadCounts();
-            }, 15000);
-            document.addEventListener('visibilitychange', () => {
-                if (document.visibilityState === 'visible') fetchDownloadCounts();
-            });
-            window.addEventListener('focus', fetchDownloadCounts);
             fetchDownloads();
 
             window.__build = {
@@ -6310,8 +6716,6 @@
                 currentCategory: () => currentCategory,
                 parseColorTitle,
                 stripColorTags,
-                getDownloadCount,
-                incrementDownloadCount,
                 loadPluginsFromModrinth,
                 loadResourcePacksFromModrinth,
                 loadModsFromModrinth,
